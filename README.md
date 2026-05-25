@@ -144,7 +144,7 @@
       margin-bottom:1rem; position:relative; overflow:hidden;
     }
     .my-store-header::before {
-      content:'🐐'; position:absolute; right:-10px; top:-10px;
+      content:''; position:absolute; right:-10px; top:-10px;
       font-size:6rem; opacity:.15; transform:rotate(-10deg);
     }
     .my-store-header h2 { font-size:1.4rem; margin-bottom:.2rem; }
@@ -372,7 +372,7 @@
 ════════════════════════════════════════ -->
 <div class="setup-overlay" id="setupOverlay">
   <div class="setup-box">
-    <div class="logo-big">🐐</div>
+    <div class="logo-big"></div>
     <h2>GOAT KIDS Network</h2>
     <p class="sub">Set up your store to join the network</p>
     <div class="form-group">
