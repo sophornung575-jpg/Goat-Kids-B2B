@@ -4,7 +4,7 @@
     <!-- Open Graph / Social Media Preview -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sophornung575-jpg.github.io/Goad-Kids">
-    <meta property="og:title" content="Goat Kids B2B  — Kids Clothing & Accessories">
+    <meta property="og:title" content="Goat Kids B2B — Kids Clothing & Accessories">
     <meta property="og:description" content="Shop cute & quality kids clothing, dresses, shoes and accessories. Fast delivery, Cash on Delivery available.">
     <meta property="og:image" content="https://raw.githubusercontent.com/sophornung575-jpg/Goad-Kids/main/Goat%20Kids%20QR.jpg">
     <meta property="og:image:width" content="1200">
@@ -12,7 +12,7 @@
     <meta property="og:site_name" content="Goat Kids B2B">
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Goat Kids B2B  — Kids Clothing & Accessories">
+    <meta name="twitter:title" content="Goat Kids B2B — Kids Clothing & Accessories">
     <meta name="twitter:description" content="Shop cute & quality kids clothing, dresses, shoes and accessories. Fast delivery, Cash on Delivery available.">
     <meta name="twitter:image" content="https://raw.githubusercontent.com/sophornung575-jpg/Goad-Kids/main/Goat%20Kids%20QR.jpg">
     <!-- General SEO -->
@@ -353,7 +353,7 @@
             <nav class="desktop-nav">
                 <a href="#" class="nav-link active" onclick="showTab('store');return false"><i class="fas fa-store"></i><span data-translate="store">Store</span></a>
                 <a href="#" class="nav-link hidden" id="adminNavLink" onclick="showTab('admin');return false"><i class="fas fa-cog"></i><span data-translate="admin">Admin</span></a>
-                <a href="#" class="nav-link" id="networkNavLink" onclick="showTab('network');return false"><i class="fas fa-network-wired"></i> Network<span id="networkBadge" style="display:none;background:var(--secondary);color:#fff;font-size:0.6rem;padding:0.1rem 0.35rem;border-radius:8px;margin-left:0.2rem;font-weight:700">0</span></a>
+                <a href="#" class="nav-link" id="networkNavLink" onclick="showNetworkTab();return false"><i class="fas fa-network-wired"></i> Network<span id="networkBadge" style="display:none;background:var(--secondary);color:#fff;font-size:0.6rem;padding:0.1rem 0.35rem;border-radius:8px;margin-left:0.2rem;font-weight:700">0</span></a>
                 <button class="btn btn-small btn-outline" onclick="openWishlistModal()" style="position:relative"><i class="fas fa-heart" style="color:var(--secondary)"></i> <span style="font-size:0.8rem">Wishlist</span> <span id="wishlistBadge" style="position:absolute;top:-6px;right:-6px;background:var(--secondary);color:#fff;font-size:0.65rem;min-width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700">0</span></button>
                 <button class="btn btn-small btn-outline" onclick="openAdminModal()" id="adminLoginBtn"><i class="fas fa-user-shield"></i><span data-translate="login">Login</span></button>
                 <button class="btn btn-small btn-success" onclick="syncToFirebase()" id="syncBtn"><i class="fas fa-cloud-upload-alt"></i><span data-translate="sync">Sync</span></button>
@@ -364,7 +364,7 @@
         <nav class="mobile-nav" id="mobileNav">
             <a href="#" class="nav-link" onclick="showTab('store');closeMobileMenu();return false"><i class="fas fa-store"></i> Store</a>
             <a href="#" class="nav-link hidden" id="adminNavLinkMobile" onclick="showTab('admin');closeMobileMenu();return false"><i class="fas fa-cog"></i> Admin</a>
-            <a href="#" class="nav-link" onclick="showTab('network');closeMobileMenu();return false"><i class="fas fa-network-wired"></i> Network</a>
+            <a href="#" class="nav-link" onclick="showNetworkTab();closeMobileMenu();return false"><i class="fas fa-network-wired"></i> Network</a>
             <button class="btn btn-outline w-full mt-4" onclick="openAdminModal();closeMobileMenu()" id="adminLoginBtnMobile"><i class="fas fa-user-shield"></i> Admin Login</button>
             <button class="btn btn-success w-full mt-4" onclick="syncToFirebase();closeMobileMenu()"><i class="fas fa-cloud-upload-alt"></i> Sync</button>
         </nav>
@@ -6132,7 +6132,7 @@ function sendToTelegram(order, callback) {
         participants:[NW.store.id,storeId],participantNames:names,
         lastMessageAt:firebase.firestore.FieldValue.serverTimestamp()
       },{merge:true}).then(function(){
-        showTab('network'); setTimeout(function(){switchNwTab('chat'); setTimeout(function(){nwOpenConv(convId);},400);},200);
+        showNetworkTab(); setTimeout(function(){switchNwTab('chat'); setTimeout(function(){nwOpenConv(convId);},400);},200);
       }).catch(function(){});
     }
 
@@ -6196,13 +6196,25 @@ function sendToTelegram(order, callback) {
       return d.getDate()+'/'+(d.getMonth()+1);
     }
 
-    // Hook into showTab to auto-init NW
-    var _origShowTab=showTab;
-    function showTab(tab){
-      _origShowTab(tab);
-      if(tab==='network'&&!NW.store){ setTimeout(nwInit,100); }
-      else if(tab==='network'&&NW.store&&!NW.db){ setTimeout(nwInitFirebase,100); }
+    function showNetworkTab(){
+      showTab('network');
+      if(!NW.store){ setTimeout(nwInit,100); }
+      else if(!NW.db){ setTimeout(nwInitFirebase,100); }
     }
+
+    // Hook into showTab — patch after page load to avoid overwrite issues
+    document.addEventListener('DOMContentLoaded', function(){
+      var _orig = window.showTab;
+      if(_orig){
+        window.showTab = function(tab){
+          _orig(tab);
+          if(tab==='network'){
+            if(!NW.store){ setTimeout(nwInit,100); }
+            else if(!NW.db){ setTimeout(nwInitFirebase,100); }
+          }
+        };
+      }
+    });
     // ═══════════════════════════ END NETWORK MODULE ═══════════════════════
 
     </script>
