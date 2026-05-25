@@ -388,12 +388,9 @@
       <input type="text" class="form-control" id="setupCity" placeholder="e.g. Phnom Penh, Siem Reap…">
     </div>
     <div class="form-group">
-      <label>Firebase Config JSON <small class="text-gray">(same as main app)</small></label>
-      <textarea class="form-control" id="setupFirebase" rows="5" placeholder="Paste your firebaseConfig { ... } here"></textarea>
-      <div id="setupFormatTip" class="hidden" style="background:#fff8e1;border:1px solid #ecc94b;border-radius:8px;padding:.75rem;font-size:.78rem;margin-top:.5rem;line-height:1.6">
-        <strong>&#x1F4A1; Where to get it:</strong> Firebase Console &#x2192; &#x2699;&#xFE0F; Project Settings &#x2192; Your Apps &#x2192; Config<br><br>
-        Paste the <strong>whole block</strong> including <code>{ }</code>. Both JS and JSON formats work.
-      </div>
+      <label>Join Code <small class="text-gray">(given by your master store)</small></label>
+      <input type="password" class="form-control" id="setupJoinCode" placeholder="Enter your join code">
+      <div id="setupCodeError" class="hidden" style="color:#f56565;font-size:.78rem;margin-top:.3rem">❌ Wrong join code. Please check with your master store.</div>
     </div>
     <button class="btn btn-primary btn-full" onclick="completeSetup()" style="margin-top:.75rem; padding:.75rem;">
       <i class="fas fa-rocket"></i> Join Network
@@ -811,36 +808,19 @@ function completeSetup() {
   const name = document.getElementById('setupStoreName').value.trim();
   const owner = document.getElementById('setupOwner').value.trim();
   const city = document.getElementById('setupCity').value.trim();
-  const fbRaw = document.getElementById('setupFirebase').value.trim();
-  if (!name || !owner || !fbRaw) { showToast('Please fill all required fields','error'); return; }
-  let cfg;
-  try {
-    // Extract just the { ... } block
-    let cleaned = fbRaw;
-    // Remove variable assignment: const firebaseConfig = { ... };
-    cleaned = cleaned.replace(/^[\s\S]*?(const|var|let)\s+\w+\s*=\s*/,'');
-    // Remove trailing semicolon or extra text after last }
-    cleaned = cleaned.replace(/};?[\s\S]*$/,'}');
-    // Extract from first { to last }
-    const start = cleaned.indexOf('{');
-    const end = cleaned.lastIndexOf('}');
-    if (start === -1 || end === -1) throw new Error('No JSON object found');
-    cleaned = cleaned.slice(start, end + 1);
-    // Convert JS object keys (unquoted) to JSON keys (quoted)
-    // e.g.  apiKey: "..."  →  "apiKey": "..."
-    cleaned = cleaned.replace(/([{,]\s*)([a-zA-Z_]\w*)(\s*:)/g, '$1"$2"$3');
-    // Remove trailing commas before } or ]
-    cleaned = cleaned.replace(/,(\s*[}\]])/g, '$1');
-    cfg = JSON.parse(cleaned);
-  } catch(e) {
-    showToast('Could not read Firebase config — see format tip below', 'error');
-    document.getElementById('setupFormatTip').classList.remove('hidden');
+  const joinCode = document.getElementById('setupJoinCode').value.trim();
+  const VALID_CODE = 'GoadKids1001';
+  if (!name || !owner || !city || !joinCode) { showToast('Please fill all fields','error'); return; }
+  if (joinCode !== VALID_CODE) {
+    document.getElementById('setupCodeError').classList.remove('hidden');
     return;
   }
-  if (!cfg.apiKey || !cfg.projectId) { showToast('Firebase config missing apiKey/projectId','error'); return; }
+  document.getElementById('setupCodeError').classList.add('hidden');
+  const fbRaw = '{}'; // not used, hardcoded below
+  const cfg = {};
 
   // Store firebase config
-  localStorage.setItem('goatB2BFirebaseConfig', JSON.stringify(cfg));
+  // Firebase config is hardcoded - no need to store
   myStore = { id: 'store_' + Date.now() + '_' + Math.random().toString(36).slice(2,7), name, owner, city };
   localStorage.setItem('goatNetworkStore', JSON.stringify(myStore));
   document.getElementById('setupOverlay').style.display = 'none';
@@ -850,7 +830,16 @@ function completeSetup() {
 
 function initFirebase(cfg) {
   try {
-    if (!firebase.apps.length) firebase.initializeApp(cfg);
+    const hardcodedCfg = {
+      apiKey: "AIzaSyDBQyX-LC9dIzE-B-79kXBmr42KbWEoQSU",
+      authDomain: "goat-kids-store.firebaseapp.com",
+      projectId: "goat-kids-store",
+      storageBucket: "goat-kids-store.firebasestorage.app",
+      messagingSenderId: "372035223463",
+      appId: "1:372035223463:web:a9948932607e81da2a4082",
+      measurementId: "G-V41CZRMTN5"
+    };
+    if (!firebase.apps.length) firebase.initializeApp(hardcodedCfg);
     db = firebase.firestore();
     db.settings({ cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED });
     db.enablePersistence().catch(()=>{});
@@ -1541,22 +1530,10 @@ function showToast(msg, type='') {
 // ─── BOOT ────────────────────────────────────────────────────────────────
 window.addEventListener('load', function() {
   const hasStore = loadMyStore();
-  const fbRaw = localStorage.getItem('goatB2BFirebaseConfig');
-
-  if (hasStore && fbRaw) {
-    try {
-      const cfg = JSON.parse(fbRaw);
-      document.getElementById('setupOverlay').style.display = 'none';
-      initFirebase(cfg);
-      initUI();
-    } catch(e) {
-      document.getElementById('setupOverlay').style.display = 'flex';
-    }
-  } else if (hasStore && !fbRaw) {
-    // pre-fill store fields
-    document.getElementById('setupStoreName').value = myStore.name;
-    document.getElementById('setupOwner').value = myStore.owner;
-    document.getElementById('setupCity').value = myStore.city;
+  if (hasStore) {
+    document.getElementById('setupOverlay').style.display = 'none';
+    initFirebase({});
+    initUI();
   }
 });
 </script>
