@@ -23,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <meta name="description" content="GOAT KIDS - Premium Children's Clothing Store">
     <meta name="theme-color" content="#667eea">
-    <title>GOAT KIDS - Retail Store</title>
+    <title>GOAT KIDS - Children's Clothing Store</title>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -261,13 +261,6 @@
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <script>
-      function goTo(tab) {
-        if (typeof showTab === 'function') showTab(tab);
-        else document.addEventListener('DOMContentLoaded', function() { showTab(tab); });
-      }
-    </script>
 </head>
 <body>
     <img id="receiptLogo" src="data:image/jpeg;base64,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" style="display:none">
@@ -280,7 +273,7 @@
     <div class="status-bar" id="statusBar"><span id="statusText">Connecting...</span></div>
 
     <!-- FIX #12: floating cart hidden when on admin tab via JS -->
-    <div class="floating-cart" id="floatingCartBtn" onclick=\"goTo('cart')">
+    <div class="floating-cart" id="floatingCartBtn" onclick="showTab('cart')">
         <i class="fas fa-shopping-cart"></i>
         <span class="floating-cart-count" id="floatingCartCount">0</span>
     </div>
@@ -336,15 +329,15 @@
 
 <header id="appRoot">
         <div class="header-container">
-            <div class="logo" onclick=\"goTo('store')"><span>GOAT KIDS</span><span id="adminBadge" class="admin-badge hidden">ADMIN</span></div>
+            <div class="logo" onclick="showTab('store')"><span>GOAT KIDS</span><span id="adminBadge" class="admin-badge hidden">ADMIN</span></div>
             <div style="display:flex;align-items:center;gap:0.5rem">
                 <button class="mobile-lang-btn" onclick="toggleLanguage()" title="Switch Language"><span id="langIconMobile">🇰🇭</span></button>
                 <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
             </div>
             <nav class="desktop-nav">
-                <a href="#" class="nav-link active" onclick=\"goTo('store');return false"><i class="fas fa-store"></i><span data-translate="store">Store</span></a>
-                <a href="#" class="nav-link" id="wholesaleNavLink" onclick=\"goTo('wholesale');return false"><i class="fas fa-network-wired"></i><span>Wholesale</span></a>
-                <a href="#" class="nav-link hidden" id="adminNavLink" onclick=\"goTo('admin');return false"><i class="fas fa-cog"></i><span data-translate="admin">Admin</span></a>
+                <a href="#" class="nav-link active" onclick="showTab('store');return false"><i class="fas fa-store"></i><span data-translate="store">Store</span></a>
+                <a href="#" class="nav-link" id="wholesaleNavLink" onclick="showTab('wholesale');wsOnShow();return false"><i class="fas fa-network-wired"></i><span>Wholesale</span></a>
+                <a href="#" class="nav-link hidden" id="adminNavLink" onclick="showTab('admin');return false"><i class="fas fa-cog"></i><span data-translate="admin">Admin</span></a>
                 <button class="btn btn-small btn-outline" onclick="openWishlistModal()" style="position:relative"><i class="fas fa-heart" style="color:var(--secondary)"></i> <span style="font-size:0.8rem">Wishlist</span> <span id="wishlistBadge" style="position:absolute;top:-6px;right:-6px;background:var(--secondary);color:#fff;font-size:0.65rem;min-width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700">0</span></button>
                 <button class="btn btn-small btn-outline" onclick="openAdminModal()" id="adminLoginBtn"><i class="fas fa-user-shield"></i><span data-translate="login">Login</span></button>
                 <button class="btn btn-small btn-success" onclick="syncToFirebase()" id="syncBtn"><i class="fas fa-cloud-upload-alt"></i><span data-translate="sync">Sync</span></button>
@@ -353,9 +346,9 @@
         </div>
         <!-- FIX #9: mobile nav closes on link click via JS closeMobileMenu() -->
         <nav class="mobile-nav" id="mobileNav">
-            <a href="#" class="nav-link" onclick=\"goTo('store');closeMobileMenu();return false"><i class="fas fa-store"></i> Store</a>
-            <a href="#" class="nav-link" onclick=\"goTo('wholesale');closeMobileMenu();return false"><i class="fas fa-network-wired"></i> Wholesale</a>
-            <a href="#" class="nav-link hidden" id="adminNavLinkMobile" onclick=\"goTo('admin');closeMobileMenu();return false"><i class="fas fa-cog"></i> Admin</a>
+            <a href="#" class="nav-link" onclick="showTab('store');closeMobileMenu();return false"><i class="fas fa-store"></i> Store</a>
+            <a href="#" class="nav-link" onclick="showTab('wholesale');wsOnShow();closeMobileMenu();return false"><i class="fas fa-network-wired"></i> Wholesale</a>
+            <a href="#" class="nav-link hidden" id="adminNavLinkMobile" onclick="showTab('admin');closeMobileMenu();return false"><i class="fas fa-cog"></i> Admin</a>
             <button class="btn btn-outline w-full mt-4" onclick="openAdminModal();closeMobileMenu()" id="adminLoginBtnMobile"><i class="fas fa-user-shield"></i> Admin Login</button>
             <button class="btn btn-success w-full mt-4" onclick="syncToFirebase();closeMobileMenu()"><i class="fas fa-cloud-upload-alt"></i> Sync</button>
         </nav>
@@ -414,7 +407,7 @@
                         <p style="color:var(--gray);margin-bottom:0.5rem">Your order has been sent to the seller via Telegram.</p>
                         <div class="order-id-box" id="successOrderId"></div>
                         <p style="color:var(--gray);font-size:0.9rem;margin-bottom:1.5rem">The seller will contact you to confirm your order.</p>
-                        <button class="btn btn-primary btn-large" onclick=\"goTo('store')"><i class="fas fa-store"></i> Continue Shopping</button>
+                        <button class="btn btn-primary btn-large" onclick="showTab('store')"><i class="fas fa-store"></i> Continue Shopping</button>
                     </div>
                 </div>
 
@@ -424,7 +417,7 @@
                         <div class="cart-empty" id="emptyCart">
                             <div class="cart-empty-icon"><i class="fas fa-shopping-cart"></i></div>
                             <h3 data-translate="emptyCart">Your cart is empty</h3>
-                            <button class="btn btn-primary btn-large mt-4" onclick=\"goTo('store')" data-translate="browseStore">Browse Store</button>
+                            <button class="btn btn-primary btn-large mt-4" onclick="showTab('store')" data-translate="browseStore">Browse Store</button>
                         </div>
                         <div class="hidden" id="cartItemsList"></div>
                     </div>
@@ -466,7 +459,7 @@
                     <h2><i class="fas fa-cog"></i> Admin Panel</h2>
                     <div class="flex gap-2">
                         <button class="btn btn-outline btn-small" onclick="showActivityLog()"><i class="fas fa-history"></i> Log</button>
-                        <button class="btn btn-outline btn-small" onclick=\"goTo('store')"><i class="fas fa-store"></i> Store</button>
+                        <button class="btn btn-outline btn-small" onclick="showTab('store')"><i class="fas fa-store"></i> Store</button>
                         <button class="btn btn-secondary btn-small" onclick="adminLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
                     </div>
                 </div>
@@ -756,73 +749,63 @@
 
         <!-- WHOLESALE TAB -->
         <div id="wholesaleTab" class="tab-content hidden">
-          <!-- Setup box -->
           <div id="wsSetupBox" style="display:none;background:linear-gradient(135deg,#667eea,#a78bfa);border-radius:16px;padding:2rem;max-width:420px;margin:2rem auto">
             <h2 style="text-align:center;color:#fff;margin-bottom:.4rem;font-size:1.4rem">🌐 Join Wholesale Network</h2>
             <p style="text-align:center;color:rgba(255,255,255,.85);font-size:.85rem;margin-bottom:1.5rem">Connect with other Goat Kids stores</p>
-            <div class="form-group"><label style="color:#fff;display:block;margin-bottom:.3rem;font-size:.85rem">Store Name</label><input type="text" class="form-control" id="wsName" placeholder="e.g. Goat Kids Siem Reap" style="width:100%;padding:.6rem;border-radius:var(--radius);border:none;font-size:.9rem"></div>
-            <div class="form-group" style="margin-top:.75rem"><label style="color:#fff;display:block;margin-bottom:.3rem;font-size:.85rem">Owner Name</label><input type="text" class="form-control" id="wsOwner" placeholder="Your name" style="width:100%;padding:.6rem;border-radius:var(--radius);border:none;font-size:.9rem"></div>
-            <div class="form-group" style="margin-top:.75rem"><label style="color:#fff;display:block;margin-bottom:.3rem;font-size:.85rem">City / Area</label><input type="text" class="form-control" id="wsCity" placeholder="e.g. Siem Reap" style="width:100%;padding:.6rem;border-radius:var(--radius);border:none;font-size:.9rem"></div>
-            <div class="form-group" style="margin-top:.75rem">
-              <label style="color:#fff;display:block;margin-bottom:.3rem;font-size:.85rem">Join Code</label>
-              <input type="password" id="wsCode" placeholder="Enter join code from master store" style="width:100%;padding:.6rem;border-radius:var(--radius);border:none;font-size:.9rem">
-              <div id="wsCodeErr" style="display:none;color:#fed7d7;font-size:.78rem;margin-top:.3rem">&#10060; Wrong code. Check with master store.</div>
+            <div style="margin-bottom:.75rem"><label style="color:#fff;display:block;margin-bottom:.3rem;font-size:.85rem;font-weight:600">Store Name</label><input type="text" id="wsName" placeholder="e.g. Goat Kids Siem Reap" style="width:100%;padding:.6rem;border-radius:8px;border:none;font-size:.9rem"></div>
+            <div style="margin-bottom:.75rem"><label style="color:#fff;display:block;margin-bottom:.3rem;font-size:.85rem;font-weight:600">Owner Name</label><input type="text" id="wsOwner" placeholder="Your name" style="width:100%;padding:.6rem;border-radius:8px;border:none;font-size:.9rem"></div>
+            <div style="margin-bottom:.75rem"><label style="color:#fff;display:block;margin-bottom:.3rem;font-size:.85rem;font-weight:600">City</label><input type="text" id="wsCity" placeholder="e.g. Siem Reap" style="width:100%;padding:.6rem;border-radius:8px;border:none;font-size:.9rem"></div>
+            <div style="margin-bottom:.75rem">
+              <label style="color:#fff;display:block;margin-bottom:.3rem;font-size:.85rem;font-weight:600">Join Code</label>
+              <input type="password" id="wsCode" placeholder="Enter join code" style="width:100%;padding:.6rem;border-radius:8px;border:none;font-size:.9rem">
+              <div id="wsCodeErr" style="display:none;color:#fed7d7;font-size:.78rem;margin-top:.3rem">Wrong code. Check with master store.</div>
             </div>
-            <button onclick="wsJoin()" style="width:100%;padding:.8rem;background:#fff;color:#667eea;font-weight:700;border:none;border-radius:var(--radius);cursor:pointer;font-size:1rem;margin-top:1rem"><i class="fas fa-rocket"></i> Join Network</button>
+            <button onclick="wsJoin()" style="width:100%;padding:.8rem;background:#fff;color:#667eea;font-weight:700;border:none;border-radius:8px;cursor:pointer;font-size:1rem;margin-top:.5rem">Join Network</button>
           </div>
 
-          <!-- Main wholesale UI -->
           <div id="wsMainUI" style="display:none">
-            <!-- Store info bar -->
-            <div id="wsStoreBar" style="background:linear-gradient(135deg,#667eea,#a78bfa);color:#fff;border-radius:var(--radius-lg);padding:.75rem 1.25rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem">
-              <div><i class="fas fa-store"></i> <b id="wsStoreName">—</b> <span style="opacity:.8;font-size:.82rem" id="wsStoreCity"></span></div>
-              <button onclick="wsLogout()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:.3rem .75rem;border-radius:var(--radius);cursor:pointer;font-size:.8rem"><i class="fas fa-sign-out-alt"></i> Switch Store</button>
+            <div id="wsStoreBar" style="background:linear-gradient(135deg,#667eea,#a78bfa);color:#fff;border-radius:12px;padding:.75rem 1.25rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem">
+              <div><i class="fas fa-store"></i> <b id="wsStoreName"></b> <span style="opacity:.8;font-size:.82rem" id="wsStoreCity"></span></div>
+              <button onclick="wsLogout()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:.3rem .75rem;border-radius:8px;cursor:pointer;font-size:.8rem">Switch Store</button>
             </div>
-
-            <!-- Sub-tabs -->
-            <div style="background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow);overflow:hidden">
-              <div class="admin-tabs" style="border-bottom:2px solid var(--gray-light)">
+            <div style="background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,0.1);overflow:hidden">
+              <div class="admin-tabs">
                 <button class="admin-tab active" id="wsTab-market" onclick="wsSwitchTab('market')"><i class="fas fa-globe"></i> Market</button>
                 <button class="admin-tab" id="wsTab-transfers" onclick="wsSwitchTab('transfers')"><i class="fas fa-exchange-alt"></i> Transfers<span class="admin-tab-badge" id="wsTrBadge" style="display:none">0</span></button>
                 <button class="admin-tab" id="wsTab-chat" onclick="wsSwitchTab('chat')"><i class="fas fa-comments"></i> Chat<span class="admin-tab-badge" id="wsChBadge" style="display:none">0</span></button>
               </div>
 
-              <!-- MARKET PANEL -->
-              <div id="wsPanelMarket" class="admin-tab-content active" style="padding:1.25rem">
+              <div id="wsPanelMarket" class="admin-tab-content active">
                 <div style="background:#ebedff;border:2px dashed #667eea;border-radius:12px;padding:1rem;margin-bottom:1rem;text-align:center">
                   <b style="color:#5a67d8"><i class="fas fa-tag"></i> List Your Old / Excess Stock</b>
-                  <p style="font-size:.82rem;color:#718096;margin:.3rem 0 .75rem">Post products so other stores can buy them at wholesale price.</p>
+                  <p style="font-size:.82rem;color:#718096;margin:.3rem 0 .75rem">Post products so other stores can buy them.</p>
                   <button class="btn btn-primary" onclick="wsOpenPost()"><i class="fas fa-plus-circle"></i> Post Listing</button>
                 </div>
                 <div style="display:flex;gap:.5rem;margin-bottom:.75rem;flex-wrap:wrap">
-                  <input type="text" id="wsMktQ" placeholder="Search listings..." oninput="wsRenderMkt()" style="flex:1;min-width:120px;padding:.55rem .75rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.88rem">
-                  <select id="wsMktCat" onchange="wsRenderMkt()" style="width:140px;padding:.55rem .75rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.88rem">
-                    <option value="">All Categories</option><option>Dresses</option><option>Girl Clothes</option>
-                    <option>Boy Clothes</option><option>Baby Shirt</option><option>Baby Shoes</option><option>Baby Accessories</option>
+                  <input type="text" id="wsMktQ" placeholder="Search listings..." oninput="wsRenderMkt()" style="flex:1;min-width:120px;padding:.55rem .75rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.88rem">
+                  <select id="wsMktCat" onchange="wsRenderMkt()" style="width:140px;padding:.55rem .75rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.88rem">
+                    <option value="">All</option><option>Dresses</option><option>Girl Clothes</option><option>Boy Clothes</option><option>Baby Shirt</option><option>Baby Shoes</option><option>Baby Accessories</option>
                   </select>
                 </div>
-                <div id="wsMktGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.85rem"></div>
-                <div id="wsMktEmpty" style="display:none;text-align:center;padding:2.5rem;color:#718096"><i class="fas fa-store-slash" style="font-size:2rem;display:block;margin-bottom:.5rem;opacity:.4"></i>No listings yet. Be the first to post!</div>
+                <div id="wsMktGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.85rem"></div>
+                <div id="wsMktEmpty" style="display:none;text-align:center;padding:2.5rem;color:#718096"><i class="fas fa-store-slash" style="font-size:2rem;display:block;margin-bottom:.5rem;opacity:.4"></i>No listings yet.</div>
               </div>
 
-              <!-- TRANSFERS PANEL -->
-              <div id="wsPanelTransfers" class="admin-tab-content" style="padding:1.25rem">
+              <div id="wsPanelTransfers" class="admin-tab-content">
                 <div style="display:flex;gap:.5rem;margin-bottom:1rem">
-                  <button id="wsTF-in" onclick="wsTFTab('in')" style="flex:1;padding:.5rem;border:2px solid #667eea;background:#ebedff;color:#5a67d8;font-weight:600;border-radius:var(--radius);cursor:pointer;font-size:.85rem"><i class="fas fa-arrow-down"></i> Incoming</button>
-                  <button id="wsTF-out" onclick="wsTFTab('out')" style="flex:1;padding:.5rem;border:2px solid var(--gray-light);background:#fff;color:var(--gray-dark);font-weight:600;border-radius:var(--radius);cursor:pointer;font-size:.85rem"><i class="fas fa-arrow-up"></i> Outgoing</button>
-                  <button id="wsTF-done" onclick="wsTFTab('done')" style="flex:1;padding:.5rem;border:2px solid var(--gray-light);background:#fff;color:var(--gray-dark);font-weight:600;border-radius:var(--radius);cursor:pointer;font-size:.85rem"><i class="fas fa-history"></i> Done</button>
+                  <button id="wsTF-in" onclick="wsTFTab('in')" style="flex:1;padding:.5rem;border:2px solid #667eea;background:#ebedff;color:#5a67d8;font-weight:600;border-radius:8px;cursor:pointer;font-size:.85rem"><i class="fas fa-arrow-down"></i> Incoming</button>
+                  <button id="wsTF-out" onclick="wsTFTab('out')" style="flex:1;padding:.5rem;border:2px solid #e2e8f0;background:#fff;color:#4a5568;font-weight:600;border-radius:8px;cursor:pointer;font-size:.85rem"><i class="fas fa-arrow-up"></i> Outgoing</button>
+                  <button id="wsTF-done" onclick="wsTFTab('done')" style="flex:1;padding:.5rem;border:2px solid #e2e8f0;background:#fff;color:#4a5568;font-weight:600;border-radius:8px;cursor:pointer;font-size:.85rem"><i class="fas fa-history"></i> Done</button>
                 </div>
                 <div id="wsTFList"></div>
-                <div id="wsTFEmpty" style="display:none;text-align:center;padding:2.5rem;color:#718096"><i class="fas fa-exchange-alt" style="font-size:2rem;display:block;margin-bottom:.5rem;opacity:.4"></i>No transfers here yet.</div>
+                <div id="wsTFEmpty" style="display:none;text-align:center;padding:2.5rem;color:#718096"><i class="fas fa-exchange-alt" style="font-size:2rem;display:block;margin-bottom:.5rem;opacity:.4"></i>No transfers here.</div>
               </div>
 
-              <!-- CHAT PANEL -->
               <div id="wsPanelChat" class="admin-tab-content" style="padding:0">
                 <div style="display:grid;grid-template-columns:220px 1fr;height:500px">
-                  <div style="border-right:1px solid var(--gray-light);display:flex;flex-direction:column">
-                    <div style="padding:.75rem 1rem;border-bottom:1px solid var(--gray-light);display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:.9rem">
-                      Messages
-                      <button class="btn btn-small btn-outline" onclick="wsNewChat()" style="padding:.2rem .5rem"><i class="fas fa-edit"></i></button>
+                  <div style="border-right:1px solid #e2e8f0;display:flex;flex-direction:column">
+                    <div style="padding:.75rem 1rem;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:.9rem">
+                      Messages <button class="btn btn-small btn-outline" onclick="wsNewChat()" style="padding:.2rem .5rem"><i class="fas fa-edit"></i></button>
                     </div>
                     <div id="wsChatList" style="flex:1;overflow-y:auto"></div>
                   </div>
@@ -833,15 +816,15 @@
                       <button class="btn btn-primary btn-small" onclick="wsNewChat()"><i class="fas fa-edit"></i> New Message</button>
                     </div>
                     <div id="wsChatWin" style="display:none;flex-direction:column;height:100%">
-                      <div style="padding:.65rem 1rem;border-bottom:1px solid var(--gray-light);display:flex;align-items:center;gap:.6rem">
+                      <div style="padding:.65rem 1rem;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;gap:.6rem">
                         <div id="wsChatAv" style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#667eea,#a78bfa);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.85rem;flex-shrink:0">?</div>
-                        <div style="flex:1"><div id="wsChatWinName" style="font-weight:700;font-size:.88rem">—</div><div style="font-size:.7rem;color:var(--success)">active on network</div></div>
+                        <div style="flex:1"><div id="wsChatWinName" style="font-weight:700;font-size:.88rem">—</div></div>
                         <button class="btn btn-small btn-outline" onclick="wsOpenReq()" style="font-size:.75rem"><i class="fas fa-exchange-alt"></i> Request</button>
                       </div>
                       <div id="wsMsgs" style="flex:1;overflow-y:auto;padding:.75rem;display:flex;flex-direction:column;gap:.5rem;background:#fafbff"></div>
-                      <div style="padding:.65rem;border-top:1px solid var(--gray-light);display:flex;gap:.4rem;align-items:flex-end">
-                        <textarea id="wsMsgIn" rows="1" placeholder="Type a message..." style="flex:1;resize:none;min-height:38px;max-height:90px;padding:.45rem .65rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.85rem;font-family:inherit" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();wsSend()}" oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,90)+'px'"></textarea>
-                        <button onclick="wsSend()" style="width:38px;height:38px;border:none;border-radius:var(--radius);background:var(--primary);color:#fff;cursor:pointer"><i class="fas fa-paper-plane"></i></button>
+                      <div style="padding:.65rem;border-top:1px solid #e2e8f0;display:flex;gap:.4rem;align-items:flex-end">
+                        <textarea id="wsMsgIn" rows="1" placeholder="Type a message..." style="flex:1;resize:none;min-height:38px;max-height:90px;padding:.45rem .65rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.85rem;font-family:inherit" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();wsSend()}"></textarea>
+                        <button onclick="wsSend()" style="width:38px;height:38px;border:none;border-radius:8px;background:#667eea;color:#fff;cursor:pointer"><i class="fas fa-paper-plane"></i></button>
                       </div>
                     </div>
                   </div>
@@ -1886,7 +1869,7 @@ function sendToTelegram(order, callback) {
                 showToast('Invalid config: missing apiKey or projectId', 'error');
                 return;
             }
-            // localStorage.setItem('goatFirebaseConfig', JSON.stringify(cfg));
+            localStorage.setItem('goatFirebaseConfig', JSON.stringify(cfg));
             showToast('✅ Firebase config saved — reloading...', 'success');
             setTimeout(function() { location.reload(); }, 1500);
         } catch(e) {
@@ -1914,7 +1897,7 @@ function sendToTelegram(order, callback) {
                 .replace(/([{,]\s*)([a-zA-Z_][a-zA-Z0-9_]*)(\s*:)/g, '$1"$2"$3'); // quote keys
             var cfg = JSON.parse(json);
             if (!cfg.apiKey || !cfg.projectId) throw new Error('Missing apiKey or projectId');
-            // localStorage.setItem('goatFirebaseConfig', JSON.stringify(cfg));
+            localStorage.setItem('goatFirebaseConfig', JSON.stringify(cfg));
             showToast('✅ Firebase config updated — reloading...', 'success');
             setTimeout(function() { location.reload(); }, 1500);
         } catch(e) {
@@ -1946,7 +1929,7 @@ function sendToTelegram(order, callback) {
                 alert('Invalid config: missing apiKey or projectId');
                 return;
             }
-            // localStorage.setItem('goatFirebaseConfig', JSON.stringify(cfg));
+            localStorage.setItem('goatFirebaseConfig', JSON.stringify(cfg));
         } catch(e) {
             alert('Invalid JSON: ' + e.message + '\n\nMake sure you paste valid JSON (use double quotes)');
             return;
@@ -3171,14 +3154,7 @@ function sendToTelegram(order, callback) {
         html += '#sharePreview .s-share{background:#4a90d9;color:#fff}';
         html += '#sharePreview .s-close{background:#e53e3e;color:#fff}';
         html += '@media print{#bar{display:none!important}body{background:#fff;padding-bottom:0}#receipt{box-shadow:none;margin:0}}';
-        html += '</style>
-    <script>
-      function goTo(tab) {
-        if (typeof showTab === 'function') showTab(tab);
-        else document.addEventListener('DOMContentLoaded', function() { showTab(tab); });
-      }
-    </script>
-</head><body>';
+        html += '</style></head><body>';
 
         // Receipt content
         html += '<div id="receipt">';
@@ -3278,61 +3254,57 @@ function sendToTelegram(order, callback) {
 
         html += '<\/scr' + 'ipt>';
         html += '
-    <!-- WS Post Modal -->
     <div class="modal-overlay" id="wsPostMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal"><div class="modal-header"><h3><i class="fas fa-tag" style="color:var(--primary)"></i> Post to Wholesale Market</h3><button class="modal-close" onclick="document.getElementById('wsPostMod').style.display='none'">&times;</button></div>
+      <div class="modal"><div class="modal-header"><h3>Post to Wholesale Market</h3><button class="modal-close" onclick="document.getElementById('wsPostMod').style.display='none'">&times;</button></div>
       <div style="padding:1.25rem">
-        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Pick from inventory</label><select id="wsPI" onchange="wsFillPost()" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"><option value="">— Enter manually —</option></select></div>
-        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Item Name *</label><input type="text" id="wsPN" placeholder="Product name" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
-        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Category</label><select id="wsPC" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"><option>Dresses</option><option>Girl Clothes</option><option>Boy Clothes</option><option>Baby Shirt</option><option>Baby Shoes</option><option>Baby Accessories</option></select></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">From inventory</label><select id="wsPI" onchange="wsFillPost()" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"><option value="">— Enter manually —</option></select></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Item Name *</label><input type="text" id="wsPN" placeholder="Product name" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Category</label><select id="wsPC" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"><option>Dresses</option><option>Girl Clothes</option><option>Boy Clothes</option><option>Baby Shirt</option><option>Baby Shoes</option><option>Baby Accessories</option></select></div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.85rem">
-          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Cost $</label><input type="number" id="wsPCost" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
-          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Sell $</label><input type="number" id="wsPSell" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
-          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Qty</label><input type="number" id="wsPQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Cost $</label><input type="number" id="wsPCost" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Sell $</label><input type="number" id="wsPSell" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Qty</label><input type="number" id="wsPQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
         </div>
-        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Sizes</label><input type="text" id="wsPSz" placeholder="3M, 6M, 1T, 2T..." style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
-        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Description / Condition</label><textarea id="wsPD" rows="2" placeholder="Condition, reason for selling..." style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem;resize:vertical"></textarea></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Sizes</label><input type="text" id="wsPSz" placeholder="3M, 6M, 1T..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Description</label><textarea id="wsPD" rows="2" placeholder="Condition, reason for selling..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical"></textarea></div>
       </div>
-      <div style="padding:.85rem 1.25rem;border-top:1px solid var(--gray-light);display:flex;gap:.5rem;justify-content:flex-end">
+      <div style="padding:.85rem 1.25rem;border-top:1px solid #e2e8f0;display:flex;gap:.5rem;justify-content:flex-end">
         <button class="btn btn-outline" onclick="document.getElementById('wsPostMod').style.display='none'">Cancel</button>
-        <button class="btn btn-primary" onclick="wsPostListing()"><i class="fas fa-upload"></i> Post to Market</button>
+        <button class="btn btn-primary" onclick="wsPostListing()"><i class="fas fa-upload"></i> Post</button>
       </div></div>
     </div>
 
-    <!-- WS Buy/Request Modal -->
     <div class="modal-overlay" id="wsBuyMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal"><div class="modal-header"><h3><i class="fas fa-exchange-alt" style="color:var(--success)"></i> Request Stock Transfer</h3><button class="modal-close" onclick="document.getElementById('wsBuyMod').style.display='none'">&times;</button></div>
+      <div class="modal"><div class="modal-header"><h3>Request Stock Transfer</h3><button class="modal-close" onclick="document.getElementById('wsBuyMod').style.display='none'">&times;</button></div>
       <div style="padding:1.25rem">
-        <div id="wsBuyInfo" style="background:var(--primary-light);border-radius:var(--radius);padding:.75rem;margin-bottom:1rem;font-size:.85rem;color:var(--dark)"></div>
-        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Qty *</label><input type="number" id="wsBQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
-        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Sizes needed</label><input type="text" id="wsBSz" placeholder="e.g. 1T, 2T, 3T" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
-        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Offer Price $ <small style="color:var(--gray);font-weight:400">(leave blank to accept ask price)</small></label><input type="number" id="wsBO" placeholder="Leave blank to accept" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
-        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Note to seller</label><textarea id="wsBN" rows="2" placeholder="Urgency, special requests..." style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem;resize:vertical"></textarea></div>
+        <div id="wsBuyInfo" style="background:#ebedff;border-radius:8px;padding:.75rem;margin-bottom:1rem;font-size:.85rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Qty *</label><input type="number" id="wsBQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Sizes needed</label><input type="text" id="wsBSz" placeholder="e.g. 1T, 2T" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Offer Price $ (blank = accept ask)</label><input type="number" id="wsBO" placeholder="Leave blank to accept" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Note</label><textarea id="wsBN" rows="2" placeholder="Urgency, special requests..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical"></textarea></div>
       </div>
-      <div style="padding:.85rem 1.25rem;border-top:1px solid var(--gray-light);display:flex;gap:.5rem;justify-content:flex-end">
+      <div style="padding:.85rem 1.25rem;border-top:1px solid #e2e8f0;display:flex;gap:.5rem;justify-content:flex-end">
         <button class="btn btn-outline" onclick="document.getElementById('wsBuyMod').style.display='none'">Cancel</button>
         <button class="btn btn-success" onclick="wsSendReq()"><i class="fas fa-paper-plane"></i> Send Request</button>
       </div></div>
     </div>
 
-    <!-- WS New Chat Modal -->
     <div class="modal-overlay" id="wsNewChatMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal"><div class="modal-header"><h3><i class="fas fa-edit"></i> Start New Conversation</h3><button class="modal-close" onclick="document.getElementById('wsNewChatMod').style.display='none'">&times;</button></div>
-      <div style="padding:1.25rem"><p style="font-size:.82rem;color:var(--gray);margin-bottom:.75rem">Select a store to chat with:</p><div id="wsStorePick"></div></div></div>
+      <div class="modal"><div class="modal-header"><h3>New Conversation</h3><button class="modal-close" onclick="document.getElementById('wsNewChatMod').style.display='none'">&times;</button></div>
+      <div style="padding:1.25rem"><p style="font-size:.82rem;color:#718096;margin-bottom:.75rem">Select a store to chat with:</p><div id="wsStorePick"></div></div></div>
     </div>
 
-    <!-- WS Chat Request Modal -->
     <div class="modal-overlay" id="wsReqMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal"><div class="modal-header"><h3><i class="fas fa-exchange-alt" style="color:var(--success)"></i> Request Stock via Chat</h3><button class="modal-close" onclick="document.getElementById('wsReqMod').style.display='none'">&times;</button></div>
+      <div class="modal"><div class="modal-header"><h3>Request Stock via Chat</h3><button class="modal-close" onclick="document.getElementById('wsReqMod').style.display='none'">&times;</button></div>
       <div style="padding:1.25rem">
-        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Item *</label><input type="text" id="wsRI" placeholder="What do you need?" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Item *</label><input type="text" id="wsRI" placeholder="What do you need?" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.85rem">
-          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Qty</label><input type="number" id="wsRQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
-          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Offer $</label><input type="number" id="wsRP" placeholder="0.00" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Qty</label><input type="number" id="wsRQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Offer $</label><input type="number" id="wsRP" placeholder="0.00" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
         </div>
-        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Note</label><textarea id="wsRN" rows="2" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem;resize:vertical"></textarea></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Note</label><textarea id="wsRN" rows="2" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical"></textarea></div>
       </div>
-      <div style="padding:.85rem 1.25rem;border-top:1px solid var(--gray-light);display:flex;gap:.5rem;justify-content:flex-end">
+      <div style="padding:.85rem 1.25rem;border-top:1px solid #e2e8f0;display:flex;gap:.5rem;justify-content:flex-end">
         <button class="btn btn-outline" onclick="document.getElementById('wsReqMod').style.display='none'">Cancel</button>
         <button class="btn btn-success" onclick="wsSendChatReq()"><i class="fas fa-paper-plane"></i> Send</button>
       </div></div>
@@ -3449,7 +3421,7 @@ function sendToTelegram(order, callback) {
                 '<button class="btn btn-info btn-small" data-pid="' + p.id + '" data-act="label" onclick="inv(event,this)" style="padding:0.2rem 0.4rem"><i class="fas fa-tag" style="pointer-events:none"></i></button>' +
                 '<button class="btn btn-warning btn-small" data-pid="' + p.id + '" data-act="edit" onclick="inv(event,this)" style="padding:0.2rem 0.4rem"><i class="fas fa-edit" style="pointer-events:none"></i></button>' +
                 '<button class="btn btn-danger btn-small" data-pid="' + p.id + '" data-act="del" onclick="inv(event,this)" style="padding:0.2rem 0.4rem"><i class="fas fa-trash" style="pointer-events:none"></i></button>' +
-                '<button title="Share to Wholesale Market" style="background:none;border:none;cursor:pointer;padding:.2rem .3rem" onclick="wsShareProd(\'' + p.id + '\')"><i class="fas fa-globe" style="color:#667eea"></i></button>' +
+                '<button title="Share to Wholesale" style="background:none;border:none;cursor:pointer;padding:.2rem .3rem" onclick="wsShareProd(\'' + p.id + '\')"><i class="fas fa-globe" style="color:#667eea"></i></button>' +
                 '</div></td>' +
                 '</tr>';
         }
@@ -3673,14 +3645,7 @@ function sendToTelegram(order, callback) {
         var itemsHtml = '';
         if (refund.cart && refund.cart.length > 0) { for (var j = 0; j < refund.cart.length; j++) { var it = refund.cart[j]; itemsHtml += '<div style="margin-top:10px;font-size:16px"><b>↩️ ' + it.name + ' (' + (it.size || 'N/A') + ')</b><div style="display:flex;justify-content:space-between;margin-top:2px"><span style="color:#666">' + it.quantity + ' x $' + it.price.toFixed(2) + ' (RESTORED)</span><span style="font-weight:bold">$' + (it.price * it.quantity).toFixed(2) + '</span></div></div>'; } }
         var originalTotal = refund.originalOrder ? refund.originalOrder.total : 0;
-        var html = '<!DOCTYPE html><html><head><title>Refund Receipt ' + refundId + '</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>@page{size:58mm auto;margin:2mm 1mm}*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial,sans-serif;background:#fff;width:58mm;margin:0 auto;padding:2mm 1mm 20mm 1mm;font-size:8pt}.receipt{width:100%}.center{text-align:center}.dash{border-top:1px dashed #999;margin:3px 0}.total-row{display:flex;justify-content:space-between;font-size:8pt;padding:1px 0}.grand-total{font-size:10pt;font-weight:bold;border-top:2px solid #000;padding-top:4px;margin-top:4px;color:#e53e3e}.btns{position:fixed;bottom:0;left:0;right:0;display:flex;gap:8px;padding:8px 10px;background:#fff;border-top:1px solid #ddd;justify-content:center;z-index:999}.btns button{padding:10px 20px;border:none;border-radius:20px;font-size:13px;font-weight:bold;cursor:pointer}.btn-print{background:#e53e3e;color:#fff}.btn-close{background:#666;color:#fff}@media print{@page{size:58mm auto;margin:2mm 1mm}.btns{display:none!important}body{padding-bottom:2mm;width:58mm}}</style>
-    <script>
-      function goTo(tab) {
-        if (typeof showTab === 'function') showTab(tab);
-        else document.addEventListener('DOMContentLoaded', function() { showTab(tab); });
-      }
-    </script>
-</head><body>' +
+        var html = '<!DOCTYPE html><html><head><title>Refund Receipt ' + refundId + '</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>@page{size:58mm auto;margin:2mm 1mm}*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial,sans-serif;background:#fff;width:58mm;margin:0 auto;padding:2mm 1mm 20mm 1mm;font-size:8pt}.receipt{width:100%}.center{text-align:center}.dash{border-top:1px dashed #999;margin:3px 0}.total-row{display:flex;justify-content:space-between;font-size:8pt;padding:1px 0}.grand-total{font-size:10pt;font-weight:bold;border-top:2px solid #000;padding-top:4px;margin-top:4px;color:#e53e3e}.btns{position:fixed;bottom:0;left:0;right:0;display:flex;gap:8px;padding:8px 10px;background:#fff;border-top:1px solid #ddd;justify-content:center;z-index:999}.btns button{padding:10px 20px;border:none;border-radius:20px;font-size:13px;font-weight:bold;cursor:pointer}.btn-print{background:#e53e3e;color:#fff}.btn-close{background:#666;color:#fff}@media print{@page{size:58mm auto;margin:2mm 1mm}.btns{display:none!important}body{padding-bottom:2mm;width:58mm}}</style></head><body>' +
             '<div class="receipt"><div class="center"><h2 style="color:#e53e3e">REFUND RECEIPT</h2></div><div class="dash"></div>' +
             '<p style="font-size:17px"><b>Refund ID:</b> ' + refund.refundId + '</p>' +
             '<p style="font-size:17px"><b>Date:</b> ' + (refund.refundDate || '') + '</p>' +
@@ -3693,17 +3658,61 @@ function sendToTelegram(order, callback) {
             '<div class="total-row grand-total"><span>REFUND AMOUNT:</span><span>-$' + (refund.refundAmount || 0).toFixed(2) + '</span></div><div class="dash"></div>' +
             '<div class="center" style="font-size:14px"><p style="color:#e53e3e">💰 Refund Processed</p><p>Stock has been restored</p></div></div>' +
             '<div class="btns"><button class="btn-print" onclick="window.print()">🖨️ Print</button><button class="btn-close" onclick="window.close()">✕ Close</button></div>
-    <!-- WS Post Modal -->
-    
+    <div class="modal-overlay" id="wsPostMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3>Post to Wholesale Market</h3><button class="modal-close" onclick="document.getElementById('wsPostMod').style.display='none'">&times;</button></div>
+      <div style="padding:1.25rem">
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">From inventory</label><select id="wsPI" onchange="wsFillPost()" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"><option value="">— Enter manually —</option></select></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Item Name *</label><input type="text" id="wsPN" placeholder="Product name" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Category</label><select id="wsPC" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"><option>Dresses</option><option>Girl Clothes</option><option>Boy Clothes</option><option>Baby Shirt</option><option>Baby Shoes</option><option>Baby Accessories</option></select></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.85rem">
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Cost $</label><input type="number" id="wsPCost" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Sell $</label><input type="number" id="wsPSell" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Qty</label><input type="number" id="wsPQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        </div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Sizes</label><input type="text" id="wsPSz" placeholder="3M, 6M, 1T..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Description</label><textarea id="wsPD" rows="2" placeholder="Condition, reason for selling..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical"></textarea></div>
+      </div>
+      <div style="padding:.85rem 1.25rem;border-top:1px solid #e2e8f0;display:flex;gap:.5rem;justify-content:flex-end">
+        <button class="btn btn-outline" onclick="document.getElementById('wsPostMod').style.display='none'">Cancel</button>
+        <button class="btn btn-primary" onclick="wsPostListing()"><i class="fas fa-upload"></i> Post</button>
+      </div></div>
+    </div>
 
-    <!-- WS Buy/Request Modal -->
-    
+    <div class="modal-overlay" id="wsBuyMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3>Request Stock Transfer</h3><button class="modal-close" onclick="document.getElementById('wsBuyMod').style.display='none'">&times;</button></div>
+      <div style="padding:1.25rem">
+        <div id="wsBuyInfo" style="background:#ebedff;border-radius:8px;padding:.75rem;margin-bottom:1rem;font-size:.85rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Qty *</label><input type="number" id="wsBQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Sizes needed</label><input type="text" id="wsBSz" placeholder="e.g. 1T, 2T" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Offer Price $ (blank = accept ask)</label><input type="number" id="wsBO" placeholder="Leave blank to accept" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Note</label><textarea id="wsBN" rows="2" placeholder="Urgency, special requests..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical"></textarea></div>
+      </div>
+      <div style="padding:.85rem 1.25rem;border-top:1px solid #e2e8f0;display:flex;gap:.5rem;justify-content:flex-end">
+        <button class="btn btn-outline" onclick="document.getElementById('wsBuyMod').style.display='none'">Cancel</button>
+        <button class="btn btn-success" onclick="wsSendReq()"><i class="fas fa-paper-plane"></i> Send Request</button>
+      </div></div>
+    </div>
 
-    <!-- WS New Chat Modal -->
-    
+    <div class="modal-overlay" id="wsNewChatMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3>New Conversation</h3><button class="modal-close" onclick="document.getElementById('wsNewChatMod').style.display='none'">&times;</button></div>
+      <div style="padding:1.25rem"><p style="font-size:.82rem;color:#718096;margin-bottom:.75rem">Select a store to chat with:</p><div id="wsStorePick"></div></div></div>
+    </div>
 
-    <!-- WS Chat Request Modal -->
-    
+    <div class="modal-overlay" id="wsReqMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3>Request Stock via Chat</h3><button class="modal-close" onclick="document.getElementById('wsReqMod').style.display='none'">&times;</button></div>
+      <div style="padding:1.25rem">
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Item *</label><input type="text" id="wsRI" placeholder="What do you need?" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.85rem">
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Qty</label><input type="number" id="wsRQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Offer $</label><input type="number" id="wsRP" placeholder="0.00" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        </div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Note</label><textarea id="wsRN" rows="2" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical"></textarea></div>
+      </div>
+      <div style="padding:.85rem 1.25rem;border-top:1px solid #e2e8f0;display:flex;gap:.5rem;justify-content:flex-end">
+        <button class="btn btn-outline" onclick="document.getElementById('wsReqMod').style.display='none'">Cancel</button>
+        <button class="btn btn-success" onclick="wsSendChatReq()"><i class="fas fa-paper-plane"></i> Send</button>
+      </div></div>
+    </div>
 
 </body></html>';
         openPrintWindow(html, 'Refund_' + refundId);
@@ -3899,7 +3908,6 @@ function sendToTelegram(order, callback) {
 
         // ── Show store immediately from localStorage, no waiting ──
         loadLocal();
-        if (!STATE.products || STATE.products.length === 0) loadSamples();
         showTab('store');
         renderProducts();
         applyTranslations();
@@ -4224,14 +4232,7 @@ function sendToTelegram(order, callback) {
             '.s-all{background:#9b59b6;color:#fff}.s-close{background:#e53e3e;color:#fff}' +
             '#lblCounter{color:#fff;font-size:13px;font-weight:600;margin-bottom:6px}' +
             '@media print{#bar,#sharePreview{display:none!important}body{background:#fff;padding:0}#preview{padding:0;gap:0}.lbl-wrap{box-shadow:none}}' +
-            '</style>
-    <script>
-      function goTo(tab) {
-        if (typeof showTab === 'function') showTab(tab);
-        else document.addEventListener('DOMContentLoaded', function() { showTab(tab); });
-      }
-    </script>
-</head><body>' +
+            '</style></head><body>' +
             '<div id="preview">' + labelsHtml + '</div>' +
             '<div id="sharePreview">' +
             '<div id="lblCounter">-</div>' +
@@ -5564,17 +5565,61 @@ function sendToTelegram(order, callback) {
             '}' +
             '<'+'/scr'+'ipt>' +
             '
-    <!-- WS Post Modal -->
-    
+    <div class="modal-overlay" id="wsPostMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3>Post to Wholesale Market</h3><button class="modal-close" onclick="document.getElementById('wsPostMod').style.display='none'">&times;</button></div>
+      <div style="padding:1.25rem">
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">From inventory</label><select id="wsPI" onchange="wsFillPost()" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"><option value="">— Enter manually —</option></select></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Item Name *</label><input type="text" id="wsPN" placeholder="Product name" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Category</label><select id="wsPC" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"><option>Dresses</option><option>Girl Clothes</option><option>Boy Clothes</option><option>Baby Shirt</option><option>Baby Shoes</option><option>Baby Accessories</option></select></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.85rem">
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Cost $</label><input type="number" id="wsPCost" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Sell $</label><input type="number" id="wsPSell" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Qty</label><input type="number" id="wsPQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        </div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Sizes</label><input type="text" id="wsPSz" placeholder="3M, 6M, 1T..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Description</label><textarea id="wsPD" rows="2" placeholder="Condition, reason for selling..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical"></textarea></div>
+      </div>
+      <div style="padding:.85rem 1.25rem;border-top:1px solid #e2e8f0;display:flex;gap:.5rem;justify-content:flex-end">
+        <button class="btn btn-outline" onclick="document.getElementById('wsPostMod').style.display='none'">Cancel</button>
+        <button class="btn btn-primary" onclick="wsPostListing()"><i class="fas fa-upload"></i> Post</button>
+      </div></div>
+    </div>
 
-    <!-- WS Buy/Request Modal -->
-    
+    <div class="modal-overlay" id="wsBuyMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3>Request Stock Transfer</h3><button class="modal-close" onclick="document.getElementById('wsBuyMod').style.display='none'">&times;</button></div>
+      <div style="padding:1.25rem">
+        <div id="wsBuyInfo" style="background:#ebedff;border-radius:8px;padding:.75rem;margin-bottom:1rem;font-size:.85rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Qty *</label><input type="number" id="wsBQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Sizes needed</label><input type="text" id="wsBSz" placeholder="e.g. 1T, 2T" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Offer Price $ (blank = accept ask)</label><input type="number" id="wsBO" placeholder="Leave blank to accept" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Note</label><textarea id="wsBN" rows="2" placeholder="Urgency, special requests..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical"></textarea></div>
+      </div>
+      <div style="padding:.85rem 1.25rem;border-top:1px solid #e2e8f0;display:flex;gap:.5rem;justify-content:flex-end">
+        <button class="btn btn-outline" onclick="document.getElementById('wsBuyMod').style.display='none'">Cancel</button>
+        <button class="btn btn-success" onclick="wsSendReq()"><i class="fas fa-paper-plane"></i> Send Request</button>
+      </div></div>
+    </div>
 
-    <!-- WS New Chat Modal -->
-    
+    <div class="modal-overlay" id="wsNewChatMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3>New Conversation</h3><button class="modal-close" onclick="document.getElementById('wsNewChatMod').style.display='none'">&times;</button></div>
+      <div style="padding:1.25rem"><p style="font-size:.82rem;color:#718096;margin-bottom:.75rem">Select a store to chat with:</p><div id="wsStorePick"></div></div></div>
+    </div>
 
-    <!-- WS Chat Request Modal -->
-    
+    <div class="modal-overlay" id="wsReqMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3>Request Stock via Chat</h3><button class="modal-close" onclick="document.getElementById('wsReqMod').style.display='none'">&times;</button></div>
+      <div style="padding:1.25rem">
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Item *</label><input type="text" id="wsRI" placeholder="What do you need?" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.85rem">
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Qty</label><input type="number" id="wsRQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Offer $</label><input type="number" id="wsRP" placeholder="0.00" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        </div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Note</label><textarea id="wsRN" rows="2" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical"></textarea></div>
+      </div>
+      <div style="padding:.85rem 1.25rem;border-top:1px solid #e2e8f0;display:flex;gap:.5rem;justify-content:flex-end">
+        <button class="btn btn-outline" onclick="document.getElementById('wsReqMod').style.display='none'">Cancel</button>
+        <button class="btn btn-success" onclick="wsSendChatReq()"><i class="fas fa-paper-plane"></i> Send</button>
+      </div></div>
+    </div>
 
 </body></html>';
         // Always use blob URL - document.write() breaks script timing for QR/barcodes
@@ -5652,16 +5697,9 @@ function sendToTelegram(order, callback) {
     }
 
    
-    // ══════════════════════════════════════════
-    // WHOLESALE MODULE
-    // ══════════════════════════════════════════
-    var WS = {
-      store: null, listings: [], transfers: [], convs: [],
-      convId: null, listing: null, tfTab: 'in', _unsub: null, _init: false,
-      CODE: 'GoadKids1001'
-    };
+    // ══════════════ WHOLESALE MODULE ══════════════
+    var WS = { store:null, listings:[], transfers:[], convs:[], convId:null, listing:null, tfTab:'in', _unsub:null, _init:false, CODE:'GoadKids1001' };
 
-    // Called when Wholesale tab is shown
     function wsOnShow() {
       var raw = localStorage.getItem('goatWholesaleStore');
       if (raw) { try { WS.store = JSON.parse(raw); } catch(e) {} }
@@ -5683,108 +5721,90 @@ function sendToTelegram(order, callback) {
       var owner = document.getElementById('wsOwner').value.trim();
       var city = document.getElementById('wsCity').value.trim();
       var code = document.getElementById('wsCode').value.trim();
-      if (!name || !owner || !city || !code) { showToast('Please fill all fields', 'error'); return; }
-      if (code !== WS.CODE) { document.getElementById('wsCodeErr').style.display = 'block'; return; }
+      if (!name||!owner||!city||!code) { showToast('Please fill all fields','error'); return; }
+      if (code !== WS.CODE) { document.getElementById('wsCodeErr').style.display='block'; return; }
       document.getElementById('wsCodeErr').style.display = 'none';
-      WS.store = { id: 'ws_' + Date.now() + '_' + Math.random().toString(36).slice(2,6), name: name, owner: owner, city: city };
+      WS.store = { id:'ws_'+Date.now()+'_'+Math.random().toString(36).slice(2,6), name:name, owner:owner, city:city };
       localStorage.setItem('goatWholesaleStore', JSON.stringify(WS.store));
       WS._init = false;
       wsOnShow();
-      showToast('Welcome to the network, ' + name + '!', 'success');
+      showToast('Welcome to the network, '+name+'!','success');
     }
 
     function wsLogout() {
-      if (!confirm('Switch store? This will clear your store session.')) return;
+      if (!confirm('Switch store? This clears your session.')) return;
       localStorage.removeItem('goatWholesaleStore');
-      WS.store = null; WS._init = false;
-      WS.listings = []; WS.transfers = []; WS.convs = [];
+      WS.store = null; WS._init = false; WS.listings = []; WS.transfers = []; WS.convs = [];
       wsOnShow();
     }
 
     function wsRegStore() {
-      if (!db || !WS.store) return;
-      db.collection('network_stores').doc(WS.store.id).set({
-        id: WS.store.id, name: WS.store.name, owner: WS.store.owner, city: WS.store.city,
-        lastSeen: firebase.firestore.FieldValue.serverTimestamp()
-      }, { merge: true }).catch(function() {});
+      if (!db||!WS.store) return;
+      db.collection('network_stores').doc(WS.store.id).set({ id:WS.store.id, name:WS.store.name, owner:WS.store.owner, city:WS.store.city, lastSeen:firebase.firestore.FieldValue.serverTimestamp() }, { merge:true }).catch(function(){});
     }
 
     function wsSwitchTab(t) {
-      document.querySelectorAll('#wsMainUI .admin-tab').forEach(function(b) { b.classList.remove('active'); });
-      document.getElementById('wsTab-' + t).classList.add('active');
-      ['wsPanelMarket','wsPanelTransfers','wsPanelChat'].forEach(function(id) {
-        var el = document.getElementById(id); if (el) el.classList.remove('active');
-      });
-      var map = { market: 'wsPanelMarket', transfers: 'wsPanelTransfers', chat: 'wsPanelChat' };
-      var panel = document.getElementById(map[t]); if (panel) panel.classList.add('active');
-      if (t === 'market') wsRenderMkt();
-      if (t === 'transfers') wsRenderTF();
-      if (t === 'chat') wsRenderChatList();
+      document.querySelectorAll('#wsMainUI .admin-tab').forEach(function(b){ b.classList.remove('active'); });
+      var btn = document.getElementById('wsTab-'+t); if (btn) btn.classList.add('active');
+      ['wsPanelMarket','wsPanelTransfers','wsPanelChat'].forEach(function(id){ var el=document.getElementById(id); if(el) el.classList.remove('active'); });
+      var panels = { market:'wsPanelMarket', transfers:'wsPanelTransfers', chat:'wsPanelChat' };
+      var panel = document.getElementById(panels[t]); if (panel) panel.classList.add('active');
+      if (t==='market') wsRenderMkt();
+      if (t==='transfers') wsRenderTF();
+      if (t==='chat') wsRenderChatList();
     }
 
     function wsTFTab(t) {
       WS.tfTab = t;
-      ['in','out','done'].forEach(function(x) {
-        var b = document.getElementById('wsTF-' + x); if (!b) return;
-        b.style.borderColor = x === t ? '#667eea' : 'var(--gray-light)';
-        b.style.background = x === t ? '#ebedff' : '#fff';
-        b.style.color = x === t ? '#5a67d8' : 'var(--gray-dark)';
-      });
+      ['in','out','done'].forEach(function(x){ var b=document.getElementById('wsTF-'+x); if(!b) return; b.style.borderColor=x===t?'#667eea':'#e2e8f0'; b.style.background=x===t?'#ebedff':'#fff'; b.style.color=x===t?'#5a67d8':'#4a5568'; });
       wsRenderTF();
     }
 
     var WS_EM = { 'Dresses':'👗','Girl Clothes':'👕','Boy Clothes':'👕','Baby Shirt':'👶','Baby Shoes':'👟','Baby Accessories':'🎀' };
 
-    // ── MARKET ──
     function wsSubL() {
       if (!db) return;
-      db.collection('network_listings').where('status','==','active').onSnapshot(function(s) {
-        WS.listings = s.docs.map(function(d) { return Object.assign({ id: d.id }, d.data()); })
-          .sort(function(a,b) { return ((b.createdAt&&b.createdAt.seconds)||0) - ((a.createdAt&&a.createdAt.seconds)||0); });
+      db.collection('network_listings').where('status','==','active').onSnapshot(function(s){
+        WS.listings = s.docs.map(function(d){ return Object.assign({id:d.id},d.data()); }).sort(function(a,b){ return ((b.createdAt&&b.createdAt.seconds)||0)-((a.createdAt&&a.createdAt.seconds)||0); });
         wsRenderMkt();
-      }, function() {});
+      }, function(){});
     }
 
     function wsRenderMkt() {
-      var q = (document.getElementById('wsMktQ') ? document.getElementById('wsMktQ').value : '').toLowerCase();
-      var cat = document.getElementById('wsMktCat') ? document.getElementById('wsMktCat').value : '';
-      var list = WS.listings.filter(function(l) {
-        return (!q || (l.name||'').toLowerCase().indexOf(q) >= 0 || (l.storeName||'').toLowerCase().indexOf(q) >= 0) && (!cat || l.cat === cat);
-      });
+      var q = (document.getElementById('wsMktQ')?document.getElementById('wsMktQ').value:'').toLowerCase();
+      var cat = document.getElementById('wsMktCat')?document.getElementById('wsMktCat').value:'';
+      var list = WS.listings.filter(function(l){ return (!q||(l.name||'').toLowerCase().indexOf(q)>=0)&&(!cat||l.cat===cat); });
       var grid = document.getElementById('wsMktGrid'); var empty = document.getElementById('wsMktEmpty');
       if (!grid) return;
-      if (!list.length) { grid.innerHTML = ''; if (empty) empty.style.display = 'block'; return; }
-      if (empty) empty.style.display = 'none';
-      grid.innerHTML = list.map(function(l) {
-        var mine = WS.store && l.storeId === WS.store.id;
-        var lid = l.id; var sid = escHtml(l.storeId||''); var sn = escHtml(l.storeName||'');
+      if (!list.length) { grid.innerHTML=''; if(empty) empty.style.display='block'; return; }
+      if (empty) empty.style.display='none';
+      grid.innerHTML = list.map(function(l){
+        var mine = WS.store&&l.storeId===WS.store.id; var lid=l.id; var sid=escHtml(l.storeId||''); var sn=escHtml(l.storeName||'');
         var btns = mine
-          ? '<button class="btn btn-danger btn-small w-full" onclick="wsRemove(''+lid+'')"><i class="fas fa-trash"></i> Remove Listing</button>'
+          ? '<button class="btn btn-danger btn-small w-full" onclick="wsRemove(''+lid+'')"><i class="fas fa-trash"></i> Remove</button>'
           : '<button class="btn btn-success btn-small" style="flex:1" onclick="wsOpenBuy(''+lid+'')"><i class="fas fa-exchange-alt"></i> Request</button>'
-            + '<button class="btn btn-small btn-outline" onclick="wsChatWith(''+sid+'',''+sn+'')" title="Chat with seller"><i class="fas fa-comment"></i></button>';
-        return '<div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.08);border:1px solid var(--gray-light);overflow:hidden;transition:transform .2s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">'
-          + '<div style="height:100px;background:var(--light);display:flex;align-items:center;justify-content:center;font-size:2.8rem">'+(WS_EM[l.cat]||'📦')+'</div>'
-          + '<div style="padding:.75rem">'
-          + '<div style="font-size:.68rem;color:var(--gray);margin-bottom:.15rem"><i class="fas fa-store"></i> '+escHtml(l.storeName||'')+(l.city?' · '+escHtml(l.city):'')+'</div>'
-          + '<div style="font-weight:700;font-size:.9rem;margin-bottom:.2rem">'+escHtml(l.name||'')+'</div>'
-          + '<div style="display:flex;justify-content:space-between;align-items:center;margin:.25rem 0;flex-wrap:wrap;gap:.2rem">'
-          + '<div><div style="font-size:.65rem;color:var(--gray)">Cost</div><div style="font-weight:700;color:var(--gray-dark);font-size:.88rem">$'+parseFloat(l.costPrice||0).toFixed(2)+'</div></div>'
-          + '<div style="text-align:right"><div style="font-size:.65rem;color:var(--gray)">Sell</div><div style="font-weight:800;color:#667eea;font-size:1rem">$'+parseFloat(l.sellPrice||l.price||0).toFixed(2)+'</div></div>'
-          + '<span style="background:rgba(72,187,120,.12);color:#276749;padding:.15rem .45rem;border-radius:2rem;font-size:.68rem;font-weight:700">'+escHtml(String(l.qty||0))+' pcs</span>'
-          + '</div>'
-          + (l.sizes?'<div style="font-size:.7rem;color:var(--gray);margin-bottom:.25rem">Sizes: '+escHtml(l.sizes)+'</div>':'')
-          + (l.desc?'<div style="font-size:.7rem;color:var(--gray);font-style:italic;margin-bottom:.3rem">'+escHtml(l.desc)+'</div>':'')
-          + '<div style="display:flex;gap:.35rem;margin-top:.5rem">'+btns+'</div>'
-          + '</div></div>';
+            +'<button class="btn btn-small btn-outline" onclick="wsChatWith(''+sid+'',''+sn+'')"><i class="fas fa-comment"></i></button>';
+        return '<div style="background:#fff;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.08);border:1px solid #e2e8f0;overflow:hidden">'
+          +'<div style="height:90px;background:#f7fafc;display:flex;align-items:center;justify-content:center;font-size:2.5rem">'+(WS_EM[l.cat]||'📦')+'</div>'
+          +'<div style="padding:.7rem">'
+          +'<div style="font-size:.68rem;color:#718096;margin-bottom:.15rem">'+escHtml(l.storeName||'')+(l.city?' · '+escHtml(l.city):'')+'</div>'
+          +'<div style="font-weight:700;font-size:.88rem;margin-bottom:.2rem">'+escHtml(l.name||'')+'</div>'
+          +'<div style="display:flex;justify-content:space-between;align-items:center;margin:.25rem 0;flex-wrap:wrap;gap:.2rem">'
+          +'<div><div style="font-size:.62rem;color:#718096">Cost</div><div style="font-weight:700;font-size:.85rem">$'+parseFloat(l.costPrice||0).toFixed(2)+'</div></div>'
+          +'<div style="text-align:right"><div style="font-size:.62rem;color:#718096">Sell</div><div style="font-weight:800;color:#667eea">$'+parseFloat(l.sellPrice||l.price||0).toFixed(2)+'</div></div>'
+          +'<span style="background:rgba(72,187,120,.12);color:#276749;padding:.12rem .4rem;border-radius:2rem;font-size:.68rem;font-weight:700">'+escHtml(String(l.qty||0))+' pcs</span>'
+          +'</div>'+(l.sizes?'<div style="font-size:.7rem;color:#718096;margin-bottom:.2rem">'+escHtml(l.sizes)+'</div>':'')
+          +(l.desc?'<div style="font-size:.7rem;color:#718096;font-style:italic;margin-bottom:.3rem">'+escHtml(l.desc)+'</div>':'')
+          +'<div style="display:flex;gap:.35rem;margin-top:.45rem">'+btns+'</div>'
+          +'</div></div>';
       }).join('');
     }
 
     function wsOpenPost() {
       if (!WS.store) return;
       var sel = document.getElementById('wsPI');
-      sel.innerHTML = '<option value="">— Enter manually —</option>'
-        + STATE.products.map(function(p) { return '<option value="'+p.id+'">'+escHtml(p.name)+' ('+getTotalStock(p)+' pcs)</option>'; }).join('');
-      ['wsPN','wsPCost','wsPSell','wsPSz','wsPD'].forEach(function(id) { var el = document.getElementById(id); if (el) el.value = ''; });
+      sel.innerHTML = '<option value="">— Enter manually —</option>'+STATE.products.map(function(p){ return '<option value="'+p.id+'">'+escHtml(p.name)+' ('+getTotalStock(p)+' pcs)</option>'; }).join('');
+      ['wsPN','wsPCost','wsPSell','wsPSz','wsPD'].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=''; });
       document.getElementById('wsPQ').value = '1';
       document.getElementById('wsPostMod').style.display = 'flex';
     }
@@ -5793,345 +5813,211 @@ function sendToTelegram(order, callback) {
       var id = document.getElementById('wsPI').value; if (!id) return;
       var p = findProduct(id); if (!p) return;
       document.getElementById('wsPN').value = p.name;
-      document.getElementById('wsPC').value = p.category || 'Dresses';
+      document.getElementById('wsPC').value = p.category||'Dresses';
       document.getElementById('wsPSell').value = p.price;
       document.getElementById('wsPQ').value = getTotalStock(p);
-      document.getElementById('wsPSz').value = p.sizes ? p.sizes.map(function(s){return s.name;}).join(', ') : '';
+      document.getElementById('wsPSz').value = p.sizes?p.sizes.map(function(s){return s.name;}).join(', '):'';
     }
 
     function wsPostListing() {
-      if (!db) { showToast('Not connected to Firebase', 'error'); return; }
+      if (!db) { showToast('Not connected','error'); return; }
       var name = document.getElementById('wsPN').value.trim();
-      var sell = parseFloat(document.getElementById('wsPSell').value) || 0;
-      if (!name || !sell) { showToast('Item name and sell price are required', 'error'); return; }
-      db.collection('network_listings').add({
-        name: name, cat: document.getElementById('wsPC').value,
-        costPrice: parseFloat(document.getElementById('wsPCost').value) || 0,
-        sellPrice: sell, price: sell,
-        qty: parseInt(document.getElementById('wsPQ').value) || 1,
-        sizes: document.getElementById('wsPSz').value.trim(),
-        desc: document.getElementById('wsPD').value.trim(),
-        storeId: WS.store.id, storeName: WS.store.name, city: WS.store.city,
-        status: 'active', createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      }).then(function() {
-        document.getElementById('wsPostMod').style.display = 'none';
-        showToast('Listing posted to network!', 'success');
-      }).catch(function(e) { showToast('Error: ' + e.message, 'error'); });
+      var sell = parseFloat(document.getElementById('wsPSell').value)||0;
+      if (!name||!sell) { showToast('Name and sell price required','error'); return; }
+      db.collection('network_listings').add({ name:name, cat:document.getElementById('wsPC').value, costPrice:parseFloat(document.getElementById('wsPCost').value)||0, sellPrice:sell, price:sell, qty:parseInt(document.getElementById('wsPQ').value)||1, sizes:document.getElementById('wsPSz').value.trim(), desc:document.getElementById('wsPD').value.trim(), storeId:WS.store.id, storeName:WS.store.name, city:WS.store.city, status:'active', createdAt:firebase.firestore.FieldValue.serverTimestamp() })
+        .then(function(){ document.getElementById('wsPostMod').style.display='none'; showToast('Listed!','success'); })
+        .catch(function(e){ showToast('Error: '+e.message,'error'); });
     }
 
-    function wsRemove(id) {
-      if (!db) return;
-      db.collection('network_listings').doc(id).update({ status: 'removed' })
-        .then(function() { showToast('Listing removed', 'info'); }).catch(function() {});
-    }
+    function wsRemove(id) { if (!db) return; db.collection('network_listings').doc(id).update({status:'removed'}).then(function(){ showToast('Removed','info'); }).catch(function(){}); }
 
     function wsOpenBuy(lid) {
-      var l = WS.listings.find(function(x) { return x.id === lid; }); if (!l) return;
+      var l = WS.listings.find(function(x){ return x.id===lid; }); if (!l) return;
       WS.listing = l;
-      document.getElementById('wsBuyInfo').innerHTML =
-        '<b style="font-size:.95rem">'+escHtml(l.name)+'</b><br>'
-        + 'From: <b>'+escHtml(l.storeName)+'</b>'+(l.city?' · '+escHtml(l.city):'')+'<br>'
-        + '<div style="display:flex;gap:1rem;margin-top:.3rem">'
-        + '<div>Cost: <b>$'+parseFloat(l.costPrice||0).toFixed(2)+'</b></div>'
-        + '<div>Sell: <b style="color:#667eea">$'+parseFloat(l.sellPrice||l.price||0).toFixed(2)+'</b></div>'
-        + '<div>Qty: <b>'+escHtml(String(l.qty||0))+'</b></div></div>';
-      document.getElementById('wsBQ').value = 1;
-      document.getElementById('wsBSz').value = l.sizes || '';
-      document.getElementById('wsBO').value = '';
-      document.getElementById('wsBN').value = '';
-      document.getElementById('wsBuyMod').style.display = 'flex';
+      document.getElementById('wsBuyInfo').innerHTML = '<b>'+escHtml(l.name)+'</b><br>From: <b>'+escHtml(l.storeName)+'</b>'+(l.city?' · '+escHtml(l.city):'')+' | Cost: <b>$'+parseFloat(l.costPrice||0).toFixed(2)+'</b> Sell: <b style="color:#667eea">$'+parseFloat(l.sellPrice||l.price||0).toFixed(2)+'</b> Qty: <b>'+l.qty+'</b>';
+      document.getElementById('wsBQ').value=1; document.getElementById('wsBSz').value=l.sizes||''; document.getElementById('wsBO').value=''; document.getElementById('wsBN').value='';
+      document.getElementById('wsBuyMod').style.display='flex';
     }
 
     function wsSendReq() {
-      if (!db || !WS.listing) return;
-      var l = WS.listing;
-      var qty = parseInt(document.getElementById('wsBQ').value) || 1;
-      var offer = parseFloat(document.getElementById('wsBO').value) || (l.sellPrice || l.price || 0);
-      db.collection('network_transfers').add({
-        listingId: l.id, itemName: l.name,
-        buyerId: WS.store.id, buyerName: WS.store.name,
-        sellerId: l.storeId, sellerName: l.storeName,
-        qty: qty, sizes: document.getElementById('wsBSz').value.trim(),
-        askPrice: l.sellPrice || l.price || 0, offerPrice: offer,
-        note: document.getElementById('wsBN').value.trim(),
-        status: 'pending', createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      }).then(function(ref) {
-        document.getElementById('wsBuyMod').style.display = 'none';
-        WS.listing = null;
-        showToast('Transfer request sent!', 'success');
-        wsSysMsg(l.storeId, l.storeName, 'Transfer Request: ' + l.name + ' x' + qty + ' @$' + offer.toFixed(2) + ' Ref#' + ref.id.slice(-6).toUpperCase());
-      }).catch(function(e) { showToast('Error: ' + e.message, 'error'); });
+      if (!db||!WS.listing) return; var l=WS.listing;
+      var qty=parseInt(document.getElementById('wsBQ').value)||1;
+      var offer=parseFloat(document.getElementById('wsBO').value)||(l.sellPrice||l.price||0);
+      db.collection('network_transfers').add({ listingId:l.id, itemName:l.name, buyerId:WS.store.id, buyerName:WS.store.name, sellerId:l.storeId, sellerName:l.storeName, qty:qty, sizes:document.getElementById('wsBSz').value.trim(), askPrice:l.sellPrice||l.price||0, offerPrice:offer, note:document.getElementById('wsBN').value.trim(), status:'pending', createdAt:firebase.firestore.FieldValue.serverTimestamp() })
+        .then(function(ref){ document.getElementById('wsBuyMod').style.display='none'; WS.listing=null; showToast('Request sent!','success'); wsSysMsg(l.storeId,l.storeName,'Transfer Request: '+l.name+' x'+qty+' @$'+offer.toFixed(2)+' #'+ref.id.slice(-6).toUpperCase()); })
+        .catch(function(e){ showToast('Error: '+e.message,'error'); });
     }
 
-    // ── TRANSFERS ──
     function wsSubT() {
-      if (!db || !WS.store) return;
-      var mid = WS.store.id;
-      db.collection('network_transfers').where('buyerId','==',mid).onSnapshot(function(s1) {
-        var buyer = s1.docs.map(function(d) { return Object.assign({ id: d.id }, d.data()); });
-        db.collection('network_transfers').where('sellerId','==',mid).onSnapshot(function(s2) {
-          var seller = s2.docs.map(function(d) { return Object.assign({ id: d.id }, d.data()); });
-          var merged = buyer.slice();
-          seller.forEach(function(t) { if (!merged.find(function(x) { return x.id === t.id; })) merged.push(t); });
-          WS.transfers = merged.sort(function(a,b) { return ((b.createdAt&&b.createdAt.seconds)||0) - ((a.createdAt&&a.createdAt.seconds)||0); });
+      if (!db||!WS.store) return; var mid=WS.store.id;
+      db.collection('network_transfers').where('buyerId','==',mid).onSnapshot(function(s1){
+        var b=s1.docs.map(function(d){ return Object.assign({id:d.id},d.data()); });
+        db.collection('network_transfers').where('sellerId','==',mid).onSnapshot(function(s2){
+          var s=s2.docs.map(function(d){ return Object.assign({id:d.id},d.data()); });
+          var m=b.slice(); s.forEach(function(t){ if(!m.find(function(x){ return x.id===t.id; })) m.push(t); });
+          WS.transfers=m.sort(function(a,b){ return ((b.createdAt&&b.createdAt.seconds)||0)-((a.createdAt&&a.createdAt.seconds)||0); });
           wsRenderTF();
-          var inc = WS.transfers.filter(function(t) { return t.sellerId === mid && t.status === 'pending'; }).length;
-          var badge = document.getElementById('wsTrBadge');
-          if (badge) { badge.style.display = inc > 0 ? 'inline' : 'none'; badge.textContent = inc; }
-        }, function() {});
-      }, function() {});
+          var inc=WS.transfers.filter(function(t){ return t.sellerId===mid&&t.status==='pending'; }).length;
+          var badge=document.getElementById('wsTrBadge'); if(badge){ badge.style.display=inc?'inline':'none'; badge.textContent=inc; }
+        },function(){});
+      },function(){});
     }
 
     function wsRenderTF() {
-      var list = document.getElementById('wsTFList'); var empty = document.getElementById('wsTFEmpty');
-      if (!list) return;
-      var mid = WS.store ? WS.store.id : ''; var t = WS.tfTab;
-      var f = t === 'in' ? WS.transfers.filter(function(x) { return x.sellerId === mid && x.status === 'pending'; })
-            : t === 'out' ? WS.transfers.filter(function(x) { return x.buyerId === mid && x.status === 'pending'; })
-            : WS.transfers.filter(function(x) { return x.status !== 'pending'; });
-      if (!f.length) { list.innerHTML = ''; if (empty) empty.style.display = 'block'; return; }
-      if (empty) empty.style.display = 'none';
-      list.innerHTML = f.map(function(tr) {
-        var isSeller = tr.sellerId === mid; var tid = tr.id;
-        var pill = tr.status === 'pending'
-          ? '<span style="background:rgba(236,201,75,.15);color:#7d6608;padding:.15rem .5rem;border-radius:2rem;font-size:.7rem;font-weight:700"><i class="fas fa-clock"></i> Pending</span>'
-          : tr.status === 'accepted'
-          ? '<span style="background:rgba(72,187,120,.12);color:#276749;padding:.15rem .5rem;border-radius:2rem;font-size:.7rem;font-weight:700"><i class="fas fa-check"></i> Accepted</span>'
-          : '<span style="background:rgba(245,101,101,.12);color:#9b2c2c;padding:.15rem .5rem;border-radius:2rem;font-size:.7rem;font-weight:700"><i class="fas fa-times"></i> Declined</span>';
-        var oid = escHtml(isSeller ? tr.buyerId : tr.sellerId);
-        var on = escHtml(isSeller ? (tr.buyerName||'Buyer') : (tr.sellerName||'Seller'));
-        var act = (isSeller && tr.status === 'pending')
-          ? '<button class="btn btn-success btn-small" onclick="wsRespondTF(''+tid+'','accepted')"><i class="fas fa-check"></i> Accept</button>'
-            + '<button class="btn btn-danger btn-small" onclick="wsRespondTF(''+tid+'','declined')"><i class="fas fa-times"></i> Decline</button>'
-          : '';
-        return '<div style="border:1px solid var(--gray-light);border-radius:12px;overflow:hidden;margin-bottom:.75rem">'
-          + '<div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem .9rem;background:var(--light);border-bottom:1px solid var(--gray-light);flex-wrap:wrap;gap:.3rem">'
-          + '<div><b style="font-size:.88rem">'+escHtml(tr.itemName||'')+'</b> <span style="font-size:.7rem;color:var(--gray)">#'+tid.slice(-6).toUpperCase()+'</span></div>'+pill+'</div>'
-          + '<div style="padding:.75rem .9rem">'
-          + '<div style="font-size:.82rem;margin-bottom:.35rem;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap">'
-          + '<span style="background:#ebedff;color:#5a67d8;padding:.12rem .45rem;border-radius:2rem;font-size:.72rem;font-weight:600"><i class="fas fa-store"></i> '+escHtml(tr.buyerName||'')+'</span>'
-          + '<span style="color:#667eea"><i class="fas fa-long-arrow-alt-right"></i></span>'
-          + '<span style="background:#ebedff;color:#5a67d8;padding:.12rem .45rem;border-radius:2rem;font-size:.72rem;font-weight:600"><i class="fas fa-store"></i> '+escHtml(tr.sellerName||'')+'</span></div>'
-          + '<div style="font-size:.8rem;color:var(--gray-dark)">Qty: '+escHtml(String(tr.qty||1))+' | Sizes: '+escHtml(tr.sizes||'—')+' | Offer: <b>$'+parseFloat(tr.offerPrice||0).toFixed(2)+'</b></div>'
-          + (tr.note ? '<div style="font-size:.75rem;color:var(--gray);font-style:italic;margin-top:.2rem">'+escHtml(tr.note)+'</div>' : '')
-          + '<div style="display:flex;gap:.4rem;margin-top:.6rem;flex-wrap:wrap">'+act
-          + '<button class="btn btn-small btn-outline" onclick="wsChatWith(''+oid+'',''+on+'')"><i class="fas fa-comment"></i> Chat</button>'
-          + '</div></div></div>';
+      var list=document.getElementById('wsTFList'); var empty=document.getElementById('wsTFEmpty'); if(!list) return;
+      var mid=WS.store?WS.store.id:''; var t=WS.tfTab;
+      var f=t==='in'?WS.transfers.filter(function(x){ return x.sellerId===mid&&x.status==='pending'; }):t==='out'?WS.transfers.filter(function(x){ return x.buyerId===mid&&x.status==='pending'; }):WS.transfers.filter(function(x){ return x.status!=='pending'; });
+      if (!f.length) { list.innerHTML=''; if(empty) empty.style.display='block'; return; }
+      if (empty) empty.style.display='none';
+      list.innerHTML=f.map(function(tr){
+        var is=tr.sellerId===mid; var tid=tr.id;
+        var pill=tr.status==='pending'?'<span style="background:rgba(236,201,75,.15);color:#7d6608;padding:.12rem .45rem;border-radius:2rem;font-size:.7rem;font-weight:700">Pending</span>':tr.status==='accepted'?'<span style="background:rgba(72,187,120,.12);color:#276749;padding:.12rem .45rem;border-radius:2rem;font-size:.7rem;font-weight:700">Accepted</span>':'<span style="background:rgba(245,101,101,.12);color:#9b2c2c;padding:.12rem .45rem;border-radius:2rem;font-size:.7rem;font-weight:700">Declined</span>';
+        var oid=escHtml(is?tr.buyerId:tr.sellerId); var on=escHtml(is?(tr.buyerName||'Buyer'):(tr.sellerName||'Seller'));
+        var act=(is&&tr.status==='pending')?'<button class="btn btn-success btn-small" onclick="wsRespondTF(''+tid+'','accepted')"><i class="fas fa-check"></i> Accept</button><button class="btn btn-danger btn-small" onclick="wsRespondTF(''+tid+'','declined')"><i class="fas fa-times"></i> Decline</button>':'';
+        return '<div style="border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;margin-bottom:.65rem"><div style="display:flex;justify-content:space-between;align-items:center;padding:.5rem .8rem;background:#f7fafc;border-bottom:1px solid #e2e8f0;flex-wrap:wrap;gap:.3rem"><div><b style="font-size:.85rem">'+escHtml(tr.itemName||'')+'</b><span style="font-size:.7rem;color:#718096;margin-left:.5rem">#'+tid.slice(-6).toUpperCase()+'</span></div>'+pill+'</div><div style="padding:.65rem .8rem"><div style="font-size:.78rem;margin-bottom:.3rem"><span style="background:#ebedff;color:#5a67d8;padding:.1rem .4rem;border-radius:2rem;font-size:.7rem;font-weight:600">'+escHtml(tr.buyerName||'')+'</span> → <span style="background:#ebedff;color:#5a67d8;padding:.1rem .4rem;border-radius:2rem;font-size:.7rem;font-weight:600">'+escHtml(tr.sellerName||'')+'</span></div><div style="font-size:.78rem;color:#4a5568">Qty: '+escHtml(String(tr.qty||1))+' | '+escHtml(tr.sizes||'—')+' | $'+parseFloat(tr.offerPrice||0).toFixed(2)+'</div>'+(tr.note?'<div style="font-size:.73rem;color:#718096;font-style:italic">'+escHtml(tr.note)+'</div>':'')+'<div style="display:flex;gap:.35rem;margin-top:.5rem;flex-wrap:wrap">'+act+'<button class="btn btn-small btn-outline" onclick="wsChatWith(''+oid+'',''+on+'')"><i class="fas fa-comment"></i> Chat</button></div></div></div>';
       }).join('');
     }
 
-    function wsRespondTF(id, status) {
+    function wsRespondTF(id,status) {
       if (!db) return;
-      db.collection('network_transfers').doc(id).update({ status: status, respondedAt: firebase.firestore.FieldValue.serverTimestamp() })
-        .then(function() {
-          var tr = WS.transfers.find(function(x) { return x.id === id; });
-          if (tr) wsSysMsg(tr.buyerId, tr.buyerName, status === 'accepted' ? 'Transfer ACCEPTED: ' + tr.itemName + ' x' + tr.qty + ' - ready to ship!' : 'Transfer declined for ' + tr.itemName);
-          showToast(status === 'accepted' ? 'Transfer accepted!' : 'Transfer declined', status === 'accepted' ? 'success' : 'info');
-        }).catch(function() {});
+      db.collection('network_transfers').doc(id).update({status:status,respondedAt:firebase.firestore.FieldValue.serverTimestamp()}).then(function(){ var tr=WS.transfers.find(function(x){ return x.id===id; }); if(tr) wsSysMsg(tr.buyerId,tr.buyerName,status==='accepted'?'Transfer ACCEPTED: '+tr.itemName+' x'+tr.qty:'Transfer declined: '+tr.itemName); showToast(status==='accepted'?'Accepted!':'Declined','info'); }).catch(function(){});
     }
 
-    // ── CHAT ──
     function wsSubC() {
-      if (!db || !WS.store) return;
-      var mid = WS.store.id;
-      db.collection('network_conversations').where('participants','array-contains',mid).onSnapshot(function(s) {
-        WS.convs = s.docs.map(function(d) { return Object.assign({ id: d.id }, d.data()); })
-          .sort(function(a,b) { return ((b.lastMessageAt&&b.lastMessageAt.seconds)||0) - ((a.lastMessageAt&&a.lastMessageAt.seconds)||0); });
+      if (!db||!WS.store) return; var mid=WS.store.id;
+      db.collection('network_conversations').where('participants','array-contains',mid).onSnapshot(function(s){
+        WS.convs=s.docs.map(function(d){ return Object.assign({id:d.id},d.data()); }).sort(function(a,b){ return ((b.lastMessageAt&&b.lastMessageAt.seconds)||0)-((a.lastMessageAt&&a.lastMessageAt.seconds)||0); });
         wsRenderChatList();
-        var unread = WS.convs.filter(function(c) { return ((c.unread||{})[mid]||0) > 0; }).length;
-        var badge = document.getElementById('wsChBadge');
-        if (badge) { badge.style.display = unread > 0 ? 'inline' : 'none'; badge.textContent = unread; }
-      }, function() {});
+        var u=WS.convs.filter(function(c){ return ((c.unread||{})[mid]||0)>0; }).length;
+        var badge=document.getElementById('wsChBadge'); if(badge){ badge.style.display=u?'inline':'none'; badge.textContent=u; }
+      },function(){});
     }
 
     function wsRenderChatList() {
-      var el = document.getElementById('wsChatList'); if (!el) return;
-      var mid = WS.store ? WS.store.id : '';
-      if (!WS.convs.length) { el.innerHTML = '<div style="text-align:center;padding:1.5rem;color:var(--gray);font-size:.82rem"><i class="fas fa-comment-slash" style="font-size:1.5rem;display:block;margin-bottom:.5rem;opacity:.4"></i>No chats yet</div>'; return; }
-      el.innerHTML = WS.convs.map(function(c) {
-        var n = c.participantNames || {};
-        var oid = (c.participants||[]).find(function(p) { return p !== mid; });
-        var on = n[oid] || 'Store';
-        var init = on.split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();
-        var unread = ((c.unread||{})[mid]||0); var cid = c.id; var active = cid === WS.convId;
-        return '<div style="display:flex;align-items:center;gap:.5rem;padding:.6rem .8rem;cursor:pointer;border-bottom:1px solid var(--gray-light);background:'+(active?'var(--primary-light)':'')+';transition:background .15s" onclick="wsOpenConv(''+cid+'')" onmouseover="if(!'+active+')this.style.background='var(--light)'" onmouseout="if(!'+active+')this.style.background=''">'
-          + '<div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#667eea,#a78bfa);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.82rem;flex-shrink:0">'+init+'</div>'
-          + '<div style="flex:1;min-width:0"><div style="font-weight:600;font-size:.82rem">'+escHtml(on)+'</div><div style="font-size:.7rem;color:var(--gray);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escHtml(c.lastMessage||'')+'</div></div>'
-          + (unread > 0 ? '<span style="background:#667eea;color:#fff;font-size:.6rem;font-weight:700;padding:.1rem .3rem;border-radius:6px">'+unread+'</span>' : '')
-          + '</div>';
+      var el=document.getElementById('wsChatList'); if(!el) return; var mid=WS.store?WS.store.id:'';
+      if (!WS.convs.length) { el.innerHTML='<div style="text-align:center;padding:1.5rem;color:#718096;font-size:.82rem">No chats yet</div>'; return; }
+      el.innerHTML=WS.convs.map(function(c){
+        var n=c.participantNames||{}; var oid=(c.participants||[]).find(function(p){ return p!==mid; }); var on=n[oid]||'Store';
+        var init=on.split(' ').map(function(w){ return w[0]; }).join('').slice(0,2).toUpperCase();
+        var u=((c.unread||{})[mid]||0); var cid=c.id; var active=cid===WS.convId;
+        return '<div style="display:flex;align-items:center;gap:.5rem;padding:.6rem .8rem;cursor:pointer;border-bottom:1px solid #e2e8f0;background:'+(active?'#ebedff':'')+'" onclick="wsOpenConv(''+cid+'')">'
+          +'<div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#667eea,#a78bfa);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.82rem;flex-shrink:0">'+init+'</div>'
+          +'<div style="flex:1;min-width:0"><div style="font-weight:600;font-size:.82rem">'+escHtml(on)+'</div><div style="font-size:.7rem;color:#718096;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escHtml(c.lastMessage||'')+'</div></div>'
+          +(u>0?'<span style="background:#667eea;color:#fff;font-size:.6rem;font-weight:700;padding:.1rem .3rem;border-radius:5px">'+u+'</span>':'')+'</div>';
       }).join('');
     }
 
     function wsOpenConv(cid) {
-      WS.convId = cid;
-      var conv = WS.convs.find(function(c) { return c.id === cid; }); if (!conv) return;
-      var mid = WS.store ? WS.store.id : '';
-      var n = conv.participantNames || {};
-      var oid = (conv.participants||[]).find(function(p) { return p !== mid; });
-      var on = n[oid] || 'Store';
-      var init = on.split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();
-      document.getElementById('wsChatEmpty').style.display = 'none';
-      document.getElementById('wsChatWin').style.display = 'flex';
-      document.getElementById('wsChatAv').textContent = init;
-      document.getElementById('wsChatWinName').textContent = on;
+      WS.convId=cid; var conv=WS.convs.find(function(c){ return c.id===cid; }); if(!conv) return;
+      var mid=WS.store?WS.store.id:''; var n=conv.participantNames||{};
+      var oid=(conv.participants||[]).find(function(p){ return p!==mid; }); var on=n[oid]||'Store';
+      var init=on.split(' ').map(function(w){ return w[0]; }).join('').slice(0,2).toUpperCase();
+      document.getElementById('wsChatEmpty').style.display='none';
+      document.getElementById('wsChatWin').style.display='flex';
+      document.getElementById('wsChatAv').textContent=init;
+      document.getElementById('wsChatWinName').textContent=on;
       wsRenderChatList();
-      if (((conv.unread||{})[mid]||0) > 0) {
-        var upd = {}; upd['unread.' + mid] = 0;
-        db.collection('network_conversations').doc(cid).update(upd).catch(function() {});
-      }
-      if (WS._unsub) WS._unsub();
-      WS._unsub = db.collection('network_conversations').doc(cid).collection('messages').orderBy('createdAt','asc')
-        .onSnapshot(function(s) { wsRenderMsgs(s.docs.map(function(d) { return Object.assign({ id: d.id }, d.data()); })); }, function() {});
+      if(((conv.unread||{})[mid]||0)>0){ var upd={}; upd['unread.'+mid]=0; db.collection('network_conversations').doc(cid).update(upd).catch(function(){}); }
+      if(WS._unsub) WS._unsub();
+      WS._unsub=db.collection('network_conversations').doc(cid).collection('messages').orderBy('createdAt','asc').onSnapshot(function(s){ wsRenderMsgs(s.docs.map(function(d){ return Object.assign({id:d.id},d.data()); })); },function(){});
     }
 
     function wsRenderMsgs(msgs) {
-      var c = document.getElementById('wsMsgs'); if (!c) return;
-      var mid = WS.store ? WS.store.id : '';
-      if (!msgs.length) { c.innerHTML = '<div style="text-align:center;color:var(--gray);font-size:.82rem;padding:1.5rem">No messages yet. Say hello! 👋</div>'; return; }
-      c.innerHTML = msgs.map(function(m) {
-        var mine = m.senderId === mid;
-        var isSpecial = m.type === 'transfer_request' || m.type === 'system';
-        if (isSpecial) return '<div style="background:rgba(102,126,234,.08);border:1px solid #ebedff;border-radius:8px;padding:.5rem .75rem;font-size:.78rem"><b style="color:#5a67d8"><i class="fas fa-exchange-alt"></i> '+escHtml(m.senderName||'')+'</b><br>'+escHtml(m.text||'')+'<br><span style="font-size:.62rem;color:var(--gray)">'+wsFmt(m.createdAt)+'</span></div>';
-        var init = (m.senderName||'?').split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();
+      var c=document.getElementById('wsMsgs'); if(!c) return; var mid=WS.store?WS.store.id:'';
+      if(!msgs.length){ c.innerHTML='<div style="text-align:center;color:#718096;font-size:.82rem;padding:1.5rem">Say hello! 👋</div>'; return; }
+      c.innerHTML=msgs.map(function(m){
+        var mine=m.senderId===mid; var sp=m.type==='transfer_request'||m.type==='system';
+        if(sp) return '<div style="background:#ebedff;border-radius:8px;padding:.45rem .65rem;font-size:.75rem;margin:.2rem 0"><b style="color:#5a67d8"><i class="fas fa-exchange-alt"></i> '+escHtml(m.senderName||'')+'</b><br>'+escHtml(m.text||'')+'</div>';
+        var init=(m.senderName||'?').split(' ').map(function(w){ return w[0]; }).join('').slice(0,2).toUpperCase();
         return '<div style="display:flex;gap:.4rem;align-items:flex-end;max-width:78%;align-self:'+(mine?'flex-end':'flex-start')+';flex-direction:'+(mine?'row-reverse':'row')+'">'
-          + (!mine?'<div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#667eea,#a78bfa);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.65rem;font-weight:700;flex-shrink:0">'+init+'</div>':'')
-          + '<div><div style="padding:.5rem .75rem;border-radius:'+(mine?'14px 14px 4px 14px':'14px 14px 14px 4px')+';background:'+(mine?'var(--primary)':'#fff')+';color:'+(mine?'#fff':'inherit')+';font-size:.85rem;max-width:280px;'+(mine?'':'border:1px solid var(--gray-light);')+'">'+escHtml(m.text||'')+'</div>'
-          + '<div style="font-size:.62rem;color:var(--gray);margin-top:.15rem;'+(mine?'text-align:right':'')+'">'+wsFmt(m.createdAt)+'</div></div></div>';
+          +(!mine?'<div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#667eea,#a78bfa);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.65rem;font-weight:700;flex-shrink:0">'+init+'</div>':'')
+          +'<div style="padding:.45rem .65rem;border-radius:'+(mine?'12px 12px 3px 12px':'12px 12px 12px 3px')+';background:'+(mine?'#667eea':'#fff')+';color:'+(mine?'#fff':'inherit')+';font-size:.83rem;max-width:260px;'+(mine?'':'border:1px solid #e2e8f0;')+'">'+escHtml(m.text||'')+'</div></div>';
       }).join('');
-      c.scrollTop = c.scrollHeight;
+      c.scrollTop=c.scrollHeight;
     }
 
     function wsSend() {
-      if (!db || !WS.convId || !WS.store) return;
-      var inp = document.getElementById('wsMsgIn'); var text = inp.value.trim(); if (!text) return;
-      inp.value = ''; inp.style.height = 'auto'; var mid = WS.store.id;
-      db.collection('network_conversations').doc(WS.convId).collection('messages').add({
-        text: text, senderId: mid, senderName: WS.store.name, type: 'text',
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      }).then(function() {
-        var conv = WS.convs.find(function(c) { return c.id === WS.convId; });
-        var oid = conv ? (conv.participants||[]).find(function(p) { return p !== mid; }) : null;
-        var upd = { lastMessage: text, lastMessageAt: firebase.firestore.FieldValue.serverTimestamp() };
-        if (oid) upd['unread.' + oid] = firebase.firestore.FieldValue.increment(1);
-        db.collection('network_conversations').doc(WS.convId).update(upd).catch(function() {});
-      }).catch(function() { showToast('Send failed', 'error'); });
+      if(!db||!WS.convId||!WS.store) return;
+      var inp=document.getElementById('wsMsgIn'); var text=inp.value.trim(); if(!text) return;
+      inp.value=''; inp.style.height='auto'; var mid=WS.store.id;
+      db.collection('network_conversations').doc(WS.convId).collection('messages').add({ text:text, senderId:mid, senderName:WS.store.name, type:'text', createdAt:firebase.firestore.FieldValue.serverTimestamp() }).then(function(){
+        var conv=WS.convs.find(function(c){ return c.id===WS.convId; }); var oid=conv?(conv.participants||[]).find(function(p){ return p!==mid; }):null;
+        var upd={ lastMessage:text, lastMessageAt:firebase.firestore.FieldValue.serverTimestamp() }; if(oid) upd['unread.'+oid]=firebase.firestore.FieldValue.increment(1);
+        db.collection('network_conversations').doc(WS.convId).update(upd).catch(function(){});
+      }).catch(function(){ showToast('Send failed','error'); });
     }
 
-    function wsSysMsg(oid, on, text) {
-      if (!db || !WS.store) return;
-      var cid = [WS.store.id, oid].sort().join('_');
-      var ref = db.collection('network_conversations').doc(cid);
-      var n = {}; n[WS.store.id] = WS.store.name; n[oid] = on;
-      ref.set({ participants: [WS.store.id, oid], participantNames: n, lastMessage: text, lastMessageAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true })
-        .then(function() {
-          var upd = {}; upd['unread.' + oid] = firebase.firestore.FieldValue.increment(1);
-          ref.update(upd).catch(function() {});
-          ref.collection('messages').add({ text: text, senderId: WS.store.id, senderName: WS.store.name, type: 'transfer_request', createdAt: firebase.firestore.FieldValue.serverTimestamp() }).catch(function() {});
-        }).catch(function() {});
+    function wsSysMsg(oid,on,text) {
+      if(!db||!WS.store) return; var cid=[WS.store.id,oid].sort().join('_'); var ref=db.collection('network_conversations').doc(cid);
+      var n={}; n[WS.store.id]=WS.store.name; n[oid]=on;
+      ref.set({ participants:[WS.store.id,oid], participantNames:n, lastMessage:text, lastMessageAt:firebase.firestore.FieldValue.serverTimestamp() },{merge:true}).then(function(){
+        var upd={}; upd['unread.'+oid]=firebase.firestore.FieldValue.increment(1); ref.update(upd).catch(function(){});
+        ref.collection('messages').add({ text:text, senderId:WS.store.id, senderName:WS.store.name, type:'transfer_request', createdAt:firebase.firestore.FieldValue.serverTimestamp() }).catch(function(){});
+      }).catch(function(){});
     }
 
     function wsNewChat() {
-      if (!db || !WS.store) return;
-      document.getElementById('wsNewChatMod').style.display = 'flex';
-      db.collection('network_stores').get().then(function(s) {
-        var stores = s.docs.map(function(d) { return d.data(); }).filter(function(x) { return x.id !== WS.store.id; });
-        var el = document.getElementById('wsStorePick');
-        if (!stores.length) { el.innerHTML = '<p style="color:var(--gray);font-size:.82rem;text-align:center;padding:1rem">No other stores on the network yet.</p>'; return; }
-        el.innerHTML = stores.map(function(s) {
-          var sid = s.id; var sn = escHtml(s.name||'');
-          return '<div style="display:flex;align-items:center;justify-content:space-between;padding:.65rem .5rem;border-bottom:1px solid var(--gray-light)">'
-            + '<div><div style="font-weight:600;font-size:.88rem">'+sn+'</div><div style="font-size:.75rem;color:var(--gray)"><i class="fas fa-map-marker-alt"></i> '+escHtml(s.city||'')+'</div></div>'
-            + '<button class="btn btn-small btn-primary" onclick="wsChatWith(''+sid+'',''+sn+'');document.getElementById('wsNewChatMod').style.display='none'"><i class="fas fa-comment"></i> Chat</button>'
-            + '</div>';
+      if(!db||!WS.store) return;
+      document.getElementById('wsNewChatMod').style.display='flex';
+      db.collection('network_stores').get().then(function(s){
+        var stores=s.docs.map(function(d){ return d.data(); }).filter(function(x){ return x.id!==WS.store.id; });
+        var el=document.getElementById('wsStorePick');
+        if(!stores.length){ el.innerHTML='<p style="color:#718096;font-size:.82rem;text-align:center;padding:1rem">No other stores yet.</p>'; return; }
+        el.innerHTML=stores.map(function(s){ var sid=s.id; var sn=escHtml(s.name||'');
+          return '<div style="display:flex;align-items:center;justify-content:space-between;padding:.6rem .5rem;border-bottom:1px solid #e2e8f0"><div><div style="font-weight:600;font-size:.88rem">'+sn+'</div><div style="font-size:.75rem;color:#718096">'+escHtml(s.city||'')+'</div></div><button class="btn btn-small btn-primary" onclick="wsChatWith(''+sid+'',''+sn+'');document.getElementById('wsNewChatMod').style.display='none'"><i class="fas fa-comment"></i> Chat</button></div>';
         }).join('');
-      }).catch(function() { document.getElementById('wsStorePick').innerHTML = '<p style="color:var(--gray);font-size:.82rem">Could not load stores.</p>'; });
+      }).catch(function(){});
     }
 
-    function wsChatWith(sid, sn) {
-      if (!db || !WS.store) return;
-      var cid = [WS.store.id, sid].sort().join('_');
-      var n = {}; n[WS.store.id] = WS.store.name; n[sid] = sn;
-      db.collection('network_conversations').doc(cid).set({
-        participants: [WS.store.id, sid], participantNames: n,
-        lastMessageAt: firebase.firestore.FieldValue.serverTimestamp()
-      }, { merge: true }).then(function() {
-        showTab('wholesale');
-        wsOnShow();
-        setTimeout(function() { wsSwitchTab('chat'); setTimeout(function() { wsOpenConv(cid); }, 400); }, 200);
-      }).catch(function() {});
+    function wsChatWith(sid,sn) {
+      if(!db||!WS.store) return; var cid=[WS.store.id,sid].sort().join('_'); var n={}; n[WS.store.id]=WS.store.name; n[sid]=sn;
+      db.collection('network_conversations').doc(cid).set({ participants:[WS.store.id,sid], participantNames:n, lastMessageAt:firebase.firestore.FieldValue.serverTimestamp() },{merge:true}).then(function(){
+        showTab('wholesale'); wsOnShow(); setTimeout(function(){ wsSwitchTab('chat'); setTimeout(function(){ wsOpenConv(cid); },400); },200);
+      }).catch(function(){});
     }
 
     function wsOpenReq() {
-      ['wsRI','wsRN'].forEach(function(id) { var el = document.getElementById(id); if (el) el.value = ''; });
-      document.getElementById('wsRQ').value = 1; document.getElementById('wsRP').value = '';
-      document.getElementById('wsReqMod').style.display = 'flex';
+      ['wsRI','wsRN'].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=''; });
+      document.getElementById('wsRQ').value=1; document.getElementById('wsRP').value='';
+      document.getElementById('wsReqMod').style.display='flex';
     }
 
     function wsSendChatReq() {
-      var item = document.getElementById('wsRI').value.trim();
-      if (!item) { showToast('Enter item name', 'error'); return; }
-      var qty = parseInt(document.getElementById('wsRQ').value) || 1;
-      var price = parseFloat(document.getElementById('wsRP').value) || 0;
-      var note = document.getElementById('wsRN').value.trim();
-      var text = 'Stock Request: ' + item + ' x' + qty + (price ? ' @$' + price.toFixed(2) : '') + (note ? ' | ' + note : '');
-      document.getElementById('wsReqMod').style.display = 'none';
-      if (!WS.convId || !WS.store) return;
-      var mid = WS.store.id;
-      db.collection('network_conversations').doc(WS.convId).collection('messages').add({
-        text: text, senderId: mid, senderName: WS.store.name, type: 'transfer_request',
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      }).then(function() {
-        var conv = WS.convs.find(function(c) { return c.id === WS.convId; });
-        var oid = conv ? (conv.participants||[]).find(function(p) { return p !== mid; }) : null;
-        var upd = { lastMessage: text, lastMessageAt: firebase.firestore.FieldValue.serverTimestamp() };
-        if (oid) upd['unread.' + oid] = firebase.firestore.FieldValue.increment(1);
-        db.collection('network_conversations').doc(WS.convId).update(upd).catch(function() {});
-      }).catch(function() { showToast('Error sending', 'error'); });
+      var item=document.getElementById('wsRI').value.trim(); if(!item){ showToast('Enter item','error'); return; }
+      var qty=parseInt(document.getElementById('wsRQ').value)||1; var price=parseFloat(document.getElementById('wsRP').value)||0;
+      var note=document.getElementById('wsRN').value.trim();
+      var text='Stock Request: '+item+' x'+qty+(price?' @$'+price.toFixed(2):'')+(note?' | '+note:'');
+      document.getElementById('wsReqMod').style.display='none';
+      if(!WS.convId||!WS.store) return; var mid=WS.store.id;
+      db.collection('network_conversations').doc(WS.convId).collection('messages').add({ text:text, senderId:mid, senderName:WS.store.name, type:'transfer_request', createdAt:firebase.firestore.FieldValue.serverTimestamp() }).then(function(){
+        var conv=WS.convs.find(function(c){ return c.id===WS.convId; }); var oid=conv?(conv.participants||[]).find(function(p){ return p!==mid; }):null;
+        var upd={ lastMessage:text, lastMessageAt:firebase.firestore.FieldValue.serverTimestamp() }; if(oid) upd['unread.'+oid]=firebase.firestore.FieldValue.increment(1);
+        db.collection('network_conversations').doc(WS.convId).update(upd).catch(function(){});
+      }).catch(function(){ showToast('Error','error'); });
     }
 
     function wsShareProd(pid) {
       showTab('wholesale');
-      setTimeout(function() {
+      setTimeout(function(){
         wsOnShow();
         if (!WS.store) return;
         wsSwitchTab('market');
-        setTimeout(function() {
+        setTimeout(function(){
           wsOpenPost();
-          setTimeout(function() {
-            var p = findProduct(pid); if (!p) return;
-            document.getElementById('wsPN').value = p.name;
-            document.getElementById('wsPC').value = p.category || 'Dresses';
-            document.getElementById('wsPSell').value = p.price;
-            document.getElementById('wsPQ').value = getTotalStock(p);
-            document.getElementById('wsPSz').value = p.sizes ? p.sizes.map(function(s){return s.name;}).join(', ') : '';
-          }, 150);
-        }, 200);
-      }, 200);
+          setTimeout(function(){
+            var p=findProduct(pid); if(!p) return;
+            document.getElementById('wsPN').value=p.name;
+            document.getElementById('wsPC').value=p.category||'Dresses';
+            document.getElementById('wsPSell').value=p.price;
+            document.getElementById('wsPQ').value=getTotalStock(p);
+            document.getElementById('wsPSz').value=p.sizes?p.sizes.map(function(s){ return s.name; }).join(', '):'';
+          },150);
+        },200);
+      },200);
     }
 
-    function wsFmt(ts) {
-      if (!ts) return '';
-      var d = ts.toDate ? ts.toDate() : new Date(ts);
-      var diff = new Date() - d;
-      if (diff < 60000) return 'just now';
-      if (diff < 3600000) return Math.floor(diff/60000) + 'm ago';
-      if (diff < 86400000) return d.getHours() + ':' + String(d.getMinutes()).padStart(2,'0');
-      return d.getDate() + '/' + (d.getMonth()+1);
-    }
-
-    // Hook Wholesale tab into showTab
-    var _origShowTab = typeof showTab === 'function' ? showTab : null;
-    document.addEventListener('DOMContentLoaded', function() {
-      // Patch showTab to call wsOnShow when wholesale tab is shown
-      var origST = showTab;
-      showTab = function(tab) {
-        origST(tab);
-        if (tab === 'wholesale') setTimeout(wsOnShow, 50);
-      };
-    });
-    // ══════════════════════════════════════════
-    // END WHOLESALE MODULE
-    // ══════════════════════════════════════════
+    // wsOnShow is called directly from the wholesale nav link onclick
+    // ══════════════ END WHOLESALE MODULE ══════════════
 
     </script>
 
@@ -6266,17 +6152,61 @@ function sendToTelegram(order, callback) {
         </div>
     </div>
 
-    <!-- WS Post Modal -->
-    
+    <div class="modal-overlay" id="wsPostMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3>Post to Wholesale Market</h3><button class="modal-close" onclick="document.getElementById('wsPostMod').style.display='none'">&times;</button></div>
+      <div style="padding:1.25rem">
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">From inventory</label><select id="wsPI" onchange="wsFillPost()" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"><option value="">— Enter manually —</option></select></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Item Name *</label><input type="text" id="wsPN" placeholder="Product name" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Category</label><select id="wsPC" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"><option>Dresses</option><option>Girl Clothes</option><option>Boy Clothes</option><option>Baby Shirt</option><option>Baby Shoes</option><option>Baby Accessories</option></select></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.85rem">
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Cost $</label><input type="number" id="wsPCost" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Sell $</label><input type="number" id="wsPSell" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Qty</label><input type="number" id="wsPQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        </div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Sizes</label><input type="text" id="wsPSz" placeholder="3M, 6M, 1T..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Description</label><textarea id="wsPD" rows="2" placeholder="Condition, reason for selling..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical"></textarea></div>
+      </div>
+      <div style="padding:.85rem 1.25rem;border-top:1px solid #e2e8f0;display:flex;gap:.5rem;justify-content:flex-end">
+        <button class="btn btn-outline" onclick="document.getElementById('wsPostMod').style.display='none'">Cancel</button>
+        <button class="btn btn-primary" onclick="wsPostListing()"><i class="fas fa-upload"></i> Post</button>
+      </div></div>
+    </div>
 
-    <!-- WS Buy/Request Modal -->
-    
+    <div class="modal-overlay" id="wsBuyMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3>Request Stock Transfer</h3><button class="modal-close" onclick="document.getElementById('wsBuyMod').style.display='none'">&times;</button></div>
+      <div style="padding:1.25rem">
+        <div id="wsBuyInfo" style="background:#ebedff;border-radius:8px;padding:.75rem;margin-bottom:1rem;font-size:.85rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Qty *</label><input type="number" id="wsBQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Sizes needed</label><input type="text" id="wsBSz" placeholder="e.g. 1T, 2T" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Offer Price $ (blank = accept ask)</label><input type="number" id="wsBO" placeholder="Leave blank to accept" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Note</label><textarea id="wsBN" rows="2" placeholder="Urgency, special requests..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical"></textarea></div>
+      </div>
+      <div style="padding:.85rem 1.25rem;border-top:1px solid #e2e8f0;display:flex;gap:.5rem;justify-content:flex-end">
+        <button class="btn btn-outline" onclick="document.getElementById('wsBuyMod').style.display='none'">Cancel</button>
+        <button class="btn btn-success" onclick="wsSendReq()"><i class="fas fa-paper-plane"></i> Send Request</button>
+      </div></div>
+    </div>
 
-    <!-- WS New Chat Modal -->
-    
+    <div class="modal-overlay" id="wsNewChatMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3>New Conversation</h3><button class="modal-close" onclick="document.getElementById('wsNewChatMod').style.display='none'">&times;</button></div>
+      <div style="padding:1.25rem"><p style="font-size:.82rem;color:#718096;margin-bottom:.75rem">Select a store to chat with:</p><div id="wsStorePick"></div></div></div>
+    </div>
 
-    <!-- WS Chat Request Modal -->
-    
+    <div class="modal-overlay" id="wsReqMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3>Request Stock via Chat</h3><button class="modal-close" onclick="document.getElementById('wsReqMod').style.display='none'">&times;</button></div>
+      <div style="padding:1.25rem">
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Item *</label><input type="text" id="wsRI" placeholder="What do you need?" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.85rem">
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Qty</label><input type="number" id="wsRQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Offer $</label><input type="number" id="wsRP" placeholder="0.00" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+        </div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Note</label><textarea id="wsRN" rows="2" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical"></textarea></div>
+      </div>
+      <div style="padding:.85rem 1.25rem;border-top:1px solid #e2e8f0;display:flex;gap:.5rem;justify-content:flex-end">
+        <button class="btn btn-outline" onclick="document.getElementById('wsReqMod').style.display='none'">Cancel</button>
+        <button class="btn btn-success" onclick="wsSendChatReq()"><i class="fas fa-paper-plane"></i> Send</button>
+      </div></div>
+    </div>
 
 </body>
 </html>
