@@ -4,26 +4,26 @@
     <!-- Open Graph / Social Media Preview -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sophornung575-jpg.github.io/Goad-Kids">
-    <meta property="og:title" content="Goat Kids B2B 🐐 — Kids Clothing & Accessories">
+    <meta property="og:title" content="Goat Kids Store — Kids Clothing & Accessories">
     <meta property="og:description" content="Shop cute & quality kids clothing, dresses, shoes and accessories. Fast delivery, Cash on Delivery available.">
     <meta property="og:image" content="https://raw.githubusercontent.com/sophornung575-jpg/Goad-Kids/main/Goat%20Kids%20QR.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="Goat Kids B2B">
+    <meta property="og:site_name" content="Goat Kids Store">
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Goat Kids B2B 🐐 — Kids Clothing & Accessories">
+    <meta name="twitter:title" content="Goat Kids Store — Kids Clothing & Accessories">
     <meta name="twitter:description" content="Shop cute & quality kids clothing, dresses, shoes and accessories. Fast delivery, Cash on Delivery available.">
     <meta name="twitter:image" content="https://raw.githubusercontent.com/sophornung575-jpg/Goad-Kids/main/Goat%20Kids%20QR.jpg">
     <!-- General SEO -->
-    <meta name="description" content="Goat Kids B2B — Shop cute & quality kids clothing, dresses, shoes and accessories. Fast delivery, Cash on Delivery available.">
-    <meta name="keywords" content="kids clothing, children fashion, baby clothes, kids shoes, kids accessories, Goat Kids B2B">
+    <meta name="description" content="Goat Kids Store — Shop cute & quality kids clothing, dresses, shoes and accessories. Fast delivery, Cash on Delivery available.">
+    <meta name="keywords" content="kids clothing, children fashion, baby clothes, kids shoes, kids accessories, Goat Kids">
     <link rel="canonical" href="https://sophornung575-jpg.github.io/Goad-Kids">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta name="description" content="GOAT KIDS B2B - Premium Children's Clothing Store">
+    <meta name="description" content="GOAT KIDS - Premium Children's Clothing Store">
     <meta name="theme-color" content="#667eea">
-    <title>GOAT KIDS B2B - Children's Clothing Store</title>
+    <title>GOAT KIDS - Retail Store</title>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -33,7 +33,6 @@
         // NOTE: Move API key to environment / backend for production
         // =============================================
         // ── Firebase config stored in localStorage (not visible in source after first run) ──
-        // Firebase config hardcoded
         var firebaseConfig = {
             apiKey: "AIzaSyDBQyX-LC9dIzE-B-79kXBmr42KbWEoQSU",
             authDomain: "goat-kids-store.firebaseapp.com",
@@ -42,7 +41,6 @@
             messagingSenderId: "372035223463",
             appId: "1:372035223463:web:a9948932607e81da2a4082"
         };
-        localStorage.setItem('goatB2BFirebaseConfig', JSON.stringify(firebaseConfig));
         var db;
         firebase.initializeApp(firebaseConfig);
         db = firebase.firestore();
@@ -285,8 +283,8 @@
     <div id="firebaseSetupScreen" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:#f7fafc;z-index:99999;flex-direction:column;align-items:center;justify-content:center;padding:20px">
         <div style="background:#fff;border-radius:16px;padding:2rem;max-width:480px;width:100%;box-shadow:0 4px 24px rgba(0,0,0,0.12)">
             <div style="text-align:center;margin-bottom:1.5rem">
-                <div style="font-size:2.5rem">🐐</div>
-                <h2 style="margin:0.5rem 0;color:#2d3748">Goat Kids B2B Setup</h2>
+                <div style="font-size:2.5rem"></div>
+                <h2 style="margin:0.5rem 0;color:#2d3748">Goat Kids Setup</h2>
                 <p style="color:#718096;font-size:0.9rem">Enter your Firebase config to get started</p>
             </div>
             <div class="form-group">
@@ -303,7 +301,7 @@
                     style="font-family:monospace;font-size:0.82rem;resize:vertical"></textarea>
             </div>
             <div style="background:#f7fafc;border-radius:8px;padding:0.75rem;margin-top:1rem">
-                <div style="font-size:0.82rem;font-weight:600;margin-bottom:0.5rem;color:#4a5568">🔐 Set Passwords (leave blank for defaults)</div>
+                <div style="font-size:0.82rem;font-weight:600;margin-bottom:0.5rem;color:#4a5568">Set Passwords (leave blank for defaults)</div>
                 <div class="form-group">
                     <label style="font-size:0.82rem">Full Admin Password <span style="color:#a0aec0;font-weight:400">(default: admin123)</span></label>
                     <input type="password" id="setupAdminPass" class="form-control" placeholder="Unlocks everything + Settings page">
@@ -331,15 +329,15 @@
 
 <header id="appRoot">
         <div class="header-container">
-            <div class="logo" onclick="showTab('store')"><span>GOAT KIDS B2B</span><span id="adminBadge" class="admin-badge hidden">ADMIN</span></div>
+            <div class="logo" onclick="showTab('store')"><span>GOAT KIDS</span><span id="adminBadge" class="admin-badge hidden">ADMIN</span></div>
             <div style="display:flex;align-items:center;gap:0.5rem">
                 <button class="mobile-lang-btn" onclick="toggleLanguage()" title="Switch Language"><span id="langIconMobile">🇰🇭</span></button>
                 <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
             </div>
             <nav class="desktop-nav">
                 <a href="#" class="nav-link active" onclick="showTab('store');return false"><i class="fas fa-store"></i><span data-translate="store">Store</span></a>
+                <a href="#" class="nav-link" id="wholesaleNavLink" onclick="showTab('wholesale');return false"><i class="fas fa-network-wired"></i><span>Wholesale</span></a>
                 <a href="#" class="nav-link hidden" id="adminNavLink" onclick="showTab('admin');return false"><i class="fas fa-cog"></i><span data-translate="admin">Admin</span></a>
-                <a href="#" class="nav-link" onclick="showNetworkTab();return false"><i class="fas fa-network-wired"></i> Network</a>
                 <button class="btn btn-small btn-outline" onclick="openWishlistModal()" style="position:relative"><i class="fas fa-heart" style="color:var(--secondary)"></i> <span style="font-size:0.8rem">Wishlist</span> <span id="wishlistBadge" style="position:absolute;top:-6px;right:-6px;background:var(--secondary);color:#fff;font-size:0.65rem;min-width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700">0</span></button>
                 <button class="btn btn-small btn-outline" onclick="openAdminModal()" id="adminLoginBtn"><i class="fas fa-user-shield"></i><span data-translate="login">Login</span></button>
                 <button class="btn btn-small btn-success" onclick="syncToFirebase()" id="syncBtn"><i class="fas fa-cloud-upload-alt"></i><span data-translate="sync">Sync</span></button>
@@ -349,8 +347,8 @@
         <!-- FIX #9: mobile nav closes on link click via JS closeMobileMenu() -->
         <nav class="mobile-nav" id="mobileNav">
             <a href="#" class="nav-link" onclick="showTab('store');closeMobileMenu();return false"><i class="fas fa-store"></i> Store</a>
+            <a href="#" class="nav-link" onclick="showTab('wholesale');closeMobileMenu();return false"><i class="fas fa-network-wired"></i> Wholesale</a>
             <a href="#" class="nav-link hidden" id="adminNavLinkMobile" onclick="showTab('admin');closeMobileMenu();return false"><i class="fas fa-cog"></i> Admin</a>
-            <a href="#" class="nav-link" onclick="showNetworkTab();closeMobileMenu();return false"><i class="fas fa-network-wired"></i> Network</a>
             <button class="btn btn-outline w-full mt-4" onclick="openAdminModal();closeMobileMenu()" id="adminLoginBtnMobile"><i class="fas fa-user-shield"></i> Admin Login</button>
             <button class="btn btn-success w-full mt-4" onclick="syncToFirebase();closeMobileMenu()"><i class="fas fa-cloud-upload-alt"></i> Sync</button>
         </nav>
@@ -359,7 +357,7 @@
     <main class="container">
         <!-- STORE TAB -->
         <div id="storeTab" class="tab-content active">
-            <div class="store-header"><h1>GOAT KIDS B2B</h1><p>Shop Children's Clothing with Love and Care</p></div>
+            <div class="store-header"><h1>GOAT KIDS</h1><p>Shop Children's Clothing with Love and Care</p></div>
             <div class="search-container">
                 <div class="search-box"><i class="fas fa-search search-icon"></i><input type="text" id="searchInput" class="search-input" data-translate="search" placeholder="Search products..." oninput="filterAndRender()"></div>
                 <div class="filter-group">
@@ -626,7 +624,7 @@
                         <!-- PASSWORD LOCK OVERLAY -->
                         <div id="settingsLock" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 1rem;text-align:center">
                             <div style="background:#fff;border-radius:16px;padding:2rem;max-width:320px;width:100%;box-shadow:0 4px 20px rgba(0,0,0,0.08)">
-                                <div style="font-size:2.5rem;margin-bottom:0.5rem">🔐</div>
+                                <div style="font-size:2.5rem;margin-bottom:0.5rem"></div>
                                 <h3 style="margin-bottom:0.25rem;color:var(--gray-dark)">Settings Protected</h3>
                                 <p style="font-size:0.85rem;color:var(--gray);margin-bottom:1.5rem">Enter your admin password to access settings</p>
                                 <div style="position:relative;margin-bottom:1rem">
@@ -749,81 +747,95 @@
             </div>
         </div>
 
-        <!-- NETWORK TAB -->
-        <div id="networkTab" class="tab-content hidden">
-          <div id="nwSetupBox" style="display:none;background:linear-gradient(135deg,#667eea,#a78bfa);border-radius:18px;padding:2rem;max-width:420px;margin:2rem auto">
-            <h2 style="text-align:center;color:#fff;margin-bottom:.4rem">🌐 Join Store Network</h2>
+        <!-- WHOLESALE TAB -->
+        <div id="wholesaleTab" class="tab-content hidden">
+          <!-- Setup box -->
+          <div id="wsSetupBox" style="display:none;background:linear-gradient(135deg,#667eea,#a78bfa);border-radius:16px;padding:2rem;max-width:420px;margin:2rem auto">
+            <h2 style="text-align:center;color:#fff;margin-bottom:.4rem;font-size:1.4rem">🌐 Join Wholesale Network</h2>
             <p style="text-align:center;color:rgba(255,255,255,.85);font-size:.85rem;margin-bottom:1.5rem">Connect with other Goat Kids stores</p>
-            <div class="form-group"><label style="color:#fff">Store Name</label><input type="text" class="form-control" id="nwSetupName" placeholder="e.g. Goat Kids Siem Reap"></div>
-            <div class="form-group"><label style="color:#fff">Owner Name</label><input type="text" class="form-control" id="nwSetupOwner" placeholder="Your name"></div>
-            <div class="form-group"><label style="color:#fff">City</label><input type="text" class="form-control" id="nwSetupCity" placeholder="e.g. Siem Reap"></div>
-            <div class="form-group">
-              <label style="color:#fff">Join Code</label>
-              <input type="password" class="form-control" id="nwSetupCode" placeholder="Enter join code">
-              <div id="nwCodeErr" style="display:none;color:#fed7d7;font-size:.78rem;margin-top:.3rem">&#10060; Wrong code. Get it from your master store.</div>
+            <div class="form-group"><label style="color:#fff;display:block;margin-bottom:.3rem;font-size:.85rem">Store Name</label><input type="text" class="form-control" id="wsName" placeholder="e.g. Goat Kids Siem Reap" style="width:100%;padding:.6rem;border-radius:var(--radius);border:none;font-size:.9rem"></div>
+            <div class="form-group" style="margin-top:.75rem"><label style="color:#fff;display:block;margin-bottom:.3rem;font-size:.85rem">Owner Name</label><input type="text" class="form-control" id="wsOwner" placeholder="Your name" style="width:100%;padding:.6rem;border-radius:var(--radius);border:none;font-size:.9rem"></div>
+            <div class="form-group" style="margin-top:.75rem"><label style="color:#fff;display:block;margin-bottom:.3rem;font-size:.85rem">City / Area</label><input type="text" class="form-control" id="wsCity" placeholder="e.g. Siem Reap" style="width:100%;padding:.6rem;border-radius:var(--radius);border:none;font-size:.9rem"></div>
+            <div class="form-group" style="margin-top:.75rem">
+              <label style="color:#fff;display:block;margin-bottom:.3rem;font-size:.85rem">Join Code</label>
+              <input type="password" id="wsCode" placeholder="Enter join code from master store" style="width:100%;padding:.6rem;border-radius:var(--radius);border:none;font-size:.9rem">
+              <div id="wsCodeErr" style="display:none;color:#fed7d7;font-size:.78rem;margin-top:.3rem">&#10060; Wrong code. Check with master store.</div>
             </div>
-            <button onclick="nwCompleteSetup()" style="width:100%;padding:.8rem;background:#fff;color:#667eea;font-weight:700;border:none;border-radius:8px;cursor:pointer;font-size:1rem;margin-top:.5rem"><i class="fas fa-rocket"></i> Join Network</button>
+            <button onclick="wsJoin()" style="width:100%;padding:.8rem;background:#fff;color:#667eea;font-weight:700;border:none;border-radius:var(--radius);cursor:pointer;font-size:1rem;margin-top:1rem"><i class="fas fa-rocket"></i> Join Network</button>
           </div>
 
-          <div id="nwMainUI" style="display:none;background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow);overflow:hidden">
-            <div class="admin-tabs">
-              <button class="admin-tab active" id="nwTab-market" onclick="nwSwitchTab('market')"><i class="fas fa-globe"></i> Market</button>
-              <button class="admin-tab" id="nwTab-transfers" onclick="nwSwitchTab('transfers')"><i class="fas fa-exchange-alt"></i> Transfers<span class="admin-tab-badge" id="nwTransferBadge" style="display:none">0</span></button>
-              <button class="admin-tab" id="nwTab-chat" onclick="nwSwitchTab('chat')"><i class="fas fa-comments"></i> Chat<span class="admin-tab-badge" id="nwChatBadge" style="display:none">0</span></button>
+          <!-- Main wholesale UI -->
+          <div id="wsMainUI" style="display:none">
+            <!-- Store info bar -->
+            <div id="wsStoreBar" style="background:linear-gradient(135deg,#667eea,#a78bfa);color:#fff;border-radius:var(--radius-lg);padding:.75rem 1.25rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem">
+              <div><i class="fas fa-store"></i> <b id="wsStoreName">—</b> <span style="opacity:.8;font-size:.82rem" id="wsStoreCity"></span></div>
+              <button onclick="wsLogout()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:.3rem .75rem;border-radius:var(--radius);cursor:pointer;font-size:.8rem"><i class="fas fa-sign-out-alt"></i> Switch Store</button>
             </div>
 
-            <div id="nwPanelMarket" class="admin-tab-content active" style="padding:1.25rem">
-              <div style="background:#ebedff;border:2px dashed #667eea;border-radius:12px;padding:1rem;margin-bottom:1rem;text-align:center">
-                <b style="color:#5a67d8"><i class="fas fa-tag"></i> List Your Old / Excess Stock</b>
-                <p style="font-size:.82rem;color:#718096;margin:.3rem 0 .75rem">Share products so other stores can buy them.</p>
-                <button class="btn btn-primary" onclick="nwOpenPostModal()"><i class="fas fa-plus-circle"></i> Post a Listing</button>
+            <!-- Sub-tabs -->
+            <div style="background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow);overflow:hidden">
+              <div class="admin-tabs" style="border-bottom:2px solid var(--gray-light)">
+                <button class="admin-tab active" id="wsTab-market" onclick="wsSwitchTab('market')"><i class="fas fa-globe"></i> Market</button>
+                <button class="admin-tab" id="wsTab-transfers" onclick="wsSwitchTab('transfers')"><i class="fas fa-exchange-alt"></i> Transfers<span class="admin-tab-badge" id="wsTrBadge" style="display:none">0</span></button>
+                <button class="admin-tab" id="wsTab-chat" onclick="wsSwitchTab('chat')"><i class="fas fa-comments"></i> Chat<span class="admin-tab-badge" id="wsChBadge" style="display:none">0</span></button>
               </div>
-              <div style="display:flex;gap:.5rem;margin-bottom:.75rem;flex-wrap:wrap">
-                <input type="text" class="form-control" id="nwMktSearch" placeholder="Search..." oninput="nwRenderMarket()" style="flex:1;min-width:120px">
-                <select class="form-control" id="nwMktCat" onchange="nwRenderMarket()" style="width:140px">
-                  <option value="">All</option><option value="Dresses">Dresses</option><option value="Girl Clothes">Girl Clothes</option>
-                  <option value="Boy Clothes">Boy Clothes</option><option value="Baby Shirt">Baby Shirts</option>
-                  <option value="Baby Shoes">Baby Shoes</option><option value="Baby Accessories">Accessories</option>
-                </select>
-              </div>
-              <div id="nwListingGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.85rem"></div>
-              <div id="nwMktEmpty" style="display:none;text-align:center;padding:2.5rem;color:#718096"><i class="fas fa-store-slash" style="font-size:2rem;display:block;margin-bottom:.5rem;opacity:.4"></i>No listings yet.</div>
-            </div>
 
-            <div id="nwPanelTransfers" class="admin-tab-content" style="padding:1.25rem">
-              <div style="display:flex;gap:.5rem;margin-bottom:1rem">
-                <button id="nwTOtab-incoming" onclick="nwSwitchTOTab('incoming')" style="flex:1;padding:.5rem;border:2px solid #667eea;background:#ebedff;color:#5a67d8;font-weight:600;border-radius:8px;cursor:pointer"><i class="fas fa-arrow-down"></i> Incoming</button>
-                <button id="nwTOtab-outgoing" onclick="nwSwitchTOTab('outgoing')" style="flex:1;padding:.5rem;border:2px solid #e2e8f0;background:#fff;color:#4a5568;font-weight:600;border-radius:8px;cursor:pointer"><i class="fas fa-arrow-up"></i> Outgoing</button>
-                <button id="nwTOtab-done" onclick="nwSwitchTOTab('done')" style="flex:1;padding:.5rem;border:2px solid #e2e8f0;background:#fff;color:#4a5568;font-weight:600;border-radius:8px;cursor:pointer"><i class="fas fa-history"></i> Done</button>
-              </div>
-              <div id="nwTransferList"></div>
-              <div id="nwTransferEmpty" style="display:none;text-align:center;padding:2.5rem;color:#718096"><i class="fas fa-exchange-alt" style="font-size:2rem;display:block;margin-bottom:.5rem;opacity:.4"></i>No transfers here yet.</div>
-            </div>
-
-            <div id="nwPanelChat" class="admin-tab-content" style="padding:0">
-              <div style="display:grid;grid-template-columns:220px 1fr;height:480px">
-                <div style="border-right:1px solid var(--gray-light);display:flex;flex-direction:column">
-                  <div style="padding:.75rem;border-bottom:1px solid var(--gray-light);display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:.9rem">
-                    Messages <button class="btn btn-small btn-outline" onclick="nwOpenNewChat()" style="padding:.2rem .5rem"><i class="fas fa-edit"></i></button>
-                  </div>
-                  <div id="nwChatList" style="flex:1;overflow-y:auto"></div>
+              <!-- MARKET PANEL -->
+              <div id="wsPanelMarket" class="admin-tab-content active" style="padding:1.25rem">
+                <div style="background:#ebedff;border:2px dashed #667eea;border-radius:12px;padding:1rem;margin-bottom:1rem;text-align:center">
+                  <b style="color:#5a67d8"><i class="fas fa-tag"></i> List Your Old / Excess Stock</b>
+                  <p style="font-size:.82rem;color:#718096;margin:.3rem 0 .75rem">Post products so other stores can buy them at wholesale price.</p>
+                  <button class="btn btn-primary" onclick="wsOpenPost()"><i class="fas fa-plus-circle"></i> Post Listing</button>
                 </div>
-                <div style="display:flex;flex-direction:column;height:100%">
-                  <div id="nwChatEmpty" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#718096;gap:.5rem">
-                    <i class="fas fa-comments" style="font-size:2.5rem;opacity:.3"></i>
-                    <p style="font-size:.85rem">Select a conversation</p>
-                    <button class="btn btn-primary btn-small" onclick="nwOpenNewChat()" style="margin-top:.5rem"><i class="fas fa-edit"></i> New Message</button>
-                  </div>
-                  <div id="nwChatWindow" style="display:none;flex-direction:column;height:100%">
-                    <div style="padding:.65rem .9rem;border-bottom:1px solid var(--gray-light);display:flex;align-items:center;gap:.6rem">
-                      <div id="nwChatAvatar" style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#667eea,#a78bfa);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.85rem;flex-shrink:0">?</div>
-                      <div style="flex:1"><div id="nwChatWinName" style="font-weight:700;font-size:.88rem">—</div><div style="font-size:.7rem;color:#48bb78">active on network</div></div>
-                      <button class="btn btn-small btn-outline" onclick="nwOpenChatTransfer()" style="font-size:.75rem"><i class="fas fa-exchange-alt"></i> Request</button>
+                <div style="display:flex;gap:.5rem;margin-bottom:.75rem;flex-wrap:wrap">
+                  <input type="text" id="wsMktQ" placeholder="Search listings..." oninput="wsRenderMkt()" style="flex:1;min-width:120px;padding:.55rem .75rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.88rem">
+                  <select id="wsMktCat" onchange="wsRenderMkt()" style="width:140px;padding:.55rem .75rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.88rem">
+                    <option value="">All Categories</option><option>Dresses</option><option>Girl Clothes</option>
+                    <option>Boy Clothes</option><option>Baby Shirt</option><option>Baby Shoes</option><option>Baby Accessories</option>
+                  </select>
+                </div>
+                <div id="wsMktGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.85rem"></div>
+                <div id="wsMktEmpty" style="display:none;text-align:center;padding:2.5rem;color:#718096"><i class="fas fa-store-slash" style="font-size:2rem;display:block;margin-bottom:.5rem;opacity:.4"></i>No listings yet. Be the first to post!</div>
+              </div>
+
+              <!-- TRANSFERS PANEL -->
+              <div id="wsPanelTransfers" class="admin-tab-content" style="padding:1.25rem">
+                <div style="display:flex;gap:.5rem;margin-bottom:1rem">
+                  <button id="wsTF-in" onclick="wsTFTab('in')" style="flex:1;padding:.5rem;border:2px solid #667eea;background:#ebedff;color:#5a67d8;font-weight:600;border-radius:var(--radius);cursor:pointer;font-size:.85rem"><i class="fas fa-arrow-down"></i> Incoming</button>
+                  <button id="wsTF-out" onclick="wsTFTab('out')" style="flex:1;padding:.5rem;border:2px solid var(--gray-light);background:#fff;color:var(--gray-dark);font-weight:600;border-radius:var(--radius);cursor:pointer;font-size:.85rem"><i class="fas fa-arrow-up"></i> Outgoing</button>
+                  <button id="wsTF-done" onclick="wsTFTab('done')" style="flex:1;padding:.5rem;border:2px solid var(--gray-light);background:#fff;color:var(--gray-dark);font-weight:600;border-radius:var(--radius);cursor:pointer;font-size:.85rem"><i class="fas fa-history"></i> Done</button>
+                </div>
+                <div id="wsTFList"></div>
+                <div id="wsTFEmpty" style="display:none;text-align:center;padding:2.5rem;color:#718096"><i class="fas fa-exchange-alt" style="font-size:2rem;display:block;margin-bottom:.5rem;opacity:.4"></i>No transfers here yet.</div>
+              </div>
+
+              <!-- CHAT PANEL -->
+              <div id="wsPanelChat" class="admin-tab-content" style="padding:0">
+                <div style="display:grid;grid-template-columns:220px 1fr;height:500px">
+                  <div style="border-right:1px solid var(--gray-light);display:flex;flex-direction:column">
+                    <div style="padding:.75rem 1rem;border-bottom:1px solid var(--gray-light);display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:.9rem">
+                      Messages
+                      <button class="btn btn-small btn-outline" onclick="wsNewChat()" style="padding:.2rem .5rem"><i class="fas fa-edit"></i></button>
                     </div>
-                    <div id="nwChatMsgs" style="flex:1;overflow-y:auto;padding:.75rem;display:flex;flex-direction:column;gap:.5rem;background:#fafbff"></div>
-                    <div style="padding:.65rem;border-top:1px solid var(--gray-light);display:flex;gap:.4rem;align-items:flex-end">
-                      <textarea id="nwChatInput" rows="1" placeholder="Type a message..." style="flex:1;resize:none;min-height:38px;max-height:90px;padding:.45rem .65rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.85rem;font-family:inherit" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();nwSendMsg()}" oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,90)+'px'"></textarea>
-                      <button onclick="nwSendMsg()" style="width:38px;height:38px;border:none;border-radius:var(--radius);background:var(--primary);color:#fff;cursor:pointer"><i class="fas fa-paper-plane"></i></button>
+                    <div id="wsChatList" style="flex:1;overflow-y:auto"></div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;height:100%">
+                    <div id="wsChatEmpty" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#718096;gap:.5rem">
+                      <i class="fas fa-comments" style="font-size:2.5rem;opacity:.3"></i>
+                      <p style="font-size:.85rem">Select a conversation</p>
+                      <button class="btn btn-primary btn-small" onclick="wsNewChat()"><i class="fas fa-edit"></i> New Message</button>
+                    </div>
+                    <div id="wsChatWin" style="display:none;flex-direction:column;height:100%">
+                      <div style="padding:.65rem 1rem;border-bottom:1px solid var(--gray-light);display:flex;align-items:center;gap:.6rem">
+                        <div id="wsChatAv" style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#667eea,#a78bfa);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.85rem;flex-shrink:0">?</div>
+                        <div style="flex:1"><div id="wsChatWinName" style="font-weight:700;font-size:.88rem">—</div><div style="font-size:.7rem;color:var(--success)">active on network</div></div>
+                        <button class="btn btn-small btn-outline" onclick="wsOpenReq()" style="font-size:.75rem"><i class="fas fa-exchange-alt"></i> Request</button>
+                      </div>
+                      <div id="wsMsgs" style="flex:1;overflow-y:auto;padding:.75rem;display:flex;flex-direction:column;gap:.5rem;background:#fafbff"></div>
+                      <div style="padding:.65rem;border-top:1px solid var(--gray-light);display:flex;gap:.4rem;align-items:flex-end">
+                        <textarea id="wsMsgIn" rows="1" placeholder="Type a message..." style="flex:1;resize:none;min-height:38px;max-height:90px;padding:.45rem .65rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.85rem;font-family:inherit" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();wsSend()}" oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,90)+'px'"></textarea>
+                        <button onclick="wsSend()" style="width:38px;height:38px;border:none;border-radius:var(--radius);background:var(--primary);color:#fff;cursor:pointer"><i class="fas fa-paper-plane"></i></button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -889,7 +901,15 @@
                 <div class="image-preview-container" id="editImagePreviewContainer"></div>
                 <div class="flex gap-2 mt-4"><input type="text" id="editImageUrlInput" class="form-control" placeholder="Add image URL"><button class="btn btn-outline btn-small" onclick="addEditImageUrl()">Add</button></div>
             </div>
-            <div class="form-group"><label>Size Inventory</label><div id="editSizeInventory" class="size-edit-grid"></div></div>
+            <div class="form-group">
+                <label>Size Inventory</label>
+                <div id="editSizeInventory" class="size-edit-grid"></div>
+                <div style="display:flex;gap:8px;margin-top:8px">
+                    <input type="text" id="editNewSizeName" class="form-control" placeholder="Size name (e.g. 130)" style="flex:1">
+                    <input type="number" id="editNewSizeQty" class="form-control" placeholder="Qty" min="0" value="0" style="width:70px">
+                    <button class="btn btn-success btn-small" onclick="addEditSize()"><i class="fas fa-plus"></i> Add</button>
+                </div>
+            </div>
             <button class="btn btn-primary w-full btn-large" onclick="saveEditProduct()"><i class="fas fa-save"></i> Save Changes</button>
         </div>
     </div>
@@ -914,8 +934,8 @@
     // =============================================
     function getTelegramConfig() {
         return {
-            botToken: localStorage.getItem('goatB2BTgToken') || '',
-            chatId: localStorage.getItem('goatB2BTgChatId') || ''
+            botToken: localStorage.getItem('goatTgToken') || '',
+            chatId: localStorage.getItem('goatTgChatId') || ''
         };
     }
 
@@ -927,15 +947,15 @@
             statusEl.innerHTML = '<span style="color:var(--danger)"><i class="fas fa-exclamation-circle"></i> Please enter both Bot Token and Chat ID.</span>';
             return;
         }
-        localStorage.setItem('goatB2BTgToken', token);
-        localStorage.setItem('goatB2BTgChatId', chatId);
+        localStorage.setItem('goatTgToken', token);
+        localStorage.setItem('goatTgChatId', chatId);
         statusEl.innerHTML = '<span style="color:var(--success)"><i class="fas fa-check-circle"></i> Saved! Telegram notifications are now active.</span>';
     }
 
     function clearTelegramConfig() {
         if (!confirm('Remove saved Telegram credentials?')) return;
-        localStorage.removeItem('goatB2BTgToken');
-        localStorage.removeItem('goatB2BTgChatId');
+        localStorage.removeItem('goatTgToken');
+        localStorage.removeItem('goatTgChatId');
         document.getElementById('telegramBotTokenInput').value = '';
         document.getElementById('telegramChatIdInput').value = '';
         document.getElementById('telegramConfigStatus').innerHTML = '<span style="color:var(--gray)"><i class="fas fa-info-circle"></i> Credentials cleared.</span>';
@@ -956,7 +976,7 @@
     function testTelegramMessage() {
         var statusEl = document.getElementById('telegramConfigStatus');
         statusEl.innerHTML = '<span style="color:var(--info)"><i class="fas fa-spinner fa-spin"></i> Sending test message...</span>';
-        _sendTelegramRaw('🔔 GOAT KIDS B2B: Telegram is working! Orders will be delivered here.', function(ok) {
+        _sendTelegramRaw('📨 GOAT KIDS: Telegram is working! Orders will be delivered here.', function(ok) {
             if (ok) {
                 statusEl.innerHTML = '<span style="color:var(--success)"><i class="fas fa-check-circle"></i> Test message sent successfully!</span>';
             } else {
@@ -1022,9 +1042,9 @@ function sendToTelegram(order, callback) {
     var STATE = {
         products: [],
         cart: [],
-        isAdmin: localStorage.getItem('goatB2BAdmin') === 'true',
-        adminRole: localStorage.getItem('goatB2BAdminRole') || '',
-        loginRecords: JSON.parse(localStorage.getItem('goatB2BLoginRecords') || '[]'),
+        isAdmin: localStorage.getItem('goatAdmin') === 'true',
+        adminRole: localStorage.getItem('goatAdminRole') || '',
+        loginRecords: JSON.parse(localStorage.getItem('goatLoginRecords') || '[]'),
         paymentMethod: 'cod',
         shippingFee: 0,
         historyPage: 0,
@@ -1045,11 +1065,11 @@ function sendToTelegram(order, callback) {
         dateFilter: 'today',
         customStartDate: null,
         customEndDate: null,
-        loginAttempts: JSON.parse(localStorage.getItem('goatB2BLoginAttempts') || '{}'),
+        loginAttempts: JSON.parse(localStorage.getItem('goatLoginAttempts') || '{}'),
         maxLoginAttempts: 5,
         lockoutMinutes: 15,
-        activityLog: JSON.parse(localStorage.getItem('goatB2BActivityLog') || '[]'),
-        language: localStorage.getItem('goatB2BLanguage') || 'en',
+        activityLog: JSON.parse(localStorage.getItem('goatActivityLog') || '[]'),
+        language: localStorage.getItem('goatLanguage') || 'en',
         // FIX #7: order rate limiting - track last order timestamp
         lastOrderTime: parseInt(localStorage.getItem('goatLastOrderTime') || '0'),
         orderCooldownSeconds: 30
@@ -1115,7 +1135,7 @@ function sendToTelegram(order, callback) {
 
     function toggleLanguage() {
         STATE.language = STATE.language === 'en' ? 'kh' : 'en';
-        localStorage.setItem('goatB2BLanguage', STATE.language);
+        localStorage.setItem('goatLanguage', STATE.language);
         document.getElementById('langIcon').textContent = STATE.language === 'en' ? '🇰🇭' : '🇺🇸';
         document.getElementById('langText').textContent = STATE.language === 'en' ? 'ខ្មែរ' : 'English';
         var m = document.getElementById('langIconMobile');
@@ -1188,7 +1208,7 @@ function sendToTelegram(order, callback) {
         return '';
     }
 
-    function saveProducts() { localStorage.setItem('goatB2BProducts', JSON.stringify(STATE.products)); }
+    function saveProducts() { localStorage.setItem('goatProducts', JSON.stringify(STATE.products)); }
     function saveOrders() {
         localStorage.setItem('pendingOrders', JSON.stringify(STATE.pendingOrders));
         // Keep only the latest 50 confirmed orders in localStorage
@@ -1212,7 +1232,7 @@ function sendToTelegram(order, callback) {
         var entry = { action: action, details: details, time: new Date().toLocaleString(), timestamp: Date.now(), user: STATE.adminRole || 'system' };
         STATE.activityLog.unshift(entry);
         if (STATE.activityLog.length > 200) STATE.activityLog = STATE.activityLog.slice(0, 200);
-        localStorage.setItem('goatB2BActivityLog', JSON.stringify(STATE.activityLog));
+        localStorage.setItem('goatActivityLog', JSON.stringify(STATE.activityLog));
     }
 
     function updateShipping() {
@@ -1299,7 +1319,7 @@ function sendToTelegram(order, callback) {
 
             // Now clear cart
             STATE.cart = [];
-            localStorage.setItem('goatB2BCart', '[]');
+            localStorage.setItem('goatCart', '[]');
             updateCartBadge();
 
             // Update rate limit timestamp
@@ -1360,7 +1380,7 @@ function sendToTelegram(order, callback) {
         var el = document.getElementById('loginAttemptsLeft');
         if (attempts.lockedUntil > now) {
             var mins = Math.ceil((attempts.lockedUntil - now) / 60000);
-            el.textContent = '🔒 Locked for ' + mins + ' more minutes';
+            el.textContent = ' Locked for ' + mins + ' more minutes';
             el.style.color = 'var(--danger)';
         } else if (attempts.count > 0) {
             var rem = STATE.maxLoginAttempts - attempts.count;
@@ -1612,7 +1632,8 @@ function sendToTelegram(order, callback) {
             var p = STATE.products[i];
             if (p.id === code || p.barcode === code ||
                 (p.id && p.id.toLowerCase() === codeLower) ||
-                (p.barcode && p.barcode.toLowerCase() === codeLower)) {
+                (p.barcode && p.barcode.toLowerCase() === codeLower) ||
+                (p.name && p.name.toLowerCase().indexOf(codeLower) !== -1)) {
                 found = p; break;
             }
         }
@@ -1762,7 +1783,7 @@ function sendToTelegram(order, callback) {
             STATE.cart.push({ productId: pid, name: p.name, price: p.price, size: sizeName, quantity: qty, image: (p.images && p.images[0]) || '' });
         }
         // Save cart
-        try { localStorage.setItem('goatB2BCart', JSON.stringify(STATE.cart)); } catch(e) {}
+        try { localStorage.setItem('goatCart', JSON.stringify(STATE.cart)); } catch(e) {}
 
         updateCartBadge();
         showToast(p.name + ' (' + sizeName + ') ×' + qty + ' added to cart ✅', 'success');
@@ -1819,7 +1840,7 @@ function sendToTelegram(order, callback) {
     }
 
     function loadCurrentFirebaseConfig() {
-        var cfg = localStorage.getItem('goatB2BFirebaseConfig');
+        var cfg = localStorage.getItem('goatFirebaseConfig');
         var ta = document.getElementById('settingsFirebaseJson');
         if (ta) {
             if (cfg) {
@@ -1858,7 +1879,7 @@ function sendToTelegram(order, callback) {
                 showToast('Invalid config: missing apiKey or projectId', 'error');
                 return;
             }
-            localStorage.setItem('goatB2BFirebaseConfig', JSON.stringify(cfg));
+            localStorage.setItem('goatFirebaseConfig', JSON.stringify(cfg));
             showToast('✅ Firebase config saved — reloading...', 'success');
             setTimeout(function() { location.reload(); }, 1500);
         } catch(e) {
@@ -1868,7 +1889,7 @@ function sendToTelegram(order, callback) {
 
     function clearFirebaseConfig() {
         if (!confirm('This will clear the Firebase config and show the setup screen on next reload. Continue?')) return;
-        localStorage.removeItem('goatB2BFirebaseConfig');
+        localStorage.removeItem('goatFirebaseConfig');
         showToast('Config cleared — reloading...', 'warning');
         setTimeout(function() { location.reload(); }, 1000);
     }
@@ -1886,7 +1907,7 @@ function sendToTelegram(order, callback) {
                 .replace(/([{,]\s*)([a-zA-Z_][a-zA-Z0-9_]*)(\s*:)/g, '$1"$2"$3'); // quote keys
             var cfg = JSON.parse(json);
             if (!cfg.apiKey || !cfg.projectId) throw new Error('Missing apiKey or projectId');
-            localStorage.setItem('goatB2BFirebaseConfig', JSON.stringify(cfg));
+            localStorage.setItem('goatFirebaseConfig', JSON.stringify(cfg));
             showToast('✅ Firebase config updated — reloading...', 'success');
             setTimeout(function() { location.reload(); }, 1500);
         } catch(e) {
@@ -1895,16 +1916,16 @@ function sendToTelegram(order, callback) {
     }
 
     function getStoredPasswords() {
-        var stored = localStorage.getItem('goatB2BPasswords');
+        var stored = localStorage.getItem('goatPasswords');
         if (stored) { try { return JSON.parse(stored); } catch(e) {} }
         // First-run defaults (overwritten immediately if user has set passwords)
         // First run - return defaults so app works, user should change in settings
         var defaults = { fullPass: 'admin123', ordersPass: 'orders123', inventoryPass: 'inventory123' };
-        localStorage.setItem('goatB2BPasswords', JSON.stringify(defaults));
+        localStorage.setItem('goatPasswords', JSON.stringify(defaults));
         return defaults;
     }
     function savePasswords(obj) {
-        localStorage.setItem('goatB2BPasswords', JSON.stringify(obj));
+        localStorage.setItem('goatPasswords', JSON.stringify(obj));
     }
 
     function completeSetup() {
@@ -1918,7 +1939,7 @@ function sendToTelegram(order, callback) {
                 alert('Invalid config: missing apiKey or projectId');
                 return;
             }
-            localStorage.setItem('goatB2BFirebaseConfig', JSON.stringify(cfg));
+            localStorage.setItem('goatFirebaseConfig', JSON.stringify(cfg));
         } catch(e) {
             alert('Invalid JSON: ' + e.message + '\n\nMake sure you paste valid JSON (use double quotes)');
             return;
@@ -1933,7 +1954,7 @@ function sendToTelegram(order, callback) {
             ordersPass: op || 'orders123',
             inventoryPass: ip || 'inventory123'
         };
-        localStorage.setItem('goatB2BPasswords', JSON.stringify(pw));
+        localStorage.setItem('goatPasswords', JSON.stringify(pw));
 
         // 3. Reload to initialize Firebase
         showToast('Setup complete! Loading app...', 'success');
@@ -2000,15 +2021,15 @@ function sendToTelegram(order, callback) {
                 showToast('Wrong password! ' + (STATE.maxLoginAttempts - attempts.count) + ' left', 'error');
             }
             STATE.loginAttempts['attempts_' + role] = attempts;
-            localStorage.setItem('goatB2BLoginAttempts', JSON.stringify(STATE.loginAttempts));
+            localStorage.setItem('goatLoginAttempts', JSON.stringify(STATE.loginAttempts));
             addLoginRecord('Unknown', role, false);
             updateLoginAttemptsDisplay();
             return;
         }
         STATE.loginAttempts['attempts_' + role] = { count: 0, lastAttempt: now, lockedUntil: 0 };
-        localStorage.setItem('goatB2BLoginAttempts', JSON.stringify(STATE.loginAttempts));
+        localStorage.setItem('goatLoginAttempts', JSON.stringify(STATE.loginAttempts));
         STATE.isAdmin = true; STATE.adminRole = role;
-        localStorage.setItem('goatB2BAdmin', 'true'); localStorage.setItem('goatB2BAdminRole', role);
+        localStorage.setItem('goatAdmin', 'true'); localStorage.setItem('goatAdminRole', role);
         addLoginRecord(name, role, true);
         document.getElementById('adminBadge').classList.remove('hidden');
         document.getElementById('adminBadge').textContent = role === 'full' ? 'ADMIN' : (role === 'orders' ? 'ORDERS' : 'STOCK');
@@ -2027,7 +2048,7 @@ function sendToTelegram(order, callback) {
 
     function adminLogout() {
         STATE.isAdmin = false; STATE.adminRole = '';
-        localStorage.removeItem('goatB2BAdmin'); localStorage.removeItem('goatB2BAdminRole');
+        localStorage.removeItem('goatAdmin'); localStorage.removeItem('goatAdminRole');
         document.getElementById('adminBadge').classList.add('hidden');
         document.getElementById('adminNavLink').classList.add('hidden');
         document.getElementById('adminNavLinkMobile').classList.add('hidden');
@@ -2044,7 +2065,7 @@ function sendToTelegram(order, callback) {
         var rec = { name: n, role: r, success: s, time: new Date().toLocaleString(), timestamp: Date.now() };
         STATE.loginRecords.unshift(rec);
         if (STATE.loginRecords.length > 50) STATE.loginRecords = STATE.loginRecords.slice(0, 50);
-        localStorage.setItem('goatB2BLoginRecords', JSON.stringify(STATE.loginRecords));
+        localStorage.setItem('goatLoginRecords', JSON.stringify(STATE.loginRecords));
     }
 
     function showLoginHistory() {
@@ -2065,7 +2086,7 @@ function sendToTelegram(order, callback) {
     }
 
     function closeLoginHistory() { document.getElementById('loginHistoryModal').classList.remove('active'); document.getElementById('loginHistoryModal').classList.add('hidden'); }
-    function clearLoginHistory() { if (confirm('Clear all?')) { STATE.loginRecords = []; localStorage.removeItem('goatB2BLoginRecords'); showLoginHistory(); showToast('Cleared', 'info'); } }
+    function clearLoginHistory() { if (confirm('Clear all?')) { STATE.loginRecords = []; localStorage.removeItem('goatLoginRecords'); showLoginHistory(); showToast('Cleared', 'info'); } }
     function openAdminModal() { document.getElementById('adminModal').classList.add('active'); document.getElementById('adminModal').classList.remove('hidden'); updateLoginAttemptsDisplay(); }
     function closeAdminModal() { document.getElementById('adminModal').classList.remove('active'); document.getElementById('adminModal').classList.add('hidden'); }
     function copyStoreId() { navigator.clipboard.writeText(STATE.storeId).then(function() { showToast('Copied!', 'success'); }).catch(function() { showToast('Failed', 'error'); }); }
@@ -2081,7 +2102,7 @@ function sendToTelegram(order, callback) {
                 setTimeout(function() { reject(new Error('timeout')); }, 5000);
             });
             await Promise.race([
-                db.collection('stores').doc('GOAT-B2B').get(),
+                db.collection('stores').doc('GOAT-1979').get(),
                 timeoutPromise
             ]);
             STATE.firebaseOnline = true;
@@ -2096,7 +2117,7 @@ function sendToTelegram(order, callback) {
                 showStatus('Offline (timeout)', 'offline');
             } else if (errMsg.indexOf('permission') !== -1 || errMsg.indexOf('PERMISSION') !== -1) {
                 showStatus('Offline (rules blocked)', 'offline');
-                console.error('Firestore rules blocking connection. Check rules allow GOAT-B2B path.');
+                console.error('Firestore rules blocking connection. Check rules allow GOAT-1979 path.');
             } else {
                 showStatus('Offline: ' + errMsg.substring(0, 30), 'offline');
             }
@@ -2119,11 +2140,13 @@ function sendToTelegram(order, callback) {
                 setTimeout(function() { reject(new Error('Firebase timeout')); }, 8000);
             });
             var fetchPromise = async function() {
-                var s = await db.collection('stores').doc(STATE.storeId).collection('products').where('active', '==', true).get();
+                var s = await db.collection('stores').doc(STATE.storeId).collection('products').get();
                 var p = [];
+                var deleted = JSON.parse(localStorage.getItem('goatDeletedProducts') || '[]');
                 s.forEach(function(d) {
+                    if (deleted.indexOf(d.id) !== -1) return; // skip locally deleted
                     var dt = d.data();
-                    p.push({ id: d.id, name: dt.name || '', price: dt.price || 0, stock: dt.stock || 0, category: dt.category || '', images: dt.images || [], sizes: dt.sizes || [], addedAt: dt.addedAt || 0 });
+                    p.push({ id: d.id, name: dt.name || '', price: dt.price || 0, stock: dt.stock || 0, category: dt.category || '', images: dt.images || [], sizes: dt.sizes || [], addedAt: dt.addedAt || 0, active: dt.active !== false });
                 });
                 if (p.length) { STATE.products = p; saveProducts(); }
 
@@ -2152,7 +2175,7 @@ function sendToTelegram(order, callback) {
     }
 
     function loadLocal() { loadProductsLocal(); STATE.pendingOrders = JSON.parse(localStorage.getItem('pendingOrders') || '[]'); STATE.confirmedOrders = JSON.parse(localStorage.getItem('confirmedOrders') || '[]'); loadRefunds(); }
-    function loadProductsLocal() { var s = localStorage.getItem('goatB2BProducts'); STATE.products = s ? JSON.parse(s) : []; if (!STATE.products.length) loadSamples(); }
+    function loadProductsLocal() { var s = localStorage.getItem('goatProducts'); STATE.products = s ? JSON.parse(s) : []; if (!STATE.products.length) loadSamples(); }
 
     async function syncToFirebase() {
         if (!STATE.firebaseOnline) {
@@ -2168,6 +2191,13 @@ function sendToTelegram(order, callback) {
                 var p = STATE.products[i];
                 await db.collection('stores').doc(STATE.storeId).collection('products').doc(p.id).set({ name: p.name, price: p.price, stock: p.stock, category: p.category, images: p.images || [], sizes: p.sizes || [], active: true, updatedAt: new Date().toISOString() }, { merge: true });
             }
+            // Delete products that were deleted locally
+            var deleted = JSON.parse(localStorage.getItem('goatDeletedProducts') || '[]');
+            for (var d = 0; d < deleted.length; d++) {
+                await db.collection('stores').doc(STATE.storeId).collection('products').doc(deleted[d]).delete();
+            }
+            if (deleted.length > 0) localStorage.setItem('goatDeletedProducts', '[]');
+
             var all = STATE.pendingOrders.concat(STATE.confirmedOrders);
             for (var j = 0; j < all.length; j++) {
                 await db.collection('stores').doc(STATE.storeId).collection('orders').doc(all[j].orderId).set(Object.assign({}, all[j], { updatedAt: new Date().toISOString() }), { merge: true });
@@ -2246,7 +2276,7 @@ function sendToTelegram(order, callback) {
         var imgs = STATE.newProductImages.length ? STATE.newProductImages.slice() : ['https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=400'];
         var t = 0;
         for (var i = 0; i < STATE.newProductSizes.length; i++) { t += STATE.newProductSizes[i].qty; }
-        STATE.products.push({ id: 'p' + Date.now(), name: n, price: pr, stock: t, category: c, images: imgs, sizes: STATE.newProductSizes.slice(), addedAt: Date.now() });
+        STATE.products.push({ id: 'p' + Date.now(), name: n, price: pr, stock: t, category: c, images: imgs, sizes: STATE.newProductSizes.slice(), addedAt: Date.now(), active: true });
         saveProducts();
         logActivity('Add Product', n + ' ($' + pr + ')');
         if (STATE.firebaseOnline) syncToFirebase();
@@ -2263,8 +2293,19 @@ function sendToTelegram(order, callback) {
         for (var i = 0; i < STATE.products.length; i++) { if (STATE.products[i].id === pid) { p = STATE.products[i]; break; } }
         if (!p) return;
         if (!confirm('Delete "' + p.name + '"?')) return;
+        // Remove from local state
         STATE.products = STATE.products.filter(function(x) { return x.id !== pid; });
         saveProducts();
+        // Track deleted IDs so sync knows to delete from Firebase
+        var deleted = JSON.parse(localStorage.getItem('goatDeletedProducts') || '[]');
+        deleted.push(pid);
+        localStorage.setItem('goatDeletedProducts', JSON.stringify(deleted));
+        // Delete from Firebase immediately if online
+        if (STATE.firebaseOnline && db) {
+            db.collection('stores').doc(STATE.storeId).collection('products').doc(pid).delete()
+            .then(function() { showToast('Product deleted from cloud ✅', 'success'); })
+            .catch(function(e) { showToast('Deleted locally, will sync later', 'warning'); });
+        }
         logActivity('Delete Product', p.name);
         // FIX #10: Mark active:false in Firestore so other devices stop loading it
         if (STATE.firebaseOnline) {
@@ -2284,18 +2325,51 @@ function sendToTelegram(order, callback) {
         document.getElementById('editProductPrice').value = p.price;
         STATE.editProductImages = (p.images || []).slice();
         renderEditImagePreviews();
-        var sh = '';
-        if (p.sizes && p.sizes.length) {
-            for (var j = 0; j < p.sizes.length; j++) {
-                sh += '<div class="size-edit-item"><label>' + p.sizes[j].name + '</label><input type="number" value="' + p.sizes[j].qty + '" min="0" data-size-index="' + j + '" class="edit-size-qty"></div>';
-            }
-        } else { sh = '<p style="color:var(--gray)">No sizes</p>'; }
-        document.getElementById('editSizeInventory').innerHTML = sh;
+        STATE._editSizes = p.sizes ? p.sizes.map(function(s){ return {name:s.name, qty:s.qty}; }) : [];
+        renderEditSizes();
         document.getElementById('editProductModal').classList.add('active');
         document.getElementById('editProductModal').classList.remove('hidden');
     }
 
     function closeEditModal() { document.getElementById('editProductModal').classList.remove('active'); document.getElementById('editProductModal').classList.add('hidden'); }
+
+    function renderEditSizes() {
+        var sh = '';
+        if (STATE._editSizes && STATE._editSizes.length) {
+            STATE._editSizes.forEach(function(s, j) {
+                sh += '<div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">' +
+                    '<input type="text" class="form-control edit-size-name" data-idx="' + j + '" value="' + escHtml(s.name) + '" style="flex:1;font-size:0.85rem" placeholder="Size name">' +
+                    '<input type="number" class="form-control edit-size-qty" data-idx="' + j + '" value="' + s.qty + '" min="0" style="width:65px;font-size:0.85rem">' +
+                    '<button onclick="removeEditSize(' + j + ')" style="background:none;border:1px solid var(--danger);color:var(--danger);border-radius:6px;padding:4px 8px;cursor:pointer;font-size:12px">✕</button>' +
+                    '</div>';
+            });
+        } else {
+            sh = '<p style="color:var(--gray);font-size:0.85rem">No sizes — add one below</p>';
+        }
+        document.getElementById('editSizeInventory').innerHTML = sh;
+    }
+
+    function addEditSize() {
+        var name = document.getElementById('editNewSizeName').value.trim();
+        var qty = parseInt(document.getElementById('editNewSizeQty').value) || 0;
+        if (!name) { showToast('Enter a size name', 'warning'); return; }
+        // Check duplicate
+        for (var i = 0; i < STATE._editSizes.length; i++) {
+            if (STATE._editSizes[i].name.toLowerCase() === name.toLowerCase()) {
+                showToast('Size "' + name + '" already exists', 'warning'); return;
+            }
+        }
+        STATE._editSizes.push({ name: name, qty: qty });
+        document.getElementById('editNewSizeName').value = '';
+        document.getElementById('editNewSizeQty').value = '0';
+        renderEditSizes();
+    }
+
+    function removeEditSize(idx) {
+        if (!confirm('Remove size "' + STATE._editSizes[idx].name + '"?')) return;
+        STATE._editSizes.splice(idx, 1);
+        renderEditSizes();
+    }
 
     function saveEditProduct() {
         var pid = document.getElementById('editProductId').value;
@@ -2545,7 +2619,7 @@ function sendToTelegram(order, callback) {
         for (var k = 0; k < STATE.cart.length; k++) { if (STATE.cart[k].productId === pid && STATE.cart[k].size === size) { ex = STATE.cart[k]; break; } }
         if (ex) ex.quantity++;
         else STATE.cart.push({ productId: pid, name: p.name, price: p.price, size: size, quantity: 1, image: (p.images && p.images[0]) || '' });
-        localStorage.setItem('goatB2BCart', JSON.stringify(STATE.cart));
+        localStorage.setItem('goatCart', JSON.stringify(STATE.cart));
         updateCartBadge(); renderCart(); updateShipping();
         showToast(p.name + ' (' + size + ') added!', 'success');
     }
@@ -2585,11 +2659,11 @@ function sendToTelegram(order, callback) {
             if (q > maxQty) { showToast('Only ' + maxQty + ' in stock for size ' + item.size, 'warning'); return; }
         }
         STATE.cart[i].quantity = q;
-        localStorage.setItem('goatB2BCart', JSON.stringify(STATE.cart));
+        localStorage.setItem('goatCart', JSON.stringify(STATE.cart));
         updateCartBadge(); renderCart(); updateShipping();
     }
 
-    function remCart(i) { STATE.cart.splice(i, 1); localStorage.setItem('goatB2BCart', JSON.stringify(STATE.cart)); updateCartBadge(); renderCart(); updateShipping(); }
+    function remCart(i) { STATE.cart.splice(i, 1); localStorage.setItem('goatCart', JSON.stringify(STATE.cart)); updateCartBadge(); renderCart(); updateShipping(); }
 
     // =============================================
     // IMAGES
@@ -2749,13 +2823,13 @@ function sendToTelegram(order, callback) {
 
     // ── Offline sync queue: retries failed Firebase writes when connection returns ──
     function queueOfflineSync(oid, confirmedOrder, stockUpdates) {
-        var queue = JSON.parse(localStorage.getItem('goatB2BSyncQueue') || '[]');
+        var queue = JSON.parse(localStorage.getItem('goatSyncQueue') || '[]');
         queue.push({ oid: oid, confirmedOrder: confirmedOrder, stockUpdates: stockUpdates.map(function(u){ return { productId: u.product.id, newSizes: u.newSizes, newStock: u.newStock }; }), queuedAt: Date.now() });
-        localStorage.setItem('goatB2BSyncQueue', JSON.stringify(queue));
+        localStorage.setItem('goatSyncQueue', JSON.stringify(queue));
     }
 
     async function flushOfflineSyncQueue() {
-        var queue = JSON.parse(localStorage.getItem('goatB2BSyncQueue') || '[]');
+        var queue = JSON.parse(localStorage.getItem('goatSyncQueue') || '[]');
         if (!queue.length || !STATE.firebaseOnline) return;
         var remaining = [];
         for (var i = 0; i < queue.length; i++) {
@@ -2778,7 +2852,7 @@ function sendToTelegram(order, callback) {
                 remaining.push(item);
             }
         }
-        localStorage.setItem('goatB2BSyncQueue', JSON.stringify(remaining));
+        localStorage.setItem('goatSyncQueue', JSON.stringify(remaining));
     }
 
     function sendDailySummary() {
@@ -2788,7 +2862,7 @@ function sendToTelegram(order, callback) {
         var pending = STATE.pendingOrders.length;
         var lowStock = STATE.products.filter(function(p){return getTotalStock(p)<=3&&getTotalStock(p)>0;});
         var outStock = STATE.products.filter(function(p){return getTotalStock(p)===0;});
-        var msg = '📊 <b>GOAT KIDS B2B Daily Summary</b>\n' + new Date().toLocaleDateString() + '\n\n' +
+        var msg = '📊 <b>GOAT KIDS Daily Summary</b>\n' + new Date().toLocaleDateString() + '\n\n' +
             '✅ Confirmed today: ' + todayOrders.length + ' orders\n' +
             '💰 Revenue today: $' + revenue.toFixed(2) + '\n' +
             '⏳ Still pending: ' + pending + '\n\n';
@@ -2911,8 +2985,8 @@ function sendToTelegram(order, callback) {
             document.getElementById('settingsContent').style.display = 'block';
             inp.value = '';
             // Populate Telegram settings
-            var savedToken = localStorage.getItem('goatB2BTgToken') || '';
-            var savedChat = localStorage.getItem('goatB2BTgChatId') || '';
+            var savedToken = localStorage.getItem('goatTgToken') || '';
+            var savedChat = localStorage.getItem('goatTgChatId') || '';
             var ti = document.getElementById('telegramBotTokenInput'); if (ti) ti.value = savedToken;
             var ci = document.getElementById('telegramChatIdInput'); if (ci) ci.value = savedChat;
             var st = document.getElementById('telegramConfigStatus');
@@ -3031,7 +3105,6 @@ function sendToTelegram(order, callback) {
         if (next) next.disabled = pg >= totalPages - 1;
     }
 
-    // ── Simple 58mm receipt — HTML print window ──
     function printReceipt(oid) {
         var order = null;
         for (var i = 0; i < STATE.confirmedOrders.length; i++) { if (STATE.confirmedOrders[i].orderId === oid) { order = STATE.confirmedOrders[i]; break; } }
@@ -3062,16 +3135,16 @@ function sendToTelegram(order, callback) {
         html += '.logo{width:36mm;display:block;margin:0 auto 2mm}';
         html += '.dash{border:none;border-top:1px dashed #aaa;margin:1.5mm 0}';
         html += '.solid{border:none;border-top:1.5px solid #000;margin:1mm 0}';
-        html += '.row{display:flex;justify-content:space-between;padding:0.5mm 0;font-size:7.5pt}';
+        html += '.row{display:flex;justify-content:space-between;padding:0.5mm 0;font-size:9.5pt}';
         html += '.lbl{color:#555}';
-        html += '.tot{font-weight:bold;font-size:9pt}';
-        html += '.inm{font-weight:bold;font-size:7.5pt}';
+        html += '.tot{font-weight:bold;font-size:12pt}';
+        html += '.inm{font-weight:bold;font-size:9.5pt}';
         html += '.isz{font-weight:normal;color:#666}';
-        html += '.ir{display:flex;justify-content:space-between;font-size:7pt;color:#444;margin-top:0.5mm}';
-        html += '.ft{text-align:center;font-size:6.5pt;color:#888;margin-top:2mm;line-height:1.6}';
+        html += '.ir{display:flex;justify-content:space-between;font-size:9pt;color:#444;margin-top:0.5mm}';
+        html += '.ft{text-align:center;font-size:11pt;color:#888;margin-top:2mm;line-height:1.6}';
         html += '#bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid #e2e8f0;z-index:999;font-family:Arial,sans-serif}';
         html += '#btns{display:flex;gap:8px;padding:10px 12px;justify-content:center}';
-        html += '#btns button{flex:1;max-width:110px;padding:12px 6px;border:none;border-radius:22px;font-size:13px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px}';
+        html += '#btns button{flex:1;max-width:110px;padding:12px 6px;border:none;border-radius:22px;font-size:15px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px}';
         html += '.ba{background:#4a90d9;color:#fff}';
         html += '.bp{background:#48bb78;color:#fff}';
         html += '.bsh{background:#f6ad55;color:#fff}';
@@ -3117,7 +3190,7 @@ function sendToTelegram(order, callback) {
         html += '<hr class="solid">';
         html += '<div class="row tot"><span>TOTAL</span><span>$' + (order.total||0).toFixed(2) + '</span></div>';
         html += '<hr class="dash">';
-        html += '<div class="ft"><p>&#9829; Thank you for your order!</p><p>Payment: Cash on Delivery</p></div>';
+        html += '<div class="ft"><p>&#9829; Thank you for your order!</p><p>Shop Tell : 093779077</p></div>';
         html += '</div>'; // end #receipt
 
         // Share image preview overlay
@@ -3191,56 +3264,63 @@ function sendToTelegram(order, callback) {
 
         html += '<\/scr' + 'ipt>';
         html += '
-    <div class="modal-overlay" id="nwPostModal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal"><div class="modal-header"><h3><i class="fas fa-tag" style="color:var(--primary)"></i> Post to Network Market</h3><button class="modal-close" onclick="document.getElementById('nwPostModal').style.display='none'">&times;</button></div>
+    <!-- WS Post Modal -->
+    <div class="modal-overlay" id="wsPostMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3><i class="fas fa-tag" style="color:var(--primary)"></i> Post to Wholesale Market</h3><button class="modal-close" onclick="document.getElementById('wsPostMod').style.display='none'">&times;</button></div>
       <div style="padding:1.25rem">
-        <div class="form-group"><label>Pick from inventory</label><select class="form-control" id="nwPostFromInv" onchange="nwFillFromInv()"><option value="">— Enter manually —</option></select></div>
-        <div class="form-group"><label>Item Name *</label><input type="text" class="form-control" id="nwPostName" placeholder="Product name"></div>
-        <div class="form-group"><label>Category</label><select class="form-control" id="nwPostCat"><option value="Dresses">Dresses</option><option value="Girl Clothes">Girl Clothes</option><option value="Boy Clothes">Boy Clothes</option><option value="Baby Shirt">Baby Shirts</option><option value="Baby Shoes">Baby Shoes</option><option value="Baby Accessories">Accessories</option></select></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem">
-          <div class="form-group"><label>Cost $</label><input type="number" class="form-control" id="nwPostCost" placeholder="0.00" min="0" step="0.01"></div>
-          <div class="form-group"><label>Sell $</label><input type="number" class="form-control" id="nwPostPrice" placeholder="0.00" min="0" step="0.01"></div>
-          <div class="form-group"><label>Qty</label><input type="number" class="form-control" id="nwPostQty" value="1" min="1"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Pick from inventory</label><select id="wsPI" onchange="wsFillPost()" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"><option value="">— Enter manually —</option></select></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Item Name *</label><input type="text" id="wsPN" placeholder="Product name" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Category</label><select id="wsPC" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"><option>Dresses</option><option>Girl Clothes</option><option>Boy Clothes</option><option>Baby Shirt</option><option>Baby Shoes</option><option>Baby Accessories</option></select></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.85rem">
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Cost $</label><input type="number" id="wsPCost" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Sell $</label><input type="number" id="wsPSell" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Qty</label><input type="number" id="wsPQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
         </div>
-        <div class="form-group"><label>Sizes</label><input type="text" class="form-control" id="nwPostSizes" placeholder="e.g. 3M, 6M, 1T"></div>
-        <div class="form-group"><label>Description</label><textarea class="form-control" id="nwPostDesc" rows="2" placeholder="Condition, reason..."></textarea></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Sizes</label><input type="text" id="wsPSz" placeholder="3M, 6M, 1T, 2T..." style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Description / Condition</label><textarea id="wsPD" rows="2" placeholder="Condition, reason for selling..." style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem;resize:vertical"></textarea></div>
       </div>
       <div style="padding:.85rem 1.25rem;border-top:1px solid var(--gray-light);display:flex;gap:.5rem;justify-content:flex-end">
-        <button class="btn btn-outline" onclick="document.getElementById('nwPostModal').style.display='none'">Cancel</button>
-        <button class="btn btn-primary" onclick="nwSubmitListing()"><i class="fas fa-upload"></i> Post</button>
+        <button class="btn btn-outline" onclick="document.getElementById('wsPostMod').style.display='none'">Cancel</button>
+        <button class="btn btn-primary" onclick="wsPostListing()"><i class="fas fa-upload"></i> Post to Market</button>
       </div></div>
     </div>
-    <div class="modal-overlay" id="nwBuyModal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal"><div class="modal-header"><h3><i class="fas fa-exchange-alt" style="color:var(--success)"></i> Request Transfer</h3><button class="modal-close" onclick="document.getElementById('nwBuyModal').style.display='none'">&times;</button></div>
+
+    <!-- WS Buy/Request Modal -->
+    <div class="modal-overlay" id="wsBuyMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3><i class="fas fa-exchange-alt" style="color:var(--success)"></i> Request Stock Transfer</h3><button class="modal-close" onclick="document.getElementById('wsBuyMod').style.display='none'">&times;</button></div>
       <div style="padding:1.25rem">
-        <div id="nwBuyInfo" style="background:var(--primary-light);border-radius:var(--radius);padding:.75rem;margin-bottom:1rem;font-size:.85rem"></div>
-        <div class="form-group"><label>Qty *</label><input type="number" class="form-control" id="nwBuyQty" value="1" min="1"></div>
-        <div class="form-group"><label>Sizes needed</label><input type="text" class="form-control" id="nwBuySizes" placeholder="e.g. 1T, 2T"></div>
-        <div class="form-group"><label>Offer Price $ (blank = accept ask)</label><input type="number" class="form-control" id="nwBuyOffer" placeholder="Leave blank" min="0" step="0.01"></div>
-        <div class="form-group"><label>Note</label><textarea class="form-control" id="nwBuyNote" rows="2" placeholder="Urgency, requests..."></textarea></div>
+        <div id="wsBuyInfo" style="background:var(--primary-light);border-radius:var(--radius);padding:.75rem;margin-bottom:1rem;font-size:.85rem;color:var(--dark)"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Qty *</label><input type="number" id="wsBQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Sizes needed</label><input type="text" id="wsBSz" placeholder="e.g. 1T, 2T, 3T" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Offer Price $ <small style="color:var(--gray);font-weight:400">(leave blank to accept ask price)</small></label><input type="number" id="wsBO" placeholder="Leave blank to accept" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Note to seller</label><textarea id="wsBN" rows="2" placeholder="Urgency, special requests..." style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem;resize:vertical"></textarea></div>
       </div>
       <div style="padding:.85rem 1.25rem;border-top:1px solid var(--gray-light);display:flex;gap:.5rem;justify-content:flex-end">
-        <button class="btn btn-outline" onclick="document.getElementById('nwBuyModal').style.display='none'">Cancel</button>
-        <button class="btn btn-success" onclick="nwSubmitTransfer()"><i class="fas fa-paper-plane"></i> Send Request</button>
+        <button class="btn btn-outline" onclick="document.getElementById('wsBuyMod').style.display='none'">Cancel</button>
+        <button class="btn btn-success" onclick="wsSendReq()"><i class="fas fa-paper-plane"></i> Send Request</button>
       </div></div>
     </div>
-    <div class="modal-overlay" id="nwNewChatModal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal"><div class="modal-header"><h3><i class="fas fa-edit"></i> New Conversation</h3><button class="modal-close" onclick="document.getElementById('nwNewChatModal').style.display='none'">&times;</button></div>
-      <div style="padding:1.25rem"><p style="font-size:.82rem;color:var(--gray);margin-bottom:.75rem">Select a store:</p><div id="nwStorePicker"></div></div></div>
+
+    <!-- WS New Chat Modal -->
+    <div class="modal-overlay" id="wsNewChatMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3><i class="fas fa-edit"></i> Start New Conversation</h3><button class="modal-close" onclick="document.getElementById('wsNewChatMod').style.display='none'">&times;</button></div>
+      <div style="padding:1.25rem"><p style="font-size:.82rem;color:var(--gray);margin-bottom:.75rem">Select a store to chat with:</p><div id="wsStorePick"></div></div></div>
     </div>
-    <div class="modal-overlay" id="nwChatTransferModal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal"><div class="modal-header"><h3><i class="fas fa-exchange-alt" style="color:var(--success)"></i> Request via Chat</h3><button class="modal-close" onclick="document.getElementById('nwChatTransferModal').style.display='none'">&times;</button></div>
+
+    <!-- WS Chat Request Modal -->
+    <div class="modal-overlay" id="wsReqMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3><i class="fas fa-exchange-alt" style="color:var(--success)"></i> Request Stock via Chat</h3><button class="modal-close" onclick="document.getElementById('wsReqMod').style.display='none'">&times;</button></div>
       <div style="padding:1.25rem">
-        <div class="form-group"><label>Item *</label><input type="text" class="form-control" id="nwCtItem" placeholder="What do you need?"></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
-          <div class="form-group"><label>Qty</label><input type="number" class="form-control" id="nwCtQty" value="1" min="1"></div>
-          <div class="form-group"><label>Offer $</label><input type="number" class="form-control" id="nwCtPrice" placeholder="0.00"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Item *</label><input type="text" id="wsRI" placeholder="What do you need?" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.85rem">
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Qty</label><input type="number" id="wsRQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Offer $</label><input type="number" id="wsRP" placeholder="0.00" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
         </div>
-        <div class="form-group"><label>Note</label><textarea class="form-control" id="nwCtNote" rows="2"></textarea></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Note</label><textarea id="wsRN" rows="2" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem;resize:vertical"></textarea></div>
       </div>
       <div style="padding:.85rem 1.25rem;border-top:1px solid var(--gray-light);display:flex;gap:.5rem;justify-content:flex-end">
-        <button class="btn btn-outline" onclick="document.getElementById('nwChatTransferModal').style.display='none'">Cancel</button>
-        <button class="btn btn-success" onclick="nwSendChatTransfer()"><i class="fas fa-paper-plane"></i> Send</button>
+        <button class="btn btn-outline" onclick="document.getElementById('wsReqMod').style.display='none'">Cancel</button>
+        <button class="btn btn-success" onclick="wsSendChatReq()"><i class="fas fa-paper-plane"></i> Send</button>
       </div></div>
     </div>
 
@@ -3355,7 +3435,7 @@ function sendToTelegram(order, callback) {
                 '<button class="btn btn-info btn-small" data-pid="' + p.id + '" data-act="label" onclick="inv(event,this)" style="padding:0.2rem 0.4rem"><i class="fas fa-tag" style="pointer-events:none"></i></button>' +
                 '<button class="btn btn-warning btn-small" data-pid="' + p.id + '" data-act="edit" onclick="inv(event,this)" style="padding:0.2rem 0.4rem"><i class="fas fa-edit" style="pointer-events:none"></i></button>' +
                 '<button class="btn btn-danger btn-small" data-pid="' + p.id + '" data-act="del" onclick="inv(event,this)" style="padding:0.2rem 0.4rem"><i class="fas fa-trash" style="pointer-events:none"></i></button>' +
-                '<button title="Share to Market" style="background:none;border:none;cursor:pointer;padding:0.2rem 0.4rem" onclick="nwShareProduct(\'' + p.id + '\')"><i class="fas fa-globe" style="color:#667eea;font-size:.9rem"></i></button>' +
+                '<button title="Share to Wholesale Market" style="background:none;border:none;cursor:pointer;padding:.2rem .3rem" onclick="wsShareProd(\'' + p.id + '\')"><i class="fas fa-globe" style="color:#667eea"></i></button>' +
                 '</div></td>' +
                 '</tr>';
         }
@@ -3592,56 +3672,63 @@ function sendToTelegram(order, callback) {
             '<div class="total-row grand-total"><span>REFUND AMOUNT:</span><span>-$' + (refund.refundAmount || 0).toFixed(2) + '</span></div><div class="dash"></div>' +
             '<div class="center" style="font-size:14px"><p style="color:#e53e3e">💰 Refund Processed</p><p>Stock has been restored</p></div></div>' +
             '<div class="btns"><button class="btn-print" onclick="window.print()">🖨️ Print</button><button class="btn-close" onclick="window.close()">✕ Close</button></div>
-    <div class="modal-overlay" id="nwPostModal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal"><div class="modal-header"><h3><i class="fas fa-tag" style="color:var(--primary)"></i> Post to Network Market</h3><button class="modal-close" onclick="document.getElementById('nwPostModal').style.display='none'">&times;</button></div>
+    <!-- WS Post Modal -->
+    <div class="modal-overlay" id="wsPostMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3><i class="fas fa-tag" style="color:var(--primary)"></i> Post to Wholesale Market</h3><button class="modal-close" onclick="document.getElementById('wsPostMod').style.display='none'">&times;</button></div>
       <div style="padding:1.25rem">
-        <div class="form-group"><label>Pick from inventory</label><select class="form-control" id="nwPostFromInv" onchange="nwFillFromInv()"><option value="">— Enter manually —</option></select></div>
-        <div class="form-group"><label>Item Name *</label><input type="text" class="form-control" id="nwPostName" placeholder="Product name"></div>
-        <div class="form-group"><label>Category</label><select class="form-control" id="nwPostCat"><option value="Dresses">Dresses</option><option value="Girl Clothes">Girl Clothes</option><option value="Boy Clothes">Boy Clothes</option><option value="Baby Shirt">Baby Shirts</option><option value="Baby Shoes">Baby Shoes</option><option value="Baby Accessories">Accessories</option></select></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem">
-          <div class="form-group"><label>Cost $</label><input type="number" class="form-control" id="nwPostCost" placeholder="0.00" min="0" step="0.01"></div>
-          <div class="form-group"><label>Sell $</label><input type="number" class="form-control" id="nwPostPrice" placeholder="0.00" min="0" step="0.01"></div>
-          <div class="form-group"><label>Qty</label><input type="number" class="form-control" id="nwPostQty" value="1" min="1"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Pick from inventory</label><select id="wsPI" onchange="wsFillPost()" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"><option value="">— Enter manually —</option></select></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Item Name *</label><input type="text" id="wsPN" placeholder="Product name" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Category</label><select id="wsPC" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"><option>Dresses</option><option>Girl Clothes</option><option>Boy Clothes</option><option>Baby Shirt</option><option>Baby Shoes</option><option>Baby Accessories</option></select></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.85rem">
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Cost $</label><input type="number" id="wsPCost" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Sell $</label><input type="number" id="wsPSell" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Qty</label><input type="number" id="wsPQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
         </div>
-        <div class="form-group"><label>Sizes</label><input type="text" class="form-control" id="nwPostSizes" placeholder="e.g. 3M, 6M, 1T"></div>
-        <div class="form-group"><label>Description</label><textarea class="form-control" id="nwPostDesc" rows="2" placeholder="Condition, reason..."></textarea></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Sizes</label><input type="text" id="wsPSz" placeholder="3M, 6M, 1T, 2T..." style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Description / Condition</label><textarea id="wsPD" rows="2" placeholder="Condition, reason for selling..." style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem;resize:vertical"></textarea></div>
       </div>
       <div style="padding:.85rem 1.25rem;border-top:1px solid var(--gray-light);display:flex;gap:.5rem;justify-content:flex-end">
-        <button class="btn btn-outline" onclick="document.getElementById('nwPostModal').style.display='none'">Cancel</button>
-        <button class="btn btn-primary" onclick="nwSubmitListing()"><i class="fas fa-upload"></i> Post</button>
+        <button class="btn btn-outline" onclick="document.getElementById('wsPostMod').style.display='none'">Cancel</button>
+        <button class="btn btn-primary" onclick="wsPostListing()"><i class="fas fa-upload"></i> Post to Market</button>
       </div></div>
     </div>
-    <div class="modal-overlay" id="nwBuyModal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal"><div class="modal-header"><h3><i class="fas fa-exchange-alt" style="color:var(--success)"></i> Request Transfer</h3><button class="modal-close" onclick="document.getElementById('nwBuyModal').style.display='none'">&times;</button></div>
+
+    <!-- WS Buy/Request Modal -->
+    <div class="modal-overlay" id="wsBuyMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3><i class="fas fa-exchange-alt" style="color:var(--success)"></i> Request Stock Transfer</h3><button class="modal-close" onclick="document.getElementById('wsBuyMod').style.display='none'">&times;</button></div>
       <div style="padding:1.25rem">
-        <div id="nwBuyInfo" style="background:var(--primary-light);border-radius:var(--radius);padding:.75rem;margin-bottom:1rem;font-size:.85rem"></div>
-        <div class="form-group"><label>Qty *</label><input type="number" class="form-control" id="nwBuyQty" value="1" min="1"></div>
-        <div class="form-group"><label>Sizes needed</label><input type="text" class="form-control" id="nwBuySizes" placeholder="e.g. 1T, 2T"></div>
-        <div class="form-group"><label>Offer Price $ (blank = accept ask)</label><input type="number" class="form-control" id="nwBuyOffer" placeholder="Leave blank" min="0" step="0.01"></div>
-        <div class="form-group"><label>Note</label><textarea class="form-control" id="nwBuyNote" rows="2" placeholder="Urgency, requests..."></textarea></div>
+        <div id="wsBuyInfo" style="background:var(--primary-light);border-radius:var(--radius);padding:.75rem;margin-bottom:1rem;font-size:.85rem;color:var(--dark)"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Qty *</label><input type="number" id="wsBQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Sizes needed</label><input type="text" id="wsBSz" placeholder="e.g. 1T, 2T, 3T" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Offer Price $ <small style="color:var(--gray);font-weight:400">(leave blank to accept ask price)</small></label><input type="number" id="wsBO" placeholder="Leave blank to accept" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Note to seller</label><textarea id="wsBN" rows="2" placeholder="Urgency, special requests..." style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem;resize:vertical"></textarea></div>
       </div>
       <div style="padding:.85rem 1.25rem;border-top:1px solid var(--gray-light);display:flex;gap:.5rem;justify-content:flex-end">
-        <button class="btn btn-outline" onclick="document.getElementById('nwBuyModal').style.display='none'">Cancel</button>
-        <button class="btn btn-success" onclick="nwSubmitTransfer()"><i class="fas fa-paper-plane"></i> Send Request</button>
+        <button class="btn btn-outline" onclick="document.getElementById('wsBuyMod').style.display='none'">Cancel</button>
+        <button class="btn btn-success" onclick="wsSendReq()"><i class="fas fa-paper-plane"></i> Send Request</button>
       </div></div>
     </div>
-    <div class="modal-overlay" id="nwNewChatModal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal"><div class="modal-header"><h3><i class="fas fa-edit"></i> New Conversation</h3><button class="modal-close" onclick="document.getElementById('nwNewChatModal').style.display='none'">&times;</button></div>
-      <div style="padding:1.25rem"><p style="font-size:.82rem;color:var(--gray);margin-bottom:.75rem">Select a store:</p><div id="nwStorePicker"></div></div></div>
+
+    <!-- WS New Chat Modal -->
+    <div class="modal-overlay" id="wsNewChatMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3><i class="fas fa-edit"></i> Start New Conversation</h3><button class="modal-close" onclick="document.getElementById('wsNewChatMod').style.display='none'">&times;</button></div>
+      <div style="padding:1.25rem"><p style="font-size:.82rem;color:var(--gray);margin-bottom:.75rem">Select a store to chat with:</p><div id="wsStorePick"></div></div></div>
     </div>
-    <div class="modal-overlay" id="nwChatTransferModal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal"><div class="modal-header"><h3><i class="fas fa-exchange-alt" style="color:var(--success)"></i> Request via Chat</h3><button class="modal-close" onclick="document.getElementById('nwChatTransferModal').style.display='none'">&times;</button></div>
+
+    <!-- WS Chat Request Modal -->
+    <div class="modal-overlay" id="wsReqMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3><i class="fas fa-exchange-alt" style="color:var(--success)"></i> Request Stock via Chat</h3><button class="modal-close" onclick="document.getElementById('wsReqMod').style.display='none'">&times;</button></div>
       <div style="padding:1.25rem">
-        <div class="form-group"><label>Item *</label><input type="text" class="form-control" id="nwCtItem" placeholder="What do you need?"></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
-          <div class="form-group"><label>Qty</label><input type="number" class="form-control" id="nwCtQty" value="1" min="1"></div>
-          <div class="form-group"><label>Offer $</label><input type="number" class="form-control" id="nwCtPrice" placeholder="0.00"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Item *</label><input type="text" id="wsRI" placeholder="What do you need?" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.85rem">
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Qty</label><input type="number" id="wsRQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Offer $</label><input type="number" id="wsRP" placeholder="0.00" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
         </div>
-        <div class="form-group"><label>Note</label><textarea class="form-control" id="nwCtNote" rows="2"></textarea></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Note</label><textarea id="wsRN" rows="2" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem;resize:vertical"></textarea></div>
       </div>
       <div style="padding:.85rem 1.25rem;border-top:1px solid var(--gray-light);display:flex;gap:.5rem;justify-content:flex-end">
-        <button class="btn btn-outline" onclick="document.getElementById('nwChatTransferModal').style.display='none'">Cancel</button>
-        <button class="btn btn-success" onclick="nwSendChatTransfer()"><i class="fas fa-paper-plane"></i> Send</button>
+        <button class="btn btn-outline" onclick="document.getElementById('wsReqMod').style.display='none'">Cancel</button>
+        <button class="btn btn-success" onclick="wsSendChatReq()"><i class="fas fa-paper-plane"></i> Send</button>
       </div></div>
     </div>
 
@@ -3743,8 +3830,8 @@ function sendToTelegram(order, callback) {
             if (STATE.isAdmin) {
                 renderPending(); renderHistory(); renderRefunds();
                 renderInventory(); updateAdminBadges();
-                var savedToken = localStorage.getItem('goatB2BTgToken') || '';
-                var savedChat = localStorage.getItem('goatB2BTgChatId') || '';
+                var savedToken = localStorage.getItem('goatTgToken') || '';
+                var savedChat = localStorage.getItem('goatTgChatId') || '';
                 var tokenInp = document.getElementById('telegramBotTokenInput');
                 var chatInp = document.getElementById('telegramChatIdInput');
                 if (tokenInp) tokenInp.value = savedToken;
@@ -3815,18 +3902,18 @@ function sendToTelegram(order, callback) {
         }
 
         // Fixed store ID — same on every device
-        var sid = 'GOAT-B2B';
-        localStorage.setItem('goatB2BStoreId', sid);
+        var sid = 'GOAT-1979';
+        localStorage.setItem('goatStoreId', sid);
         STATE.storeId = sid;
         document.getElementById('storeIdDisplay').textContent = sid;
 
         // Load cart
-        STATE.cart = JSON.parse(localStorage.getItem('goatB2BCart') || '[]');
+        STATE.cart = JSON.parse(localStorage.getItem('goatCart') || '[]');
         updateCartBadge();
         // Initialize wishlist badge
         updateWishlistBadge();
         // First-run: initialize default passwords if not already set
-        if (!localStorage.getItem('goatB2BPasswords')) {
+        if (!localStorage.getItem('goatPasswords')) {
             savePasswords({ fullPass: 'admin123', ordersPass: 'orders123', inventoryPass: 'inventory123' });
         }
 
@@ -3853,7 +3940,7 @@ function sendToTelegram(order, callback) {
         });
     });
 
-    console.log('✅ GOAT KIDS B2B Store Ready — v2 FIXED (showTab, closeMobileMenu, escHtml, updQty)');
+    console.log('✅ GOAT KIDS Store Ready — v2 FIXED (showTab, closeMobileMenu, escHtml, updQty)');
     
     // ── LABEL PRINTING ──
     var _labelProduct = null;
@@ -5496,56 +5583,63 @@ function sendToTelegram(order, callback) {
             '}' +
             '<'+'/scr'+'ipt>' +
             '
-    <div class="modal-overlay" id="nwPostModal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal"><div class="modal-header"><h3><i class="fas fa-tag" style="color:var(--primary)"></i> Post to Network Market</h3><button class="modal-close" onclick="document.getElementById('nwPostModal').style.display='none'">&times;</button></div>
+    <!-- WS Post Modal -->
+    <div class="modal-overlay" id="wsPostMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3><i class="fas fa-tag" style="color:var(--primary)"></i> Post to Wholesale Market</h3><button class="modal-close" onclick="document.getElementById('wsPostMod').style.display='none'">&times;</button></div>
       <div style="padding:1.25rem">
-        <div class="form-group"><label>Pick from inventory</label><select class="form-control" id="nwPostFromInv" onchange="nwFillFromInv()"><option value="">— Enter manually —</option></select></div>
-        <div class="form-group"><label>Item Name *</label><input type="text" class="form-control" id="nwPostName" placeholder="Product name"></div>
-        <div class="form-group"><label>Category</label><select class="form-control" id="nwPostCat"><option value="Dresses">Dresses</option><option value="Girl Clothes">Girl Clothes</option><option value="Boy Clothes">Boy Clothes</option><option value="Baby Shirt">Baby Shirts</option><option value="Baby Shoes">Baby Shoes</option><option value="Baby Accessories">Accessories</option></select></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem">
-          <div class="form-group"><label>Cost $</label><input type="number" class="form-control" id="nwPostCost" placeholder="0.00" min="0" step="0.01"></div>
-          <div class="form-group"><label>Sell $</label><input type="number" class="form-control" id="nwPostPrice" placeholder="0.00" min="0" step="0.01"></div>
-          <div class="form-group"><label>Qty</label><input type="number" class="form-control" id="nwPostQty" value="1" min="1"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Pick from inventory</label><select id="wsPI" onchange="wsFillPost()" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"><option value="">— Enter manually —</option></select></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Item Name *</label><input type="text" id="wsPN" placeholder="Product name" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Category</label><select id="wsPC" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"><option>Dresses</option><option>Girl Clothes</option><option>Boy Clothes</option><option>Baby Shirt</option><option>Baby Shoes</option><option>Baby Accessories</option></select></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.85rem">
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Cost $</label><input type="number" id="wsPCost" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Sell $</label><input type="number" id="wsPSell" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Qty</label><input type="number" id="wsPQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
         </div>
-        <div class="form-group"><label>Sizes</label><input type="text" class="form-control" id="nwPostSizes" placeholder="e.g. 3M, 6M, 1T"></div>
-        <div class="form-group"><label>Description</label><textarea class="form-control" id="nwPostDesc" rows="2" placeholder="Condition, reason..."></textarea></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Sizes</label><input type="text" id="wsPSz" placeholder="3M, 6M, 1T, 2T..." style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Description / Condition</label><textarea id="wsPD" rows="2" placeholder="Condition, reason for selling..." style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem;resize:vertical"></textarea></div>
       </div>
       <div style="padding:.85rem 1.25rem;border-top:1px solid var(--gray-light);display:flex;gap:.5rem;justify-content:flex-end">
-        <button class="btn btn-outline" onclick="document.getElementById('nwPostModal').style.display='none'">Cancel</button>
-        <button class="btn btn-primary" onclick="nwSubmitListing()"><i class="fas fa-upload"></i> Post</button>
+        <button class="btn btn-outline" onclick="document.getElementById('wsPostMod').style.display='none'">Cancel</button>
+        <button class="btn btn-primary" onclick="wsPostListing()"><i class="fas fa-upload"></i> Post to Market</button>
       </div></div>
     </div>
-    <div class="modal-overlay" id="nwBuyModal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal"><div class="modal-header"><h3><i class="fas fa-exchange-alt" style="color:var(--success)"></i> Request Transfer</h3><button class="modal-close" onclick="document.getElementById('nwBuyModal').style.display='none'">&times;</button></div>
+
+    <!-- WS Buy/Request Modal -->
+    <div class="modal-overlay" id="wsBuyMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3><i class="fas fa-exchange-alt" style="color:var(--success)"></i> Request Stock Transfer</h3><button class="modal-close" onclick="document.getElementById('wsBuyMod').style.display='none'">&times;</button></div>
       <div style="padding:1.25rem">
-        <div id="nwBuyInfo" style="background:var(--primary-light);border-radius:var(--radius);padding:.75rem;margin-bottom:1rem;font-size:.85rem"></div>
-        <div class="form-group"><label>Qty *</label><input type="number" class="form-control" id="nwBuyQty" value="1" min="1"></div>
-        <div class="form-group"><label>Sizes needed</label><input type="text" class="form-control" id="nwBuySizes" placeholder="e.g. 1T, 2T"></div>
-        <div class="form-group"><label>Offer Price $ (blank = accept ask)</label><input type="number" class="form-control" id="nwBuyOffer" placeholder="Leave blank" min="0" step="0.01"></div>
-        <div class="form-group"><label>Note</label><textarea class="form-control" id="nwBuyNote" rows="2" placeholder="Urgency, requests..."></textarea></div>
+        <div id="wsBuyInfo" style="background:var(--primary-light);border-radius:var(--radius);padding:.75rem;margin-bottom:1rem;font-size:.85rem;color:var(--dark)"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Qty *</label><input type="number" id="wsBQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Sizes needed</label><input type="text" id="wsBSz" placeholder="e.g. 1T, 2T, 3T" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Offer Price $ <small style="color:var(--gray);font-weight:400">(leave blank to accept ask price)</small></label><input type="number" id="wsBO" placeholder="Leave blank to accept" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Note to seller</label><textarea id="wsBN" rows="2" placeholder="Urgency, special requests..." style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem;resize:vertical"></textarea></div>
       </div>
       <div style="padding:.85rem 1.25rem;border-top:1px solid var(--gray-light);display:flex;gap:.5rem;justify-content:flex-end">
-        <button class="btn btn-outline" onclick="document.getElementById('nwBuyModal').style.display='none'">Cancel</button>
-        <button class="btn btn-success" onclick="nwSubmitTransfer()"><i class="fas fa-paper-plane"></i> Send Request</button>
+        <button class="btn btn-outline" onclick="document.getElementById('wsBuyMod').style.display='none'">Cancel</button>
+        <button class="btn btn-success" onclick="wsSendReq()"><i class="fas fa-paper-plane"></i> Send Request</button>
       </div></div>
     </div>
-    <div class="modal-overlay" id="nwNewChatModal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal"><div class="modal-header"><h3><i class="fas fa-edit"></i> New Conversation</h3><button class="modal-close" onclick="document.getElementById('nwNewChatModal').style.display='none'">&times;</button></div>
-      <div style="padding:1.25rem"><p style="font-size:.82rem;color:var(--gray);margin-bottom:.75rem">Select a store:</p><div id="nwStorePicker"></div></div></div>
+
+    <!-- WS New Chat Modal -->
+    <div class="modal-overlay" id="wsNewChatMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3><i class="fas fa-edit"></i> Start New Conversation</h3><button class="modal-close" onclick="document.getElementById('wsNewChatMod').style.display='none'">&times;</button></div>
+      <div style="padding:1.25rem"><p style="font-size:.82rem;color:var(--gray);margin-bottom:.75rem">Select a store to chat with:</p><div id="wsStorePick"></div></div></div>
     </div>
-    <div class="modal-overlay" id="nwChatTransferModal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal"><div class="modal-header"><h3><i class="fas fa-exchange-alt" style="color:var(--success)"></i> Request via Chat</h3><button class="modal-close" onclick="document.getElementById('nwChatTransferModal').style.display='none'">&times;</button></div>
+
+    <!-- WS Chat Request Modal -->
+    <div class="modal-overlay" id="wsReqMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3><i class="fas fa-exchange-alt" style="color:var(--success)"></i> Request Stock via Chat</h3><button class="modal-close" onclick="document.getElementById('wsReqMod').style.display='none'">&times;</button></div>
       <div style="padding:1.25rem">
-        <div class="form-group"><label>Item *</label><input type="text" class="form-control" id="nwCtItem" placeholder="What do you need?"></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
-          <div class="form-group"><label>Qty</label><input type="number" class="form-control" id="nwCtQty" value="1" min="1"></div>
-          <div class="form-group"><label>Offer $</label><input type="number" class="form-control" id="nwCtPrice" placeholder="0.00"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Item *</label><input type="text" id="wsRI" placeholder="What do you need?" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.85rem">
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Qty</label><input type="number" id="wsRQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Offer $</label><input type="number" id="wsRP" placeholder="0.00" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
         </div>
-        <div class="form-group"><label>Note</label><textarea class="form-control" id="nwCtNote" rows="2"></textarea></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Note</label><textarea id="wsRN" rows="2" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem;resize:vertical"></textarea></div>
       </div>
       <div style="padding:.85rem 1.25rem;border-top:1px solid var(--gray-light);display:flex;gap:.5rem;justify-content:flex-end">
-        <button class="btn btn-outline" onclick="document.getElementById('nwChatTransferModal').style.display='none'">Cancel</button>
-        <button class="btn btn-success" onclick="nwSendChatTransfer()"><i class="fas fa-paper-plane"></i> Send</button>
+        <button class="btn btn-outline" onclick="document.getElementById('wsReqMod').style.display='none'">Cancel</button>
+        <button class="btn btn-success" onclick="wsSendChatReq()"><i class="fas fa-paper-plane"></i> Send</button>
       </div></div>
     </div>
 
@@ -5625,383 +5719,486 @@ function sendToTelegram(order, callback) {
     }
 
    
-    // ══════════════════════════════════════
-    // NETWORK MODULE
-    // ══════════════════════════════════════
-    var NW = {
-      store: null, db: null,
-      listings: [], transfers: [], convs: [],
-      currentConvId: null, currentListing: null,
-      toTab: 'incoming', _unsubMsgs: null,
-      JOIN_CODE: 'GoadKids1001',
-      FB_CFG: {
-        apiKey: "AIzaSyDBQyX-LC9dIzE-B-79kXBmr42KbWEoQSU",
-        authDomain: "goat-kids-store.firebaseapp.com",
-        projectId: "goat-kids-store",
-        storageBucket: "goat-kids-store.firebasestorage.app",
-        messagingSenderId: "372035223463",
-        appId: "1:372035223463:web:a9948932607e81da2a4082"
-      }
+    // ══════════════════════════════════════════
+    // WHOLESALE MODULE
+    // ══════════════════════════════════════════
+    var WS = {
+      store: null, listings: [], transfers: [], convs: [],
+      convId: null, listing: null, tfTab: 'in', _unsub: null, _init: false,
+      CODE: 'GoadKids1001'
     };
 
-    // Auto-load samples on first run
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        if (!STATE.products || STATE.products.length === 0) loadSamples();
-        var raw = localStorage.getItem('goatNetworkStore');
-        if (raw) { try { NW.store = JSON.parse(raw); } catch(e) {} }
-      }, 1000);
-    });
-
-    function showNetworkTab() {
-      showTab('network');
-      setTimeout(function() {
-        if (!NW.store) {
-          document.getElementById('nwSetupBox').style.display = 'block';
-          document.getElementById('nwMainUI').style.display = 'none';
-        } else {
-          document.getElementById('nwSetupBox').style.display = 'none';
-          document.getElementById('nwMainUI').style.display = 'block';
-          if (!NW.db) nwInitFirebase();
-          else nwRenderMarket();
-        }
-      }, 100);
+    // Called when Wholesale tab is shown
+    function wsOnShow() {
+      var raw = localStorage.getItem('goatWholesaleStore');
+      if (raw) { try { WS.store = JSON.parse(raw); } catch(e) {} }
+      if (!WS.store) {
+        document.getElementById('wsSetupBox').style.display = 'block';
+        document.getElementById('wsMainUI').style.display = 'none';
+      } else {
+        document.getElementById('wsSetupBox').style.display = 'none';
+        document.getElementById('wsMainUI').style.display = 'block';
+        document.getElementById('wsStoreName').textContent = WS.store.name;
+        document.getElementById('wsStoreCity').textContent = WS.store.city ? '· ' + WS.store.city : '';
+        if (!WS._init) { WS._init = true; wsRegStore(); wsSubL(); wsSubT(); wsSubC(); }
+        wsRenderMkt();
+      }
     }
 
-    function nwInitFirebase() {
-      try {
-        var app;
-        try { app = firebase.app('nw'); } catch(e) {
-          app = firebase.initializeApp(NW.FB_CFG, 'nw');
-        }
-        NW.db = app.firestore();
-        nwRegisterStore(); nwSubListings(); nwSubTransfers(); nwSubConvs();
-      } catch(e) { showToast('Network: ' + e.message, 'error'); }
+    function wsJoin() {
+      var name = document.getElementById('wsName').value.trim();
+      var owner = document.getElementById('wsOwner').value.trim();
+      var city = document.getElementById('wsCity').value.trim();
+      var code = document.getElementById('wsCode').value.trim();
+      if (!name || !owner || !city || !code) { showToast('Please fill all fields', 'error'); return; }
+      if (code !== WS.CODE) { document.getElementById('wsCodeErr').style.display = 'block'; return; }
+      document.getElementById('wsCodeErr').style.display = 'none';
+      WS.store = { id: 'ws_' + Date.now() + '_' + Math.random().toString(36).slice(2,6), name: name, owner: owner, city: city };
+      localStorage.setItem('goatWholesaleStore', JSON.stringify(WS.store));
+      WS._init = false;
+      wsOnShow();
+      showToast('Welcome to the network, ' + name + '!', 'success');
     }
 
-    function nwCompleteSetup() {
-      var name = document.getElementById('nwSetupName').value.trim();
-      var owner = document.getElementById('nwSetupOwner').value.trim();
-      var city = document.getElementById('nwSetupCity').value.trim();
-      var code = document.getElementById('nwSetupCode').value.trim();
-      if (!name || !owner || !city || !code) { showToast('Fill all fields', 'error'); return; }
-      if (code !== NW.JOIN_CODE) { document.getElementById('nwCodeErr').style.display = 'block'; return; }
-      document.getElementById('nwCodeErr').style.display = 'none';
-      NW.store = { id: 'st_' + Date.now() + '_' + Math.random().toString(36).slice(2,6), name: name, owner: owner, city: city };
-      localStorage.setItem('goatNetworkStore', JSON.stringify(NW.store));
-      document.getElementById('nwSetupBox').style.display = 'none';
-      document.getElementById('nwMainUI').style.display = 'block';
-      nwInitFirebase();
-      showToast('Joined! Welcome ' + name, 'success');
+    function wsLogout() {
+      if (!confirm('Switch store? This will clear your store session.')) return;
+      localStorage.removeItem('goatWholesaleStore');
+      WS.store = null; WS._init = false;
+      WS.listings = []; WS.transfers = []; WS.convs = [];
+      wsOnShow();
     }
 
-    function nwRegisterStore() {
-      if (!NW.db || !NW.store) return;
-      NW.db.collection('network_stores').doc(NW.store.id).set({ id: NW.store.id, name: NW.store.name, owner: NW.store.owner, city: NW.store.city, lastSeen: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true }).catch(function() {});
+    function wsRegStore() {
+      if (!db || !WS.store) return;
+      db.collection('network_stores').doc(WS.store.id).set({
+        id: WS.store.id, name: WS.store.name, owner: WS.store.owner, city: WS.store.city,
+        lastSeen: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true }).catch(function() {});
     }
 
-    function nwSwitchTab(tab) {
-      document.querySelectorAll('#nwMainUI .admin-tab').forEach(function(b) { b.classList.remove('active'); });
-      ['nwPanelMarket','nwPanelTransfers','nwPanelChat'].forEach(function(id) { var el = document.getElementById(id); if (el) el.classList.remove('active'); });
-      var btn = document.getElementById('nwTab-' + tab); if (btn) btn.classList.add('active');
-      var panel = document.getElementById('nwPanel' + tab.charAt(0).toUpperCase() + tab.slice(1)); if (panel) panel.classList.add('active');
-      if (tab === 'market') nwRenderMarket();
-      if (tab === 'transfers') nwRenderTransfers();
-      if (tab === 'chat') nwRenderChatList();
-    }
-
-    function nwSwitchTOTab(t) {
-      NW.toTab = t;
-      ['incoming','outgoing','done'].forEach(function(x) {
-        var b = document.getElementById('nwTOtab-' + x); if (!b) return;
-        b.style.borderColor = x === t ? '#667eea' : '#e2e8f0';
-        b.style.background = x === t ? '#ebedff' : '#fff';
-        b.style.color = x === t ? '#5a67d8' : '#4a5568';
+    function wsSwitchTab(t) {
+      document.querySelectorAll('#wsMainUI .admin-tab').forEach(function(b) { b.classList.remove('active'); });
+      document.getElementById('wsTab-' + t).classList.add('active');
+      ['wsPanelMarket','wsPanelTransfers','wsPanelChat'].forEach(function(id) {
+        var el = document.getElementById(id); if (el) el.classList.remove('active');
       });
-      nwRenderTransfers();
+      var map = { market: 'wsPanelMarket', transfers: 'wsPanelTransfers', chat: 'wsPanelChat' };
+      var panel = document.getElementById(map[t]); if (panel) panel.classList.add('active');
+      if (t === 'market') wsRenderMkt();
+      if (t === 'transfers') wsRenderTF();
+      if (t === 'chat') wsRenderChatList();
     }
 
-    var NW_EMOJI = { 'Dresses':'👗','Girl Clothes':'👕','Boy Clothes':'👕','Baby Shirt':'👶','Baby Shoes':'👟','Baby Accessories':'🎀' };
+    function wsTFTab(t) {
+      WS.tfTab = t;
+      ['in','out','done'].forEach(function(x) {
+        var b = document.getElementById('wsTF-' + x); if (!b) return;
+        b.style.borderColor = x === t ? '#667eea' : 'var(--gray-light)';
+        b.style.background = x === t ? '#ebedff' : '#fff';
+        b.style.color = x === t ? '#5a67d8' : 'var(--gray-dark)';
+      });
+      wsRenderTF();
+    }
 
-    function nwSubListings() {
-      if (!NW.db) return;
-      NW.db.collection('network_listings').where('status','==','active').onSnapshot(function(snap) {
-        NW.listings = snap.docs.map(function(d) { return Object.assign({ id: d.id }, d.data()); });
-        NW.listings.sort(function(a,b) { return ((b.createdAt&&b.createdAt.seconds)||0) - ((a.createdAt&&a.createdAt.seconds)||0); });
-        nwRenderMarket();
+    var WS_EM = { 'Dresses':'👗','Girl Clothes':'👕','Boy Clothes':'👕','Baby Shirt':'👶','Baby Shoes':'👟','Baby Accessories':'🎀' };
+
+    // ── MARKET ──
+    function wsSubL() {
+      if (!db) return;
+      db.collection('network_listings').where('status','==','active').onSnapshot(function(s) {
+        WS.listings = s.docs.map(function(d) { return Object.assign({ id: d.id }, d.data()); })
+          .sort(function(a,b) { return ((b.createdAt&&b.createdAt.seconds)||0) - ((a.createdAt&&a.createdAt.seconds)||0); });
+        wsRenderMkt();
       }, function() {});
     }
 
-    function nwRenderMarket() {
-      var q = (document.getElementById('nwMktSearch') ? document.getElementById('nwMktSearch').value : '').toLowerCase();
-      var cat = document.getElementById('nwMktCat') ? document.getElementById('nwMktCat').value : '';
-      var list = NW.listings.filter(function(l) { return (!q||(l.name||'').toLowerCase().indexOf(q)>=0||(l.storeName||'').toLowerCase().indexOf(q)>=0)&&(!cat||l.cat===cat); });
-      var grid = document.getElementById('nwListingGrid'); var empty = document.getElementById('nwMktEmpty');
-      if (!list.length) { if(grid) grid.innerHTML=''; if(empty) empty.style.display='block'; return; }
-      if(empty) empty.style.display='none';
+    function wsRenderMkt() {
+      var q = (document.getElementById('wsMktQ') ? document.getElementById('wsMktQ').value : '').toLowerCase();
+      var cat = document.getElementById('wsMktCat') ? document.getElementById('wsMktCat').value : '';
+      var list = WS.listings.filter(function(l) {
+        return (!q || (l.name||'').toLowerCase().indexOf(q) >= 0 || (l.storeName||'').toLowerCase().indexOf(q) >= 0) && (!cat || l.cat === cat);
+      });
+      var grid = document.getElementById('wsMktGrid'); var empty = document.getElementById('wsMktEmpty');
+      if (!grid) return;
+      if (!list.length) { grid.innerHTML = ''; if (empty) empty.style.display = 'block'; return; }
+      if (empty) empty.style.display = 'none';
       grid.innerHTML = list.map(function(l) {
-        var mine = NW.store && l.storeId === NW.store.id;
-        var lid = l.id; var sid = escHtml(l.storeId||''); var sname = escHtml(l.storeName||'');
+        var mine = WS.store && l.storeId === WS.store.id;
+        var lid = l.id; var sid = escHtml(l.storeId||''); var sn = escHtml(l.storeName||'');
         var btns = mine
-          ? '<button class="btn btn-danger btn-small w-full" onclick="nwRemoveListing(''+lid+'')"><i class="fas fa-trash"></i> Remove</button>'
-          : '<button class="btn btn-success btn-small" style="flex:1" onclick="nwOpenBuyModal(''+lid+'')"><i class="fas fa-exchange-alt"></i> Request</button>'
-            + '<button class="btn btn-small btn-outline" onclick="nwChatWith(''+sid+'',''+sname+'')"><i class="fas fa-comment"></i></button>';
-        return '<div style="background:#fff;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.08);border:1px solid #e2e8f0;overflow:hidden">'
-          + '<div style="height:100px;background:#f7fafc;display:flex;align-items:center;justify-content:center;font-size:2.5rem">' + (NW_EMOJI[l.cat]||'📦') + '</div>'
-          + '<div style="padding:.7rem">'
-          + '<div style="font-size:.68rem;color:#718096;margin-bottom:.15rem"><i class="fas fa-store"></i> ' + escHtml(l.storeName||'') + (l.city?' · '+escHtml(l.city):'') + '</div>'
-          + '<div style="font-weight:700;font-size:.88rem;margin-bottom:.2rem">' + escHtml(l.name||'') + '</div>'
+          ? '<button class="btn btn-danger btn-small w-full" onclick="wsRemove(''+lid+'')"><i class="fas fa-trash"></i> Remove Listing</button>'
+          : '<button class="btn btn-success btn-small" style="flex:1" onclick="wsOpenBuy(''+lid+'')"><i class="fas fa-exchange-alt"></i> Request</button>'
+            + '<button class="btn btn-small btn-outline" onclick="wsChatWith(''+sid+'',''+sn+'')" title="Chat with seller"><i class="fas fa-comment"></i></button>';
+        return '<div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.08);border:1px solid var(--gray-light);overflow:hidden;transition:transform .2s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">'
+          + '<div style="height:100px;background:var(--light);display:flex;align-items:center;justify-content:center;font-size:2.8rem">'+(WS_EM[l.cat]||'📦')+'</div>'
+          + '<div style="padding:.75rem">'
+          + '<div style="font-size:.68rem;color:var(--gray);margin-bottom:.15rem"><i class="fas fa-store"></i> '+escHtml(l.storeName||'')+(l.city?' · '+escHtml(l.city):'')+'</div>'
+          + '<div style="font-weight:700;font-size:.9rem;margin-bottom:.2rem">'+escHtml(l.name||'')+'</div>'
           + '<div style="display:flex;justify-content:space-between;align-items:center;margin:.25rem 0;flex-wrap:wrap;gap:.2rem">'
-          + '<div><div style="font-size:.65rem;color:#718096">Cost</div><div style="font-weight:700;color:#4a5568">$'+parseFloat(l.costPrice||0).toFixed(2)+'</div></div>'
-          + '<div style="text-align:right"><div style="font-size:.65rem;color:#718096">Sell</div><div style="font-weight:800;color:#667eea;font-size:1rem">$'+parseFloat(l.sellPrice||l.price||0).toFixed(2)+'</div></div>'
+          + '<div><div style="font-size:.65rem;color:var(--gray)">Cost</div><div style="font-weight:700;color:var(--gray-dark);font-size:.88rem">$'+parseFloat(l.costPrice||0).toFixed(2)+'</div></div>'
+          + '<div style="text-align:right"><div style="font-size:.65rem;color:var(--gray)">Sell</div><div style="font-weight:800;color:#667eea;font-size:1rem">$'+parseFloat(l.sellPrice||l.price||0).toFixed(2)+'</div></div>'
           + '<span style="background:rgba(72,187,120,.12);color:#276749;padding:.15rem .45rem;border-radius:2rem;font-size:.68rem;font-weight:700">'+escHtml(String(l.qty||0))+' pcs</span>'
           + '</div>'
-          + (l.sizes?'<div style="font-size:.7rem;color:#718096;margin-bottom:.25rem">'+escHtml(l.sizes)+'</div>':'')
-          + (l.desc?'<div style="font-size:.7rem;color:#718096;font-style:italic;margin-bottom:.3rem">'+escHtml(l.desc)+'</div>':'')
-          + '<div style="display:flex;gap:.35rem;margin-top:.45rem">'+btns+'</div>'
+          + (l.sizes?'<div style="font-size:.7rem;color:var(--gray);margin-bottom:.25rem">Sizes: '+escHtml(l.sizes)+'</div>':'')
+          + (l.desc?'<div style="font-size:.7rem;color:var(--gray);font-style:italic;margin-bottom:.3rem">'+escHtml(l.desc)+'</div>':'')
+          + '<div style="display:flex;gap:.35rem;margin-top:.5rem">'+btns+'</div>'
           + '</div></div>';
       }).join('');
     }
 
-    function nwOpenPostModal() {
-      if (!NW.store) return;
-      var sel = document.getElementById('nwPostFromInv');
-      sel.innerHTML = '<option value="">— Enter manually —</option>' + STATE.products.map(function(p) { return '<option value="'+p.id+'">'+escHtml(p.name)+' ('+getTotalStock(p)+' pcs)</option>'; }).join('');
-      ['nwPostName','nwPostCost','nwPostPrice','nwPostSizes','nwPostDesc'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
-      document.getElementById('nwPostQty').value='1';
-      document.getElementById('nwPostModal').style.display='flex';
+    function wsOpenPost() {
+      if (!WS.store) return;
+      var sel = document.getElementById('wsPI');
+      sel.innerHTML = '<option value="">— Enter manually —</option>'
+        + STATE.products.map(function(p) { return '<option value="'+p.id+'">'+escHtml(p.name)+' ('+getTotalStock(p)+' pcs)</option>'; }).join('');
+      ['wsPN','wsPCost','wsPSell','wsPSz','wsPD'].forEach(function(id) { var el = document.getElementById(id); if (el) el.value = ''; });
+      document.getElementById('wsPQ').value = '1';
+      document.getElementById('wsPostMod').style.display = 'flex';
     }
 
-    function nwFillFromInv() {
-      var id = document.getElementById('nwPostFromInv').value; if (!id) return;
+    function wsFillPost() {
+      var id = document.getElementById('wsPI').value; if (!id) return;
       var p = findProduct(id); if (!p) return;
-      document.getElementById('nwPostName').value = p.name;
-      document.getElementById('nwPostCat').value = p.category||'Dresses';
-      document.getElementById('nwPostPrice').value = p.price;
-      document.getElementById('nwPostQty').value = getTotalStock(p);
-      document.getElementById('nwPostSizes').value = p.sizes ? p.sizes.map(function(s){return s.name;}).join(', ') : '';
+      document.getElementById('wsPN').value = p.name;
+      document.getElementById('wsPC').value = p.category || 'Dresses';
+      document.getElementById('wsPSell').value = p.price;
+      document.getElementById('wsPQ').value = getTotalStock(p);
+      document.getElementById('wsPSz').value = p.sizes ? p.sizes.map(function(s){return s.name;}).join(', ') : '';
     }
 
-    function nwSubmitListing() {
-      if (!NW.db) { showToast('Network not connected','error'); return; }
-      var name = document.getElementById('nwPostName').value.trim();
-      var sell = parseFloat(document.getElementById('nwPostPrice').value)||0;
-      if (!name||!sell) { showToast('Name and sell price required','error'); return; }
-      NW.db.collection('network_listings').add({ name:name, cat:document.getElementById('nwPostCat').value, costPrice:parseFloat(document.getElementById('nwPostCost').value)||0, sellPrice:sell, price:sell, qty:parseInt(document.getElementById('nwPostQty').value)||1, sizes:document.getElementById('nwPostSizes').value.trim(), desc:document.getElementById('nwPostDesc').value.trim(), storeId:NW.store.id, storeName:NW.store.name, city:NW.store.city, status:'active', createdAt:firebase.firestore.FieldValue.serverTimestamp() })
-        .then(function() { document.getElementById('nwPostModal').style.display='none'; showToast('Listed!','success'); })
-        .catch(function(e) { showToast('Error: '+e.message,'error'); });
+    function wsPostListing() {
+      if (!db) { showToast('Not connected to Firebase', 'error'); return; }
+      var name = document.getElementById('wsPN').value.trim();
+      var sell = parseFloat(document.getElementById('wsPSell').value) || 0;
+      if (!name || !sell) { showToast('Item name and sell price are required', 'error'); return; }
+      db.collection('network_listings').add({
+        name: name, cat: document.getElementById('wsPC').value,
+        costPrice: parseFloat(document.getElementById('wsPCost').value) || 0,
+        sellPrice: sell, price: sell,
+        qty: parseInt(document.getElementById('wsPQ').value) || 1,
+        sizes: document.getElementById('wsPSz').value.trim(),
+        desc: document.getElementById('wsPD').value.trim(),
+        storeId: WS.store.id, storeName: WS.store.name, city: WS.store.city,
+        status: 'active', createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(function() {
+        document.getElementById('wsPostMod').style.display = 'none';
+        showToast('Listing posted to network!', 'success');
+      }).catch(function(e) { showToast('Error: ' + e.message, 'error'); });
     }
 
-    function nwRemoveListing(id) {
-      if (!NW.db) return;
-      NW.db.collection('network_listings').doc(id).update({status:'removed'}).then(function(){showToast('Removed','info');}).catch(function(){});
+    function wsRemove(id) {
+      if (!db) return;
+      db.collection('network_listings').doc(id).update({ status: 'removed' })
+        .then(function() { showToast('Listing removed', 'info'); }).catch(function() {});
     }
 
-    function nwOpenBuyModal(lid) {
-      var l = NW.listings.find(function(x){return x.id===lid;}); if (!l) return;
-      NW.currentListing = l;
-      document.getElementById('nwBuyInfo').innerHTML = '<b>'+escHtml(l.name)+'</b><br>From: <b>'+escHtml(l.storeName)+'</b>'+(l.city?' · '+escHtml(l.city):'')+' | Cost: <b>$'+parseFloat(l.costPrice||0).toFixed(2)+'</b> Sell: <b style="color:#667eea">$'+parseFloat(l.sellPrice||l.price||0).toFixed(2)+'</b> Qty: <b>'+escHtml(String(l.qty||0))+'</b>';
-      document.getElementById('nwBuyQty').value=1; document.getElementById('nwBuySizes').value=l.sizes||''; document.getElementById('nwBuyOffer').value=''; document.getElementById('nwBuyNote').value='';
-      document.getElementById('nwBuyModal').style.display='flex';
+    function wsOpenBuy(lid) {
+      var l = WS.listings.find(function(x) { return x.id === lid; }); if (!l) return;
+      WS.listing = l;
+      document.getElementById('wsBuyInfo').innerHTML =
+        '<b style="font-size:.95rem">'+escHtml(l.name)+'</b><br>'
+        + 'From: <b>'+escHtml(l.storeName)+'</b>'+(l.city?' · '+escHtml(l.city):'')+'<br>'
+        + '<div style="display:flex;gap:1rem;margin-top:.3rem">'
+        + '<div>Cost: <b>$'+parseFloat(l.costPrice||0).toFixed(2)+'</b></div>'
+        + '<div>Sell: <b style="color:#667eea">$'+parseFloat(l.sellPrice||l.price||0).toFixed(2)+'</b></div>'
+        + '<div>Qty: <b>'+escHtml(String(l.qty||0))+'</b></div></div>';
+      document.getElementById('wsBQ').value = 1;
+      document.getElementById('wsBSz').value = l.sizes || '';
+      document.getElementById('wsBO').value = '';
+      document.getElementById('wsBN').value = '';
+      document.getElementById('wsBuyMod').style.display = 'flex';
     }
 
-    function nwSubmitTransfer() {
-      if (!NW.db||!NW.currentListing) return;
-      var l = NW.currentListing;
-      var qty = parseInt(document.getElementById('nwBuyQty').value)||1;
-      var offer = parseFloat(document.getElementById('nwBuyOffer').value)||(l.sellPrice||l.price||0);
-      NW.db.collection('network_transfers').add({ listingId:l.id, itemName:l.name, buyerId:NW.store.id, buyerName:NW.store.name, sellerId:l.storeId, sellerName:l.storeName, qty:qty, sizes:document.getElementById('nwBuySizes').value.trim(), askPrice:l.sellPrice||l.price||0, offerPrice:offer, note:document.getElementById('nwBuyNote').value.trim(), status:'pending', createdAt:firebase.firestore.FieldValue.serverTimestamp() })
-        .then(function(ref) { document.getElementById('nwBuyModal').style.display='none'; NW.currentListing=null; showToast('Request sent!','success'); nwSendSysMsg(l.storeId,l.storeName,'Transfer Request: '+l.name+' x'+qty+' @$'+offer.toFixed(2)+' Ref#'+ref.id.slice(-6).toUpperCase()); })
-        .catch(function(e){showToast('Error: '+e.message,'error');});
+    function wsSendReq() {
+      if (!db || !WS.listing) return;
+      var l = WS.listing;
+      var qty = parseInt(document.getElementById('wsBQ').value) || 1;
+      var offer = parseFloat(document.getElementById('wsBO').value) || (l.sellPrice || l.price || 0);
+      db.collection('network_transfers').add({
+        listingId: l.id, itemName: l.name,
+        buyerId: WS.store.id, buyerName: WS.store.name,
+        sellerId: l.storeId, sellerName: l.storeName,
+        qty: qty, sizes: document.getElementById('wsBSz').value.trim(),
+        askPrice: l.sellPrice || l.price || 0, offerPrice: offer,
+        note: document.getElementById('wsBN').value.trim(),
+        status: 'pending', createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(function(ref) {
+        document.getElementById('wsBuyMod').style.display = 'none';
+        WS.listing = null;
+        showToast('Transfer request sent!', 'success');
+        wsSysMsg(l.storeId, l.storeName, 'Transfer Request: ' + l.name + ' x' + qty + ' @$' + offer.toFixed(2) + ' Ref#' + ref.id.slice(-6).toUpperCase());
+      }).catch(function(e) { showToast('Error: ' + e.message, 'error'); });
     }
 
-    function nwSubTransfers() {
-      if (!NW.db||!NW.store) return;
-      var myId = NW.store.id;
-      NW.db.collection('network_transfers').where('buyerId','==',myId).onSnapshot(function(s1) {
-        var buyer = s1.docs.map(function(d){return Object.assign({id:d.id},d.data());});
-        NW.db.collection('network_transfers').where('sellerId','==',myId).onSnapshot(function(s2) {
-          var seller = s2.docs.map(function(d){return Object.assign({id:d.id},d.data());});
-          var merged = buyer.slice(); seller.forEach(function(t){if(!merged.find(function(b){return b.id===t.id;}))merged.push(t);});
-          NW.transfers = merged.sort(function(a,b){return ((b.createdAt&&b.createdAt.seconds)||0)-((a.createdAt&&a.createdAt.seconds)||0);});
-          nwRenderTransfers();
-          var inc = NW.transfers.filter(function(t){return t.sellerId===myId&&t.status==='pending';}).length;
-          var badge = document.getElementById('nwTransferBadge'); if(badge){badge.style.display=inc>0?'inline':'none';badge.textContent=inc;}
-        },function(){});
-      },function(){});
+    // ── TRANSFERS ──
+    function wsSubT() {
+      if (!db || !WS.store) return;
+      var mid = WS.store.id;
+      db.collection('network_transfers').where('buyerId','==',mid).onSnapshot(function(s1) {
+        var buyer = s1.docs.map(function(d) { return Object.assign({ id: d.id }, d.data()); });
+        db.collection('network_transfers').where('sellerId','==',mid).onSnapshot(function(s2) {
+          var seller = s2.docs.map(function(d) { return Object.assign({ id: d.id }, d.data()); });
+          var merged = buyer.slice();
+          seller.forEach(function(t) { if (!merged.find(function(x) { return x.id === t.id; })) merged.push(t); });
+          WS.transfers = merged.sort(function(a,b) { return ((b.createdAt&&b.createdAt.seconds)||0) - ((a.createdAt&&a.createdAt.seconds)||0); });
+          wsRenderTF();
+          var inc = WS.transfers.filter(function(t) { return t.sellerId === mid && t.status === 'pending'; }).length;
+          var badge = document.getElementById('wsTrBadge');
+          if (badge) { badge.style.display = inc > 0 ? 'inline' : 'none'; badge.textContent = inc; }
+        }, function() {});
+      }, function() {});
     }
 
-    function nwRenderTransfers() {
-      var list=document.getElementById('nwTransferList'); var empty=document.getElementById('nwTransferEmpty');
-      var myId=NW.store?NW.store.id:''; var t=NW.toTab; var filtered;
-      if(t==='incoming') filtered=NW.transfers.filter(function(x){return x.sellerId===myId&&x.status==='pending';});
-      else if(t==='outgoing') filtered=NW.transfers.filter(function(x){return x.buyerId===myId&&x.status==='pending';});
-      else filtered=NW.transfers.filter(function(x){return x.status!=='pending';});
-      if(!filtered.length){if(list)list.innerHTML='';if(empty)empty.style.display='block';return;}
-      if(empty)empty.style.display='none';
-      list.innerHTML=filtered.map(function(tr){
-        var isSeller=tr.sellerId===myId, tid=tr.id;
-        var pill=tr.status==='pending'?'<span style="background:rgba(236,201,75,.15);color:#7d6608;padding:.15rem .5rem;border-radius:2rem;font-size:.7rem;font-weight:700">Pending</span>':tr.status==='accepted'?'<span style="background:rgba(72,187,120,.12);color:#276749;padding:.15rem .5rem;border-radius:2rem;font-size:.7rem;font-weight:700">Accepted</span>':'<span style="background:rgba(245,101,101,.12);color:#9b2c2c;padding:.15rem .5rem;border-radius:2rem;font-size:.7rem;font-weight:700">Declined</span>';
-        var otherId=escHtml(isSeller?tr.buyerId:tr.sellerId); var otherName=escHtml(isSeller?(tr.buyerName||'Buyer'):(tr.sellerName||'Seller'));
-        var actions=(isSeller&&tr.status==='pending')?'<button class="btn btn-success btn-small" onclick="nwRespondTR(''+tid+'','accepted')"><i class="fas fa-check"></i> Accept</button><button class="btn btn-danger btn-small" onclick="nwRespondTR(''+tid+'','declined')"><i class="fas fa-times"></i> Decline</button>':'';
-        return '<div style="border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;margin-bottom:.65rem"><div style="display:flex;justify-content:space-between;align-items:center;padding:.5rem .8rem;background:#f7fafc;border-bottom:1px solid #e2e8f0;flex-wrap:wrap;gap:.3rem"><div><b style="font-size:.85rem">'+escHtml(tr.itemName||'')+'</b><span style="font-size:.7rem;color:#718096;margin-left:.5rem">#'+tid.slice(-6).toUpperCase()+'</span></div>'+pill+'</div><div style="padding:.65rem .8rem"><div style="font-size:.8rem;margin-bottom:.3rem"><span style="background:#ebedff;color:#5a67d8;padding:.1rem .4rem;border-radius:2rem;font-size:.7rem;font-weight:600">'+escHtml(tr.buyerName||'')+'</span> <span style="color:#667eea">&#8594;</span> <span style="background:#ebedff;color:#5a67d8;padding:.1rem .4rem;border-radius:2rem;font-size:.7rem;font-weight:600">'+escHtml(tr.sellerName||'')+'</span></div><div style="font-size:.78rem;color:#4a5568">Qty: '+escHtml(String(tr.qty||1))+' | Sizes: '+escHtml(tr.sizes||'—')+' | $'+parseFloat(tr.offerPrice||0).toFixed(2)+'</div>'+(tr.note?'<div style="font-size:.73rem;color:#718096;font-style:italic">'+escHtml(tr.note)+'</div>':'')+'<div style="display:flex;gap:.35rem;margin-top:.5rem;flex-wrap:wrap">'+actions+'<button class="btn btn-small btn-outline" onclick="nwChatWith(''+otherId+'',''+otherName+'')"><i class="fas fa-comment"></i> Chat</button></div></div></div>';
+    function wsRenderTF() {
+      var list = document.getElementById('wsTFList'); var empty = document.getElementById('wsTFEmpty');
+      if (!list) return;
+      var mid = WS.store ? WS.store.id : ''; var t = WS.tfTab;
+      var f = t === 'in' ? WS.transfers.filter(function(x) { return x.sellerId === mid && x.status === 'pending'; })
+            : t === 'out' ? WS.transfers.filter(function(x) { return x.buyerId === mid && x.status === 'pending'; })
+            : WS.transfers.filter(function(x) { return x.status !== 'pending'; });
+      if (!f.length) { list.innerHTML = ''; if (empty) empty.style.display = 'block'; return; }
+      if (empty) empty.style.display = 'none';
+      list.innerHTML = f.map(function(tr) {
+        var isSeller = tr.sellerId === mid; var tid = tr.id;
+        var pill = tr.status === 'pending'
+          ? '<span style="background:rgba(236,201,75,.15);color:#7d6608;padding:.15rem .5rem;border-radius:2rem;font-size:.7rem;font-weight:700"><i class="fas fa-clock"></i> Pending</span>'
+          : tr.status === 'accepted'
+          ? '<span style="background:rgba(72,187,120,.12);color:#276749;padding:.15rem .5rem;border-radius:2rem;font-size:.7rem;font-weight:700"><i class="fas fa-check"></i> Accepted</span>'
+          : '<span style="background:rgba(245,101,101,.12);color:#9b2c2c;padding:.15rem .5rem;border-radius:2rem;font-size:.7rem;font-weight:700"><i class="fas fa-times"></i> Declined</span>';
+        var oid = escHtml(isSeller ? tr.buyerId : tr.sellerId);
+        var on = escHtml(isSeller ? (tr.buyerName||'Buyer') : (tr.sellerName||'Seller'));
+        var act = (isSeller && tr.status === 'pending')
+          ? '<button class="btn btn-success btn-small" onclick="wsRespondTF(''+tid+'','accepted')"><i class="fas fa-check"></i> Accept</button>'
+            + '<button class="btn btn-danger btn-small" onclick="wsRespondTF(''+tid+'','declined')"><i class="fas fa-times"></i> Decline</button>'
+          : '';
+        return '<div style="border:1px solid var(--gray-light);border-radius:12px;overflow:hidden;margin-bottom:.75rem">'
+          + '<div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem .9rem;background:var(--light);border-bottom:1px solid var(--gray-light);flex-wrap:wrap;gap:.3rem">'
+          + '<div><b style="font-size:.88rem">'+escHtml(tr.itemName||'')+'</b> <span style="font-size:.7rem;color:var(--gray)">#'+tid.slice(-6).toUpperCase()+'</span></div>'+pill+'</div>'
+          + '<div style="padding:.75rem .9rem">'
+          + '<div style="font-size:.82rem;margin-bottom:.35rem;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap">'
+          + '<span style="background:#ebedff;color:#5a67d8;padding:.12rem .45rem;border-radius:2rem;font-size:.72rem;font-weight:600"><i class="fas fa-store"></i> '+escHtml(tr.buyerName||'')+'</span>'
+          + '<span style="color:#667eea"><i class="fas fa-long-arrow-alt-right"></i></span>'
+          + '<span style="background:#ebedff;color:#5a67d8;padding:.12rem .45rem;border-radius:2rem;font-size:.72rem;font-weight:600"><i class="fas fa-store"></i> '+escHtml(tr.sellerName||'')+'</span></div>'
+          + '<div style="font-size:.8rem;color:var(--gray-dark)">Qty: '+escHtml(String(tr.qty||1))+' | Sizes: '+escHtml(tr.sizes||'—')+' | Offer: <b>$'+parseFloat(tr.offerPrice||0).toFixed(2)+'</b></div>'
+          + (tr.note ? '<div style="font-size:.75rem;color:var(--gray);font-style:italic;margin-top:.2rem">'+escHtml(tr.note)+'</div>' : '')
+          + '<div style="display:flex;gap:.4rem;margin-top:.6rem;flex-wrap:wrap">'+act
+          + '<button class="btn btn-small btn-outline" onclick="wsChatWith(''+oid+'',''+on+'')"><i class="fas fa-comment"></i> Chat</button>'
+          + '</div></div></div>';
       }).join('');
     }
 
-    function nwRespondTR(id,status) {
-      if (!NW.db) return;
-      NW.db.collection('network_transfers').doc(id).update({status:status,respondedAt:firebase.firestore.FieldValue.serverTimestamp()}).then(function(){var tr=NW.transfers.find(function(x){return x.id===id;});if(tr)nwSendSysMsg(tr.buyerId,tr.buyerName,status==='accepted'?'Transfer ACCEPTED: '+tr.itemName+' x'+tr.qty:'Transfer declined for '+tr.itemName);showToast(status==='accepted'?'Accepted!':'Declined','info');}).catch(function(){});
+    function wsRespondTF(id, status) {
+      if (!db) return;
+      db.collection('network_transfers').doc(id).update({ status: status, respondedAt: firebase.firestore.FieldValue.serverTimestamp() })
+        .then(function() {
+          var tr = WS.transfers.find(function(x) { return x.id === id; });
+          if (tr) wsSysMsg(tr.buyerId, tr.buyerName, status === 'accepted' ? 'Transfer ACCEPTED: ' + tr.itemName + ' x' + tr.qty + ' - ready to ship!' : 'Transfer declined for ' + tr.itemName);
+          showToast(status === 'accepted' ? 'Transfer accepted!' : 'Transfer declined', status === 'accepted' ? 'success' : 'info');
+        }).catch(function() {});
     }
 
-    function nwSubConvs() {
-      if (!NW.db||!NW.store) return;
-      var myId=NW.store.id;
-      NW.db.collection('network_conversations').where('participants','array-contains',myId).onSnapshot(function(snap){
-        NW.convs=snap.docs.map(function(d){return Object.assign({id:d.id},d.data());});
-        NW.convs.sort(function(a,b){return ((b.lastMessageAt&&b.lastMessageAt.seconds)||0)-((a.lastMessageAt&&a.lastMessageAt.seconds)||0);});
-        nwRenderChatList();
-        var unread=NW.convs.filter(function(c){return ((c.unread||{})[myId]||0)>0;}).length;
-        var badge=document.getElementById('nwChatBadge');if(badge){badge.style.display=unread>0?'inline':'none';badge.textContent=unread;}
-      },function(){});
+    // ── CHAT ──
+    function wsSubC() {
+      if (!db || !WS.store) return;
+      var mid = WS.store.id;
+      db.collection('network_conversations').where('participants','array-contains',mid).onSnapshot(function(s) {
+        WS.convs = s.docs.map(function(d) { return Object.assign({ id: d.id }, d.data()); })
+          .sort(function(a,b) { return ((b.lastMessageAt&&b.lastMessageAt.seconds)||0) - ((a.lastMessageAt&&a.lastMessageAt.seconds)||0); });
+        wsRenderChatList();
+        var unread = WS.convs.filter(function(c) { return ((c.unread||{})[mid]||0) > 0; }).length;
+        var badge = document.getElementById('wsChBadge');
+        if (badge) { badge.style.display = unread > 0 ? 'inline' : 'none'; badge.textContent = unread; }
+      }, function() {});
     }
 
-    function nwRenderChatList() {
-      var el=document.getElementById('nwChatList');if(!el)return;
-      var myId=NW.store?NW.store.id:'';
-      if(!NW.convs.length){el.innerHTML='<div style="text-align:center;padding:1.5rem;color:#718096;font-size:.82rem">No chats yet</div>';return;}
-      el.innerHTML=NW.convs.map(function(c){
-        var names=c.participantNames||{}; var otherId=(c.participants||[]).find(function(p){return p!==myId;}); var oName=names[otherId]||'Store';
-        var init=oName.split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();
-        var unread=((c.unread||{})[myId]||0); var cid=c.id; var active=cid===NW.currentConvId;
-        return '<div style="display:flex;align-items:center;gap:.5rem;padding:.6rem .8rem;cursor:pointer;border-bottom:1px solid var(--gray-light);background:'+(active?'var(--primary-light)':'')+'" onclick="nwOpenConv(''+cid+'')">'
-          +'<div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#667eea,#a78bfa);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.82rem;flex-shrink:0">'+init+'</div>'
-          +'<div style="flex:1;min-width:0"><div style="font-weight:600;font-size:.82rem">'+escHtml(oName)+'</div><div style="font-size:.7rem;color:#718096;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escHtml(c.lastMessage||'')+'</div></div>'
-          +(unread>0?'<span style="background:#667eea;color:#fff;font-size:.6rem;font-weight:700;padding:.1rem .3rem;border-radius:6px">'+unread+'</span>':'')
-          +'</div>';
+    function wsRenderChatList() {
+      var el = document.getElementById('wsChatList'); if (!el) return;
+      var mid = WS.store ? WS.store.id : '';
+      if (!WS.convs.length) { el.innerHTML = '<div style="text-align:center;padding:1.5rem;color:var(--gray);font-size:.82rem"><i class="fas fa-comment-slash" style="font-size:1.5rem;display:block;margin-bottom:.5rem;opacity:.4"></i>No chats yet</div>'; return; }
+      el.innerHTML = WS.convs.map(function(c) {
+        var n = c.participantNames || {};
+        var oid = (c.participants||[]).find(function(p) { return p !== mid; });
+        var on = n[oid] || 'Store';
+        var init = on.split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();
+        var unread = ((c.unread||{})[mid]||0); var cid = c.id; var active = cid === WS.convId;
+        return '<div style="display:flex;align-items:center;gap:.5rem;padding:.6rem .8rem;cursor:pointer;border-bottom:1px solid var(--gray-light);background:'+(active?'var(--primary-light)':'')+';transition:background .15s" onclick="wsOpenConv(''+cid+'')" onmouseover="if(!'+active+')this.style.background='var(--light)'" onmouseout="if(!'+active+')this.style.background=''">'
+          + '<div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#667eea,#a78bfa);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.82rem;flex-shrink:0">'+init+'</div>'
+          + '<div style="flex:1;min-width:0"><div style="font-weight:600;font-size:.82rem">'+escHtml(on)+'</div><div style="font-size:.7rem;color:var(--gray);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+escHtml(c.lastMessage||'')+'</div></div>'
+          + (unread > 0 ? '<span style="background:#667eea;color:#fff;font-size:.6rem;font-weight:700;padding:.1rem .3rem;border-radius:6px">'+unread+'</span>' : '')
+          + '</div>';
       }).join('');
     }
 
-    function nwOpenConv(convId) {
-      NW.currentConvId=convId;
-      var conv=NW.convs.find(function(c){return c.id===convId;}); if(!conv)return;
-      var myId=NW.store?NW.store.id:''; var names=conv.participantNames||{};
-      var otherId=(conv.participants||[]).find(function(p){return p!==myId;}); var oName=names[otherId]||'Store';
-      var init=oName.split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();
-      document.getElementById('nwChatEmpty').style.display='none';
-      document.getElementById('nwChatWindow').style.display='flex';
-      document.getElementById('nwChatAvatar').textContent=init;
-      document.getElementById('nwChatWinName').textContent=oName;
-      nwRenderChatList();
-      if(((conv.unread||{})[myId]||0)>0){var upd={};upd['unread.'+myId]=0;NW.db.collection('network_conversations').doc(convId).update(upd).catch(function(){});}
-      if(NW._unsubMsgs)NW._unsubMsgs();
-      NW._unsubMsgs=NW.db.collection('network_conversations').doc(convId).collection('messages').orderBy('createdAt','asc')
-        .onSnapshot(function(snap){nwRenderMsgs(snap.docs.map(function(d){return Object.assign({id:d.id},d.data());}));},function(){});
+    function wsOpenConv(cid) {
+      WS.convId = cid;
+      var conv = WS.convs.find(function(c) { return c.id === cid; }); if (!conv) return;
+      var mid = WS.store ? WS.store.id : '';
+      var n = conv.participantNames || {};
+      var oid = (conv.participants||[]).find(function(p) { return p !== mid; });
+      var on = n[oid] || 'Store';
+      var init = on.split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();
+      document.getElementById('wsChatEmpty').style.display = 'none';
+      document.getElementById('wsChatWin').style.display = 'flex';
+      document.getElementById('wsChatAv').textContent = init;
+      document.getElementById('wsChatWinName').textContent = on;
+      wsRenderChatList();
+      if (((conv.unread||{})[mid]||0) > 0) {
+        var upd = {}; upd['unread.' + mid] = 0;
+        db.collection('network_conversations').doc(cid).update(upd).catch(function() {});
+      }
+      if (WS._unsub) WS._unsub();
+      WS._unsub = db.collection('network_conversations').doc(cid).collection('messages').orderBy('createdAt','asc')
+        .onSnapshot(function(s) { wsRenderMsgs(s.docs.map(function(d) { return Object.assign({ id: d.id }, d.data()); })); }, function() {});
     }
 
-    function nwRenderMsgs(msgs) {
-      var c=document.getElementById('nwChatMsgs');if(!c)return;
-      var myId=NW.store?NW.store.id:'';
-      if(!msgs.length){c.innerHTML='<div style="text-align:center;color:#718096;font-size:.82rem;padding:1.5rem">Say hello! 👋</div>';return;}
-      c.innerHTML=msgs.map(function(m){
-        var mine=m.senderId===myId; var isSpecial=m.type==='transfer_request'||m.type==='system';
-        if(isSpecial)return '<div style="background:rgba(102,126,234,.08);border:1px solid #ebedff;border-radius:8px;padding:.45rem .65rem;font-size:.75rem"><b style="color:#5a67d8"><i class="fas fa-exchange-alt"></i> '+escHtml(m.senderName||'')+'</b><br>'+escHtml(m.text||'')+'<br><span style="font-size:.62rem;color:#718096">'+nwFmt(m.createdAt)+'</span></div>';
-        var init=(m.senderName||'?').split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();
+    function wsRenderMsgs(msgs) {
+      var c = document.getElementById('wsMsgs'); if (!c) return;
+      var mid = WS.store ? WS.store.id : '';
+      if (!msgs.length) { c.innerHTML = '<div style="text-align:center;color:var(--gray);font-size:.82rem;padding:1.5rem">No messages yet. Say hello! 👋</div>'; return; }
+      c.innerHTML = msgs.map(function(m) {
+        var mine = m.senderId === mid;
+        var isSpecial = m.type === 'transfer_request' || m.type === 'system';
+        if (isSpecial) return '<div style="background:rgba(102,126,234,.08);border:1px solid #ebedff;border-radius:8px;padding:.5rem .75rem;font-size:.78rem"><b style="color:#5a67d8"><i class="fas fa-exchange-alt"></i> '+escHtml(m.senderName||'')+'</b><br>'+escHtml(m.text||'')+'<br><span style="font-size:.62rem;color:var(--gray)">'+wsFmt(m.createdAt)+'</span></div>';
+        var init = (m.senderName||'?').split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();
         return '<div style="display:flex;gap:.4rem;align-items:flex-end;max-width:78%;align-self:'+(mine?'flex-end':'flex-start')+';flex-direction:'+(mine?'row-reverse':'row')+'">'
-          +(!mine?'<div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#667eea,#a78bfa);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.65rem;font-weight:700;flex-shrink:0">'+init+'</div>':'')
-          +'<div><div style="padding:.45rem .65rem;border-radius:'+(mine?'12px 12px 3px 12px':'12px 12px 12px 3px')+';background:'+(mine?'var(--primary)':'#fff')+';color:'+(mine?'#fff':'inherit')+';font-size:.83rem;max-width:260px;'+(mine?'':'border:1px solid #e2e8f0;')+'">'+escHtml(m.text||'')+'</div>'
-          +'<div style="font-size:.6rem;color:#718096;margin-top:.15rem;'+(mine?'text-align:right':'')+'">' +nwFmt(m.createdAt)+'</div></div></div>';
+          + (!mine?'<div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#667eea,#a78bfa);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.65rem;font-weight:700;flex-shrink:0">'+init+'</div>':'')
+          + '<div><div style="padding:.5rem .75rem;border-radius:'+(mine?'14px 14px 4px 14px':'14px 14px 14px 4px')+';background:'+(mine?'var(--primary)':'#fff')+';color:'+(mine?'#fff':'inherit')+';font-size:.85rem;max-width:280px;'+(mine?'':'border:1px solid var(--gray-light);')+'">'+escHtml(m.text||'')+'</div>'
+          + '<div style="font-size:.62rem;color:var(--gray);margin-top:.15rem;'+(mine?'text-align:right':'')+'">'+wsFmt(m.createdAt)+'</div></div></div>';
       }).join('');
-      c.scrollTop=c.scrollHeight;
+      c.scrollTop = c.scrollHeight;
     }
 
-    function nwSendMsg() {
-      if(!NW.db||!NW.currentConvId)return;
-      var inp=document.getElementById('nwChatInput'); var text=inp.value.trim(); if(!text)return;
-      inp.value=''; inp.style.height='auto'; var myId=NW.store.id;
-      NW.db.collection('network_conversations').doc(NW.currentConvId).collection('messages').add({text:text,senderId:myId,senderName:NW.store.name,type:'text',createdAt:firebase.firestore.FieldValue.serverTimestamp()}).then(function(){
-        var conv=NW.convs.find(function(c){return c.id===NW.currentConvId;}); var otherId=conv?(conv.participants||[]).find(function(p){return p!==myId;}):null;
-        var upd={lastMessage:text,lastMessageAt:firebase.firestore.FieldValue.serverTimestamp()};if(otherId)upd['unread.'+otherId]=firebase.firestore.FieldValue.increment(1);
-        NW.db.collection('network_conversations').doc(NW.currentConvId).update(upd).catch(function(){});
-      }).catch(function(){showToast('Send failed','error');});
+    function wsSend() {
+      if (!db || !WS.convId || !WS.store) return;
+      var inp = document.getElementById('wsMsgIn'); var text = inp.value.trim(); if (!text) return;
+      inp.value = ''; inp.style.height = 'auto'; var mid = WS.store.id;
+      db.collection('network_conversations').doc(WS.convId).collection('messages').add({
+        text: text, senderId: mid, senderName: WS.store.name, type: 'text',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(function() {
+        var conv = WS.convs.find(function(c) { return c.id === WS.convId; });
+        var oid = conv ? (conv.participants||[]).find(function(p) { return p !== mid; }) : null;
+        var upd = { lastMessage: text, lastMessageAt: firebase.firestore.FieldValue.serverTimestamp() };
+        if (oid) upd['unread.' + oid] = firebase.firestore.FieldValue.increment(1);
+        db.collection('network_conversations').doc(WS.convId).update(upd).catch(function() {});
+      }).catch(function() { showToast('Send failed', 'error'); });
     }
 
-    function nwSendSysMsg(otherStoreId,otherStoreName,text) {
-      if(!NW.db||!NW.store)return;
-      var convId=[NW.store.id,otherStoreId].sort().join('_'); var ref=NW.db.collection('network_conversations').doc(convId);
-      var names={};names[NW.store.id]=NW.store.name;names[otherStoreId]=otherStoreName;
-      ref.set({participants:[NW.store.id,otherStoreId],participantNames:names,lastMessage:text,lastMessageAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).then(function(){
-        var upd={};upd['unread.'+otherStoreId]=firebase.firestore.FieldValue.increment(1);ref.update(upd).catch(function(){});
-        ref.collection('messages').add({text:text,senderId:NW.store.id,senderName:NW.store.name,type:'transfer_request',createdAt:firebase.firestore.FieldValue.serverTimestamp()}).catch(function(){});
-      }).catch(function(){});
+    function wsSysMsg(oid, on, text) {
+      if (!db || !WS.store) return;
+      var cid = [WS.store.id, oid].sort().join('_');
+      var ref = db.collection('network_conversations').doc(cid);
+      var n = {}; n[WS.store.id] = WS.store.name; n[oid] = on;
+      ref.set({ participants: [WS.store.id, oid], participantNames: n, lastMessage: text, lastMessageAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true })
+        .then(function() {
+          var upd = {}; upd['unread.' + oid] = firebase.firestore.FieldValue.increment(1);
+          ref.update(upd).catch(function() {});
+          ref.collection('messages').add({ text: text, senderId: WS.store.id, senderName: WS.store.name, type: 'transfer_request', createdAt: firebase.firestore.FieldValue.serverTimestamp() }).catch(function() {});
+        }).catch(function() {});
     }
 
-    function nwOpenNewChat() {
-      if(!NW.db)return;
-      document.getElementById('nwNewChatModal').style.display='flex';
-      NW.db.collection('network_stores').get().then(function(snap){
-        var stores=snap.docs.map(function(d){return d.data();}).filter(function(s){return s.id!==NW.store.id;});
-        var picker=document.getElementById('nwStorePicker');
-        if(!stores.length){picker.innerHTML='<p style="color:#718096;font-size:.82rem">No other stores yet.</p>';return;}
-        picker.innerHTML=stores.map(function(s){var sid=s.id;var sname=escHtml(s.name||'');return '<div style="display:flex;align-items:center;justify-content:space-between;padding:.6rem .4rem;border-bottom:1px solid var(--gray-light)"><div><b style="font-size:.88rem">'+sname+'</b><div style="font-size:.75rem;color:#718096">'+escHtml(s.city||'')+'</div></div><button class="btn btn-small btn-primary" onclick="nwChatWith(''+sid+'',''+sname+'');document.getElementById('nwNewChatModal').style.display='none'"><i class="fas fa-comment"></i> Chat</button></div>';}).join('');
-      }).catch(function(){document.getElementById('nwStorePicker').innerHTML='<p style="color:#718096;font-size:.82rem">Could not load.</p>';});
+    function wsNewChat() {
+      if (!db || !WS.store) return;
+      document.getElementById('wsNewChatMod').style.display = 'flex';
+      db.collection('network_stores').get().then(function(s) {
+        var stores = s.docs.map(function(d) { return d.data(); }).filter(function(x) { return x.id !== WS.store.id; });
+        var el = document.getElementById('wsStorePick');
+        if (!stores.length) { el.innerHTML = '<p style="color:var(--gray);font-size:.82rem;text-align:center;padding:1rem">No other stores on the network yet.</p>'; return; }
+        el.innerHTML = stores.map(function(s) {
+          var sid = s.id; var sn = escHtml(s.name||'');
+          return '<div style="display:flex;align-items:center;justify-content:space-between;padding:.65rem .5rem;border-bottom:1px solid var(--gray-light)">'
+            + '<div><div style="font-weight:600;font-size:.88rem">'+sn+'</div><div style="font-size:.75rem;color:var(--gray)"><i class="fas fa-map-marker-alt"></i> '+escHtml(s.city||'')+'</div></div>'
+            + '<button class="btn btn-small btn-primary" onclick="wsChatWith(''+sid+'',''+sn+'');document.getElementById('wsNewChatMod').style.display='none'"><i class="fas fa-comment"></i> Chat</button>'
+            + '</div>';
+        }).join('');
+      }).catch(function() { document.getElementById('wsStorePick').innerHTML = '<p style="color:var(--gray);font-size:.82rem">Could not load stores.</p>'; });
     }
 
-    function nwChatWith(storeId,storeName) {
-      if(!NW.db||!NW.store)return;
-      var convId=[NW.store.id,storeId].sort().join('_'); var names={};names[NW.store.id]=NW.store.name;names[storeId]=storeName;
-      NW.db.collection('network_conversations').doc(convId).set({participants:[NW.store.id,storeId],participantNames:names,lastMessageAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true}).then(function(){
-        showNetworkTab(); setTimeout(function(){nwSwitchTab('chat');setTimeout(function(){nwOpenConv(convId);},400);},200);
-      }).catch(function(){});
+    function wsChatWith(sid, sn) {
+      if (!db || !WS.store) return;
+      var cid = [WS.store.id, sid].sort().join('_');
+      var n = {}; n[WS.store.id] = WS.store.name; n[sid] = sn;
+      db.collection('network_conversations').doc(cid).set({
+        participants: [WS.store.id, sid], participantNames: n,
+        lastMessageAt: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true }).then(function() {
+        showTab('wholesale');
+        wsOnShow();
+        setTimeout(function() { wsSwitchTab('chat'); setTimeout(function() { wsOpenConv(cid); }, 400); }, 200);
+      }).catch(function() {});
     }
 
-    function nwOpenChatTransfer() {
-      ['nwCtItem','nwCtNote'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
-      document.getElementById('nwCtQty').value=1; document.getElementById('nwCtPrice').value='';
-      document.getElementById('nwChatTransferModal').style.display='flex';
+    function wsOpenReq() {
+      ['wsRI','wsRN'].forEach(function(id) { var el = document.getElementById(id); if (el) el.value = ''; });
+      document.getElementById('wsRQ').value = 1; document.getElementById('wsRP').value = '';
+      document.getElementById('wsReqMod').style.display = 'flex';
     }
 
-    function nwSendChatTransfer() {
-      var item=document.getElementById('nwCtItem').value.trim(); if(!item){showToast('Enter item','error');return;}
-      var qty=parseInt(document.getElementById('nwCtQty').value)||1; var price=parseFloat(document.getElementById('nwCtPrice').value)||0;
-      var note=document.getElementById('nwCtNote').value.trim();
-      var text='Transfer Request: '+item+' x'+qty+(price?' @$'+price.toFixed(2):'')+(note?' | '+note:'');
-      document.getElementById('nwChatTransferModal').style.display='none';
-      if(!NW.currentConvId)return; var myId=NW.store.id;
-      NW.db.collection('network_conversations').doc(NW.currentConvId).collection('messages').add({text:text,senderId:myId,senderName:NW.store.name,type:'transfer_request',createdAt:firebase.firestore.FieldValue.serverTimestamp()}).then(function(){
-        var conv=NW.convs.find(function(c){return c.id===NW.currentConvId;}); var otherId=conv?(conv.participants||[]).find(function(p){return p!==myId;}):null;
-        var upd={lastMessage:text,lastMessageAt:firebase.firestore.FieldValue.serverTimestamp()};if(otherId)upd['unread.'+otherId]=firebase.firestore.FieldValue.increment(1);
-        NW.db.collection('network_conversations').doc(NW.currentConvId).update(upd).catch(function(){});
-      }).catch(function(){showToast('Error','error');});
+    function wsSendChatReq() {
+      var item = document.getElementById('wsRI').value.trim();
+      if (!item) { showToast('Enter item name', 'error'); return; }
+      var qty = parseInt(document.getElementById('wsRQ').value) || 1;
+      var price = parseFloat(document.getElementById('wsRP').value) || 0;
+      var note = document.getElementById('wsRN').value.trim();
+      var text = 'Stock Request: ' + item + ' x' + qty + (price ? ' @$' + price.toFixed(2) : '') + (note ? ' | ' + note : '');
+      document.getElementById('wsReqMod').style.display = 'none';
+      if (!WS.convId || !WS.store) return;
+      var mid = WS.store.id;
+      db.collection('network_conversations').doc(WS.convId).collection('messages').add({
+        text: text, senderId: mid, senderName: WS.store.name, type: 'transfer_request',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(function() {
+        var conv = WS.convs.find(function(c) { return c.id === WS.convId; });
+        var oid = conv ? (conv.participants||[]).find(function(p) { return p !== mid; }) : null;
+        var upd = { lastMessage: text, lastMessageAt: firebase.firestore.FieldValue.serverTimestamp() };
+        if (oid) upd['unread.' + oid] = firebase.firestore.FieldValue.increment(1);
+        db.collection('network_conversations').doc(WS.convId).update(upd).catch(function() {});
+      }).catch(function() { showToast('Error sending', 'error'); });
     }
 
-    function nwShareProduct(pid) {
-      showNetworkTab();
-      setTimeout(function(){
-        nwSwitchTab('market');
-        setTimeout(function(){
-          nwOpenPostModal();
-          setTimeout(function(){
-            var p=findProduct(pid);if(!p)return;
-            document.getElementById('nwPostName').value=p.name;
-            document.getElementById('nwPostCat').value=p.category||'Dresses';
-            document.getElementById('nwPostPrice').value=p.price;
-            document.getElementById('nwPostQty').value=getTotalStock(p);
-            document.getElementById('nwPostSizes').value=p.sizes?p.sizes.map(function(s){return s.name;}).join(', '):'';
-          },150);
-        },200);
-      },200);
+    function wsShareProd(pid) {
+      showTab('wholesale');
+      setTimeout(function() {
+        wsOnShow();
+        if (!WS.store) return;
+        wsSwitchTab('market');
+        setTimeout(function() {
+          wsOpenPost();
+          setTimeout(function() {
+            var p = findProduct(pid); if (!p) return;
+            document.getElementById('wsPN').value = p.name;
+            document.getElementById('wsPC').value = p.category || 'Dresses';
+            document.getElementById('wsPSell').value = p.price;
+            document.getElementById('wsPQ').value = getTotalStock(p);
+            document.getElementById('wsPSz').value = p.sizes ? p.sizes.map(function(s){return s.name;}).join(', ') : '';
+          }, 150);
+        }, 200);
+      }, 200);
     }
 
-    function nwFmt(ts) {
-      if(!ts)return'';
-      var d=ts.toDate?ts.toDate():new Date(ts); var diff=new Date()-d;
-      if(diff<60000)return'just now'; if(diff<3600000)return Math.floor(diff/60000)+'m ago';
-      if(diff<86400000)return d.getHours()+':'+String(d.getMinutes()).padStart(2,'0');
-      return d.getDate()+'/'+(d.getMonth()+1);
+    function wsFmt(ts) {
+      if (!ts) return '';
+      var d = ts.toDate ? ts.toDate() : new Date(ts);
+      var diff = new Date() - d;
+      if (diff < 60000) return 'just now';
+      if (diff < 3600000) return Math.floor(diff/60000) + 'm ago';
+      if (diff < 86400000) return d.getHours() + ':' + String(d.getMinutes()).padStart(2,'0');
+      return d.getDate() + '/' + (d.getMonth()+1);
     }
-    // ══════════════════════════════════════
-    // END NETWORK MODULE
-    // ══════════════════════════════════════
+
+    // Hook Wholesale tab into showTab
+    var _origShowTab = typeof showTab === 'function' ? showTab : null;
+    document.addEventListener('DOMContentLoaded', function() {
+      // Patch showTab to call wsOnShow when wholesale tab is shown
+      var origST = showTab;
+      showTab = function(tab) {
+        origST(tab);
+        if (tab === 'wholesale') setTimeout(wsOnShow, 50);
+      };
+    });
+    // ══════════════════════════════════════════
+    // END WHOLESALE MODULE
+    // ══════════════════════════════════════════
 
     </script>
 
@@ -6136,56 +6333,63 @@ function sendToTelegram(order, callback) {
         </div>
     </div>
 
-    <div class="modal-overlay" id="nwPostModal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal"><div class="modal-header"><h3><i class="fas fa-tag" style="color:var(--primary)"></i> Post to Network Market</h3><button class="modal-close" onclick="document.getElementById('nwPostModal').style.display='none'">&times;</button></div>
+    <!-- WS Post Modal -->
+    <div class="modal-overlay" id="wsPostMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3><i class="fas fa-tag" style="color:var(--primary)"></i> Post to Wholesale Market</h3><button class="modal-close" onclick="document.getElementById('wsPostMod').style.display='none'">&times;</button></div>
       <div style="padding:1.25rem">
-        <div class="form-group"><label>Pick from inventory</label><select class="form-control" id="nwPostFromInv" onchange="nwFillFromInv()"><option value="">— Enter manually —</option></select></div>
-        <div class="form-group"><label>Item Name *</label><input type="text" class="form-control" id="nwPostName" placeholder="Product name"></div>
-        <div class="form-group"><label>Category</label><select class="form-control" id="nwPostCat"><option value="Dresses">Dresses</option><option value="Girl Clothes">Girl Clothes</option><option value="Boy Clothes">Boy Clothes</option><option value="Baby Shirt">Baby Shirts</option><option value="Baby Shoes">Baby Shoes</option><option value="Baby Accessories">Accessories</option></select></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem">
-          <div class="form-group"><label>Cost $</label><input type="number" class="form-control" id="nwPostCost" placeholder="0.00" min="0" step="0.01"></div>
-          <div class="form-group"><label>Sell $</label><input type="number" class="form-control" id="nwPostPrice" placeholder="0.00" min="0" step="0.01"></div>
-          <div class="form-group"><label>Qty</label><input type="number" class="form-control" id="nwPostQty" value="1" min="1"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Pick from inventory</label><select id="wsPI" onchange="wsFillPost()" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"><option value="">— Enter manually —</option></select></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Item Name *</label><input type="text" id="wsPN" placeholder="Product name" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Category</label><select id="wsPC" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"><option>Dresses</option><option>Girl Clothes</option><option>Boy Clothes</option><option>Baby Shirt</option><option>Baby Shoes</option><option>Baby Accessories</option></select></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.85rem">
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Cost $</label><input type="number" id="wsPCost" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Sell $</label><input type="number" id="wsPSell" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Qty</label><input type="number" id="wsPQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
         </div>
-        <div class="form-group"><label>Sizes</label><input type="text" class="form-control" id="nwPostSizes" placeholder="e.g. 3M, 6M, 1T"></div>
-        <div class="form-group"><label>Description</label><textarea class="form-control" id="nwPostDesc" rows="2" placeholder="Condition, reason..."></textarea></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Sizes</label><input type="text" id="wsPSz" placeholder="3M, 6M, 1T, 2T..." style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Description / Condition</label><textarea id="wsPD" rows="2" placeholder="Condition, reason for selling..." style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem;resize:vertical"></textarea></div>
       </div>
       <div style="padding:.85rem 1.25rem;border-top:1px solid var(--gray-light);display:flex;gap:.5rem;justify-content:flex-end">
-        <button class="btn btn-outline" onclick="document.getElementById('nwPostModal').style.display='none'">Cancel</button>
-        <button class="btn btn-primary" onclick="nwSubmitListing()"><i class="fas fa-upload"></i> Post</button>
+        <button class="btn btn-outline" onclick="document.getElementById('wsPostMod').style.display='none'">Cancel</button>
+        <button class="btn btn-primary" onclick="wsPostListing()"><i class="fas fa-upload"></i> Post to Market</button>
       </div></div>
     </div>
-    <div class="modal-overlay" id="nwBuyModal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal"><div class="modal-header"><h3><i class="fas fa-exchange-alt" style="color:var(--success)"></i> Request Transfer</h3><button class="modal-close" onclick="document.getElementById('nwBuyModal').style.display='none'">&times;</button></div>
+
+    <!-- WS Buy/Request Modal -->
+    <div class="modal-overlay" id="wsBuyMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3><i class="fas fa-exchange-alt" style="color:var(--success)"></i> Request Stock Transfer</h3><button class="modal-close" onclick="document.getElementById('wsBuyMod').style.display='none'">&times;</button></div>
       <div style="padding:1.25rem">
-        <div id="nwBuyInfo" style="background:var(--primary-light);border-radius:var(--radius);padding:.75rem;margin-bottom:1rem;font-size:.85rem"></div>
-        <div class="form-group"><label>Qty *</label><input type="number" class="form-control" id="nwBuyQty" value="1" min="1"></div>
-        <div class="form-group"><label>Sizes needed</label><input type="text" class="form-control" id="nwBuySizes" placeholder="e.g. 1T, 2T"></div>
-        <div class="form-group"><label>Offer Price $ (blank = accept ask)</label><input type="number" class="form-control" id="nwBuyOffer" placeholder="Leave blank" min="0" step="0.01"></div>
-        <div class="form-group"><label>Note</label><textarea class="form-control" id="nwBuyNote" rows="2" placeholder="Urgency, requests..."></textarea></div>
+        <div id="wsBuyInfo" style="background:var(--primary-light);border-radius:var(--radius);padding:.75rem;margin-bottom:1rem;font-size:.85rem;color:var(--dark)"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Qty *</label><input type="number" id="wsBQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Sizes needed</label><input type="text" id="wsBSz" placeholder="e.g. 1T, 2T, 3T" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Offer Price $ <small style="color:var(--gray);font-weight:400">(leave blank to accept ask price)</small></label><input type="number" id="wsBO" placeholder="Leave blank to accept" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Note to seller</label><textarea id="wsBN" rows="2" placeholder="Urgency, special requests..." style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem;resize:vertical"></textarea></div>
       </div>
       <div style="padding:.85rem 1.25rem;border-top:1px solid var(--gray-light);display:flex;gap:.5rem;justify-content:flex-end">
-        <button class="btn btn-outline" onclick="document.getElementById('nwBuyModal').style.display='none'">Cancel</button>
-        <button class="btn btn-success" onclick="nwSubmitTransfer()"><i class="fas fa-paper-plane"></i> Send Request</button>
+        <button class="btn btn-outline" onclick="document.getElementById('wsBuyMod').style.display='none'">Cancel</button>
+        <button class="btn btn-success" onclick="wsSendReq()"><i class="fas fa-paper-plane"></i> Send Request</button>
       </div></div>
     </div>
-    <div class="modal-overlay" id="nwNewChatModal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal"><div class="modal-header"><h3><i class="fas fa-edit"></i> New Conversation</h3><button class="modal-close" onclick="document.getElementById('nwNewChatModal').style.display='none'">&times;</button></div>
-      <div style="padding:1.25rem"><p style="font-size:.82rem;color:var(--gray);margin-bottom:.75rem">Select a store:</p><div id="nwStorePicker"></div></div></div>
+
+    <!-- WS New Chat Modal -->
+    <div class="modal-overlay" id="wsNewChatMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3><i class="fas fa-edit"></i> Start New Conversation</h3><button class="modal-close" onclick="document.getElementById('wsNewChatMod').style.display='none'">&times;</button></div>
+      <div style="padding:1.25rem"><p style="font-size:.82rem;color:var(--gray);margin-bottom:.75rem">Select a store to chat with:</p><div id="wsStorePick"></div></div></div>
     </div>
-    <div class="modal-overlay" id="nwChatTransferModal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
-      <div class="modal"><div class="modal-header"><h3><i class="fas fa-exchange-alt" style="color:var(--success)"></i> Request via Chat</h3><button class="modal-close" onclick="document.getElementById('nwChatTransferModal').style.display='none'">&times;</button></div>
+
+    <!-- WS Chat Request Modal -->
+    <div class="modal-overlay" id="wsReqMod" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+      <div class="modal"><div class="modal-header"><h3><i class="fas fa-exchange-alt" style="color:var(--success)"></i> Request Stock via Chat</h3><button class="modal-close" onclick="document.getElementById('wsReqMod').style.display='none'">&times;</button></div>
       <div style="padding:1.25rem">
-        <div class="form-group"><label>Item *</label><input type="text" class="form-control" id="nwCtItem" placeholder="What do you need?"></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
-          <div class="form-group"><label>Qty</label><input type="number" class="form-control" id="nwCtQty" value="1" min="1"></div>
-          <div class="form-group"><label>Offer $</label><input type="number" class="form-control" id="nwCtPrice" placeholder="0.00"></div>
+        <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Item *</label><input type="text" id="wsRI" placeholder="What do you need?" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.85rem">
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Qty</label><input type="number" id="wsRQ" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
+          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Offer $</label><input type="number" id="wsRP" placeholder="0.00" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem"></div>
         </div>
-        <div class="form-group"><label>Note</label><textarea class="form-control" id="nwCtNote" rows="2"></textarea></div>
+        <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:var(--gray-dark)">Note</label><textarea id="wsRN" rows="2" style="width:100%;padding:.6rem;border:2px solid var(--gray-light);border-radius:var(--radius);font-size:.9rem;resize:vertical"></textarea></div>
       </div>
       <div style="padding:.85rem 1.25rem;border-top:1px solid var(--gray-light);display:flex;gap:.5rem;justify-content:flex-end">
-        <button class="btn btn-outline" onclick="document.getElementById('nwChatTransferModal').style.display='none'">Cancel</button>
-        <button class="btn btn-success" onclick="nwSendChatTransfer()"><i class="fas fa-paper-plane"></i> Send</button>
+        <button class="btn btn-outline" onclick="document.getElementById('wsReqMod').style.display='none'">Cancel</button>
+        <button class="btn btn-success" onclick="wsSendChatReq()"><i class="fas fa-paper-plane"></i> Send</button>
       </div></div>
     </div>
 
