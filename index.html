@@ -6013,23 +6013,8 @@ function sendToTelegram(order, callback) {
       if (listing.storeId === MKT.store.id) { showToast('This is your own listing', 'info'); return; }
 
       // Build cart message
-      var msg = '🛒 *Order Request*
-'
-        + '━━━━━━━━━━━━━━━━
-'
-        + '📦 Item: ' + listing.name + '
-'
-        + '💰 Price: $' + parseFloat(listing.sell).toFixed(2) + ' per pc
-'
-        + (listing.sizes ? '📏 Sizes: ' + listing.sizes + '
-' : '')
-        + '🏪 From: ' + listing.storeName + '
-'
-        + '━━━━━━━━━━━━━━━━
-'
-        + 'Please confirm availability and qty.';
-
-      // Open/create conversation with seller
+      var msg = 'Cart Request: ' + listing.name + ' @$' + parseFloat(listing.sell).toFixed(2) + (listing.sizes ? ' Sizes: ' + listing.sizes : '') + ' (From: ' + listing.storeName + ') - Please confirm qty and availability.';
+            // Open/create conversation with seller
       mktOpenChatWith(listing.storeId, listing.storeName, msg);
     }
 
@@ -6149,14 +6134,14 @@ function sendToTelegram(order, callback) {
       });
     }
 
-    // ── Hook into showTab (safe — called after all scripts load) ──
-    (function() {
+    // ── Hook into showTab — runs after DOM ready so showTab exists ──
+    document.addEventListener('DOMContentLoaded', function() {
       var _orig = showTab;
       showTab = function(tab) {
         _orig(tab);
         if (tab === 'market') setTimeout(mktOnShow, 50);
       };
-    })();
+    });
     // ═══════════════════════════════════════════
     // END MARKET MODULE
     // ═══════════════════════════════════════════
