@@ -354,7 +354,7 @@
             </div>
             <nav class="desktop-nav">
                 <a href="#" class="nav-link active" onclick="showTab('store');return false"><i class="fas fa-store"></i><span data-translate="store">Store</span></a>
-                <a href="#" class="nav-link" id="marketNavLink" onclick="showTab('market');return false"><i class="fas fa-globe"></i><span>Market</span></a>
+                <a href="#" class="nav-link" id="marketNavLink" onclick="showTab('market');mktOnShow();return false"><i class="fas fa-globe"></i><span>Market</span></a>
                 <a href="#" class="nav-link hidden" id="adminNavLink" onclick="showTab('admin');return false"><i class="fas fa-cog"></i><span data-translate="admin">Admin</span></a>
                 <button class="btn btn-small btn-outline" onclick="openWishlistModal()" style="position:relative"><i class="fas fa-heart" style="color:var(--secondary)"></i> <span style="font-size:0.8rem">Wishlist</span> <span id="wishlistBadge" style="position:absolute;top:-6px;right:-6px;background:var(--secondary);color:#fff;font-size:0.65rem;min-width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700">0</span></button>
                 <button class="btn btn-small btn-outline" onclick="openAdminModal()" id="adminLoginBtn"><i class="fas fa-user-shield"></i><span data-translate="login">Login</span></button>
@@ -365,7 +365,7 @@
         <!-- FIX #9: mobile nav closes on link click via JS closeMobileMenu() -->
         <nav class="mobile-nav" id="mobileNav">
             <a href="#" class="nav-link" onclick="showTab('store');closeMobileMenu();return false"><i class="fas fa-store"></i> Store</a>
-            <a href="#" class="nav-link" onclick="showTab('market');closeMobileMenu();return false"><i class="fas fa-globe"></i> Market</a>
+            <a href="#" class="nav-link" onclick="showTab('market');mktOnShow();closeMobileMenu();return false"><i class="fas fa-globe"></i> Market</a>
             <a href="#" class="nav-link hidden" id="adminNavLinkMobile" onclick="showTab('admin');closeMobileMenu();return false"><i class="fas fa-cog"></i> Admin</a>
             <button class="btn btn-outline w-full mt-4" onclick="openAdminModal();closeMobileMenu()" id="adminLoginBtnMobile"><i class="fas fa-user-shield"></i> Admin Login</button>
             <button class="btn btn-success w-full mt-4" onclick="syncToFirebase();closeMobileMenu()"><i class="fas fa-cloud-upload-alt"></i> Sync</button>
@@ -5902,21 +5902,7 @@ function sendToTelegram(order, callback) {
       return d.getDate()+'/'+(d.getMonth()+1);
     }
 
-    // Hook showTab - runs immediately since it's at end of script
-    window.addEventListener('load', function() {
-      if (typeof showTab === 'function') {
-        var _orig = showTab;
-        showTab = function(tab) {
-          _orig(tab);
-          if (tab === 'market') setTimeout(mktOnShow, 50);
-        };
-      }
-      // Also patch market nav links directly
-      document.querySelectorAll('[onclick*="market"]').forEach(function(el) {
-        var orig = el.getAttribute('onclick');
-        el.setAttribute('onclick', orig.replace('return false', 'mktOnShow();return false'));
-      });
-    });
+    // mktOnShow is called directly from nav link onclick
     // ═══════════════════════════════════
     // END MARKET MODULE
     // ═══════════════════════════════════
