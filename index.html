@@ -20,8 +20,8 @@
     <meta name="keywords" content="kids clothing, children fashion, baby clothes, kids shoes, kids accessories, Goat Kids">
     <link rel="canonical" href="https://sophornung575-jpg.github.io/Goad-Kids">
     <meta charset="UTF-8">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22></text></svg>">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22></text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐐</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐐</text></svg>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <meta name="description" content="GOAT KIDS - Premium Children's Clothing Store">
     <meta name="theme-color" content="#667eea">
@@ -52,8 +52,7 @@
                 projectId: "goat-kids-b2b",
                 storageBucket: "goat-kids-b2b.firebasestorage.app",
                 messagingSenderId: "133821884669",
-                appId: "1:133821884669:web:87626bd7c869b40981f694",
-                measurementId: "G-LLG53WWNXJ"
+                appId: "1:133821884669:web:87626bd7c869b40981f694"
             };
             localStorage.setItem('goatFirebaseConfig', JSON.stringify(firebaseConfig));
         }
@@ -355,8 +354,7 @@
             </div>
             <nav class="desktop-nav">
                 <a href="#" class="nav-link active" onclick="showTab('store');return false"><i class="fas fa-store"></i><span data-translate="store">Store</span></a>
-                <a href="#" class="nav-link" onclick="showTab('market');return false"><i class="fas fa-globe"></i><span>Market</span></a>
-                <a href="#" class="nav-link" onclick="showTab('chat');return false"><i class="fas fa-comments"></i><span>Chat</span></a>
+                <a href="#" class="nav-link" id="marketNavLink" onclick="showTab('market');return false"><i class="fas fa-globe"></i><span>Market</span></a>
                 <a href="#" class="nav-link hidden" id="adminNavLink" onclick="showTab('admin');return false"><i class="fas fa-cog"></i><span data-translate="admin">Admin</span></a>
                 <button class="btn btn-small btn-outline" onclick="openWishlistModal()" style="position:relative"><i class="fas fa-heart" style="color:var(--secondary)"></i> <span style="font-size:0.8rem">Wishlist</span> <span id="wishlistBadge" style="position:absolute;top:-6px;right:-6px;background:var(--secondary);color:#fff;font-size:0.65rem;min-width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700">0</span></button>
                 <button class="btn btn-small btn-outline" onclick="openAdminModal()" id="adminLoginBtn"><i class="fas fa-user-shield"></i><span data-translate="login">Login</span></button>
@@ -368,7 +366,6 @@
         <nav class="mobile-nav" id="mobileNav">
             <a href="#" class="nav-link" onclick="showTab('store');closeMobileMenu();return false"><i class="fas fa-store"></i> Store</a>
             <a href="#" class="nav-link" onclick="showTab('market');closeMobileMenu();return false"><i class="fas fa-globe"></i> Market</a>
-            <a href="#" class="nav-link" onclick="showTab('chat');closeMobileMenu();return false"><i class="fas fa-comments"></i> Chat</a>
             <a href="#" class="nav-link hidden" id="adminNavLinkMobile" onclick="showTab('admin');closeMobileMenu();return false"><i class="fas fa-cog"></i> Admin</a>
             <button class="btn btn-outline w-full mt-4" onclick="openAdminModal();closeMobileMenu()" id="adminLoginBtnMobile"><i class="fas fa-user-shield"></i> Admin Login</button>
             <button class="btn btn-success w-full mt-4" onclick="syncToFirebase();closeMobileMenu()"><i class="fas fa-cloud-upload-alt"></i> Sync</button>
@@ -770,83 +767,69 @@
 
         <!-- MARKET TAB -->
         <div id="marketTab" class="tab-content hidden">
-          <div style="padding:1rem;max-width:900px;margin:0 auto">
-            <!-- Join box -->
-            <div id="mktJoinBox" style="display:none;background:linear-gradient(135deg,#667eea,#a78bfa);border-radius:16px;padding:2rem;max-width:420px;margin:0 auto 1.5rem">
-              <h2 style="color:#fff;text-align:center;margin-bottom:.5rem">🌐 Join Market Network</h2>
-              <p style="color:rgba(255,255,255,.85);text-align:center;font-size:.85rem;margin-bottom:1.5rem">Connect with other Goat Kids stores</p>
-              <div style="margin-bottom:.75rem"><label style="color:#fff;display:block;margin-bottom:.3rem;font-size:.85rem;font-weight:600">Store Name</label><input id="mktJoinName" type="text" placeholder="e.g. Goat Kids Siem Reap" style="width:100%;padding:.65rem;border-radius:8px;border:none;font-size:.9rem"></div>
-              <div style="margin-bottom:.75rem"><label style="color:#fff;display:block;margin-bottom:.3rem;font-size:.85rem;font-weight:600">City</label><input id="mktJoinCity" type="text" placeholder="e.g. Siem Reap" style="width:100%;padding:.65rem;border-radius:8px;border:none;font-size:.9rem"></div>
-              <div style="margin-bottom:.75rem"><label style="color:#fff;display:block;margin-bottom:.3rem;font-size:.85rem;font-weight:600">Join Code</label><input id="mktJoinCode" type="password" placeholder="Enter join code" style="width:100%;padding:.65rem;border-radius:8px;border:none;font-size:.9rem"><div id="mktJoinErr" style="display:none;color:#fed7d7;font-size:.78rem;margin-top:.3rem">Wrong code. Check with master store.</div></div>
-              <button onclick="mktJoin()" style="width:100%;padding:.8rem;background:#fff;color:#667eea;font-weight:700;border:none;border-radius:8px;cursor:pointer;font-size:1rem;margin-top:.25rem">Join Network</button>
+          <div style="padding:1rem;max-width:960px;margin:0 auto">
+
+            <!-- Setup box (shown before joining) -->
+            <div id="mktSetup" style="display:none;background:linear-gradient(135deg,#667eea,#a78bfa);border-radius:16px;padding:2rem;max-width:400px;margin:0 auto 1.5rem">
+              <h2 style="color:#fff;text-align:center;margin-bottom:.4rem;font-size:1.3rem">🌐 Join B2B Market</h2>
+              <p style="color:rgba(255,255,255,.85);text-align:center;font-size:.83rem;margin-bottom:1.25rem">Connect your store to the network</p>
+              <div style="margin-bottom:.7rem">
+                <label style="color:#fff;display:block;margin-bottom:.25rem;font-size:.83rem;font-weight:600">Store Name</label>
+                <input id="mktSetupName" type="text" placeholder="e.g. Goat Kids Phnom Penh" style="width:100%;padding:.6rem;border-radius:8px;border:none;font-size:.9rem;box-sizing:border-box">
+              </div>
+              <div style="margin-bottom:.7rem">
+                <label style="color:#fff;display:block;margin-bottom:.25rem;font-size:.83rem;font-weight:600">City</label>
+                <input id="mktSetupCity" type="text" placeholder="e.g. Phnom Penh" style="width:100%;padding:.6rem;border-radius:8px;border:none;font-size:.9rem;box-sizing:border-box">
+              </div>
+              <div style="margin-bottom:.7rem">
+                <label style="color:#fff;display:block;margin-bottom:.25rem;font-size:.83rem;font-weight:600">Join Code</label>
+                <input id="mktSetupCode" type="password" placeholder="Enter code from master store" style="width:100%;padding:.6rem;border-radius:8px;border:none;font-size:.9rem;box-sizing:border-box">
+                <div id="mktSetupErr" style="display:none;color:#fed7d7;font-size:.78rem;margin-top:.25rem">Wrong code. Check with master store.</div>
+              </div>
+              <button onclick="mktJoin()" style="width:100%;padding:.75rem;background:#fff;color:#667eea;font-weight:700;border:none;border-radius:8px;cursor:pointer;font-size:.95rem;margin-top:.25rem">
+                Join Network
+              </button>
             </div>
 
-            <!-- Store bar -->
-            <div id="mktStoreBar" style="display:none;background:linear-gradient(135deg,#667eea,#a78bfa);color:#fff;border-radius:12px;padding:.75rem 1.25rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem">
-              <div><i class="fas fa-store"></i> <b id="mktStoreName"></b></div>
+            <!-- Top bar (shown after joining) -->
+            <div id="mktTopBar" style="display:none;background:linear-gradient(135deg,#667eea,#a78bfa);color:#fff;border-radius:12px;padding:.75rem 1.1rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem">
+              <div style="font-size:.9rem"><i class="fas fa-store"></i> <b id="mktMyStoreName">—</b> <span id="mktMyCity" style="opacity:.8;font-size:.82rem"></span></div>
               <div style="display:flex;gap:.5rem">
-                <button onclick="mktOpenPost()" style="background:#fff;color:#667eea;border:none;padding:.4rem .85rem;border-radius:8px;cursor:pointer;font-weight:700;font-size:.85rem"><i class="fas fa-plus"></i> Post Listing</button>
-                <button onclick="mktLogout()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:.4rem .75rem;border-radius:8px;cursor:pointer;font-size:.8rem">Switch Store</button>
+                <button onclick="mktOpenPost()" style="background:#fff;color:#667eea;border:none;padding:.4rem .9rem;border-radius:8px;cursor:pointer;font-weight:700;font-size:.83rem"><i class="fas fa-plus"></i> Post Item</button>
+                <button onclick="mktLeave()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:.4rem .75rem;border-radius:8px;cursor:pointer;font-size:.78rem">Switch</button>
               </div>
             </div>
 
-            <!-- Search -->
-            <div id="mktSearchBar" style="display:none;display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap">
-              <input id="mktQ" type="text" placeholder="Search listings..." oninput="mktRender()" style="flex:1;min-width:140px;padding:.55rem .85rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.88rem">
-              <select id="mktCatFilter" onchange="mktRender()" style="padding:.55rem .75rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.88rem">
+            <!-- Search bar -->
+            <div id="mktFilters" style="display:none;display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap">
+              <input id="mktSearch" type="text" placeholder="Search listings..." oninput="mktRender()" style="flex:1;min-width:140px;padding:.55rem .85rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.88rem">
+              <select id="mktCatF" onchange="mktRender()" style="padding:.55rem .75rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.88rem;background:#fff">
                 <option value="">All Categories</option>
                 <option>Dresses</option><option>Girl Clothes</option><option>Boy Clothes</option>
                 <option>Baby Shirt</option><option>Baby Shoes</option><option>Baby Accessories</option>
               </select>
             </div>
 
-            <!-- Grid -->
-            <div id="mktGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.85rem"></div>
-            <div id="mktEmpty" style="display:none;text-align:center;padding:3rem;color:#718096"><i class="fas fa-store-slash" style="font-size:2.5rem;display:block;margin-bottom:.75rem;opacity:.4"></i><p>No listings yet. Be the first to post!</p></div>
-          </div>
-        </div>
-
-        <!-- CHAT TAB -->
-        <div id="chatTab" class="tab-content hidden">
-          <div style="max-width:900px;margin:0 auto;padding:1rem">
-            <!-- Join box reuses mkt session -->
-            <div id="chatJoinBox" style="display:none;background:linear-gradient(135deg,#667eea,#a78bfa);border-radius:16px;padding:2rem;max-width:420px;margin:0 auto">
-              <h2 style="color:#fff;text-align:center;margin-bottom:.5rem">💬 Join to Chat</h2>
-              <p style="color:rgba(255,255,255,.85);text-align:center;font-size:.85rem;margin-bottom:1rem">You need to join the market first</p>
-              <button onclick="showTab('market')" style="width:100%;padding:.8rem;background:#fff;color:#667eea;font-weight:700;border:none;border-radius:8px;cursor:pointer;font-size:1rem">Go to Market &rarr;</button>
+            <!-- Listings grid -->
+            <div id="mktGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.85rem"></div>
+            <div id="mktEmpty" style="display:none;text-align:center;padding:3rem;color:#718096">
+              <i class="fas fa-store-slash" style="font-size:2.5rem;display:block;margin-bottom:.75rem;opacity:.35"></i>
+              <p style="font-size:.9rem">No listings yet. Be the first to post!</p>
             </div>
 
-            <div id="chatMainUI" style="display:none;background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:hidden">
-              <div style="display:grid;grid-template-columns:240px 1fr;height:520px">
-                <!-- Sidebar -->
-                <div style="border-right:1px solid #e2e8f0;display:flex;flex-direction:column">
-                  <div style="padding:.75rem 1rem;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:.9rem">
-                    Messages
-                    <button onclick="chatNewConv()" style="background:none;border:1px solid #e2e8f0;border-radius:6px;padding:.25rem .5rem;cursor:pointer;font-size:.8rem"><i class="fas fa-edit"></i></button>
-                  </div>
-                  <div id="chatList" style="flex:1;overflow-y:auto"></div>
-                </div>
-                <!-- Main -->
-                <div style="display:flex;flex-direction:column;height:100%">
-                  <div id="chatEmpty" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#718096;gap:.75rem">
-                    <i class="fas fa-comments" style="font-size:3rem;opacity:.3"></i>
-                    <p style="font-size:.88rem">Select a conversation or start a new one</p>
-                    <button onclick="chatNewConv()" style="background:#667eea;color:#fff;border:none;padding:.55rem 1.1rem;border-radius:8px;cursor:pointer;font-size:.88rem;font-weight:600"><i class="fas fa-edit"></i> New Message</button>
-                  </div>
-                  <div id="chatWindow" style="display:none;flex-direction:column;height:100%">
-                    <div style="padding:.7rem 1rem;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;gap:.65rem">
-                      <div id="chatWinAv" style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#667eea,#a78bfa);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.88rem;flex-shrink:0">?</div>
-                      <div style="flex:1"><div id="chatWinName" style="font-weight:700;font-size:.9rem">—</div><div style="font-size:.7rem;color:#48bb78">active on network</div></div>
-                    </div>
-                    <div id="chatMsgs" style="flex:1;overflow-y:auto;padding:.85rem;display:flex;flex-direction:column;gap:.5rem;background:#fafbff"></div>
-                    <div style="padding:.65rem;border-top:1px solid #e2e8f0;display:flex;gap:.5rem;align-items:flex-end">
-                      <textarea id="chatMsgIn" rows="1" placeholder="Type a message..." style="flex:1;resize:none;min-height:38px;max-height:90px;padding:.45rem .7rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.88rem;font-family:inherit" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();chatSend()}" oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,90)+'px'"></textarea>
-                      <button onclick="chatSend()" style="width:38px;height:38px;background:#667eea;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:1rem;flex-shrink:0"><i class="fas fa-paper-plane"></i></button>
-                    </div>
-                  </div>
-                </div>
+            <!-- Chat panel (slides in when chatting) -->
+            <div id="mktChatPanel" style="display:none;margin-top:1rem;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.1);overflow:hidden">
+              <div style="padding:.7rem 1rem;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between;background:#f7fafc">
+                <div style="font-weight:700;font-size:.9rem"><i class="fas fa-comment" style="color:#667eea"></i> Chat with <span id="mktChatWithName">—</span></div>
+                <button onclick="mktCloseChat()" style="background:none;border:none;cursor:pointer;color:#718096;font-size:1.1rem">&times;</button>
+              </div>
+              <div id="mktChatMsgs" style="height:260px;overflow-y:auto;padding:.85rem;display:flex;flex-direction:column;gap:.5rem;background:#fafbff"></div>
+              <div style="padding:.6rem;border-top:1px solid #e2e8f0;display:flex;gap:.4rem;align-items:flex-end">
+                <textarea id="mktChatIn" rows="1" placeholder="Type a message..." style="flex:1;resize:none;min-height:38px;max-height:80px;padding:.45rem .65rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.88rem;font-family:inherit" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();mktChatSend()}" oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,80)+'px'"></textarea>
+                <button onclick="mktChatSend()" style="width:38px;height:38px;background:#667eea;color:#fff;border:none;border-radius:8px;cursor:pointer;flex-shrink:0"><i class="fas fa-paper-plane"></i></button>
               </div>
             </div>
+
           </div>
         </div>
 
@@ -3399,35 +3382,51 @@ function sendToTelegram(order, callback) {
 
         html += '<\/scr' + 'ipt>';
         html += '
-    <!-- Market Post Modal -->
-    <div id="mktPostModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:900;display:none;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)this.style.display='none'">
-      <div style="background:#fff;border-radius:16px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid #e2e8f0"><h3 style="font-size:1rem;font-weight:700"><i class="fas fa-tag" style="color:#667eea"></i> Post to Market</h3><button onclick="document.getElementById('mktPostModal').style.display='none'" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#718096">&times;</button></div>
+    <!-- Market: Post Item Modal -->
+    <div id="mktPostModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)this.style.display='none'">
+      <div style="background:#fff;border-radius:16px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)">
+        <div style="padding:1rem 1.25rem;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between">
+          <h3 style="font-size:1rem;font-weight:700"><i class="fas fa-tag" style="color:#667eea"></i> Post Item to Market</h3>
+          <button onclick="document.getElementById('mktPostModal').style.display='none'" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#718096;line-height:1">&times;</button>
+        </div>
         <div style="padding:1.25rem">
-          <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Pick from inventory</label><select id="mktPostInv" onchange="mktFillPost()" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"><option value="">— Enter manually —</option></select></div>
-          <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Item Name *</label><input id="mktPostName" type="text" placeholder="Product name" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.85rem">
-            <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Cost Price $</label><input id="mktPostCost" type="number" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
-            <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Sell Price $ *</label><input id="mktPostSell" type="number" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+          <div style="margin-bottom:.85rem">
+            <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Pick from inventory</label>
+            <select id="mktPostInv" onchange="mktFillFromInv()" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem">
+              <option value="">— Enter manually —</option>
+            </select>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.85rem">
-            <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Qty</label><input id="mktPostQty" type="number" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
-            <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Sizes</label><input id="mktPostSizes" type="text" placeholder="3M, 6M, 1T..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+          <div style="margin-bottom:.85rem">
+            <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Item Name *</label>
+            <input id="mktPostName" type="text" placeholder="Product name" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;box-sizing:border-box">
           </div>
-          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Description / Condition</label><textarea id="mktPostDesc" rows="2" placeholder="e.g. Good condition, excess stock..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical"></textarea></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.85rem">
+            <div>
+              <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Cost $</label>
+              <input id="mktPostCost" type="number" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;box-sizing:border-box">
+            </div>
+            <div>
+              <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Sell $ *</label>
+              <input id="mktPostSell" type="number" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;box-sizing:border-box">
+            </div>
+            <div>
+              <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Qty</label>
+              <input id="mktPostQty" type="number" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;box-sizing:border-box">
+            </div>
+          </div>
+          <div style="margin-bottom:.85rem">
+            <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Sizes</label>
+            <input id="mktPostSizes" type="text" placeholder="e.g. 3M, 6M, 1T, 2T" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;box-sizing:border-box">
+          </div>
+          <div>
+            <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Description / Condition</label>
+            <textarea id="mktPostDesc" rows="2" placeholder="Good condition, excess stock..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical;box-sizing:border-box"></textarea>
+          </div>
         </div>
         <div style="padding:.85rem 1.25rem;border-top:1px solid #e2e8f0;display:flex;gap:.5rem;justify-content:flex-end">
-          <button onclick="document.getElementById('mktPostModal').style.display='none'" style="padding:.5rem 1rem;border:2px solid #e2e8f0;background:#fff;border-radius:8px;cursor:pointer;font-weight:600">Cancel</button>
-          <button onclick="mktSubmitPost()" style="padding:.5rem 1rem;background:#667eea;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600"><i class="fas fa-upload"></i> Post</button>
+          <button onclick="document.getElementById('mktPostModal').style.display='none'" style="padding:.5rem 1.1rem;border:2px solid #e2e8f0;background:#fff;border-radius:8px;cursor:pointer;font-weight:600;font-size:.88rem">Cancel</button>
+          <button onclick="mktSubmitPost()" style="padding:.5rem 1.1rem;background:#667eea;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:.88rem"><i class="fas fa-upload"></i> Post to Market</button>
         </div>
-      </div>
-    </div>
-
-    <!-- Chat: New Conversation Modal -->
-    <div id="chatNewModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:900;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)this.style.display='none'">
-      <div style="background:#fff;border-radius:16px;width:100%;max-width:420px;max-height:80vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid #e2e8f0"><h3 style="font-size:1rem;font-weight:700"><i class="fas fa-edit"></i> Start Conversation</h3><button onclick="document.getElementById('chatNewModal').style.display='none'" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#718096">&times;</button></div>
-        <div style="padding:1.25rem"><p style="font-size:.83rem;color:#718096;margin-bottom:.75rem">Select a store to chat with:</p><div id="chatStoreList"></div></div>
       </div>
     </div>
 
@@ -3542,7 +3541,7 @@ function sendToTelegram(order, callback) {
                 '<button class="btn btn-info btn-small" data-pid="' + p.id + '" data-act="label" onclick="inv(event,this)" style="padding:0.2rem 0.4rem"><i class="fas fa-tag" style="pointer-events:none"></i></button>' +
                 '<button class="btn btn-warning btn-small" data-pid="' + p.id + '" data-act="edit" onclick="inv(event,this)" style="padding:0.2rem 0.4rem"><i class="fas fa-edit" style="pointer-events:none"></i></button>' +
                 '<button class="btn btn-danger btn-small" data-pid="' + p.id + '" data-act="del" onclick="inv(event,this)" style="padding:0.2rem 0.4rem"><i class="fas fa-trash" style="pointer-events:none"></i></button>' +
-                '<button title="Share to Market" style="background:none;border:none;cursor:pointer;padding:.2rem .3rem" onclick="mktShareProduct(\'' + p.id + '\')"><i class="fas fa-globe" style="color:#667eea;font-size:.9rem"></i></button>' +
+                '<button title="Share to Market" style="background:none;border:none;cursor:pointer;padding:.2rem .3rem" onclick="mktShareFromInv(\'' + p.id + '\')"><i class="fas fa-globe" style="color:#667eea;font-size:.9rem"></i></button>' +
                 '</div></td>' +
                 '</tr>';
         }
@@ -3789,35 +3788,51 @@ function sendToTelegram(order, callback) {
             '<div class="total-row grand-total"><span>REFUND AMOUNT:</span><span>-$' + (refund.refundAmount || 0).toFixed(2) + '</span></div><div class="dash"></div>' +
             '<div class="center" style="font-size:14px"><p style="color:#e53e3e">💰 Refund Processed</p><p>Stock has been restored</p></div></div>' +
             '<div class="btns"><button class="btn-print" onclick="window.print()">🖨️ Print</button><button class="btn-close" onclick="window.close()">✕ Close</button></div>
-    <!-- Market Post Modal -->
-    <div id="mktPostModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:900;display:none;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)this.style.display='none'">
-      <div style="background:#fff;border-radius:16px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid #e2e8f0"><h3 style="font-size:1rem;font-weight:700"><i class="fas fa-tag" style="color:#667eea"></i> Post to Market</h3><button onclick="document.getElementById('mktPostModal').style.display='none'" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#718096">&times;</button></div>
+    <!-- Market: Post Item Modal -->
+    <div id="mktPostModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)this.style.display='none'">
+      <div style="background:#fff;border-radius:16px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)">
+        <div style="padding:1rem 1.25rem;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between">
+          <h3 style="font-size:1rem;font-weight:700"><i class="fas fa-tag" style="color:#667eea"></i> Post Item to Market</h3>
+          <button onclick="document.getElementById('mktPostModal').style.display='none'" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#718096;line-height:1">&times;</button>
+        </div>
         <div style="padding:1.25rem">
-          <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Pick from inventory</label><select id="mktPostInv" onchange="mktFillPost()" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"><option value="">— Enter manually —</option></select></div>
-          <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Item Name *</label><input id="mktPostName" type="text" placeholder="Product name" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.85rem">
-            <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Cost Price $</label><input id="mktPostCost" type="number" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
-            <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Sell Price $ *</label><input id="mktPostSell" type="number" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+          <div style="margin-bottom:.85rem">
+            <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Pick from inventory</label>
+            <select id="mktPostInv" onchange="mktFillFromInv()" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem">
+              <option value="">— Enter manually —</option>
+            </select>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.85rem">
-            <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Qty</label><input id="mktPostQty" type="number" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
-            <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Sizes</label><input id="mktPostSizes" type="text" placeholder="3M, 6M, 1T..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+          <div style="margin-bottom:.85rem">
+            <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Item Name *</label>
+            <input id="mktPostName" type="text" placeholder="Product name" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;box-sizing:border-box">
           </div>
-          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Description / Condition</label><textarea id="mktPostDesc" rows="2" placeholder="e.g. Good condition, excess stock..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical"></textarea></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.85rem">
+            <div>
+              <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Cost $</label>
+              <input id="mktPostCost" type="number" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;box-sizing:border-box">
+            </div>
+            <div>
+              <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Sell $ *</label>
+              <input id="mktPostSell" type="number" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;box-sizing:border-box">
+            </div>
+            <div>
+              <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Qty</label>
+              <input id="mktPostQty" type="number" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;box-sizing:border-box">
+            </div>
+          </div>
+          <div style="margin-bottom:.85rem">
+            <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Sizes</label>
+            <input id="mktPostSizes" type="text" placeholder="e.g. 3M, 6M, 1T, 2T" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;box-sizing:border-box">
+          </div>
+          <div>
+            <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Description / Condition</label>
+            <textarea id="mktPostDesc" rows="2" placeholder="Good condition, excess stock..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical;box-sizing:border-box"></textarea>
+          </div>
         </div>
         <div style="padding:.85rem 1.25rem;border-top:1px solid #e2e8f0;display:flex;gap:.5rem;justify-content:flex-end">
-          <button onclick="document.getElementById('mktPostModal').style.display='none'" style="padding:.5rem 1rem;border:2px solid #e2e8f0;background:#fff;border-radius:8px;cursor:pointer;font-weight:600">Cancel</button>
-          <button onclick="mktSubmitPost()" style="padding:.5rem 1rem;background:#667eea;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600"><i class="fas fa-upload"></i> Post</button>
+          <button onclick="document.getElementById('mktPostModal').style.display='none'" style="padding:.5rem 1.1rem;border:2px solid #e2e8f0;background:#fff;border-radius:8px;cursor:pointer;font-weight:600;font-size:.88rem">Cancel</button>
+          <button onclick="mktSubmitPost()" style="padding:.5rem 1.1rem;background:#667eea;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:.88rem"><i class="fas fa-upload"></i> Post to Market</button>
         </div>
-      </div>
-    </div>
-
-    <!-- Chat: New Conversation Modal -->
-    <div id="chatNewModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:900;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)this.style.display='none'">
-      <div style="background:#fff;border-radius:16px;width:100%;max-width:420px;max-height:80vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid #e2e8f0"><h3 style="font-size:1rem;font-weight:700"><i class="fas fa-edit"></i> Start Conversation</h3><button onclick="document.getElementById('chatNewModal').style.display='none'" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#718096">&times;</button></div>
-        <div style="padding:1.25rem"><p style="font-size:.83rem;color:#718096;margin-bottom:.75rem">Select a store to chat with:</p><div id="chatStoreList"></div></div>
       </div>
     </div>
 
@@ -5674,35 +5689,51 @@ function sendToTelegram(order, callback) {
             '}' +
             '<'+'/scr'+'ipt>' +
             '
-    <!-- Market Post Modal -->
-    <div id="mktPostModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:900;display:none;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)this.style.display='none'">
-      <div style="background:#fff;border-radius:16px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid #e2e8f0"><h3 style="font-size:1rem;font-weight:700"><i class="fas fa-tag" style="color:#667eea"></i> Post to Market</h3><button onclick="document.getElementById('mktPostModal').style.display='none'" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#718096">&times;</button></div>
+    <!-- Market: Post Item Modal -->
+    <div id="mktPostModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)this.style.display='none'">
+      <div style="background:#fff;border-radius:16px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)">
+        <div style="padding:1rem 1.25rem;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between">
+          <h3 style="font-size:1rem;font-weight:700"><i class="fas fa-tag" style="color:#667eea"></i> Post Item to Market</h3>
+          <button onclick="document.getElementById('mktPostModal').style.display='none'" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#718096;line-height:1">&times;</button>
+        </div>
         <div style="padding:1.25rem">
-          <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Pick from inventory</label><select id="mktPostInv" onchange="mktFillPost()" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"><option value="">— Enter manually —</option></select></div>
-          <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Item Name *</label><input id="mktPostName" type="text" placeholder="Product name" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.85rem">
-            <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Cost Price $</label><input id="mktPostCost" type="number" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
-            <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Sell Price $ *</label><input id="mktPostSell" type="number" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+          <div style="margin-bottom:.85rem">
+            <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Pick from inventory</label>
+            <select id="mktPostInv" onchange="mktFillFromInv()" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem">
+              <option value="">— Enter manually —</option>
+            </select>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.85rem">
-            <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Qty</label><input id="mktPostQty" type="number" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
-            <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Sizes</label><input id="mktPostSizes" type="text" placeholder="3M, 6M, 1T..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+          <div style="margin-bottom:.85rem">
+            <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Item Name *</label>
+            <input id="mktPostName" type="text" placeholder="Product name" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;box-sizing:border-box">
           </div>
-          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Description / Condition</label><textarea id="mktPostDesc" rows="2" placeholder="e.g. Good condition, excess stock..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical"></textarea></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.85rem">
+            <div>
+              <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Cost $</label>
+              <input id="mktPostCost" type="number" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;box-sizing:border-box">
+            </div>
+            <div>
+              <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Sell $ *</label>
+              <input id="mktPostSell" type="number" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;box-sizing:border-box">
+            </div>
+            <div>
+              <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Qty</label>
+              <input id="mktPostQty" type="number" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;box-sizing:border-box">
+            </div>
+          </div>
+          <div style="margin-bottom:.85rem">
+            <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Sizes</label>
+            <input id="mktPostSizes" type="text" placeholder="e.g. 3M, 6M, 1T, 2T" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;box-sizing:border-box">
+          </div>
+          <div>
+            <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Description / Condition</label>
+            <textarea id="mktPostDesc" rows="2" placeholder="Good condition, excess stock..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical;box-sizing:border-box"></textarea>
+          </div>
         </div>
         <div style="padding:.85rem 1.25rem;border-top:1px solid #e2e8f0;display:flex;gap:.5rem;justify-content:flex-end">
-          <button onclick="document.getElementById('mktPostModal').style.display='none'" style="padding:.5rem 1rem;border:2px solid #e2e8f0;background:#fff;border-radius:8px;cursor:pointer;font-weight:600">Cancel</button>
-          <button onclick="mktSubmitPost()" style="padding:.5rem 1rem;background:#667eea;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600"><i class="fas fa-upload"></i> Post</button>
+          <button onclick="document.getElementById('mktPostModal').style.display='none'" style="padding:.5rem 1.1rem;border:2px solid #e2e8f0;background:#fff;border-radius:8px;cursor:pointer;font-weight:600;font-size:.88rem">Cancel</button>
+          <button onclick="mktSubmitPost()" style="padding:.5rem 1.1rem;background:#667eea;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:.88rem"><i class="fas fa-upload"></i> Post to Market</button>
         </div>
-      </div>
-    </div>
-
-    <!-- Chat: New Conversation Modal -->
-    <div id="chatNewModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:900;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)this.style.display='none'">
-      <div style="background:#fff;border-radius:16px;width:100%;max-width:420px;max-height:80vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid #e2e8f0"><h3 style="font-size:1rem;font-weight:700"><i class="fas fa-edit"></i> Start Conversation</h3><button onclick="document.getElementById('chatNewModal').style.display='none'" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#718096">&times;</button></div>
-        <div style="padding:1.25rem"><p style="font-size:.83rem;color:#718096;margin-bottom:.75rem">Select a store to chat with:</p><div id="chatStoreList"></div></div>
       </div>
     </div>
 
@@ -5782,327 +5813,353 @@ function sendToTelegram(order, callback) {
     }
 
    
-    // ═══════════════════════════════════════
-    // MARKET + CHAT MODULE
-    // ═══════════════════════════════════════
-    var NET = {
-      store: null,
-      listings: [],
-      convs: [],
-      convId: null,
-      _unsubL: null,
-      _unsubC: null,
-      _unsubM: null,
-      _init: false,
+    // ═══════════════════════════════════════════
+    // MARKET MODULE — B2B inter-store marketplace
+    // ═══════════════════════════════════════════
+    var MKT = {
+      store: null,       // current store { id, name, city }
+      listings: [],      // live from Firestore
+      convId: null,      // active chat conversation id
+      convUnsub: null,   // unsubscribe fn for messages
+      listUnsub: null,   // unsubscribe fn for listings
       CODE: 'GoadKids1001',
-      EM: { 'Dresses':'👗','Girl Clothes':'👕','Boy Clothes':'👕','Baby Shirt':'👶','Baby Shoes':'👟','Baby Accessories':'🎀' }
+      EMOJI: { 'Dresses':'👗','Girl Clothes':'👕','Boy Clothes':'👕','Baby Shirt':'👶','Baby Shoes':'👟','Baby Accessories':'🎀','Other':'📦' }
     };
 
-    // ── Helpers ──
-    function netLoad() {
-      var raw = localStorage.getItem('goatNetStore');
-      if (raw) { try { NET.store = JSON.parse(raw); } catch(e) {} }
-      return !!NET.store;
-    }
-
-    function netInit() {
-      if (NET._init || !db || !NET.store) return;
-      NET._init = true;
-      // Register store
-      db.collection('net_stores').doc(NET.store.id).set({
-        id: NET.store.id, name: NET.store.name, city: NET.store.city,
-        ts: firebase.firestore.FieldValue.serverTimestamp()
-      }, { merge: true }).catch(function(){});
-      // Subscribe listings
-      NET._unsubL = db.collection('net_listings').where('status','==','active')
-        .onSnapshot(function(s) {
-          NET.listings = s.docs.map(function(d){ return Object.assign({id:d.id},d.data()); })
-            .sort(function(a,b){ return ((b.ts&&b.ts.seconds)||0)-((a.ts&&a.ts.seconds)||0); });
-          mktRender();
-        }, function(){});
-      // Subscribe conversations
-      NET._unsubC = db.collection('net_convs').where('members','array-contains',NET.store.id)
-        .onSnapshot(function(s) {
-          NET.convs = s.docs.map(function(d){ return Object.assign({id:d.id},d.data()); })
-            .sort(function(a,b){ return ((b.lastAt&&b.lastAt.seconds)||0)-((a.lastAt&&a.lastAt.seconds)||0); });
-          chatRenderList();
-        }, function(){});
-    }
-
-    // ── MARKET ──
+    // ── Called when Market tab opens ──
     function mktOnShow() {
-      netLoad();
-      if (!NET.store) {
-        document.getElementById('mktJoinBox').style.display = 'block';
-        document.getElementById('mktStoreBar').style.display = 'none';
-        document.getElementById('mktSearchBar').style.display = 'none';
+      // Load saved store from localStorage
+      var raw = localStorage.getItem('mktStore');
+      MKT.store = raw ? JSON.parse(raw) : null;
+
+      if (!MKT.store) {
+        document.getElementById('mktSetup').style.display = 'block';
+        document.getElementById('mktTopBar').style.display = 'none';
+        document.getElementById('mktFilters').style.display = 'none';
+        document.getElementById('mktGrid').innerHTML = '';
+        document.getElementById('mktEmpty').style.display = 'none';
       } else {
-        document.getElementById('mktJoinBox').style.display = 'none';
-        document.getElementById('mktStoreBar').style.display = 'flex';
-        document.getElementById('mktSearchBar').style.display = 'flex';
-        document.getElementById('mktStoreName').textContent = NET.store.name;
-        netInit();
-        mktRender();
+        document.getElementById('mktSetup').style.display = 'none';
+        document.getElementById('mktTopBar').style.display = 'flex';
+        document.getElementById('mktFilters').style.display = 'flex';
+        document.getElementById('mktMyStoreName').textContent = MKT.store.name;
+        document.getElementById('mktMyCity').textContent = MKT.store.city ? '· ' + MKT.store.city : '';
+        mktSubscribe();
       }
     }
 
     function mktJoin() {
-      var name = document.getElementById('mktJoinName').value.trim();
-      var city = document.getElementById('mktJoinCity').value.trim();
-      var code = document.getElementById('mktJoinCode').value.trim();
-      if (!name || !city || !code) { showToast('Fill all fields', 'error'); return; }
-      if (code !== NET.CODE) { document.getElementById('mktJoinErr').style.display='block'; return; }
-      document.getElementById('mktJoinErr').style.display = 'none';
-      NET.store = { id: 'st_'+Date.now()+'_'+Math.random().toString(36).slice(2,5), name: name, city: city };
-      localStorage.setItem('goatNetStore', JSON.stringify(NET.store));
-      NET._init = false;
+      var name = document.getElementById('mktSetupName').value.trim();
+      var city = document.getElementById('mktSetupCity').value.trim();
+      var code = document.getElementById('mktSetupCode').value.trim();
+      if (!name || !city) { showToast('Please fill store name and city', 'error'); return; }
+      if (code !== MKT.CODE) { document.getElementById('mktSetupErr').style.display='block'; return; }
+      document.getElementById('mktSetupErr').style.display = 'none';
+      MKT.store = { id: 'st_' + Date.now() + '_' + Math.random().toString(36).slice(2,5), name: name, city: city };
+      localStorage.setItem('mktStore', JSON.stringify(MKT.store));
+      // Register on network
+      if (db) {
+        db.collection('mkt_stores').doc(MKT.store.id).set({
+          id: MKT.store.id, name: MKT.store.name, city: MKT.store.city,
+          ts: firebase.firestore.FieldValue.serverTimestamp()
+        }).catch(function(){});
+      }
       mktOnShow();
       showToast('Welcome, ' + name + '!', 'success');
     }
 
-    function mktLogout() {
-      if (!confirm('Switch store?')) return;
-      localStorage.removeItem('goatNetStore');
-      NET.store = null; NET._init = false; NET.listings = []; NET.convs = [];
+    function mktLeave() {
+      if (!confirm('Switch store? Your session will be cleared.')) return;
+      if (MKT.listUnsub) MKT.listUnsub();
+      if (MKT.convUnsub) MKT.convUnsub();
+      localStorage.removeItem('mktStore');
+      MKT.store = null; MKT.listings = []; MKT.convId = null;
+      document.getElementById('mktChatPanel').style.display = 'none';
       mktOnShow();
     }
 
+    function mktSubscribe() {
+      if (!db || !MKT.store || MKT.listUnsub) return;
+      MKT.listUnsub = db.collection('mkt_listings')
+        .where('status','==','active')
+        .onSnapshot(function(snap) {
+          MKT.listings = snap.docs.map(function(d){ return Object.assign({id:d.id}, d.data()); })
+            .sort(function(a,b){ return ((b.ts&&b.ts.seconds)||0) - ((a.ts&&a.ts.seconds)||0); });
+          mktRender();
+        }, function(e){ console.warn('Listings error:', e); });
+    }
+
     function mktRender() {
-      var q = (document.getElementById('mktQ')||{value:''}).value.toLowerCase();
-      var cat = (document.getElementById('mktCatFilter')||{value:''}).value;
-      var list = NET.listings.filter(function(l){
-        return (!q||(l.name||'').toLowerCase().indexOf(q)>=0||((l.storeName||'').toLowerCase()).indexOf(q)>=0) && (!cat||l.cat===cat);
+      var q = ((document.getElementById('mktSearch')||{}).value||'').toLowerCase();
+      var cat = ((document.getElementById('mktCatF')||{}).value||'');
+      var list = MKT.listings.filter(function(l){
+        return (!q || (l.name||'').toLowerCase().indexOf(q)>=0 || (l.storeName||'').toLowerCase().indexOf(q)>=0)
+            && (!cat || l.cat===cat);
       });
       var grid = document.getElementById('mktGrid');
       var empty = document.getElementById('mktEmpty');
       if (!grid) return;
-      if (!list.length) { grid.innerHTML=''; if(empty) empty.style.display='block'; return; }
-      if(empty) empty.style.display='none';
+      if (!list.length) { grid.innerHTML=''; empty.style.display='block'; return; }
+      empty.style.display = 'none';
       grid.innerHTML = list.map(function(l){
-        var mine = NET.store && l.storeId === NET.store.id;
-        var lid = l.id;
+        var mine = MKT.store && l.storeId === MKT.store.id;
+        var lid = escHtml(l.id);
+        var sname = escHtml(l.storeName||'');
+        var scity = l.city ? ' · '+escHtml(l.city) : '';
+        var emoji = MKT.EMOJI[l.cat] || '📦';
         var btns = mine
-          ? '<button onclick="mktRemove(''+lid+'')" style="width:100%;padding:.4rem;background:#fed7d7;color:#c53030;border:none;border-radius:6px;cursor:pointer;font-size:.8rem;font-weight:600"><i class="fas fa-trash"></i> Remove</button>'
-          : '<div style="display:flex;gap:.35rem">'
-            + '<button onclick="chatWithStore(''+escHtml(l.storeId)+'',''+escHtml(l.storeName)+'')" style="flex:1;padding:.4rem;background:#ebedff;color:#5a67d8;border:none;border-radius:6px;cursor:pointer;font-size:.8rem;font-weight:600"><i class="fas fa-comment"></i> Chat</button>'
-            + '</div>';
-        return '<div style="background:#fff;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.08);border:1px solid #e2e8f0;overflow:hidden">'
-          + '<div style="height:90px;background:#f7fafc;display:flex;align-items:center;justify-content:center;font-size:2.5rem">'+(NET.EM[l.cat]||'📦')+'</div>'
-          + '<div style="padding:.7rem">'
-          + '<div style="font-size:.68rem;color:#718096;margin-bottom:.15rem"><i class="fas fa-store"></i> '+escHtml(l.storeName||'')+(l.city?' · '+escHtml(l.city):'')+'</div>'
-          + '<div style="font-weight:700;font-size:.9rem;margin-bottom:.2rem">'+escHtml(l.name||'')+'</div>'
-          + '<div style="display:flex;justify-content:space-between;align-items:center;margin:.25rem 0">'
-          + '<div><div style="font-size:.62rem;color:#718096">Cost</div><div style="font-weight:700;font-size:.88rem;color:#4a5568">$'+parseFloat(l.cost||0).toFixed(2)+'</div></div>'
-          + '<div style="text-align:right"><div style="font-size:.62rem;color:#718096">Sell</div><div style="font-weight:800;color:#667eea;font-size:1rem">$'+parseFloat(l.sell||0).toFixed(2)+'</div></div>'
-          + '<span style="background:rgba(72,187,120,.12);color:#276749;padding:.12rem .4rem;border-radius:2rem;font-size:.68rem;font-weight:700">'+escHtml(String(l.qty||0))+' pcs</span>'
-          + '</div>'
-          + (l.sizes?'<div style="font-size:.7rem;color:#718096;margin-bottom:.2rem">'+escHtml(l.sizes)+'</div>':'')
-          + (l.desc?'<div style="font-size:.7rem;color:#718096;font-style:italic;margin-bottom:.3rem">'+escHtml(l.desc)+'</div>':'')
-          + '<div style="margin-top:.45rem">'+btns+'</div>'
-          + '</div></div>';
+          ? '<button onclick="mktRemove(''+lid+'')" style="width:100%;padding:.45rem;background:#fed7d7;color:#c53030;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600"><i class="fas fa-trash"></i> Remove Listing</button>'
+          : '<button onclick="mktAddToChat(''+lid+'')" style="width:100%;padding:.45rem;background:#667eea;color:#fff;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600"><i class="fas fa-shopping-cart"></i> Add to Cart &amp; Chat</button>';
+        return '<div style="background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.08);border:1px solid #e2e8f0;overflow:hidden;transition:transform .18s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">'
+          +'<div style="height:95px;background:#f7fafc;display:flex;align-items:center;justify-content:center;font-size:2.8rem">'+emoji+'</div>'
+          +'<div style="padding:.75rem">'
+          +'<div style="font-size:.68rem;color:#718096;margin-bottom:.15rem"><i class="fas fa-store" style="font-size:.6rem"></i> '+sname+scity+'</div>'
+          +'<div style="font-weight:700;font-size:.92rem;margin-bottom:.25rem">'+escHtml(l.name||'')+'</div>'
+          +'<div style="display:flex;justify-content:space-between;align-items:center;margin:.2rem 0;flex-wrap:wrap;gap:.2rem">'
+          +'<div><div style="font-size:.62rem;color:#718096">Cost</div><div style="font-weight:700;font-size:.88rem;color:#4a5568">$'+parseFloat(l.cost||0).toFixed(2)+'</div></div>'
+          +'<div style="text-align:right"><div style="font-size:.62rem;color:#718096">Sell</div><div style="font-weight:800;color:#667eea;font-size:1rem">$'+parseFloat(l.sell||0).toFixed(2)+'</div></div>'
+          +'<span style="background:rgba(72,187,120,.12);color:#276749;padding:.12rem .4rem;border-radius:2rem;font-size:.68rem;font-weight:700">'+escHtml(String(l.qty||0))+' pcs</span>'
+          +'</div>'
+          +(l.sizes?'<div style="font-size:.7rem;color:#718096;margin-bottom:.2rem">Sizes: '+escHtml(l.sizes)+'</div>':'')
+          +(l.desc?'<div style="font-size:.7rem;color:#718096;font-style:italic;margin-bottom:.3rem">'+escHtml(l.desc)+'</div>':'')
+          +'<div style="margin-top:.5rem">'+btns+'</div>'
+          +'</div></div>';
       }).join('');
     }
 
+    // ── Post item ──
     function mktOpenPost() {
-      if (!NET.store) return;
+      if (!MKT.store) return;
+      // Fill inventory dropdown
       var sel = document.getElementById('mktPostInv');
       sel.innerHTML = '<option value="">— Enter manually —</option>'
-        + STATE.products.map(function(p){ return '<option value="'+p.id+'">'+escHtml(p.name)+' ('+getTotalStock(p)+' pcs)</option>'; }).join('');
-      ['mktPostName','mktPostCost','mktPostSell','mktPostSizes','mktPostDesc'].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=''; });
+        + STATE.products.map(function(p){
+            return '<option value="'+p.id+'">'+escHtml(p.name)+' (Qty: '+getTotalStock(p)+')</option>';
+          }).join('');
+      ['mktPostName','mktPostCost','mktPostSell','mktPostSizes','mktPostDesc'].forEach(function(id){
+        var el=document.getElementById(id); if(el) el.value='';
+      });
       document.getElementById('mktPostQty').value = '1';
       document.getElementById('mktPostModal').style.display = 'flex';
     }
 
-    function mktFillPost() {
+    function mktFillFromInv() {
       var id = document.getElementById('mktPostInv').value; if (!id) return;
       var p = findProduct(id); if (!p) return;
       document.getElementById('mktPostName').value = p.name;
-      document.getElementById('mktPostSell').value = p.price;
+      document.getElementById('mktPostCost').value = p.costPrice || '';
+      document.getElementById('mktPostSell').value = p.price || '';
       document.getElementById('mktPostQty').value = getTotalStock(p);
       document.getElementById('mktPostSizes').value = p.sizes ? p.sizes.map(function(s){return s.name;}).join(', ') : '';
     }
 
     function mktSubmitPost() {
-      if (!db||!NET.store) { showToast('Not connected','error'); return; }
+      if (!db || !MKT.store) { showToast('Not connected', 'error'); return; }
       var name = document.getElementById('mktPostName').value.trim();
       var sell = parseFloat(document.getElementById('mktPostSell').value)||0;
-      if (!name||!sell) { showToast('Name and sell price required','error'); return; }
-      db.collection('net_listings').add({
-        name: name,
-        cat: (document.getElementById('mktPostInv').selectedOptions[0]||{}).text || 'Other',
+      if (!name) { showToast('Item name is required', 'error'); return; }
+      if (!sell) { showToast('Sell price is required', 'error'); return; }
+      // Get category from selected inventory item if any
+      var invId = document.getElementById('mktPostInv').value;
+      var cat = 'Other';
+      if (invId) { var p = findProduct(invId); if (p) cat = p.category||'Other'; }
+      db.collection('mkt_listings').add({
+        name: name, cat: cat,
         cost: parseFloat(document.getElementById('mktPostCost').value)||0,
         sell: sell, qty: parseInt(document.getElementById('mktPostQty').value)||1,
         sizes: document.getElementById('mktPostSizes').value.trim(),
         desc: document.getElementById('mktPostDesc').value.trim(),
-        storeId: NET.store.id, storeName: NET.store.name, city: NET.store.city,
+        storeId: MKT.store.id, storeName: MKT.store.name, city: MKT.store.city,
         status: 'active', ts: firebase.firestore.FieldValue.serverTimestamp()
       }).then(function(){
         document.getElementById('mktPostModal').style.display = 'none';
-        showToast('Posted to market!', 'success');
-      }).catch(function(e){ showToast('Error: '+e.message,'error'); });
+        showToast('Item posted to market! 🎉', 'success');
+      }).catch(function(e){ showToast('Error: '+e.message, 'error'); });
     }
 
     function mktRemove(id) {
       if (!db) return;
-      db.collection('net_listings').doc(id).update({status:'removed'})
-        .then(function(){ showToast('Listing removed','info'); }).catch(function(){});
+      if (!confirm('Remove this listing?')) return;
+      db.collection('mkt_listings').doc(id).update({status:'removed'})
+        .then(function(){ showToast('Listing removed', 'info'); })
+        .catch(function(){});
     }
 
-    function mktShareProduct(pid) {
+    // ── Share from inventory ──
+    function mktShareFromInv(pid) {
       showTab('market');
       setTimeout(function(){
         mktOnShow();
-        if (!NET.store) return;
+        if (!MKT.store) return; // needs to join first
         setTimeout(function(){
           mktOpenPost();
           setTimeout(function(){
             var p = findProduct(pid); if (!p) return;
             document.getElementById('mktPostName').value = p.name;
-            document.getElementById('mktPostSell').value = p.price;
+            document.getElementById('mktPostCost').value = p.costPrice || '';
+            document.getElementById('mktPostSell').value = p.price || '';
             document.getElementById('mktPostQty').value = getTotalStock(p);
-            document.getElementById('mktPostSizes').value = p.sizes ? p.sizes.map(function(s){return s.name;}).join(', '):'';
+            document.getElementById('mktPostSizes').value = p.sizes ? p.sizes.map(function(s){return s.name;}).join(', ') : '';
           }, 150);
         }, 200);
       }, 100);
     }
 
-    // ── CHAT ──
-    function chatOnShow() {
-      netLoad();
-      if (!NET.store) {
-        document.getElementById('chatJoinBox').style.display = 'block';
-        document.getElementById('chatMainUI').style.display = 'none';
-      } else {
-        document.getElementById('chatJoinBox').style.display = 'none';
-        document.getElementById('chatMainUI').style.display = 'block';
-        netInit();
-        chatRenderList();
-      }
+    // ── Add to Cart & Chat ──
+    function mktAddToChat(lid) {
+      var listing = MKT.listings.find(function(l){ return l.id === lid; });
+      if (!listing) return;
+      if (!MKT.store) { showToast('Join the market first', 'error'); return; }
+      if (listing.storeId === MKT.store.id) { showToast('This is your own listing', 'info'); return; }
+
+      // Build cart message
+      var msg = '🛒 *Order Request*
+'
+        + '━━━━━━━━━━━━━━━━
+'
+        + '📦 Item: ' + listing.name + '
+'
+        + '💰 Price: $' + parseFloat(listing.sell).toFixed(2) + ' per pc
+'
+        + (listing.sizes ? '📏 Sizes: ' + listing.sizes + '
+' : '')
+        + '🏪 From: ' + listing.storeName + '
+'
+        + '━━━━━━━━━━━━━━━━
+'
+        + 'Please confirm availability and qty.';
+
+      // Open/create conversation with seller
+      mktOpenChatWith(listing.storeId, listing.storeName, msg);
     }
 
-    function chatRenderList() {
-      var el = document.getElementById('chatList'); if (!el) return;
-      if (!NET.convs.length) {
-        el.innerHTML = '<div style="text-align:center;padding:2rem .5rem;color:#718096;font-size:.82rem">No conversations yet.<br>Go to Market and click Chat on a listing.</div>';
+    function mktOpenChatWith(sellerId, sellerName, initialMsg) {
+      if (!db || !MKT.store) return;
+      var convId = [MKT.store.id, sellerId].sort().join('__');
+      var convRef = db.collection('mkt_convs').doc(convId);
+      var names = {};
+      names[MKT.store.id] = MKT.store.name;
+      names[sellerId] = sellerName;
+
+      convRef.set({
+        members: [MKT.store.id, sellerId],
+        names: names,
+        lastAt: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true }).then(function(){
+        MKT.convId = convId;
+        // Show chat panel
+        document.getElementById('mktChatPanel').style.display = 'block';
+        document.getElementById('mktChatWithName').textContent = sellerName;
+        // Scroll to chat
+        document.getElementById('mktChatPanel').scrollIntoView({ behavior:'smooth', block:'nearest' });
+        // Subscribe messages
+        mktSubMessages(convId);
+        // Send initial cart message if provided
+        if (initialMsg) {
+          setTimeout(function(){
+            mktSendMsg(initialMsg);
+          }, 600);
+        }
+      }).catch(function(e){ showToast('Could not open chat: '+e.message,'error'); });
+    }
+
+    function mktSubMessages(convId) {
+      if (MKT.convUnsub) MKT.convUnsub();
+      MKT.convUnsub = db.collection('mkt_convs').doc(convId).collection('msgs')
+        .orderBy('ts', 'asc')
+        .onSnapshot(function(snap){
+          var msgs = snap.docs.map(function(d){ return Object.assign({id:d.id}, d.data()); });
+          mktRenderMsgs(msgs);
+        }, function(){});
+    }
+
+    function mktRenderMsgs(msgs) {
+      var c = document.getElementById('mktChatMsgs'); if (!c) return;
+      var myId = MKT.store ? MKT.store.id : '';
+      if (!msgs.length) {
+        c.innerHTML = '<div style="text-align:center;color:#718096;font-size:.83rem;padding:1.5rem">No messages yet</div>';
         return;
       }
-      var myId = NET.store ? NET.store.id : '';
-      el.innerHTML = NET.convs.map(function(c){
-        var n = c.names||{}; var oid = (c.members||[]).find(function(p){return p!==myId;});
-        var on = n[oid]||'Store'; var init = on.split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();
-        var unread = ((c.unread||{})[myId]||0); var cid = c.id; var active = cid === NET.convId;
-        return '<div style="display:flex;align-items:center;gap:.5rem;padding:.6rem .85rem;cursor:pointer;border-bottom:1px solid #e2e8f0;background:'+(active?'#ebedff':'')+'" onclick="chatOpenConv(''+cid+'')">'
-          + '<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#667eea,#a78bfa);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.85rem;flex-shrink:0">'+init+'</div>'
-          + '<div style="flex:1;min-width:0"><div style="font-weight:600;font-size:.83rem">'+escHtml(on)+'</div><div style="font-size:.7rem;color:#718096;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+escHtml(c.last||'')+'</div></div>'
-          + (unread>0?'<span style="background:#667eea;color:#fff;font-size:.6rem;font-weight:700;padding:.1rem .3rem;border-radius:5px">'+unread+'</span>':'')
-          + '</div>';
-      }).join('');
-    }
-
-    function chatOpenConv(cid) {
-      NET.convId = cid;
-      var conv = NET.convs.find(function(c){return c.id===cid;}); if(!conv) return;
-      var myId = NET.store.id; var n = conv.names||{};
-      var oid = (conv.members||[]).find(function(p){return p!==myId;}); var on = n[oid]||'Store';
-      var init = on.split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();
-      document.getElementById('chatEmpty').style.display = 'none';
-      document.getElementById('chatWindow').style.display = 'flex';
-      document.getElementById('chatWinAv').textContent = init;
-      document.getElementById('chatWinName').textContent = on;
-      chatRenderList();
-      // Mark read
-      if (((conv.unread||{})[myId]||0)>0) {
-        var upd={}; upd['unread.'+myId]=0;
-        db.collection('net_convs').doc(cid).update(upd).catch(function(){});
-      }
-      if (NET._unsubM) NET._unsubM();
-      NET._unsubM = db.collection('net_convs').doc(cid).collection('msgs')
-        .orderBy('ts','asc')
-        .onSnapshot(function(s){ chatRenderMsgs(s.docs.map(function(d){return Object.assign({id:d.id},d.data());})); }, function(){});
-    }
-
-    function chatRenderMsgs(msgs) {
-      var c = document.getElementById('chatMsgs'); if (!c) return;
-      var myId = NET.store ? NET.store.id : '';
-      if (!msgs.length) { c.innerHTML='<div style="text-align:center;color:#718096;font-size:.82rem;padding:1.5rem">Say hello! 👋</div>'; return; }
       c.innerHTML = msgs.map(function(m){
         var mine = m.sid === myId;
         var init = (m.sname||'?').split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();
-        return '<div style="display:flex;gap:.4rem;align-items:flex-end;max-width:78%;align-self:'+(mine?'flex-end':'flex-start')+';flex-direction:'+(mine?'row-reverse':'row')+'">'
-          + (!mine?'<div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#667eea,#a78bfa);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.65rem;font-weight:700;flex-shrink:0">'+init+'</div>':'')
-          + '<div><div style="padding:.5rem .75rem;border-radius:'+(mine?'14px 14px 3px 14px':'14px 14px 14px 3px')+';background:'+(mine?'#667eea':'#fff')+';color:'+(mine?'#fff':'#2d3748')+';font-size:.85rem;max-width:270px;'+(mine?'':'border:1px solid #e2e8f0;')+'">'+escHtml(m.text||'')+'</div>'
-          + '<div style="font-size:.6rem;color:#718096;margin-top:.15rem;'+(mine?'text-align:right':'')+'">' + chatFmt(m.ts) + '</div></div></div>';
+        var isCart = m.text && m.text.indexOf('🛒') === 0;
+        if (isCart) {
+          return '<div style="background:linear-gradient(135deg,#ebedff,#f0fff4);border:1px solid #c3dafe;border-radius:10px;padding:.65rem .85rem;font-size:.8rem;white-space:pre-line;max-width:280px;align-self:'+(mine?'flex-end':'flex-start')+'">'+escHtml(m.text)+'<div style="font-size:.6rem;color:#718096;margin-top:.25rem;text-align:right">'+mktFmt(m.ts)+'</div></div>';
+        }
+        return '<div style="display:flex;gap:.4rem;align-items:flex-end;max-width:80%;align-self:'+(mine?'flex-end':'flex-start')+';flex-direction:'+(mine?'row-reverse':'row')+'">'
+          +(!mine?'<div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#667eea,#a78bfa);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.65rem;font-weight:700;flex-shrink:0">'+init+'</div>':'')
+          +'<div><div style="padding:.5rem .7rem;border-radius:'+(mine?'14px 14px 3px 14px':'14px 14px 14px 3px')+';background:'+(mine?'#667eea':'#fff')+';color:'+(mine?'#fff':'#2d3748')+';font-size:.85rem;max-width:260px;'+(mine?'':'border:1px solid #e2e8f0;')+'">'+escHtml(m.text||'')+'</div>'
+          +'<div style="font-size:.6rem;color:#718096;margin-top:.12rem;'+(mine?'text-align:right':'')+'">'+mktFmt(m.ts)+'</div></div></div>';
       }).join('');
       c.scrollTop = c.scrollHeight;
     }
 
-    function chatSend() {
-      if (!db||!NET.convId||!NET.store) return;
-      var inp = document.getElementById('chatMsgIn'); var text = inp.value.trim(); if (!text) return;
-      inp.value=''; inp.style.height='auto';
-      var myId = NET.store.id;
-      db.collection('net_convs').doc(NET.convId).collection('msgs').add({
-        text: text, sid: myId, sname: NET.store.name, ts: firebase.firestore.FieldValue.serverTimestamp()
+    function mktSendMsg(text) {
+      if (!db || !MKT.convId || !MKT.store) return;
+      var t = text || ((document.getElementById('mktChatIn')||{}).value||'').trim();
+      if (!t) return;
+      var inp = document.getElementById('mktChatIn');
+      if (inp) { inp.value=''; inp.style.height='auto'; }
+      var myId = MKT.store.id;
+      db.collection('mkt_convs').doc(MKT.convId).collection('msgs').add({
+        text: t, sid: myId, sname: MKT.store.name,
+        ts: firebase.firestore.FieldValue.serverTimestamp()
       }).then(function(){
-        var conv = NET.convs.find(function(c){return c.id===NET.convId;}); if (!conv) return;
-        var oid = (conv.members||[]).find(function(p){return p!==myId;});
-        var upd = { last: text, lastAt: firebase.firestore.FieldValue.serverTimestamp() };
-        if (oid) upd['unread.'+oid] = firebase.firestore.FieldValue.increment(1);
-        db.collection('net_convs').doc(NET.convId).update(upd).catch(function(){});
-      }).catch(function(){ showToast('Send failed','error'); });
+        var upd = { last: t.slice(0,60), lastAt: firebase.firestore.FieldValue.serverTimestamp() };
+        db.collection('mkt_convs').doc(MKT.convId).update(upd).catch(function(){});
+      }).catch(function(){ showToast('Send failed', 'error'); });
     }
 
-    function chatNewConv() {
-      if (!db||!NET.store) return;
-      document.getElementById('chatNewModal').style.display = 'flex';
-      db.collection('net_stores').get().then(function(s){
-        var stores = s.docs.map(function(d){return d.data();}).filter(function(x){return x.id!==NET.store.id;});
-        var el = document.getElementById('chatStoreList');
-        if (!stores.length) { el.innerHTML='<p style="color:#718096;font-size:.83rem;text-align:center;padding:1rem">No other stores on the network yet.</p>'; return; }
-        el.innerHTML = stores.map(function(s){
-          var sid=s.id; var sn=escHtml(s.name||'');
-          return '<div style="display:flex;align-items:center;justify-content:space-between;padding:.65rem .4rem;border-bottom:1px solid #e2e8f0">'
-            + '<div><div style="font-weight:600;font-size:.88rem">'+sn+'</div><div style="font-size:.75rem;color:#718096">'+escHtml(s.city||'')+'</div></div>'
-            + '<button onclick="chatWithStore(''+sid+'',''+sn+'');document.getElementById('chatNewModal').style.display='none'" style="padding:.35rem .75rem;background:#667eea;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:.82rem;font-weight:600"><i class="fas fa-comment"></i> Chat</button>'
-            + '</div>';
-        }).join('');
-      }).catch(function(){});
+    function mktChatSend() { mktSendMsg(); }
+
+    function mktCloseChat() {
+      document.getElementById('mktChatPanel').style.display = 'none';
+      if (MKT.convUnsub) { MKT.convUnsub(); MKT.convUnsub = null; }
+      MKT.convId = null;
     }
 
-    function chatWithStore(sid, sn) {
-      if (!db||!NET.store) return;
-      var cid = [NET.store.id, sid].sort().join('_');
-      var names={}; names[NET.store.id]=NET.store.name; names[sid]=sn;
-      db.collection('net_convs').doc(cid).set({
-        members: [NET.store.id, sid], names: names,
-        lastAt: firebase.firestore.FieldValue.serverTimestamp()
-      }, { merge:true }).then(function(){
-        showTab('chat');
-        chatOnShow();
-        setTimeout(function(){ chatOpenConv(cid); }, 500);
-      }).catch(function(){});
-    }
-
-    function chatFmt(ts) {
+    function mktFmt(ts) {
       if (!ts) return '';
       var d = ts.toDate ? ts.toDate() : new Date(ts);
       var diff = new Date()-d;
       if (diff<60000) return 'just now';
-      if (diff<3600000) return Math.floor(diff/60000)+'m ago';
+      if (diff<3600000) return Math.floor(diff/60000)+'m';
       if (diff<86400000) return d.getHours()+':'+String(d.getMinutes()).padStart(2,'0');
       return d.getDate()+'/'+(d.getMonth()+1);
     }
 
-    // ── Hook showTab ──
-    var _stOrig = showTab;
-    showTab = function(tab) {
-      _stOrig(tab);
-      if (tab==='market') setTimeout(mktOnShow,50);
-      if (tab==='chat') setTimeout(chatOnShow,50);
-    };
-    // ═══════════════════════════════════════
-    // END MARKET + CHAT MODULE
-    // ═══════════════════════════════════════
+    // ── Load 3 sample listings on first run ──
+    function mktLoadSamples() {
+      if (!db || !MKT.store) return;
+      // Only load samples if no listings exist yet
+      db.collection('mkt_listings').where('status','==','active').limit(1).get().then(function(snap){
+        if (!snap.empty) return; // already has listings
+        var samples = [
+          { name:'Baby Floral Dress', cat:'Dresses', cost:4.50, sell:8.00, qty:15, sizes:'3M, 6M, 9M, 1T', desc:'Excess stock, good condition', storeId:MKT.store.id, storeName:MKT.store.name, city:MKT.store.city, status:'active' },
+          { name:'Boy Striped T-Shirt', cat:'Boy Clothes', cost:3.00, sell:5.50, qty:20, sizes:'1T, 2T, 3T', desc:'Last season, all new', storeId:MKT.store.id, storeName:MKT.store.name, city:MKT.store.city, status:'active' },
+          { name:'Baby Pink Shoes', cat:'Baby Shoes', cost:5.00, sell:9.00, qty:8, sizes:'S, M, L', desc:'Original packaging, selling to clear stock', storeId:MKT.store.id, storeName:MKT.store.name, city:MKT.store.city, status:'active' }
+        ];
+        var batch = db.batch();
+        samples.forEach(function(s){
+          s.ts = firebase.firestore.FieldValue.serverTimestamp();
+          batch.set(db.collection('mkt_listings').doc(), s);
+        });
+        batch.commit().then(function(){ showToast('3 sample listings loaded!', 'success'); }).catch(function(){});
+      });
+    }
+
+    // ── Hook into showTab (safe — called after all scripts load) ──
+    (function() {
+      var _orig = showTab;
+      showTab = function(tab) {
+        _orig(tab);
+        if (tab === 'market') setTimeout(mktOnShow, 50);
+      };
+    })();
+    // ═══════════════════════════════════════════
+    // END MARKET MODULE
+    // ═══════════════════════════════════════════
 
     </script>
 
@@ -6237,35 +6294,51 @@ function sendToTelegram(order, callback) {
         </div>
     </div>
 
-    <!-- Market Post Modal -->
-    <div id="mktPostModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:900;display:none;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)this.style.display='none'">
-      <div style="background:#fff;border-radius:16px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid #e2e8f0"><h3 style="font-size:1rem;font-weight:700"><i class="fas fa-tag" style="color:#667eea"></i> Post to Market</h3><button onclick="document.getElementById('mktPostModal').style.display='none'" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#718096">&times;</button></div>
+    <!-- Market: Post Item Modal -->
+    <div id="mktPostModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)this.style.display='none'">
+      <div style="background:#fff;border-radius:16px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)">
+        <div style="padding:1rem 1.25rem;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between">
+          <h3 style="font-size:1rem;font-weight:700"><i class="fas fa-tag" style="color:#667eea"></i> Post Item to Market</h3>
+          <button onclick="document.getElementById('mktPostModal').style.display='none'" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#718096;line-height:1">&times;</button>
+        </div>
         <div style="padding:1.25rem">
-          <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Pick from inventory</label><select id="mktPostInv" onchange="mktFillPost()" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"><option value="">— Enter manually —</option></select></div>
-          <div style="margin-bottom:.85rem"><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Item Name *</label><input id="mktPostName" type="text" placeholder="Product name" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.85rem">
-            <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Cost Price $</label><input id="mktPostCost" type="number" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
-            <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Sell Price $ *</label><input id="mktPostSell" type="number" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+          <div style="margin-bottom:.85rem">
+            <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Pick from inventory</label>
+            <select id="mktPostInv" onchange="mktFillFromInv()" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem">
+              <option value="">— Enter manually —</option>
+            </select>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.85rem">
-            <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Qty</label><input id="mktPostQty" type="number" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
-            <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Sizes</label><input id="mktPostSizes" type="text" placeholder="3M, 6M, 1T..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem"></div>
+          <div style="margin-bottom:.85rem">
+            <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Item Name *</label>
+            <input id="mktPostName" type="text" placeholder="Product name" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;box-sizing:border-box">
           </div>
-          <div><label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem">Description / Condition</label><textarea id="mktPostDesc" rows="2" placeholder="e.g. Good condition, excess stock..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical"></textarea></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.85rem">
+            <div>
+              <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Cost $</label>
+              <input id="mktPostCost" type="number" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;box-sizing:border-box">
+            </div>
+            <div>
+              <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Sell $ *</label>
+              <input id="mktPostSell" type="number" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;box-sizing:border-box">
+            </div>
+            <div>
+              <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Qty</label>
+              <input id="mktPostQty" type="number" value="1" min="1" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;box-sizing:border-box">
+            </div>
+          </div>
+          <div style="margin-bottom:.85rem">
+            <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Sizes</label>
+            <input id="mktPostSizes" type="text" placeholder="e.g. 3M, 6M, 1T, 2T" style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;box-sizing:border-box">
+          </div>
+          <div>
+            <label style="display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568">Description / Condition</label>
+            <textarea id="mktPostDesc" rows="2" placeholder="Good condition, excess stock..." style="width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical;box-sizing:border-box"></textarea>
+          </div>
         </div>
         <div style="padding:.85rem 1.25rem;border-top:1px solid #e2e8f0;display:flex;gap:.5rem;justify-content:flex-end">
-          <button onclick="document.getElementById('mktPostModal').style.display='none'" style="padding:.5rem 1rem;border:2px solid #e2e8f0;background:#fff;border-radius:8px;cursor:pointer;font-weight:600">Cancel</button>
-          <button onclick="mktSubmitPost()" style="padding:.5rem 1rem;background:#667eea;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600"><i class="fas fa-upload"></i> Post</button>
+          <button onclick="document.getElementById('mktPostModal').style.display='none'" style="padding:.5rem 1.1rem;border:2px solid #e2e8f0;background:#fff;border-radius:8px;cursor:pointer;font-weight:600;font-size:.88rem">Cancel</button>
+          <button onclick="mktSubmitPost()" style="padding:.5rem 1.1rem;background:#667eea;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:.88rem"><i class="fas fa-upload"></i> Post to Market</button>
         </div>
-      </div>
-    </div>
-
-    <!-- Chat: New Conversation Modal -->
-    <div id="chatNewModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:900;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)this.style.display='none'">
-      <div style="background:#fff;border-radius:16px;width:100%;max-width:420px;max-height:80vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid #e2e8f0"><h3 style="font-size:1rem;font-weight:700"><i class="fas fa-edit"></i> Start Conversation</h3><button onclick="document.getElementById('chatNewModal').style.display='none'" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#718096">&times;</button></div>
-        <div style="padding:1.25rem"><p style="font-size:.83rem;color:#718096;margin-bottom:.75rem">Select a store to chat with:</p><div id="chatStoreList"></div></div>
       </div>
     </div>
 
