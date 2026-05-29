@@ -764,7 +764,7 @@
         <!-- MARKET TAB -->
         <div id="marketTab" class="tab-content hidden">
           <div style="padding:1rem;max-width:960px;margin:0 auto">
-            <div id="mktSetup" style="display:none;background:linear-gradient(135deg,#667eea,#a78bfa);border-radius:16px;padding:2rem;max-width:400px;margin:0 auto 1.5rem">
+            <div id="mktSetup" style="display:block;background:linear-gradient(135deg,#667eea,#a78bfa);border-radius:16px;padding:2rem;max-width:400px;margin:0 auto 1.5rem">
               <h2 style="color:#fff;text-align:center;margin-bottom:.4rem;font-size:1.3rem">🌐 Join B2B Market</h2>
               <p style="color:rgba(255,255,255,.85);text-align:center;font-size:.83rem;margin-bottom:1.25rem">Connect your store to the network</p>
               <div style="margin-bottom:.7rem"><label style="color:#fff;display:block;margin-bottom:.25rem;font-size:.83rem;font-weight:600">Store Name</label><input id="mktSetupName" type="text" placeholder="e.g. Goat Kids Phnom Penh" style="width:100%;padding:.6rem;border-radius:8px;border:none;font-size:.9rem;box-sizing:border-box"></div>
@@ -5902,10 +5902,20 @@ function sendToTelegram(order, callback) {
       return d.getDate()+'/'+(d.getMonth()+1);
     }
 
-    // Hook showTab after DOM ready
-    document.addEventListener('DOMContentLoaded', function() {
-      var _orig = showTab;
-      showTab = function(tab) { _orig(tab); if(tab==='market') setTimeout(mktOnShow,50); };
+    // Hook showTab - runs immediately since it's at end of script
+    window.addEventListener('load', function() {
+      if (typeof showTab === 'function') {
+        var _orig = showTab;
+        showTab = function(tab) {
+          _orig(tab);
+          if (tab === 'market') setTimeout(mktOnShow, 50);
+        };
+      }
+      // Also patch market nav links directly
+      document.querySelectorAll('[onclick*="market"]').forEach(function(el) {
+        var orig = el.getAttribute('onclick');
+        el.setAttribute('onclick', orig.replace('return false', 'mktOnShow();return false'));
+      });
     });
     // ═══════════════════════════════════
     // END MARKET MODULE
