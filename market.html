@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Goat Kids - B2B Market</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f7fafc;color:#2d3748;min-height:100vh}
+.topbar{background:#fff;border-bottom:1px solid #e2e8f0;padding:.75rem 1.25rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.logo{font-size:1.1rem;font-weight:800;color:#667eea;display:flex;align-items:center;gap:.4rem}
+.back-btn{padding:.4rem .85rem;background:#f7fafc;border:1px solid #e2e8f0;border-radius:8px;cursor:pointer;font-size:.85rem;color:#4a5568;text-decoration:none;display:flex;align-items:center;gap:.35rem}
+.back-btn:hover{background:#e2e8f0}
+.store-badge{background:#ebedff;color:#5a67d8;padding:.3rem .75rem;border-radius:2rem;font-size:.82rem;font-weight:600;display:flex;align-items:center;gap:.4rem}
+.dot{width:8px;height:8px;border-radius:50%;background:#48bb78}
+.wrap{max-width:960px;margin:0 auto;padding:1rem}
+/* Setup */
+.setup-card{background:linear-gradient(135deg,#667eea,#a78bfa);border-radius:16px;padding:2rem;max-width:400px;margin:2rem auto}
+.setup-card h2{color:#fff;text-align:center;margin-bottom:.4rem;font-size:1.3rem}
+.setup-card p{color:rgba(255,255,255,.85);text-align:center;font-size:.83rem;margin-bottom:1.5rem}
+.setup-card label{color:#fff;display:block;margin-bottom:.25rem;font-size:.83rem;font-weight:600}
+.setup-card input{width:100%;padding:.65rem;border-radius:8px;border:none;font-size:.9rem;margin-bottom:.75rem}
+.setup-card button{width:100%;padding:.8rem;background:#fff;color:#667eea;font-weight:700;border:none;border-radius:8px;cursor:pointer;font-size:.95rem}
+.err{color:#fed7d7;font-size:.78rem;margin-top:-.5rem;margin-bottom:.5rem;display:none}
+/* Top bar */
+.mkt-bar{background:linear-gradient(135deg,#667eea,#a78bfa);color:#fff;border-radius:12px;padding:.75rem 1.1rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+.mkt-bar-left{font-size:.9rem;display:flex;align-items:center;gap:.5rem}
+.mkt-bar-right{display:flex;gap:.5rem}
+.btn-post{background:#fff;color:#667eea;border:none;padding:.4rem .9rem;border-radius:8px;cursor:pointer;font-weight:700;font-size:.85rem}
+.btn-switch{background:rgba(255,255,255,.2);border:none;color:#fff;padding:.4rem .75rem;border-radius:8px;cursor:pointer;font-size:.8rem}
+/* Filters */
+.filters{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.filters input,.filters select{padding:.55rem .85rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.88rem;background:#fff}
+.filters input{flex:1;min-width:140px}
+/* Grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.85rem}
+.card{background:#fff;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.07);border:1px solid #e2e8f0;overflow:hidden;transition:transform .18s}
+.card:hover{transform:translateY(-2px)}
+.card-img{height:90px;background:#f7fafc;display:flex;align-items:center;justify-content:center;font-size:2.8rem}
+.card-body{padding:.75rem}
+.card-store{font-size:.68rem;color:#718096;margin-bottom:.15rem}
+.card-name{font-weight:700;font-size:.9rem;margin-bottom:.2rem}
+.card-prices{display:flex;justify-content:space-between;align-items:center;margin:.2rem 0;flex-wrap:wrap;gap:.2rem}
+.price-cost{font-size:.62rem;color:#718096}
+.price-cost b{display:block;font-weight:700;font-size:.88rem;color:#4a5568}
+.price-sell{text-align:right;font-size:.62rem;color:#718096}
+.price-sell b{display:block;font-weight:800;color:#667eea;font-size:1rem}
+.qty-badge{background:rgba(72,187,120,.12);color:#276749;padding:.12rem .4rem;border-radius:2rem;font-size:.68rem;font-weight:700}
+.card-sizes{font-size:.7rem;color:#718096;margin-bottom:.2rem}
+.card-desc{font-size:.7rem;color:#718096;font-style:italic;margin-bottom:.3rem}
+.btn-cart{width:100%;padding:.45rem;background:#667eea;color:#fff;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;margin-top:.5rem}
+.btn-remove{width:100%;padding:.45rem;background:#fed7d7;color:#c53030;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;margin-top:.5rem}
+.empty{text-align:center;padding:3rem;color:#718096}
+.empty i{font-size:2.5rem;display:block;margin-bottom:.75rem;opacity:.35}
+/* Chat panel */
+.chat-panel{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.1);overflow:hidden;margin-top:1rem}
+.chat-head{padding:.7rem 1rem;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between;background:#f7fafc}
+.chat-head-title{font-weight:700;font-size:.9rem}
+.chat-close{background:none;border:none;cursor:pointer;color:#718096;font-size:1.2rem;line-height:1}
+.chat-msgs{height:280px;overflow-y:auto;padding:.85rem;display:flex;flex-direction:column;gap:.5rem;background:#fafbff}
+.chat-input-row{padding:.6rem;border-top:1px solid #e2e8f0;display:flex;gap:.4rem;align-items:flex-end}
+.chat-input-row textarea{flex:1;resize:none;min-height:38px;max-height:80px;padding:.45rem .65rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.88rem;font-family:inherit}
+.chat-send{width:38px;height:38px;background:#667eea;color:#fff;border:none;border-radius:8px;cursor:pointer;flex-shrink:0}
+.msg-mine{align-self:flex-end;background:#667eea;color:#fff;padding:.5rem .7rem;border-radius:14px 14px 3px 14px;font-size:.85rem;max-width:260px}
+.msg-other{align-self:flex-start;background:#fff;border:1px solid #e2e8f0;padding:.5rem .7rem;border-radius:14px 14px 14px 3px;font-size:.85rem;max-width:260px}
+.msg-cart{background:#ebedff;border:1px solid #c3dafe;padding:.65rem .85rem;border-radius:10px;font-size:.8rem;max-width:280px}
+.msg-time{font-size:.6rem;color:#718096;margin-top:.12rem}
+/* Modal */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:1rem}
+.modal-bg.open{display:flex}
+.modal{background:#fff;border-radius:16px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.modal-head{padding:1rem 1.25rem;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between}
+.modal-head h3{font-size:1rem;font-weight:700}
+.modal-close{background:none;border:none;font-size:1.5rem;cursor:pointer;color:#718096;line-height:1}
+.modal-body{padding:1.25rem}
+.modal-body label{display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568}
+.modal-body input,.modal-body textarea,.modal-body select{width:100%;padding:.6rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;margin-bottom:.85rem;box-sizing:border-box;font-family:inherit}
+.modal-body textarea{resize:vertical}
+.modal-foot{padding:.85rem 1.25rem;border-top:1px solid #e2e8f0;display:flex;gap:.5rem;justify-content:flex-end}
+.btn-cancel{padding:.5rem 1.1rem;border:2px solid #e2e8f0;background:#fff;border-radius:8px;cursor:pointer;font-weight:600;font-size:.88rem}
+.btn-submit{padding:.5rem 1.1rem;background:#667eea;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:.88rem}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem}
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:#2d3748;color:#fff;padding:.6rem 1.2rem;border-radius:2rem;font-size:.85rem;z-index:999;display:none;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.toast.success{background:#48bb78}
+.toast.error{background:#f56565}
+</style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="logo">🐐 B2B Market</div>
+  <div id="storeBadge" style="display:none" class="store-badge"><div class="dot"></div><span id="badgeStoreName"></span></div>
+  <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Store</a>
+</div>
+
+<div class="wrap">
+
+  <!-- Setup -->
+  <div id="setupCard" class="setup-card">
+    <h2>🌐 Join B2B Market</h2>
+    <p>Connect your store to buy and sell with other Goat Kids stores</p>
+    <label>Store Name</label>
+    <input id="setupName" type="text" placeholder="e.g. Goat Kids Siem Reap">
+    <label>City</label>
+    <input id="setupCity" type="text" placeholder="e.g. Siem Reap">
+    <label>Join Code</label>
+    <input id="setupCode" type="password" placeholder="Enter code from master store">
+    <div id="setupErr" class="err">Wrong code. Check with master store.</div>
+    <button onclick="doJoin()">Join Network</button>
+  </div>
+
+  <!-- Market UI (hidden until joined) -->
+  <div id="marketUI" style="display:none">
+
+    <!-- Top bar -->
+    <div class="mkt-bar">
+      <div class="mkt-bar-left"><i class="fas fa-store"></i> <b id="barName"></b> <span id="barCity" style="opacity:.8;font-size:.82rem"></span></div>
+      <div class="mkt-bar-right">
+        <button class="btn-post" onclick="openPostModal()"><i class="fas fa-plus"></i> Post Item</button>
+        <button class="btn-switch" onclick="doSwitch()">Switch Store</button>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <input id="searchQ" type="text" placeholder="Search listings..." oninput="renderListings()">
+      <select id="catFilter" onchange="renderListings()">
+        <option value="">All Categories</option>
+        <option>Dresses</option><option>Girl Clothes</option><option>Boy Clothes</option>
+        <option>Baby Shirt</option><option>Baby Shoes</option><option>Baby Accessories</option>
+      </select>
+    </div>
+
+    <!-- Grid -->
+    <div id="listingGrid" class="grid"></div>
+    <div id="listingEmpty" class="empty" style="display:none">
+      <i class="fas fa-store-slash"></i>
+      <p>No listings yet. Be the first to post!</p>
+    </div>
+
+    <!-- Chat Panel -->
+    <div id="chatPanel" class="chat-panel" style="display:none">
+      <div class="chat-head">
+        <div class="chat-head-title"><i class="fas fa-comment" style="color:#667eea"></i> Chat with <span id="chatWithName"></span></div>
+        <button class="chat-close" onclick="closeChat()">&times;</button>
+      </div>
+      <div id="chatMsgs" class="chat-msgs"></div>
+      <div class="chat-input-row">
+        <textarea id="chatInput" placeholder="Type a message..." rows="1"
+          onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg()}"
+          oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,80)+'px'"></textarea>
+        <button class="chat-send" onclick="sendMsg()"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Post Modal -->
+<div id="postModal" class="modal-bg" onclick="if(event.target===this)closePostModal()">
+  <div class="modal">
+    <div class="modal-head">
+      <h3><i class="fas fa-tag" style="color:#667eea"></i> Post Item to Market</h3>
+      <button class="modal-close" onclick="closePostModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <label>Item Name *</label>
+      <input id="postName" type="text" placeholder="e.g. Baby Floral Dress">
+      <div class="grid3">
+        <div><label>Cost $</label><input id="postCost" type="number" placeholder="0.00" min="0" step="0.01"></div>
+        <div><label>Sell $ *</label><input id="postSell" type="number" placeholder="0.00" min="0" step="0.01"></div>
+        <div><label>Qty</label><input id="postQty" type="number" value="1" min="1"></div>
+      </div>
+      <label>Sizes</label>
+      <input id="postSizes" type="text" placeholder="e.g. 3M, 6M, 1T, 2T">
+      <label>Description / Condition</label>
+      <textarea id="postDesc" rows="2" placeholder="Good condition, excess stock..."></textarea>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-cancel" onclick="closePostModal()">Cancel</button>
+      <button class="btn-submit" onclick="submitPost()"><i class="fas fa-upload"></i> Post to Market</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<script>
+// ── Firebase ──
+firebase.initializeApp({
+  apiKey: "AIzaSyAiTcQDO0UGqWBzJn1DkoRrnXCJW2n83kM",
+  authDomain: "goat-kids-b2b.firebaseapp.com",
+  projectId: "goat-kids-b2b",
+  storageBucket: "goat-kids-b2b.firebasestorage.app",
+  messagingSenderId: "133821884669",
+  appId: "1:133821884669:web:87626bd7c869b40981f694"
+});
+var db = firebase.firestore();
+
+// ── State ──
+var STORE = null;
+var listings = [];
+var convId = null;
+var unsubListings = null;
+var unsubMsgs = null;
+var CODE = 'GoadKids1001';
+var EMOJI = {'Dresses':'👗','Girl Clothes':'👕','Boy Clothes':'👕','Baby Shirt':'👶','Baby Shoes':'👟','Baby Accessories':'🎀'};
+
+// ── Init ──
+window.addEventListener('load', function() {
+  var raw = localStorage.getItem('mktStore');
+  if (raw) {
+    try { STORE = JSON.parse(raw); } catch(e) {}
+  }
+  if (STORE) {
+    showMarket();
+  } else {
+    document.getElementById('setupCard').style.display = 'block';
+    document.getElementById('marketUI').style.display = 'none';
+  }
+});
+
+// ── Join ──
+function doJoin() {
+  var name = document.getElementById('setupName').value.trim();
+  var city = document.getElementById('setupCity').value.trim();
+  var code = document.getElementById('setupCode').value.trim();
+  if (!name || !city) { toast('Fill store name and city', 'error'); return; }
+  if (code !== CODE) { document.getElementById('setupErr').style.display = 'block'; return; }
+  document.getElementById('setupErr').style.display = 'none';
+  STORE = { id: 'st_' + Date.now() + '_' + Math.random().toString(36).slice(2,5), name: name, city: city };
+  localStorage.setItem('mktStore', JSON.stringify(STORE));
+  db.collection('mkt_stores').doc(STORE.id).set({ id:STORE.id, name:STORE.name, city:STORE.city, ts:firebase.firestore.FieldValue.serverTimestamp() }).catch(function(){});
+  showMarket();
+  toast('Welcome, ' + name + '!', 'success');
+  setTimeout(loadSamples, 1000);
+}
+
+function doSwitch() {
+  if (!confirm('Switch store? Session will be cleared.')) return;
+  localStorage.removeItem('mktStore');
+  STORE = null; listings = []; convId = null;
+  if (unsubListings) { unsubListings(); unsubListings = null; }
+  if (unsubMsgs) { unsubMsgs(); unsubMsgs = null; }
+  document.getElementById('setupCard').style.display = 'block';
+  document.getElementById('marketUI').style.display = 'none';
+  document.getElementById('storeBadge').style.display = 'none';
+  document.getElementById('chatPanel').style.display = 'none';
+}
+
+function showMarket() {
+  document.getElementById('setupCard').style.display = 'none';
+  document.getElementById('marketUI').style.display = 'block';
+  document.getElementById('barName').textContent = STORE.name;
+  document.getElementById('barCity').textContent = STORE.city ? '· ' + STORE.city : '';
+  document.getElementById('badgeStoreName').textContent = STORE.name;
+  document.getElementById('storeBadge').style.display = 'flex';
+  subscribeListings();
+}
+
+// ── Listings ──
+function subscribeListings() {
+  if (unsubListings) return;
+  unsubListings = db.collection('mkt_listings').where('status','==','active')
+    .onSnapshot(function(snap) {
+      listings = snap.docs.map(function(d){ return Object.assign({id:d.id},d.data()); })
+        .sort(function(a,b){ return ((b.ts&&b.ts.seconds)||0)-((a.ts&&a.ts.seconds)||0); });
+      renderListings();
+    }, function(e) {
+      toast('Connection error: ' + e.message, 'error');
+    });
+}
+
+function renderListings() {
+  var q = (document.getElementById('searchQ').value||'').toLowerCase();
+  var cat = document.getElementById('catFilter').value;
+  var list = listings.filter(function(l){
+    return (!q||(l.name||'').toLowerCase().indexOf(q)>=0||(l.storeName||'').toLowerCase().indexOf(q)>=0) && (!cat||l.cat===cat);
+  });
+  var grid = document.getElementById('listingGrid');
+  var empty = document.getElementById('listingEmpty');
+  if (!list.length) { grid.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display = 'none';
+  grid.innerHTML = list.map(function(l) {
+    var mine = l.storeId === STORE.id;
+    var action = mine
+      ? '<button class="btn-remove" onclick="removeListing(\'' + l.id + '\')"><i class="fas fa-trash"></i> Remove</button>'
+      : '<button class="btn-cart" onclick="addToChat(\'' + l.id + '\')"><i class="fas fa-shopping-cart"></i> Add to Cart &amp; Chat</button>';
+    return '<div class="card">'
+      + '<div class="card-img">' + (EMOJI[l.cat]||'📦') + '</div>'
+      + '<div class="card-body">'
+      + '<div class="card-store"><i class="fas fa-store" style="font-size:.6rem"></i> ' + esc(l.storeName||'') + (l.city?' · '+esc(l.city):'') + '</div>'
+      + '<div class="card-name">' + esc(l.name||'') + '</div>'
+      + '<div class="card-prices">'
+      + '<div class="price-cost"><span>Cost</span><b>$' + parseFloat(l.cost||0).toFixed(2) + '</b></div>'
+      + '<div class="price-sell"><span>Sell</span><b>$' + parseFloat(l.sell||0).toFixed(2) + '</b></div>'
+      + '<span class="qty-badge">' + (l.qty||0) + ' pcs</span>'
+      + '</div>'
+      + (l.sizes?'<div class="card-sizes">Sizes: '+esc(l.sizes)+'</div>':'')
+      + (l.desc?'<div class="card-desc">'+esc(l.desc)+'</div>':'')
+      + action
+      + '</div></div>';
+  }).join('');
+}
+
+function removeListing(id) {
+  if (!confirm('Remove this listing?')) return;
+  db.collection('mkt_listings').doc(id).update({status:'removed'}).then(function(){ toast('Removed','info'); }).catch(function(){});
+}
+
+// ── Post ──
+function openPostModal() { document.getElementById('postModal').classList.add('open'); }
+function closePostModal() { document.getElementById('postModal').classList.remove('open'); }
+
+function submitPost() {
+  var name = document.getElementById('postName').value.trim();
+  var sell = parseFloat(document.getElementById('postSell').value)||0;
+  if (!name) { toast('Item name required','error'); return; }
+  if (!sell) { toast('Sell price required','error'); return; }
+  db.collection('mkt_listings').add({
+    name: name,
+    cat: 'Other',
+    cost: parseFloat(document.getElementById('postCost').value)||0,
+    sell: sell,
+    qty: parseInt(document.getElementById('postQty').value)||1,
+    sizes: document.getElementById('postSizes').value.trim(),
+    desc: document.getElementById('postDesc').value.trim(),
+    storeId: STORE.id, storeName: STORE.name, city: STORE.city,
+    status: 'active',
+    ts: firebase.firestore.FieldValue.serverTimestamp()
+  }).then(function() {
+    closePostModal();
+    ['postName','postCost','postSell','postSizes','postDesc'].forEach(function(id){ document.getElementById(id).value=''; });
+    document.getElementById('postQty').value='1';
+    toast('Posted to market!', 'success');
+  }).catch(function(e){ toast('Error: '+e.message,'error'); });
+}
+
+// ── Chat ──
+function addToChat(lid) {
+  var l = listings.find(function(x){return x.id===lid;});
+  if (!l) return;
+  if (l.storeId === STORE.id) { toast('This is your own listing','info'); return; }
+  var msg = 'Cart Request: ' + l.name + ' | Price: $' + parseFloat(l.sell).toFixed(2) + (l.sizes?' | Sizes: '+l.sizes:'') + ' | Please confirm qty & availability.';
+  openChatWith(l.storeId, l.storeName, msg);
+}
+
+function openChatWith(sellerId, sellerName, initMsg) {
+  convId = [STORE.id, sellerId].sort().join('__');
+  var names = {}; names[STORE.id]=STORE.name; names[sellerId]=sellerName;
+  db.collection('mkt_convs').doc(convId).set({
+    members:[STORE.id,sellerId], names:names,
+    lastAt:firebase.firestore.FieldValue.serverTimestamp()
+  },{merge:true}).then(function(){
+    document.getElementById('chatPanel').style.display = 'block';
+    document.getElementById('chatWithName').textContent = sellerName;
+    document.getElementById('chatPanel').scrollIntoView({behavior:'smooth',block:'nearest'});
+    subMsgs();
+    if (initMsg) setTimeout(function(){ doSend(initMsg); }, 700);
+  }).catch(function(e){ toast('Chat error: '+e.message,'error'); });
+}
+
+function subMsgs() {
+  if (unsubMsgs) { unsubMsgs(); unsubMsgs=null; }
+  unsubMsgs = db.collection('mkt_convs').doc(convId).collection('msgs')
+    .orderBy('ts','asc')
+    .onSnapshot(function(s){ renderMsgs(s.docs.map(function(d){return Object.assign({id:d.id},d.data());})); }, function(){});
+}
+
+function renderMsgs(msgs) {
+  var c = document.getElementById('chatMsgs');
+  if (!msgs.length) { c.innerHTML='<div style="text-align:center;color:#718096;padding:1.5rem;font-size:.83rem">No messages yet</div>'; return; }
+  c.innerHTML = msgs.map(function(m) {
+    var mine = m.sid===STORE.id;
+    var isCart = (m.text||'').indexOf('Cart Request:')===0;
+    var t = '<div style="font-size:.6rem;color:#718096;margin-top:.12rem;text-align:'+(mine?'right':'left')+'">'+fmt(m.ts)+'</div>';
+    if (isCart) return '<div class="msg-cart" style="align-self:'+(mine?'flex-end':'flex-start')+'"><i class="fas fa-shopping-cart" style="color:#667eea"></i> '+esc(m.text)+t+'</div>';
+    return '<div class="'+(mine?'msg-mine':'msg-other')+'" style="align-self:'+(mine?'flex-end':'flex-start')+'">'+esc(m.text)+t+'</div>';
+  }).join('');
+  c.scrollTop = c.scrollHeight;
+}
+
+function sendMsg() { doSend(document.getElementById('chatInput').value.trim()); document.getElementById('chatInput').value=''; }
+
+function doSend(text) {
+  if (!text||!convId) return;
+  db.collection('mkt_convs').doc(convId).collection('msgs').add({
+    text:text, sid:STORE.id, sname:STORE.name,
+    ts:firebase.firestore.FieldValue.serverTimestamp()
+  }).then(function(){
+    db.collection('mkt_convs').doc(convId).update({last:text.slice(0,60),lastAt:firebase.firestore.FieldValue.serverTimestamp()}).catch(function(){});
+  }).catch(function(){ toast('Send failed','error'); });
+}
+
+function closeChat() {
+  document.getElementById('chatPanel').style.display='none';
+  if(unsubMsgs){unsubMsgs();unsubMsgs=null;}
+  convId=null;
+}
+
+// ── Samples ──
+function loadSamples() {
+  db.collection('mkt_listings').where('status','==','active').limit(1).get().then(function(snap){
+    if(!snap.empty) return;
+    var batch=db.batch();
+    [{name:'Baby Floral Dress',cat:'Dresses',cost:4.5,sell:8,qty:15,sizes:'3M,6M,1T',desc:'Excess stock'},
+     {name:'Boy Striped T-Shirt',cat:'Boy Clothes',cost:3,sell:5.5,qty:20,sizes:'1T,2T,3T',desc:'Last season'},
+     {name:'Baby Pink Shoes',cat:'Baby Shoes',cost:5,sell:9,qty:8,sizes:'S,M,L',desc:'Original packaging'}
+    ].forEach(function(s){
+      s.storeId=STORE.id;s.storeName=STORE.name;s.city=STORE.city;s.status='active';
+      s.ts=firebase.firestore.FieldValue.serverTimestamp();
+      batch.set(db.collection('mkt_listings').doc(),s);
+    });
+    batch.commit().then(function(){toast('3 sample listings loaded!','success');}).catch(function(){});
+  });
+}
+
+// ── Utils ──
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function fmt(ts){
+  if(!ts) return '';
+  var d=ts.toDate?ts.toDate():new Date(ts),diff=new Date()-d;
+  if(diff<60000) return 'now';
+  if(diff<3600000) return Math.floor(diff/60000)+'m';
+  if(diff<86400000) return d.getHours()+':'+String(d.getMinutes()).padStart(2,'0');
+  return d.getDate()+'/'+(d.getMonth()+1);
+}
+function toast(msg,type){
+  var t=document.getElementById('toast');
+  t.textContent=msg; t.className='toast'+(type?' '+type:'');
+  t.style.display='block';
+  setTimeout(function(){t.style.display='none';},2500);
+}
+</script>
+</body>
+</html>
