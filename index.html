@@ -804,8 +804,8 @@
 
               <!-- Sub tabs -->
               <div style="display:flex;background:#fff;border-radius:10px;border:1px solid #e2e8f0;overflow:hidden;margin-bottom:1rem">
-                <button class="admin-tab active" id="mktSubTab-inventory" onclick="mktSubSwitch('inventory')" style="flex:1"><i class="fas fa-boxes"></i> My Inventory</button>
-                <button class="admin-tab" id="mktSubTab-listings" onclick="mktSubSwitch('listings')" style="flex:1"><i class="fas fa-globe"></i> Market</button>
+
+                <button class="admin-tab active" id="mktSubTab-listings" onclick="mktSubSwitch('listings')" style="flex:1"><i class="fas fa-globe"></i> Market</button>
                 <button class="admin-tab" id="mktSubTab-chat" onclick="mktSubSwitch('chat')" style="flex:1"><i class="fas fa-comments"></i> Chat <span id="mktChatBadge" style="display:none;background:#e53e3e;color:#fff;font-size:.6rem;padding:.1rem .3rem;border-radius:5px">0</span></button>
               </div>
 
@@ -937,6 +937,33 @@
               <div id="masterStoreEmpty" style="display:none;text-align:center;padding:2rem;color:#718096">
                 <i class="fas fa-store-slash" style="font-size:2rem;display:block;margin-bottom:.5rem;opacity:.4"></i>
                 <p style="font-size:.85rem">No stores yet. Add your first store above.</p>
+              </div>
+
+              <!-- Product Manager Panel -->
+              <div id="masterProductPanel" style="display:none;margin-top:1rem;background:#fff;border-radius:12px;border:1px solid #e2e8f0;overflow:hidden">
+                <div style="padding:.85rem 1rem;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between;background:#f7fafc">
+                  <div style="font-weight:700;font-size:.9rem"><i class="fas fa-box" style="color:#667eea"></i> Products for: <span id="masterProdStoreName" style="color:#667eea"></span></div>
+                  <button onclick="document.getElementById('masterProductPanel').style.display='none'" style="background:none;border:none;cursor:pointer;color:#718096;font-size:1.2rem">&times;</button>
+                </div>
+                <!-- Add product form -->
+                <div style="padding:1rem;border-bottom:1px solid #e2e8f0;background:#f7fafc">
+                  <div style="font-size:.82rem;font-weight:700;color:#4a5568;margin-bottom:.65rem">Add New Product</div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem">
+                    <div><label style="display:block;font-size:.78rem;font-weight:600;margin-bottom:.2rem;color:#4a5568">Name *</label><input id="mpName" type="text" placeholder="Product name" style="width:100%;padding:.5rem;border:2px solid #e2e8f0;border-radius:7px;font-size:.88rem;box-sizing:border-box"></div>
+                    <div><label style="display:block;font-size:.78rem;font-weight:600;margin-bottom:.2rem;color:#4a5568">Category</label>
+                      <select id="mpCat" style="width:100%;padding:.5rem;border:2px solid #e2e8f0;border-radius:7px;font-size:.88rem">
+                        <option>Dresses</option><option>Girl Clothes</option><option>Boy Clothes</option><option>Baby Shirt</option><option>Baby Shoes</option><option>Baby Accessories</option>
+                      </select>
+                    </div>
+                    <div><label style="display:block;font-size:.78rem;font-weight:600;margin-bottom:.2rem;color:#4a5568">Price $</label><input id="mpPrice" type="number" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:.5rem;border:2px solid #e2e8f0;border-radius:7px;font-size:.88rem;box-sizing:border-box"></div>
+                    <div><label style="display:block;font-size:.78rem;font-weight:600;margin-bottom:.2rem;color:#4a5568">Stock</label><input id="mpStock" type="number" placeholder="0" min="0" style="width:100%;padding:.5rem;border:2px solid #e2e8f0;border-radius:7px;font-size:.88rem;box-sizing:border-box"></div>
+                  </div>
+                  <div style="margin-bottom:.5rem"><label style="display:block;font-size:.78rem;font-weight:600;margin-bottom:.2rem;color:#4a5568">Description</label><input id="mpDesc" type="text" placeholder="Optional description" style="width:100%;padding:.5rem;border:2px solid #e2e8f0;border-radius:7px;font-size:.88rem;box-sizing:border-box"></div>
+                  <button onclick="masterAddProduct()" style="padding:.45rem 1rem;background:#48bb78;color:#fff;border:none;border-radius:7px;cursor:pointer;font-weight:600;font-size:.85rem"><i class="fas fa-plus"></i> Add Product</button>
+                </div>
+                <!-- Product list -->
+                <div id="masterProdList" style="max-height:300px;overflow-y:auto"></div>
+                <div id="masterProdEmpty" style="display:none;text-align:center;padding:1.5rem;color:#718096;font-size:.83rem">No products yet.</div>
               </div>
             </div>
 
@@ -5809,8 +5836,9 @@ function sendToTelegram(order, callback) {
         document.getElementById('mktStoreName').textContent = MKT.store.name;
         document.getElementById('mktStoreCity').textContent = MKT.store.city ? '· ' + MKT.store.city : '';
         document.getElementById('mktStoreId').textContent = 'ID: ' + MKT.store.id;
-        mktSubSwitch('inventory');
-        mktLoadInventory();
+        mktSubSwitch('listings');
+        MKT.cart = [];
+        mktUpdateCartUI();
         mktSubListings();
         mktSubConvs();
       }
@@ -5848,13 +5876,9 @@ function sendToTelegram(order, callback) {
     // ── Sub tab switch ──
     function mktSubSwitch(tab) {
       document.querySelectorAll('#mktMainUI .admin-tab').forEach(function(b){ b.classList.remove('active'); });
-      document.getElementById('mktSubTab-' + tab).classList.add('active');
-      ['inventory','listings','chat'].forEach(function(t){
-        var el = document.getElementById('mktPanel-' + t);
-        if (el) el.classList.remove('active');
-      });
-      var panel = document.getElementById('mktPanel-' + tab);
-      if (panel) panel.classList.add('active');
+      var tabBtn = document.getElementById('mktSubTab-' + tab); if (tabBtn) tabBtn.classList.add('active');
+      ['listings','chat'].forEach(function(t){ var el=document.getElementById('mktPanel-'+t); if(el) el.classList.remove('active'); });
+      var panel = document.getElementById('mktPanel-' + tab); if (panel) panel.classList.add('active');
       if (tab === 'listings') mktRenderListings();
       if (tab === 'chat') mktRenderConvList();
     }
@@ -5937,7 +5961,6 @@ function sendToTelegram(order, callback) {
           MKT.listings = snap.docs.map(function(d){ return Object.assign({id:d.id},d.data()); })
             .sort(function(a,b){ return ((b.ts&&b.ts.seconds)||0)-((a.ts&&a.ts.seconds)||0); });
           mktRenderListings();
-          mktLoadInventory(); // refresh Listed badges
         }, function(){});
     }
 
@@ -5954,8 +5977,8 @@ function sendToTelegram(order, callback) {
       grid.innerHTML = list.map(function(l){
         var mine = MKT.store && l.storeId===MKT.store.id;
         var action = mine
-          ? '<button onclick="mktRemoveListing(\''+l.id+'\')" style="width:100%;padding:.4rem;background:#fed7d7;color:#c53030;border:none;border-radius:7px;cursor:pointer;font-size:.8rem;font-weight:600;margin-top:.45rem"><i class="fas fa-trash"></i> Remove</button>'
-          : '<button onclick="mktChatAbout(\''+l.id+'\')" style="width:100%;padding:.4rem;background:#667eea;color:#fff;border:none;border-radius:7px;cursor:pointer;font-size:.8rem;font-weight:600;margin-top:.45rem"><i class="fas fa-shopping-cart"></i> Add to Cart &amp; Chat</button>';
+          ? '<button onclick="mktRemoveListing(\\\'' + l.id + '\\\')" style="width:100%;padding:.4rem;background:#fed7d7;color:#c53030;border:none;border-radius:7px;cursor:pointer;font-size:.8rem;font-weight:600;margin-top:.45rem"><i class="fas fa-trash"></i> Remove</button>'
+          : '<button onclick="mktAddToCart(\\\'' + l.id + '\\\')" style="width:100%;padding:.4rem;background:#667eea;color:#fff;border:none;border-radius:7px;cursor:pointer;font-size:.8rem;font-weight:600;margin-top:.45rem"><i class="fas fa-cart-plus"></i> Add to Cart</button>';
         return '<div style="background:#fff;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.07);border:1px solid #e2e8f0;overflow:hidden">'
           +'<div style="height:88px;background:#f7fafc;display:flex;align-items:center;justify-content:center;font-size:2.6rem">'+(MKT.EMOJI[l.cat]||'📦')+'</div>'
           +'<div style="padding:.7rem">'
@@ -5978,11 +6001,99 @@ function sendToTelegram(order, callback) {
       db.collection('mkt_listings').doc(id).update({status:'removed'}).then(function(){showToast('Removed','info');}).catch(function(){});
     }
 
-    function mktChatAbout(lid){
-      var l=MKT.listings.find(function(x){return x.id===lid;}); if(!l) return;
-      if(l.storeId===MKT.store.id){showToast('Your own listing','info');return;}
-      var msg='Cart Request: '+l.name+' | Price: $'+parseFloat(l.sell).toFixed(2)+(l.sizes?' | Sizes: '+l.sizes:'')+' | Please confirm qty & availability.';
-      mktOpenConvWith(l.storeId, l.storeName, msg);
+    // ── Cart System ──
+    MKT.cart = [];
+
+    function mktAddToCart(lid) {
+      var l = MKT.listings.find(function(x){ return x.id===lid; }); if (!l) return;
+      if (l.storeId === MKT.store.id) { showToast('This is your own listing','info'); return; }
+      var existing = MKT.cart.find(function(c){ return c.listing.id===lid; });
+      if (existing) { existing.qty++; showToast(l.name + ' qty updated to ' + existing.qty, 'info'); }
+      else { MKT.cart.push({ listing: l, qty: 1 }); showToast(l.name + ' added!', 'success'); }
+      mktUpdateCartUI();
+    }
+
+    function mktUpdateCartUI() {
+      var count = MKT.cart.reduce(function(s,c){ return s+c.qty; }, 0);
+      var btn = document.getElementById('mktCartBtn');
+      var countEl = document.getElementById('mktCartCount');
+      if (btn) btn.style.display = MKT.cart.length > 0 ? 'block' : 'none';
+      if (countEl) countEl.textContent = count;
+      var itemsEl = document.getElementById('mktCartItems');
+      var emptyEl = document.getElementById('mktCartEmpty');
+      var footerEl = document.getElementById('mktCartFooter');
+      var totalEl = document.getElementById('mktCartTotal');
+      if (!itemsEl) return;
+      if (!MKT.cart.length) {
+        itemsEl.innerHTML = '';
+        if (emptyEl) emptyEl.style.display = 'block';
+        if (footerEl) footerEl.style.display = 'none';
+        return;
+      }
+      if (emptyEl) emptyEl.style.display = 'none';
+      if (footerEl) footerEl.style.display = 'block';
+      if (totalEl) totalEl.textContent = count;
+      itemsEl.innerHTML = MKT.cart.map(function(item, idx) {
+        var l = item.listing;
+        return '<div style="display:flex;align-items:center;gap:.5rem;padding:.5rem 0;border-bottom:1px solid #e2e8f0">'
+          + '<div style="font-size:1.3rem">' + (MKT.EMOJI[l.cat]||'📦') + '</div>'
+          + '<div style="flex:1;min-width:0">'
+          + '<div style="font-weight:600;font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + escHtml(l.name) + '</div>'
+          + '<div style="font-size:.7rem;color:#718096">' + escHtml(l.storeName) + ' · $' + parseFloat(l.sell).toFixed(2) + '</div>'
+          + '</div>'
+          + '<div style="display:flex;align-items:center;gap:.25rem;flex-shrink:0">'
+          + '<button onclick="mktCartQty(' + idx + ',-1)" style="width:22px;height:22px;border:1px solid #e2e8f0;border-radius:4px;background:#fff;cursor:pointer;font-size:.9rem;line-height:1;font-weight:700">-</button>'
+          + '<span style="font-size:.85rem;font-weight:700;min-width:18px;text-align:center">' + item.qty + '</span>'
+          + '<button onclick="mktCartQty(' + idx + ',1)" style="width:22px;height:22px;border:1px solid #e2e8f0;border-radius:4px;background:#fff;cursor:pointer;font-size:.9rem;line-height:1;font-weight:700">+</button>'
+          + '<button onclick="mktCartRemove(' + idx + ')" style="width:22px;height:22px;border:none;border-radius:4px;background:#fed7d7;color:#c53030;cursor:pointer;font-size:.85rem;line-height:1;margin-left:.1rem">&times;</button>'
+          + '</div></div>';
+      }).join('');
+    }
+
+    function mktCartQty(idx, d) {
+      MKT.cart[idx].qty += d;
+      if (MKT.cart[idx].qty < 1) MKT.cart[idx].qty = 1;
+      mktUpdateCartUI();
+    }
+
+    function mktCartRemove(idx) { MKT.cart.splice(idx,1); mktUpdateCartUI(); }
+
+    function mktClearCart() {
+      MKT.cart = []; mktUpdateCartUI();
+      var p = document.getElementById('mktCartPanel'); if (p) p.style.display = 'none';
+    }
+
+    function mktToggleCart() {
+      var p = document.getElementById('mktCartPanel');
+      if (!p) return;
+      p.style.display = p.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function mktSendCartOrder() {
+      if (!MKT.cart.length) { showToast('Cart is empty','error'); return; }
+      // Group items by seller store
+      var byStore = {};
+      MKT.cart.forEach(function(item) {
+        var sid = item.listing.storeId;
+        if (!byStore[sid]) byStore[sid] = { storeName: item.listing.storeName, items: [] };
+        byStore[sid].items.push(item);
+      });
+      var storeCount = Object.keys(byStore).length;
+      Object.keys(byStore).forEach(function(sid) {
+        var g = byStore[sid];
+        var msg = 'ORDER REQUEST from ' + MKT.store.name + ':
+';
+        g.items.forEach(function(item) {
+          msg += '- ' + item.listing.name + ' x' + item.qty + ' @ $' + parseFloat(item.listing.sell).toFixed(2);
+          if (item.listing.sizes) msg += ' (Sizes: ' + item.listing.sizes + ')';
+          msg += '
+';
+        });
+        msg += 'Please confirm availability and arrange delivery.';
+        mktOpenConvWith(sid, g.storeName, msg);
+      });
+      mktClearCart();
+      showToast('Order sent to ' + storeCount + ' store(s)!', 'success');
     }
 
     // ── Chat ──
@@ -6175,6 +6286,75 @@ function sendToTelegram(order, callback) {
         if(tab==='master' && sessionStorage.getItem('masterAuth')==='1') setTimeout(masterShowUI,50);
       };
     });
+    var masterCurrentStoreId = null;
+
+    function masterCopyLink(storeId) {
+      var url = window.location.origin + window.location.pathname.replace('index.html','') + 'shop.html?store=' + storeId;
+      navigator.clipboard ? navigator.clipboard.writeText(url).then(function(){ showToast('Shop link copied!','success'); }) : showToast(url, 'info');
+    }
+
+    function masterManageProducts(storeId, storeName) {
+      masterCurrentStoreId = storeId;
+      document.getElementById('masterProdStoreName').textContent = storeName;
+      document.getElementById('masterProductPanel').style.display = 'block';
+      document.getElementById('masterProductPanel').scrollIntoView({behavior:'smooth'});
+      masterLoadProducts(storeId);
+    }
+
+    function masterLoadProducts(storeId) {
+      db.collection('shop_products').where('storeId','==',storeId).get().then(function(snap) {
+        var prods = snap.docs.map(function(d){ return Object.assign({id:d.id}, d.data()); });
+        var list = document.getElementById('masterProdList');
+        var empty = document.getElementById('masterProdEmpty');
+        if (!prods.length) { list.innerHTML=''; empty.style.display='block'; return; }
+        empty.style.display='none';
+        list.innerHTML = prods.map(function(p) {
+          return '<div style="display:flex;align-items:center;justify-content:space-between;padding:.6rem 1rem;border-bottom:1px solid #e2e8f0;font-size:.83rem">'
+            +'<div><b>'+escHtml(p.name||'')+'</b> <span style="color:#718096">· '+escHtml(p.category||'')+'</span>'
+            +'<span style="color:#667eea;font-weight:700;margin-left:.5rem">$'+parseFloat(p.price||0).toFixed(2)+'</span>'
+            +' <span style="color:#718096">Stock: '+escHtml(String(p.stock||0))+'</span>'
+            +(p.active===false?' <span style="color:#e53e3e;font-size:.75rem">(hidden)</span>':'')
+            +'</div>'
+            +'<div style="display:flex;gap:.3rem">'
+            +'<button onclick="masterToggleProduct(''+p.id+'','+(p.active!==false?'false':'true')+')" style="padding:.25rem .5rem;border:none;border-radius:5px;cursor:pointer;font-size:.75rem;background:'+(p.active!==false?'#fed7d7':'#c6f6d5')+';color:'+(p.active!==false?'#c53030':'#276749')+'">'+(p.active!==false?'Hide':'Show')+'</button>'
+            +'<button onclick="masterDeleteProduct(''+p.id+'')" style="padding:.25rem .5rem;background:#fed7d7;color:#c53030;border:none;border-radius:5px;cursor:pointer;font-size:.75rem"><i class="fas fa-trash"></i></button>'
+            +'</div></div>';
+        }).join('');
+      });
+    }
+
+    function masterAddProduct() {
+      if (!masterCurrentStoreId) return;
+      var name = document.getElementById('mpName').value.trim();
+      var price = parseFloat(document.getElementById('mpPrice').value)||0;
+      if (!name) { showToast('Product name required','error'); return; }
+      db.collection('shop_products').add({
+        storeId: masterCurrentStoreId,
+        name: name,
+        category: document.getElementById('mpCat').value,
+        price: price,
+        stock: parseInt(document.getElementById('mpStock').value)||0,
+        description: document.getElementById('mpDesc').value.trim(),
+        active: true,
+        ts: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(function(){
+        showToast('Product added!','success');
+        ['mpName','mpPrice','mpStock','mpDesc'].forEach(function(id){ document.getElementById(id).value=''; });
+        masterLoadProducts(masterCurrentStoreId);
+      }).catch(function(e){ showToast('Error: '+e.message,'error'); });
+    }
+
+    function masterToggleProduct(id, active) {
+      db.collection('shop_products').doc(id).update({active: active==='true'||active===true})
+        .then(function(){ masterLoadProducts(masterCurrentStoreId); });
+    }
+
+    function masterDeleteProduct(id) {
+      if (!confirm('Delete this product?')) return;
+      db.collection('shop_products').doc(id).delete()
+        .then(function(){ showToast('Deleted','info'); masterLoadProducts(masterCurrentStoreId); });
+    }
+
     // ═══════════════════════════════════════════════════════
     // END MARKET + MASTER MODULE
     // ═══════════════════════════════════════════════════════
