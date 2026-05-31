@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Master Admin - Goat Kids B2B</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f7fafc;color:#2d3748}
+.topbar{background:#2d3748;padding:.85rem 1.25rem;display:flex;align-items:center;justify-content:space-between}
+.topbar .logo{color:#fff;font-size:1.1rem;font-weight:800}
+.topbar .sub{color:#a0aec0;font-size:.82rem}
+.wrap{max-width:700px;margin:2rem auto;padding:0 1rem}
+/* Master login */
+.master-login{background:#fff;border-radius:12px;padding:2rem;max-width:360px;margin:3rem auto;box-shadow:0 4px 20px rgba(0,0,0,.1)}
+.master-login h2{text-align:center;margin-bottom:.25rem}
+.master-login p{text-align:center;color:#718096;font-size:.83rem;margin-bottom:1.5rem}
+label{display:block;font-size:.82rem;font-weight:600;margin-bottom:.3rem;color:#4a5568}
+input{width:100%;padding:.65rem;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;margin-bottom:.85rem;box-sizing:border-box}
+input:focus{outline:none;border-color:#667eea}
+.btn{padding:.6rem 1.25rem;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:.88rem}
+.btn-primary{background:#667eea;color:#fff;width:100%;padding:.75rem}
+.btn-primary:hover{background:#5a67d8}
+.btn-success{background:#48bb78;color:#fff}
+.btn-danger{background:#fc8181;color:#c53030}
+.btn-sm{padding:.35rem .75rem;font-size:.78rem}
+/* Store list */
+.section-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#718096;margin-bottom:.75rem}
+.store-card{background:#fff;border-radius:10px;border:1px solid #e2e8f0;padding:1rem;margin-bottom:.75rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.store-info .name{font-weight:700;font-size:.95rem}
+.store-info .meta{font-size:.78rem;color:#718096;margin-top:.15rem}
+.store-info .creds{font-size:.78rem;background:#f7fafc;border:1px solid #e2e8f0;border-radius:6px;padding:.3rem .6rem;margin-top:.4rem;font-family:monospace}
+.store-actions{display:flex;gap:.5rem;flex-shrink:0}
+/* Add store form */
+.add-card{background:#fff;border-radius:12px;border:2px dashed #667eea;padding:1.5rem;margin-bottom:1.5rem}
+.add-card h3{font-size:.95rem;font-weight:700;color:#5a67d8;margin-bottom:1rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);padding:.6rem 1.2rem;border-radius:2rem;font-size:.85rem;z-index:9999;display:none;box-shadow:0 4px 12px rgba(0,0,0,.2);color:#fff}
+.toast.success{background:#48bb78}
+.toast.error{background:#f56565}
+.toast.info{background:#2d3748}
+.badge{display:inline-flex;align-items:center;gap:.3rem;padding:.2rem .55rem;border-radius:2rem;font-size:.72rem;font-weight:700;background:#ebedff;color:#5a67d8}
+.err{color:#e53e3e;font-size:.78rem;margin-top:-.5rem;margin-bottom:.75rem;display:none}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div>
+    <div class="logo">🐐 Goat Kids — Master Admin</div>
+    <div class="sub">Manage store accounts for B2B Market</div>
+  </div>
+  <div style="display:flex;gap:.5rem">
+    <a href="market.html" style="color:#a0aec0;font-size:.82rem;text-decoration:none;padding:.4rem .75rem;border:1px solid #4a5568;border-radius:8px"><i class="fas fa-globe"></i> Market</a>
+    <button id="masterLogoutBtn" onclick="masterLogout()" style="display:none;background:#e53e3e;color:#fff;border:none;padding:.4rem .75rem;border-radius:8px;cursor:pointer;font-size:.82rem"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  </div>
+</div>
+
+<!-- Master Login -->
+<div id="masterLoginSection">
+  <div class="master-login">
+    <h2>🔐 Master Login</h2>
+    <p>Enter master password to manage stores</p>
+    <label>Master Password</label>
+    <input id="masterPw" type="password" placeholder="Enter master password" onkeydown="if(event.key==='Enter')masterLogin()">
+    <div id="masterErr" class="err">Wrong password.</div>
+    <button class="btn btn-primary" onclick="masterLogin()">Login as Master</button>
+  </div>
+</div>
+
+<!-- Store Management (shown after master login) -->
+<div id="storeManagement" style="display:none">
+  <div class="wrap">
+
+    <!-- Add new store -->
+    <div class="add-card">
+      <h3><i class="fas fa-plus-circle"></i> Add New Store</h3>
+      <div class="grid2">
+        <div>
+          <label>Store ID <small style="color:#718096;font-weight:400">(unique, no spaces)</small></label>
+          <input id="newId" type="text" placeholder="e.g. store_pp_001">
+        </div>
+        <div>
+          <label>Store Name</label>
+          <input id="newName" type="text" placeholder="e.g. Goat Kids Phnom Penh">
+        </div>
+      </div>
+      <div class="grid2">
+        <div>
+          <label>City</label>
+          <input id="newCity" type="text" placeholder="e.g. Phnom Penh">
+        </div>
+        <div>
+          <label>Password</label>
+          <input id="newPw" type="text" placeholder="e.g. pass123">
+        </div>
+      </div>
+      <button class="btn btn-success" onclick="addStore()"><i class="fas fa-plus"></i> Create Store Account</button>
+    </div>
+
+    <!-- Store list -->
+    <div class="section-title">All Store Accounts (<span id="storeCount">0</span>)</div>
+    <div id="storeList"></div>
+    <div id="storeEmpty" style="text-align:center;padding:2rem;color:#718096;display:none">
+      <i class="fas fa-store-slash" style="font-size:2rem;display:block;margin-bottom:.5rem;opacity:.4"></i>
+      <p>No stores yet. Add your first store above.</p>
+    </div>
+
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+firebase.initializeApp({
+  apiKey: "AIzaSyAiTcQDO0UGqWBzJn1DkoRrnXCJW2n83kM",
+  authDomain: "goat-kids-b2b.firebaseapp.com",
+  projectId: "goat-kids-b2b",
+  storageBucket: "goat-kids-b2b.firebasestorage.app",
+  messagingSenderId: "133821884669",
+  appId: "1:133821884669:web:87626bd7c869b40981f694"
+});
+var db = firebase.firestore();
+
+// Master password — change this to something secret!
+var MASTER_PW = 'GoatMaster2024';
+
+function masterLogin() {
+  var pw = document.getElementById('masterPw').value.trim();
+  if (pw !== MASTER_PW) {
+    document.getElementById('masterErr').style.display = 'block';
+    return;
+  }
+  document.getElementById('masterErr').style.display = 'none';
+  sessionStorage.setItem('masterAuth', '1');
+  showManagement();
+}
+
+function masterLogout() {
+  sessionStorage.removeItem('masterAuth');
+  document.getElementById('storeManagement').style.display = 'none';
+  document.getElementById('masterLoginSection').style.display = 'block';
+  document.getElementById('masterLogoutBtn').style.display = 'none';
+  document.getElementById('masterPw').value = '';
+}
+
+function showManagement() {
+  document.getElementById('masterLoginSection').style.display = 'none';
+  document.getElementById('storeManagement').style.display = 'block';
+  document.getElementById('masterLogoutBtn').style.display = 'inline-block';
+  loadStores();
+}
+
+// Auto-login if session exists
+window.addEventListener('load', function() {
+  if (sessionStorage.getItem('masterAuth') === '1') showManagement();
+});
+
+function loadStores() {
+  db.collection('mkt_stores').orderBy('createdAt', 'desc').get()
+    .then(function(snap) {
+      var stores = snap.docs.map(function(d){ return d.data(); });
+      renderStores(stores);
+    })
+    .catch(function() {
+      // If no index, just get without ordering
+      db.collection('mkt_stores').get().then(function(snap) {
+        var stores = snap.docs.map(function(d){ return d.data(); });
+        renderStores(stores);
+      });
+    });
+}
+
+function renderStores(stores) {
+  document.getElementById('storeCount').textContent = stores.length;
+  var list = document.getElementById('storeList');
+  var empty = document.getElementById('storeEmpty');
+  if (!stores.length) { list.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display = 'none';
+  list.innerHTML = stores.map(function(s) {
+    return '<div class="store-card">'
+      + '<div class="store-info">'
+      + '<div class="name">' + esc(s.name||'') + '</div>'
+      + '<div class="meta"><i class="fas fa-map-marker-alt"></i> ' + esc(s.city||'—') + '</div>'
+      + '<div class="creds">ID: <b>' + esc(s.id||'') + '</b> &nbsp;|&nbsp; PW: <b>' + esc(s.password||'') + '</b></div>'
+      + '</div>'
+      + '<div class="store-actions">'
+      + '<button class="btn btn-danger btn-sm" onclick="deleteStore(\'' + esc(s.id) + '\')"><i class="fas fa-trash"></i> Delete</button>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+}
+
+function addStore() {
+  var id   = document.getElementById('newId').value.trim();
+  var name = document.getElementById('newName').value.trim();
+  var city = document.getElementById('newCity').value.trim();
+  var pw   = document.getElementById('newPw').value.trim();
+  if (!id || !name || !pw) { showToast('Store ID, name and password are required', 'error'); return; }
+  if (id.includes(' ')) { showToast('Store ID cannot have spaces', 'error'); return; }
+  // Check if ID already exists
+  db.collection('mkt_stores').doc(id).get().then(function(doc) {
+    if (doc.exists) { showToast('Store ID already exists', 'error'); return; }
+    db.collection('mkt_stores').doc(id).set({
+      id: id, name: name, city: city, password: pw,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(function() {
+      showToast('Store "' + name + '" created!', 'success');
+      document.getElementById('newId').value = '';
+      document.getElementById('newName').value = '';
+      document.getElementById('newCity').value = '';
+      document.getElementById('newPw').value = '';
+      loadStores();
+    }).catch(function(e){ showToast('Error: '+e.message,'error'); });
+  });
+}
+
+function deleteStore(id) {
+  if (!confirm('Delete store "' + id + '"? This cannot be undone.')) return;
+  db.collection('mkt_stores').doc(id).delete()
+    .then(function(){ showToast('Store deleted','info'); loadStores(); })
+    .catch(function(e){ showToast('Error: '+e.message,'error'); });
+}
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function showToast(msg,type){
+  var t=document.getElementById('toast');
+  t.textContent=msg; t.className='toast '+(type||'info');
+  t.style.display='block';
+  setTimeout(function(){t.style.display='none';},3000);
+}
+</script>
+</body>
+</html>
