@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Migrate Products</title>
+<script src="https://unpkg.com/firebase@10.7.1/firebase-app-compat.js"></script>
+<script src="https://unpkg.com/firebase@10.7.1/firebase-firestore-compat.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,sans-serif;background:#f7fafc;padding:2rem;color:#2d3748}
+.card{background:#fff;border-radius:12px;padding:1.5rem;max-width:600px;margin:0 auto;box-shadow:0 2px 12px rgba(0,0,0,.1)}
+h1{font-size:1.2rem;margin-bottom:.5rem}
+p{color:#718096;font-size:.85rem;margin-bottom:1rem}
+.btn{padding:.7rem 1.5rem;background:#667eea;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:700;width:100%;margin-bottom:.5rem}
+.btn:disabled{background:#e2e8f0;color:#a0aec0;cursor:not-allowed}
+.btn-green{background:#48bb78}
+.log{margin-top:1rem;background:#1a202c;border-radius:8px;padding:1rem;font-size:.8rem;font-family:monospace;max-height:400px;overflow-y:auto;line-height:1.8;display:none}
+.ok{color:#68d391}.err{color:#fc8181}.info{color:#76e4f7}.warn{color:#f6e05e}
+.status{padding:.75rem;border-radius:8px;text-align:center;font-size:.88rem;margin-bottom:1rem;font-weight:600}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>🔄 Product Migration Tool</h1>
+  <p>Copies products from <b>goat-kids-store</b> → <b>goat-kids-b2b</b> at the correct path <code>stores/GOAT-1979/products</code></p>
+
+  <div id="status" class="status" style="background:#ebedff;color:#5a67d8">Ready</div>
+
+  <button class="btn" id="btn1" onclick="step1_readOld()">Step 1: Read from Old Project</button>
+  <button class="btn" id="btn2" onclick="step2_writeNew()" disabled>Step 2: Write to New Project</button>
+
+  <div class="log" id="log"></div>
+</div>
+
+<script>
+// OLD project
+var oldApp = firebase.initializeApp({
+  apiKey: "AIzaSyDBQyX-LC9dIzE-B-79kXBmr42KbWEoQSU",
+  authDomain: "goat-kids-store.firebaseapp.com",
+  projectId: "goat-kids-store",
+  storageBucket: "goat-kids-store.firebasestorage.app",
+  messagingSenderId: "372035223463",
+  appId: "1:372035223463:web:a9948932607e81da2a4082"
+}, "old");
+
+// NEW project
+var newApp = firebase.initializeApp({
+  apiKey: "AIzaSyAiTcQDO0UGqWBzJn1DkoRrnXCJW2n83kM",
+  authDomain: "goat-kids-b2b.firebaseapp.com",
+  projectId: "goat-kids-b2b",
+  storageBucket: "goat-kids-b2b.firebasestorage.app",
+  messagingSenderId: "133821884669",
+  appId: "1:133821884669:web:87626bd7c869b40981f694"
+}, "new");
+
+var oldDb = firebase.firestore(oldApp);
+var newDb = firebase.firestore(newApp);
+
+var products = [];
+
+function log(msg, type) {
+  var el = document.getElementById('log');
+  el.style.display = 'block';
+  el.innerHTML += '<span class="'+(type||'info')+'">'+msg+'</span>\n';
+  el.scrollTop = el.scrollHeight;
+}
+
+function status(msg, color) {
+  var el = document.getElementById('status');
+  el.textContent = msg;
+  el.style.background = color || '#ebedff';
+  el.style.color = color ? '#fff' : '#5a67d8';
+}
+
+async function step1_readOld() {
+  document.getElementById('btn1').disabled = true;
+  status('Reading from goat-kids-store...', '#667eea');
+  products = [];
+
+  try {
+    // Try GOAT-1979 path first
+    log('Trying stores/GOAT-1979/products...', 'info');
+    var snap = await oldDb.collection('stores').doc('GOAT-1979').collection('products').get();
+    if (snap.size > 0) {
+      snap.docs.forEach(function(d) { products.push(Object.assign({_id: d.id}, d.data())); });
+      log('Found ' + snap.size + ' products at stores/GOAT-1979/products', 'ok');
+    }
+
+    // Also try other store IDs
+    if (products.length === 0) {
+      log('Trying all store documents...', 'info');
+      var stores = await oldDb.collection('stores').get();
+      log('Found ' + stores.size + ' store(s)', 'info');
+      for (var i = 0; i < stores.docs.length; i++) {
+        var sid = stores.docs[i].id;
+        var prods = await oldDb.collection('stores').doc(sid).collection('products').get();
+        log('Store ' + sid + ': ' + prods.size + ' products', prods.size > 0 ? 'ok' : 'warn');
+        prods.docs.forEach(function(d) { products.push(Object.assign({_id: d.id, _storeId: sid}, d.data())); });
+
+        // Also check inline products array
+        var storeData = stores.docs[i].data();
+        if (storeData.products && Array.isArray(storeData.products) && storeData.products.length > 0) {
+          log('Store ' + sid + ': ' + storeData.products.length + ' products (inline)', 'ok');
+          storeData.products.forEach(function(p) { products.push(Object.assign({_storeId: sid}, p)); });
+        }
+      }
+    }
+
+    if (products.length === 0) {
+      log('No products found in old project!', 'err');
+      log('The old project may be empty or products are only in localStorage', 'warn');
+      status('No products found in Firebase', '#f56565');
+      document.getElementById('btn1').disabled = false;
+      return;
+    }
+
+    log('Total: ' + products.length + ' products ready to migrate', 'ok');
+    log('Preview:', 'info');
+    products.slice(0,5).forEach(function(p) { log('  - ' + (p.name||'unnamed') + ' $' + (p.price||0), 'ok'); });
+    if (products.length > 5) log('  ... and ' + (products.length-5) + ' more', 'info');
+
+    status('Read ' + products.length + ' products. Click Step 2 to write.', '#48bb78');
+    document.getElementById('btn2').disabled = false;
+
+  } catch(e) {
+    log('Error: ' + e.message, 'err');
+    status('Error: ' + e.message, '#f56565');
+    document.getElementById('btn1').disabled = false;
+  }
+}
+
+async function step2_writeNew() {
+  if (products.length === 0) { log('No products to write!', 'err'); return; }
+  document.getElementById('btn2').disabled = true;
+  status('Writing to goat-kids-b2b...', '#667eea');
+
+  try {
+    // Create store document first
+    await newDb.collection('stores').doc('GOAT-1979').set({
+      storeId: 'GOAT-1979', name: 'GOAT KIDS',
+      updatedAt: new Date().toISOString()
+    }, {merge: true});
+    log('Created stores/GOAT-1979 document', 'ok');
+
+    var ok = 0, fail = 0;
+    for (var i = 0; i < products.length; i++) {
+      var p = products[i];
+      try {
+        var docId = p._id || p.id || ('prod_' + Date.now() + '_' + i);
+        var data = {
+          name: p.name || 'Product ' + i,
+          price: p.price || 0,
+          costPrice: p.costPrice || 0,
+          stock: p.stock || 0,
+          category: p.category || 'Other',
+          description: p.description || '',
+          images: p.images || [],
+          sizes: p.sizes || [],
+          active: true,
+          migratedAt: new Date().toISOString()
+        };
+        await newDb.collection('stores').doc('GOAT-1979').collection('products').doc(docId).set(data, {merge: true});
+        log('Wrote: ' + data.name, 'ok');
+        ok++;
+      } catch(e2) {
+        log('Failed: ' + (p.name||'?') + ' - ' + e2.message, 'err');
+        fail++;
+      }
+    }
+
+    status('Done! ' + ok + ' written, ' + fail + ' failed', fail > 0 ? '#f6ad55' : '#48bb78');
+    log('Migration complete: ' + ok + ' ok, ' + fail + ' failed', ok > 0 ? 'ok' : 'err');
+    if (ok > 0) {
+      document.getElementById('btn2').textContent = 'Migration Complete!';
+      document.getElementById('btn2').style.background = '#48bb78';
+      document.getElementById('btn2').disabled = false;
+    }
+
+  } catch(e) {
+    log('Error: ' + e.message, 'err');
+    status('Error: ' + e.message, '#f56565');
+    document.getElementById('btn2').disabled = false;
+  }
+}
+</script>
+</body>
+</html>
