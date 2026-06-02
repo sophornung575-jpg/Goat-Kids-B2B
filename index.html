@@ -5866,8 +5866,11 @@ function sendToTelegram(order, callback) {
         var action = mine
           ? '<button onclick="mktRemoveListing(\'' + lid + '\')" style="width:100%;padding:.4rem;background:#fed7d7;color:#c53030;border:none;border-radius:7px;cursor:pointer;font-size:.8rem;font-weight:600;margin-top:.4rem"><i class="fas fa-trash"></i> Remove</button>'
           : '<button onclick="mktAddToCart(\'' + lid + '\')" style="width:100%;padding:.4rem;background:#667eea;color:#fff;border:none;border-radius:7px;cursor:pointer;font-size:.8rem;font-weight:600;margin-top:.4rem"><i class="fas fa-cart-plus"></i> Add to Cart</button>';
+        var cardThumb = l.img ? '<img src="' + escHtml(l.img) + '" style="width:100%;height:88px;object-fit:cover" onerror="this.style.display=\'none\'">' : '';
+        var cardEmoji = l.img ? '' : (MKT.EMOJI[l.cat]||'📦');
+        var cardImgStyle = l.img ? '' : 'display:flex;align-items:center;justify-content:center;font-size:2.6rem';
         return '<div style="background:#fff;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.07);border:1px solid #e2e8f0;overflow:hidden">'
-          + '<div style="height:88px;background:#f7fafc;display:flex;align-items:center;justify-content:center;font-size:2.6rem">' + (MKT.EMOJI[l.cat]||'📦') + '</div>'
+          + '<div style="height:88px;background:#f7fafc;' + cardImgStyle + '">' + cardThumb + cardEmoji + '</div>'
           + '<div style="padding:.7rem">'
           + '<div style="font-size:.68rem;color:#718096;margin-bottom:.12rem">' + escHtml(l.storeName||'') + (l.city ? ' - ' + escHtml(l.city) : '') + '</div>'
           + '<div style="font-weight:700;font-size:.9rem;margin-bottom:.18rem">' + escHtml(l.name||'') + '</div>'
@@ -5974,6 +5977,10 @@ function sendToTelegram(order, callback) {
         document.getElementById('mktShareDesc').value = '';
         document.getElementById('mktShareModal').style.display = 'flex';
         MKT.shareItem = p;
+        // Show product image preview if available
+        var img = p.images && p.images.length > 0 ? p.images[0] : '';
+        var infoEl = document.getElementById('mktShareInfo');
+        if (img) infoEl.innerHTML += '<br><img src="' + img + '" style="width:60px;height:60px;object-fit:cover;border-radius:8px;margin-top:.4rem">';
       }, 200);
     }
 
@@ -5983,6 +5990,7 @@ function sendToTelegram(order, callback) {
       if (!MKT.shareItem) return;
       var sell = parseFloat(document.getElementById('mktShareSell').value) || 0;
       if (!sell) { showToast('Sell price required','error'); return; }
+      var imgUrl = MKT.shareItem.images && MKT.shareItem.images.length > 0 ? MKT.shareItem.images[0] : '';
       db.collection('mkt_listings').add({
         name: MKT.shareItem.name,
         cat: MKT.shareItem.category || 'Other',
@@ -5991,6 +5999,7 @@ function sendToTelegram(order, callback) {
         qty: parseInt(document.getElementById('mktShareQty').value) || 1,
         sizes: document.getElementById('mktShareSizes').value.trim(),
         desc: document.getElementById('mktShareDesc').value.trim(),
+        img: imgUrl,
         storeId: MKT.store.id, storeName: MKT.store.name, city: MKT.store.city,
         status: 'active', ts: firebase.firestore.FieldValue.serverTimestamp()
       }).then(function() {
