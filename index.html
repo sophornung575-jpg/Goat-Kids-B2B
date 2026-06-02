@@ -2223,10 +2223,18 @@ function sendToTelegram(order, callback) {
             var timeoutPromise = new Promise(function(_, reject) {
                 setTimeout(function() { reject(new Error('timeout')); }, 5000);
             });
-            await Promise.race([
-                db.collection('stores').doc('GOAT-1979').get(),
+            var snap = await Promise.race([
+                db.collection('stores').doc(STATE.storeId).get(),
                 timeoutPromise
             ]);
+            // If store doc doesn't exist yet, create it
+            if (!snap.exists) {
+                await db.collection('stores').doc(STATE.storeId).set({
+                    storeId: STATE.storeId,
+                    name: 'GOAT KIDS',
+                    createdAt: new Date().toISOString()
+                }, {merge: true});
+            }
             STATE.firebaseOnline = true;
             showStatus('Connected', 'online');
             document.getElementById('syncBtn').disabled = false;
