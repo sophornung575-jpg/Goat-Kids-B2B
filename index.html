@@ -387,7 +387,7 @@
                 <a href="#" class="nav-link hidden" id="adminNavLink" onclick="goTab('admin');return false"><i class="fas fa-cog"></i><span data-translate="admin">Admin</span></a>
                 <button class="btn btn-small btn-outline" onclick="openWishlistModal()" style="position:relative"><i class="fas fa-heart" style="color:var(--secondary)"></i> <span style="font-size:0.8rem">Wishlist</span> <span id="wishlistBadge" style="position:absolute;top:-6px;right:-6px;background:var(--secondary);color:#fff;font-size:0.65rem;min-width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700">0</span></button>
                 <button class="btn btn-small btn-outline" onclick="openAdminModal()" id="adminLoginBtn"><i class="fas fa-user-shield"></i><span data-translate="login">Login</span></button>
-                <button class="btn btn-small btn-success" onclick="syncToFirebase()" id="syncBtn"><i class="fas fa-cloud-upload-alt"></i><span data-translate="sync">Sync</span></button>
+                <button class="btn btn-small btn-outline" onclick="forceSyncProducts()" title="Force sync products to Firebase" style="margin-right:.25rem"><i class="fas fa-cloud-upload-alt"></i></button><button class="btn btn-small btn-success" onclick="syncToFirebase()" id="syncBtn"><i class="fas fa-cloud-upload-alt"></i><span data-translate="sync">Sync</span></button>
                 <button class="btn btn-small btn-outline" onclick="toggleLanguage()" id="langToggle"><span id="langIcon">🇰🇭</span> <span id="langText">ខ្មែរ</span></button>
             </nav>
         </div>
@@ -6259,6 +6259,39 @@ function sendToTelegram(order, callback) {
       if (!confirm('Delete product?')) return;
       db.collection('shop_products').doc(id).delete().then(function(){showToast('Deleted','info');masterLoadProducts(masterCurrentStoreId);});
     }
+
+    // Force sync - bypasses firebaseOnline check
+    async function forceSyncProducts() {
+      if (!db) { showToast('Firebase not initialized', 'error'); return; }
+      showToast('Force syncing products...', 'info');
+      var count = 0;
+      try {
+        // First create/update the store document
+        await db.collection('stores').doc(STATE.storeId).set({
+          storeId: STATE.storeId, name: 'GOAT KIDS',
+          updatedAt: new Date().toISOString()
+        }, {merge: true});
+        // Then sync all products
+        for (var i = 0; i < STATE.products.length; i++) {
+          var p = STATE.products[i];
+          await db.collection('stores').doc(STATE.storeId).collection('products').doc(p.id).set({
+            name: p.name, price: p.price, stock: p.stock,
+            category: p.category, images: p.images || [],
+            sizes: p.sizes || [], costPrice: p.costPrice || 0,
+            description: p.description || '', active: true,
+            updatedAt: new Date().toISOString()
+          }, {merge: true});
+          count++;
+        }
+        STATE.firebaseOnline = true;
+        showToast('Synced ' + count + ' products to Firebase!', 'success');
+        showStatus('Connected', 'online');
+      } catch(e) {
+        showToast('Sync error: ' + e.message, 'error');
+        console.error('Force sync error:', e);
+      }
+    }
+
     // =====================================================
     // END MARKET + MASTER MODULE
     // =====================================================
