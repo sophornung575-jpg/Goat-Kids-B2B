@@ -2238,6 +2238,11 @@ function sendToTelegram(order, callback) {
             STATE.firebaseOnline = true;
             showStatus('Connected', 'online');
             document.getElementById('syncBtn').disabled = false;
+            // Auto-hide the status bar after 2 seconds when connected
+            setTimeout(function() {
+                var bar = document.getElementById('statusBar');
+                if (bar) bar.classList.remove('show');
+            }, 2000);
             await flushOfflineSyncQueue();
         } catch (e) {
             STATE.firebaseOnline = false;
