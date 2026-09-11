@@ -114,14 +114,21 @@
   .card .add:hover{ background:var(--secondary-dark); }
   .admin-empty{ text-align:center; padding:2.5rem; color:var(--gray); font-size:0.85rem; }
 
-  .manual-add{ margin-top:18px; }
-  .manual-add summary{ cursor:pointer; font-size:0.85rem; color:var(--gray-dark); font-weight:600; list-style:none; padding:2px 0; }
-  .manual-add summary::-webkit-details-marker{ display:none; }
+  .manual-add, .bulk-import{ margin-top:18px; }
+  .manual-add summary, .bulk-import summary{ cursor:pointer; font-size:0.85rem; color:var(--gray-dark); font-weight:600; list-style:none; padding:2px 0; }
+  .manual-add summary::-webkit-details-marker, .bulk-import summary::-webkit-details-marker{ display:none; }
   .manual-add summary::before{ content:"Can't find it in search? Add an item by link ▸"; }
   .manual-add[open] summary::before{ content:"Can't find it in search? Add an item by link ▾"; }
+  .bulk-import summary::before{ content:"Paste several links at once ▸"; }
+  .bulk-import[open] summary::before{ content:"Paste several links at once ▾"; }
   .add-form{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:12px; }
   .add-form input#itemUrl{ grid-column: 1 / -1; }
   .add-form button{ grid-column: 1 / -1; }
+  .bulk-form{ margin-top:12px; }
+  .bulk-form textarea{ width:100%; padding:0.7rem 0.9rem; border:2px solid var(--gray-light); border-radius:var(--radius); font-size:0.85rem; font-family:inherit; resize:vertical; }
+  .bulk-form textarea:focus{ outline:none; border-color:var(--primary); }
+  .bulk-form button{ margin-top:10px; }
+  .bulk-result{ font-size:0.8rem; color:var(--gray-dark); margin-top:8px; display:none; }
 
   aside .admin-card{ position:sticky; top:88px; max-height:calc(100vh - 110px); overflow-y:auto; margin-bottom:0; }
   aside .admin-card-body{ padding-top:0.75rem; }
@@ -172,6 +179,16 @@
           <input type="text" class="form-control" id="historyFilter" placeholder="Filter your saved products...">
           <div class="grid" id="historyGrid" style="margin-top:14px;"></div>
           <div class="admin-empty" id="historyEmpty">No saved products yet. Search 1688 or add an item by link, and everything you find will show up here for next time.</div>
+
+          <details class="bulk-import">
+            <summary></summary>
+            <p class="hint">Paste a list, one per line — either product links (a name before the link is fine, it becomes the title), or just plain product names with no link, like from a 1688 export. Names get a ready-made "Search on 1688" link since there's no exact product page to point to.</p>
+            <div class="bulk-form">
+              <textarea id="bulkUrls" rows="5" placeholder="Kids cotton dress  https://detail.1688.com/offer/1234567890.html&#10;https://detail.1688.com/offer/2345678901.html&#10;儿童棉质连衣裙&#10;..."></textarea>
+              <button class="btn btn-primary" id="bulkImportBtn"><i class="fas fa-file-import"></i> Import links</button>
+              <p class="bulk-result" id="bulkImportResult"></p>
+            </div>
+          </details>
         </div>
       </div>
     </div>
@@ -362,7 +379,7 @@ function productCardHtml(p, opts){
           ${p.sizes.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('')}
         </select>` : ''}
         <div class="row">
-          <a class="view" href="${escapeHtml(p.url)}" target="_blank" rel="noopener">View on 1688</a>
+          <a class="view" href="${escapeHtml(p.url)}" target="_blank" rel="noopener">${p.isSearchLink ? 'Search on 1688' : 'View on 1688'}</a>
           <button class="add" onclick="addToRestock('${escapeHtml(p.id)}', this)">Add to list</button>
         </div>
       </div>
@@ -727,6 +744,75 @@ document.getElementById('addItemBtn').onclick = () => {
   document.getElementById('itemQty').value = '1';
 };
 
+// Bulk import: paste many 1688 links at once (optionally with a name before
+// each one) straight into the Home catalog. No scraping — just parsing
+// whatever text was pasted, so it works the same on phone or computer.
+document.getElementById('bulkImportBtn').onclick = () => {
+  const raw = document.getElementById('bulkUrls').value;
+  const urlPattern = /https?:\/\/[^\s"'<>]*1688\.com[^\s"'<>]*/i;
+  const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
+
+  let entries = [];
+  lines.forEach(line => {
+    const m = line.match(urlPattern);
+    if(m){
+      const url = m[0];
+      const title = line.replace(url, '').replace(/^[\s|,\-–:]+|[\s|,\-–:]+$/g, '').trim();
+      entries.push({ url, title: title || url, isSearchLink: false });
+    } else {
+      // No link on this line — treat it as a bare product name (e.g. from
+      // a 1688 export that only lists names) and link to a 1688 search for
+      // that name instead of a specific product page.
+      const name = line.replace(/^[\s|,\-–:]+|[\s|,\-–:]+$/g, '').trim();
+      if(!name) return;
+      const searchUrl = 'https://s.1688.com/selloffer/offer_search.htm?keywords=' + encodeURIComponent(name);
+      entries.push({ url: searchUrl, title: name, isSearchLink: true });
+    }
+  });
+
+  // de-dupe by url within this paste (two identical names produce the
+  // same generated search url, so this also naturally de-dupes names)
+  const seen = new Set();
+  entries = entries.filter(e => {
+    if(seen.has(e.url)) return false;
+    seen.add(e.url);
+    return true;
+  });
+
+  const resultEl = document.getElementById('bulkImportResult');
+  if(entries.length === 0){
+    resultEl.textContent = 'Nothing usable found in that text.';
+    resultEl.style.display = 'block';
+    return;
+  }
+
+  entries.forEach(e => {
+    const id = hashId(e.url);
+    const data = {
+      title: e.title, price: '—', moq: '—', supplier: '—',
+      image: '', url: e.url, sizes: [], isSearchLink: e.isSearchLink
+    };
+    if(db){
+      db.collection('restockTool_history').doc(id).set({
+        ...data, savedAt: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true });
+    } else {
+      historyCache = historyCache.filter(p => p.id !== id);
+      historyCache.unshift({ id, ...data });
+    }
+  });
+  if(!db){ renderHistory(); }
+
+  const linkCount = entries.filter(e => !e.isSearchLink).length;
+  const nameCount = entries.filter(e => e.isSearchLink).length;
+  const parts = [];
+  if(linkCount) parts.push(`${linkCount} link${linkCount === 1 ? '' : 's'}`);
+  if(nameCount) parts.push(`${nameCount} name${nameCount === 1 ? '' : 's'} (as searches)`);
+  resultEl.textContent = `Added ${parts.join(' and ')} to your catalog.`;
+  resultEl.style.display = 'block';
+  document.getElementById('bulkUrls').value = '';
+};
+
 function removeFromRestock(docId){
   if(db && !docId.startsWith('local-')){
     db.collection('restockTool_items').doc(docId).delete();
@@ -762,7 +848,7 @@ function renderRestock(){
       <div class="r2">
         <span>Qty</span>
         <input class="qty" type="number" min="1" value="${item.qty}" onchange="updateQty('${item.docId}', this.value)">
-        <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Order on 1688 ↗</a>
+        <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${item.isSearchLink ? 'Search on 1688 ↗' : 'Order on 1688 ↗'}</a>
         <button class="remove" onclick="removeFromRestock('${item.docId}')">Remove</button>
       </div>
     </div>
