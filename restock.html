@@ -15,6 +15,7 @@
     --shadow:0 1px 3px rgba(0,0,0,0.1); --shadow-lg:0 10px 15px rgba(0,0,0,0.1);
   }
   *{ box-sizing: border-box; }
+  .hidden{ display:none!important; }
   body{
     margin:0;
     background:var(--light);
@@ -51,6 +52,11 @@
     padding:24px 1.5rem 60px; align-items:start;
   }
   @media (max-width: 900px){ main{ grid-template-columns: 1fr; } }
+
+  .page-tabs{ display:flex; gap:0; border-bottom:2px solid var(--gray-light); margin-bottom:1.25rem; }
+  .page-tab{ padding:0.7rem 1.3rem; border:none; background:none; font-size:0.9rem; font-weight:600; cursor:pointer; color:var(--gray-dark); border-bottom:2px solid transparent; margin-bottom:-2px; font-family:inherit; display:inline-flex; align-items:center; gap:0.5rem; }
+  .page-tab:hover{ color:var(--primary); }
+  .page-tab.active{ color:var(--primary); border-bottom-color:var(--primary); }
 
   .admin-card{ background:#fff; border:1px solid var(--gray-light); border-radius:var(--radius-lg); margin-bottom:1.5rem; overflow:hidden; }
   .admin-card-header{ padding:1rem 1.25rem; background:var(--light); border-bottom:1px solid var(--gray-light); }
@@ -92,8 +98,11 @@
   .results-head h2{ margin:0; font-size:0.95rem; font-weight:700; }
   .grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap:14px; }
   .card{ border:1px solid var(--gray-light); border-radius:var(--radius); overflow:hidden; display:flex; flex-direction:column; }
-  .thumb{ aspect-ratio:1/1; background:var(--light); display:flex; align-items:center; justify-content:center; color:var(--gray); font-size:11.5px; overflow:hidden; }
-  .thumb img{ width:100%; height:100%; object-fit:cover; }
+  .thumb{ aspect-ratio:1/1; background:var(--light); position:relative; overflow:hidden; }
+  .thumb-img{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:var(--gray); font-size:11.5px; }
+  .thumb-img img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .thumb-remove{ position:absolute; top:4px; right:4px; width:22px; height:22px; border-radius:50%; border:none; background:rgba(0,0,0,0.55); color:#fff; font-size:11px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+  .thumb-remove:hover{ background:var(--danger); }
   .card .body{ padding:10px; display:flex; flex-direction:column; gap:6px; flex:1; }
   .card .title{ font-size:0.8rem; font-weight:600; line-height:1.35; min-height:2.6em; }
   .card .price{ font-size:0.85rem; font-weight:700; color:var(--secondary-dark); }
@@ -148,50 +157,71 @@
 
 <main>
   <div>
-    <div class="admin-card">
-      <div class="admin-card-header">
-        <h1><i class="fas fa-search" style="color:var(--primary)"></i> Search suppliers</h1>
-        <p>Search trusted 1688 suppliers, build a restock list, then order directly on 1688.</p>
-      </div>
-      <div class="admin-card-body">
-        <div class="search-bar">
-          <input type="text" class="form-control" id="keyword" placeholder="Search a product, e.g. kids cotton socks">
-          <select class="form-control" id="shopFilter"></select>
-          <button class="btn btn-primary" id="searchBtn"><i class="fas fa-search"></i> Search</button>
-          <button class="btn btn-outline" id="browseBtn" title="Pick a specific shop to browse its full catalog" disabled>View all items</button>
+    <div class="page-tabs">
+      <button class="page-tab active" id="tabHomeBtn" onclick="switchSection('home')"><i class="fas fa-layer-group"></i> Home</button>
+      <button class="page-tab" id="tabSearchBtn" onclick="switchSection('search')"><i class="fas fa-search"></i> Search 1688</button>
+    </div>
+
+    <div id="homeSection">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h1><i class="fas fa-layer-group" style="color:var(--primary)"></i> Product catalog</h1>
+          <p>Everything found through search or added manually — pick straight from here without searching again.</p>
         </div>
-        <p class="hint" id="liveDataHint" style="display:none;">Live search covers all of 1688 by keyword — it doesn't filter to one trusted shop, and "View all items" still shows sample data since this scraper can't browse a whole shop without a keyword.</p>
-        <details class="shop-manager" id="shopManager" data-count="1">
-          <summary></summary>
-          <div id="shopList"></div>
-          <div class="add-shop-row">
-            <input type="text" class="name" id="newShopName" placeholder="Shop nickname">
-            <input type="text" class="id" id="newShopId" placeholder="1688 shop ID (from the shop URL)">
-            <button class="btn btn-outline btn-small" id="addShopBtn">Add shop</button>
-          </div>
-        </details>
+        <div class="admin-card-body">
+          <input type="text" class="form-control" id="historyFilter" placeholder="Filter your saved products...">
+          <div class="grid" id="historyGrid" style="margin-top:14px;"></div>
+          <div class="admin-empty" id="historyEmpty">No saved products yet. Search 1688 or add an item by link, and everything you find will show up here for next time.</div>
+        </div>
       </div>
     </div>
 
-    <div class="admin-card">
-      <div class="admin-card-body">
-        <div class="results-head">
-          <h2 id="resultsLabel">Search a product to see results</h2>
+    <div id="searchSection" class="hidden">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h1><i class="fas fa-search" style="color:var(--primary)"></i> Search suppliers</h1>
+          <p>Search trusted 1688 suppliers, build a restock list, then order directly on 1688.</p>
         </div>
-        <div class="grid" id="grid"></div>
-        <div class="admin-empty" id="emptyState">No results yet — try a search above.</div>
-
-        <details class="manual-add">
-          <summary></summary>
-          <p class="hint">If a supplier's item isn't showing up in search, paste its 1688 product link here to add it straight to your restock list.</p>
-          <div class="add-form">
-            <input type="text" class="form-control" id="itemUrl" placeholder="1688 product link">
-            <input type="text" class="form-control" id="itemTitle" placeholder="Product name">
-            <input type="text" class="form-control" id="itemSize" placeholder="Size (optional)">
-            <input type="number" class="form-control" id="itemQty" min="1" value="1" placeholder="Qty">
-            <button class="btn btn-primary" id="addItemBtn"><i class="fas fa-plus"></i> Add to list</button>
+        <div class="admin-card-body">
+          <div class="search-bar">
+            <input type="text" class="form-control" id="keyword" placeholder="Search a product, e.g. kids cotton socks">
+            <select class="form-control" id="shopFilter"></select>
+            <button class="btn btn-primary" id="searchBtn"><i class="fas fa-search"></i> Search</button>
+            <button class="btn btn-outline" id="browseBtn" title="Pick a specific shop to browse its full catalog" disabled>View all items</button>
           </div>
-        </details>
+          <p class="hint" id="liveDataHint" style="display:none;">Live search covers all of 1688 by keyword — it doesn't filter to one trusted shop, and "View all items" still shows sample data since this scraper can't browse a whole shop without a keyword.</p>
+          <details class="shop-manager" id="shopManager" data-count="1">
+            <summary></summary>
+            <div id="shopList"></div>
+            <div class="add-shop-row">
+              <input type="text" class="name" id="newShopName" placeholder="Shop nickname">
+              <input type="text" class="id" id="newShopId" placeholder="1688 shop ID (from the shop URL)">
+              <button class="btn btn-outline btn-small" id="addShopBtn">Add shop</button>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <div class="admin-card-body">
+          <div class="results-head">
+            <h2 id="resultsLabel">Search a product to see results</h2>
+          </div>
+          <div class="grid" id="grid"></div>
+          <div class="admin-empty" id="emptyState">No results yet — try a search above.</div>
+
+          <details class="manual-add">
+            <summary></summary>
+            <p class="hint">If a supplier's item isn't showing up in search, paste its 1688 product link here to add it straight to your restock list. It'll also be saved to your Home catalog.</p>
+            <div class="add-form">
+              <input type="text" class="form-control" id="itemUrl" placeholder="1688 product link">
+              <input type="text" class="form-control" id="itemTitle" placeholder="Product name">
+              <input type="text" class="form-control" id="itemSize" placeholder="Size (optional)">
+              <input type="number" class="form-control" id="itemQty" min="1" value="1" placeholder="Qty">
+              <button class="btn btn-primary" id="addItemBtn"><i class="fas fa-plus"></i> Add to list</button>
+            </div>
+          </details>
+        </div>
       </div>
     </div>
   </div>
@@ -232,8 +262,9 @@
 <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
 <script>
 // Same Firebase project as the Goat Kids B2B app, but this tool only ever
-// touches its own two collections below (restockTool_shops, restockTool_items) —
-// it never reads or writes stores/mkt_stores/mkt_listings/mkt_convs.
+// touches its own three collections below (restockTool_shops,
+// restockTool_items, restockTool_history) — it never reads or writes
+// stores/mkt_stores/mkt_listings/mkt_convs.
 const firebaseConfig = {
   apiKey: "AIzaSyAiTcQDO0UGqWBzJn1DkoRrnXCJW2n83kM",
   authDomain: "goat-kids-b2b.firebaseapp.com",
@@ -254,12 +285,28 @@ try{
 </script>
 <script>
 // ---------- state ----------
-// shops and restockList are the local cache, kept in sync with Firestore by
-// the listeners in initFirestoreListeners(). If db didn't connect (offline,
-// bad config, etc.) they just behave as session-only arrays like before.
+// shops, restockList and historyCache are the local cache, kept in sync
+// with Firestore by the listeners in initFirestoreListeners(). If db
+// didn't connect (offline, bad config, etc.) they just behave as
+// session-only arrays like before.
 let shops = [];
 let restockList = [];
 let lastResults = [];
+let historyCache = [];
+let historyFilterText = '';
+let productIndex = {}; // id -> product, refreshed whenever search results or the Home catalog render, so addToRestock can find a product regardless of which grid it was clicked from
+
+function indexProducts(list){
+  list.forEach(p => { productIndex[p.id] = p; });
+}
+
+// ---------- page tabs (Home / Search) ----------
+function switchSection(name){
+  document.getElementById('homeSection').classList.toggle('hidden', name !== 'home');
+  document.getElementById('searchSection').classList.toggle('hidden', name !== 'search');
+  document.getElementById('tabHomeBtn').classList.toggle('active', name === 'home');
+  document.getElementById('tabSearchBtn').classList.toggle('active', name === 'search');
+}
 
 function initFirestoreListeners(){
   db.collection('restockTool_shops').onSnapshot(snap => {
@@ -283,6 +330,94 @@ function initFirestoreListeners(){
     console.error('Restock list listener failed, falling back to local-only:', err);
     db = null;
     renderRestock();
+  });
+
+  db.collection('restockTool_history').orderBy('savedAt', 'desc').onSnapshot(snap => {
+    historyCache = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderHistory();
+  }, err => {
+    console.error('History listener failed, falling back to local-only:', err);
+    renderHistory();
+  });
+}
+
+// ---------- shared product card ----------
+function productCardHtml(p, opts){
+  opts = opts || {};
+  const imgHtml = p.image
+    ? `<img src="${escapeHtml(p.image)}" alt="" referrerpolicy="no-referrer" onerror="this.parentElement.textContent='No image'">`
+    : 'No image';
+  return `
+    <div class="card">
+      <div class="thumb">
+        <div class="thumb-img">${imgHtml}</div>
+        ${opts.removable ? `<button class="thumb-remove" onclick="removeFromHistory('${escapeHtml(p.id)}')" title="Remove from catalog"><i class="fas fa-times"></i></button>` : ''}
+      </div>
+      <div class="body">
+        <div class="title">${escapeHtml(p.title)}</div>
+        <div class="price">${escapeHtml(String(p.price))}</div>
+        <div class="meta">MOQ ${escapeHtml(String(p.moq))} · ${escapeHtml(p.supplier)}</div>
+        ${p.sizes && p.sizes.length ? `
+        <select class="size-select">
+          ${p.sizes.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('')}
+        </select>` : ''}
+        <div class="row">
+          <a class="view" href="${escapeHtml(p.url)}" target="_blank" rel="noopener">View on 1688</a>
+          <button class="add" onclick="addToRestock('${escapeHtml(p.id)}', this)">Add to list</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ---------- Home catalog ----------
+function renderHistory(){
+  indexProducts(historyCache);
+  const grid = document.getElementById('historyGrid');
+  const empty = document.getElementById('historyEmpty');
+  const filtered = historyFilterText
+    ? historyCache.filter(p => (p.title || '').toLowerCase().includes(historyFilterText))
+    : historyCache;
+
+  if(filtered.length === 0){
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    empty.textContent = historyCache.length === 0
+      ? 'No saved products yet. Search 1688 or add an item by link, and everything you find will show up here for next time.'
+      : 'No saved products match that filter.';
+    return;
+  }
+  empty.style.display = 'none';
+  grid.innerHTML = filtered.map(p => productCardHtml(p, { removable: true })).join('');
+}
+
+document.getElementById('historyFilter').addEventListener('input', e => {
+  historyFilterText = e.target.value.trim().toLowerCase();
+  renderHistory();
+});
+
+function removeFromHistory(id){
+  if(db){
+    db.collection('restockTool_history').doc(id).delete();
+  } else {
+    historyCache = historyCache.filter(p => p.id !== id);
+    renderHistory();
+  }
+}
+
+// Saves live search results (never sample/placeholder data) into the
+// shared Home catalog, keyed by each product's own 1688 offer ID so
+// re-finding the same item on a later search just bumps it to the top
+// instead of creating a duplicate.
+function saveToHistory(products){
+  if(!db) return;
+  products.forEach(p => {
+    if(!p.hasStableId) return;
+    db.collection('restockTool_history').doc(String(p.id)).set({
+      title: p.title, price: p.price, moq: p.moq, supplier: p.supplier,
+      image: p.image, url: p.url, sizes: p.sizes || [],
+      savedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
   });
 }
 
@@ -369,6 +504,7 @@ async function performSearch(keyword){
     setMode(true);
     try{
       results = await fetchFromApify(keyword, token);
+      saveToHistory(results);
     }catch(err){
       console.error('Apify search failed, falling back to sample data:', err);
       results = generateMockResults(keyword, shopId);
@@ -418,6 +554,7 @@ async function fetchFromApify(keyword, token){
 function mapProduct(raw){
   return {
     id: raw.offerId || String(Math.random()),
+    hasStableId: !!raw.offerId, // only items with a real 1688 offer ID get saved to the Home catalog
     title: raw.title || 'Untitled product',
     price: formatPrice(raw.price),
     moq: (raw.minOrderQuantity != null) ? `${raw.minOrderQuantity} ${raw.unit || ''}`.trim() : '—',
@@ -474,6 +611,7 @@ function generateMockResults(keyword, shopId){
   if(!keyword){
     return CATALOG_ITEMS.map((it, i) => ({
       id: 'sample-' + i,
+      hasStableId: false,
       title: it.name,
       price: it.price,
       moq: it.moq,
@@ -489,6 +627,7 @@ function generateMockResults(keyword, shopId){
   const moqs = ['50 pcs', '30 pcs', '100 pcs', '20 pcs', '40 pcs', '60 pcs'];
   return suffixes.map((suffix, i) => ({
     id: 'sample-' + i,
+    hasStableId: false,
     title: `${keyword} — ${suffix}`,
     price: prices[i],
     moq: moqs[i],
@@ -505,6 +644,8 @@ function renderResults(results, keyword, shopId){
   const empty = document.getElementById('emptyState');
   const label = document.getElementById('resultsLabel');
 
+  indexProducts(results);
+
   if(keyword){
     label.textContent = `Results for "${keyword}" (${results.length})`;
   } else {
@@ -520,29 +661,12 @@ function renderResults(results, keyword, shopId){
   }
   empty.style.display = 'none';
 
-  grid.innerHTML = results.map(p => `
-    <div class="card">
-      <div class="thumb">${p.image ? `<img src="${escapeHtml(p.image)}" alt="" referrerpolicy="no-referrer" onerror="this.closest('.thumb').textContent='No image'">` : 'No image'}</div>
-      <div class="body">
-        <div class="title">${escapeHtml(p.title)}</div>
-        <div class="price">${escapeHtml(String(p.price))}</div>
-        <div class="meta">MOQ ${escapeHtml(String(p.moq))} · ${escapeHtml(p.supplier)}</div>
-        ${p.sizes && p.sizes.length ? `
-        <select class="size-select">
-          ${p.sizes.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('')}
-        </select>` : ''}
-        <div class="row">
-          <a class="view" href="${escapeHtml(p.url)}" target="_blank" rel="noopener">View on 1688</a>
-          <button class="add" onclick="addToRestock('${p.id}', this)">Add to list</button>
-        </div>
-      </div>
-    </div>
-  `).join('');
+  grid.innerHTML = results.map(p => productCardHtml(p, { removable: false })).join('');
 }
 
 // ---------- restock list ----------
 function addToRestock(id, btnEl){
-  const product = lastResults.find(p => p.id === id);
+  const product = productIndex[id];
   if(!product) return;
   const sizeSelect = btnEl ? btnEl.closest('.card').querySelector('.size-select') : null;
   const size = sizeSelect ? sizeSelect.value : null;
@@ -560,7 +684,14 @@ function addToRestock(id, btnEl){
   }
 }
 
-// Manual add-by-link, for items found outside of search results.
+// Manual add-by-link, for items found outside of search results. Also
+// keeps a copy in the Home catalog so it's easy to find again later.
+function hashId(str){
+  let h = 0;
+  for(let i = 0; i < str.length; i++){ h = (h * 31 + str.charCodeAt(i)) >>> 0; }
+  return 'm' + h.toString(36);
+}
+
 document.getElementById('addItemBtn').onclick = () => {
   const url = document.getElementById('itemUrl').value.trim();
   const title = document.getElementById('itemTitle').value.trim();
@@ -580,6 +711,11 @@ document.getElementById('addItemBtn').onclick = () => {
   if(db){
     item.addedAt = firebase.firestore.FieldValue.serverTimestamp();
     db.collection('restockTool_items').add(item);
+    db.collection('restockTool_history').doc(hashId(url)).set({
+      title: item.title, price: '—', moq: '—', supplier: '—',
+      image: '', url, sizes: [],
+      savedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
   } else {
     restockList.push({ ...item, docId: 'local-' + Date.now() });
     renderRestock();
@@ -661,6 +797,7 @@ if(db){
   shops = [{ name: 'Supplier 1', id: '1381942494680' }];
   renderShops();
   renderRestock();
+  renderHistory();
 }
 
 </script>
