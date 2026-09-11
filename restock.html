@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Restock Search — Goat Kids B2B</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
   :root{
     --primary:#667eea; --primary-light:#a3b4f6; --primary-dark:#5a67d8;
@@ -187,6 +189,17 @@
               <textarea id="bulkUrls" rows="5" placeholder="Kids cotton dress  https://detail.1688.com/offer/1234567890.html&#10;https://detail.1688.com/offer/2345678901.html&#10;儿童棉质连衣裙&#10;..."></textarea>
               <button class="btn btn-primary" id="bulkImportBtn"><i class="fas fa-file-import"></i> Import links</button>
               <p class="bulk-result" id="bulkImportResult"></p>
+            </div>
+
+            <div class="csv-import">
+              <p class="hint" style="margin-bottom:6px;">Or upload a CSV or Excel export directly:</p>
+              <input type="file" id="csvFile" accept=".csv,text/csv,.xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+              <div id="csvPreview" style="display:none; margin-top:10px;">
+                <label class="hint" for="csvColumnSelect" style="display:block;">Which column has the item name?</label>
+                <select class="form-control" id="csvColumnSelect" style="max-width:260px; margin-top:6px;"></select>
+                <p class="hint" id="csvPreviewText" style="margin-top:8px;"></p>
+                <button class="btn btn-primary btn-small" id="csvImportBtn" style="margin-top:8px;">Import these items</button>
+              </div>
             </div>
           </details>
         </div>
@@ -811,6 +824,222 @@ document.getElementById('bulkImportBtn').onclick = () => {
   resultEl.textContent = `Added ${parts.join(' and ')} to your catalog.`;
   resultEl.style.display = 'block';
   document.getElementById('bulkUrls').value = '';
+};
+
+// ---------- CSV / Excel upload ----------
+// Exports vary in layout. First we check for a format we recognize by its
+// exact headers (a 1688 order-history export, which conveniently includes
+// the real Offer ID for each product — so we can build exact product
+// links and pull in price/supplier too, not just a name). If it's not
+// that, we fall back to a generic "which column has the name" picker that
+// scores every column by how name-like its values look, and always shows
+// a preview before importing so nothing goes in silently wrong.
+let csvRows = [];
+let csvOrderEntries = null; // set when a recognized order-export format is detected
+
+const ORDER_EXPORT_HEADERS = { title: '货品标题', price: '单价(元)', supplier: '卖家公司名', offerId: 'Offer ID' };
+
+function looksLikeHeaderRow(row){
+  return row.every(cell => (cell || '').toString().length < 30) &&
+         row.some(cell => /name|title|item|product|名称|商品|标题|品名/i.test((cell || '').toString()));
+}
+
+function csvHasHeader(){
+  return csvRows.length > 1 && looksLikeHeaderRow(csvRows[0]);
+}
+
+function columnScore(colIndex){
+  let score = 0;
+  const start = csvHasHeader() ? 1 : 0;
+  for(let i = start; i < csvRows.length; i++){
+    const val = ((csvRows[i][colIndex] || '') + '').trim();
+    if(val && isNaN(val) && val.length >= 2) score++;
+  }
+  return score;
+}
+
+// Strips a trailing variant descriptor like " 颜色: 杏色 适合身高: 110码/4Y"
+// off a product title, so the many size/colour rows for one product
+// collapse down to a single clean name.
+function stripVariantSuffix(title){
+  const m = title.match(/\s*(颜色|尺码|适合身高|规格)[:：]/);
+  return m ? title.slice(0, m.index) : title;
+}
+
+// Looks for the exact header set of a 1688 order-history export. Returns
+// deduped {title, price, supplier, url, offerId} entries (one per unique
+// Offer ID) if found, otherwise null.
+function detectOrderExport(){
+  if(csvRows.length < 2) return null;
+  const header = csvRows[0].map(h => (h || '').toString().trim());
+  const idx = {};
+  for(const key in ORDER_EXPORT_HEADERS){
+    idx[key] = header.indexOf(ORDER_EXPORT_HEADERS[key]);
+  }
+  if(idx.title === -1 || idx.offerId === -1) return null;
+
+  const seen = new Set();
+  const entries = [];
+  for(let i = 1; i < csvRows.length; i++){
+    const row = csvRows[i];
+    const offerId = ((row[idx.offerId] || '') + '').trim();
+    const rawTitle = ((row[idx.title] || '') + '').trim();
+    if(!offerId || !rawTitle || seen.has(offerId)) continue;
+    seen.add(offerId);
+    entries.push({
+      offerId,
+      title: stripVariantSuffix(rawTitle),
+      price: idx.price > -1 && row[idx.price] !== undefined && row[idx.price] !== '' ? ('¥' + row[idx.price]) : '—',
+      supplier: idx.supplier > -1 && row[idx.supplier] ? ((row[idx.supplier] || '') + '').trim() : '—',
+      url: 'https://detail.1688.com/offer/' + offerId + '.html'
+    });
+  }
+  return entries.length ? entries : null;
+}
+
+document.getElementById('csvFile').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if(!file) return;
+  const isExcel = /\.xlsx?$/i.test(file.name);
+
+  if(isExcel){
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      try{
+        const wb = XLSX.read(evt.target.result, { type: 'array' });
+        const sheet = wb.Sheets[wb.SheetNames[0]];
+        csvRows = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: '' });
+        handleParsedRows();
+      }catch(err){
+        alert('Could not read that Excel file: ' + err.message);
+      }
+    };
+    reader.onerror = () => alert('Could not read that file.');
+    reader.readAsArrayBuffer(file);
+  } else {
+    Papa.parse(file, {
+      skipEmptyLines: true,
+      complete: (results) => {
+        csvRows = results.data;
+        handleParsedRows();
+      },
+      error: (err) => alert('Could not read that file: ' + err.message)
+    });
+  }
+});
+
+function handleParsedRows(){
+  if(!csvRows || csvRows.length === 0){
+    alert('That file appears to be empty.');
+    return;
+  }
+
+  csvOrderEntries = detectOrderExport();
+  if(csvOrderEntries){
+    document.getElementById('csvColumnSelect').style.display = 'none';
+    document.querySelector('label[for="csvColumnSelect"]').style.display = 'none';
+    const preview = csvOrderEntries.slice(0, 5).map(e => e.title).join(', ');
+    document.getElementById('csvPreviewText').textContent =
+      `Detected a 1688 order export — found ${csvOrderEntries.length} distinct product${csvOrderEntries.length === 1 ? '' : 's'} across your orders (e.g. ${preview}${csvOrderEntries.length > 5 ? ', ...' : ''}). These will get exact product links, price paid, and supplier.`;
+  } else {
+    document.getElementById('csvColumnSelect').style.display = '';
+    document.querySelector('label[for="csvColumnSelect"]').style.display = '';
+    setupCsvColumnPicker();
+  }
+  document.getElementById('csvPreview').style.display = 'block';
+}
+
+function setupCsvColumnPicker(){
+  const numCols = Math.max(...csvRows.map(r => r.length));
+  const hasHeader = csvHasHeader();
+  const headerRow = hasHeader ? csvRows[0] : null;
+
+  let bestCol = 0, bestScore = -1;
+  for(let c = 0; c < numCols; c++){
+    const s = columnScore(c);
+    if(s > bestScore){ bestScore = s; bestCol = c; }
+  }
+
+  const select = document.getElementById('csvColumnSelect');
+  select.innerHTML = '';
+  for(let c = 0; c < numCols; c++){
+    const label = (headerRow && headerRow[c]) ? headerRow[c] : `Column ${c + 1}`;
+    const opt = document.createElement('option');
+    opt.value = c;
+    opt.textContent = label;
+    if(c === bestCol) opt.selected = true;
+    select.appendChild(opt);
+  }
+
+  select.onchange = updateCsvPreview;
+  updateCsvPreview();
+}
+
+function csvNamesForColumn(colIndex){
+  const start = csvHasHeader() ? 1 : 0;
+  return csvRows.slice(start)
+    .map(r => ((r[colIndex] || '') + '').trim())
+    .filter(Boolean);
+}
+
+function updateCsvPreview(){
+  const colIndex = parseInt(document.getElementById('csvColumnSelect').value);
+  const names = csvNamesForColumn(colIndex);
+  const preview = names.slice(0, 5).join(', ');
+  document.getElementById('csvPreviewText').textContent = names.length
+    ? `Found ${names.length} item${names.length === 1 ? '' : 's'} — e.g. ${preview}${names.length > 5 ? ', ...' : ''}`
+    : 'No values found in that column.';
+}
+
+document.getElementById('csvImportBtn').onclick = () => {
+  let importCount = 0;
+  const resultEl = document.getElementById('bulkImportResult');
+
+  if(csvOrderEntries){
+    csvOrderEntries.forEach(e => {
+      const id = e.offerId;
+      const data = {
+        title: e.title, price: e.price, moq: '—', supplier: e.supplier,
+        image: '', url: e.url, sizes: [], isSearchLink: false
+      };
+      if(db){
+        db.collection('restockTool_history').doc(id).set({
+          ...data, savedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+      } else {
+        historyCache = historyCache.filter(p => p.id !== id);
+        historyCache.unshift({ id, ...data });
+      }
+    });
+    importCount = csvOrderEntries.length;
+    if(!db){ renderHistory(); }
+    resultEl.textContent = `Added ${importCount} product${importCount === 1 ? '' : 's'} from your order history to your catalog.`;
+  } else {
+    const colIndex = parseInt(document.getElementById('csvColumnSelect').value);
+    const names = [...new Set(csvNamesForColumn(colIndex))];
+    names.forEach(name => {
+      const searchUrl = 'https://s.1688.com/selloffer/offer_search.htm?keywords=' + encodeURIComponent(name);
+      const id = hashId(searchUrl);
+      const data = { title: name, price: '—', moq: '—', supplier: '—', image: '', url: searchUrl, sizes: [], isSearchLink: true };
+      if(db){
+        db.collection('restockTool_history').doc(id).set({
+          ...data, savedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+      } else {
+        historyCache = historyCache.filter(p => p.id !== id);
+        historyCache.unshift({ id, ...data });
+      }
+    });
+    importCount = names.length;
+    if(!db){ renderHistory(); }
+    resultEl.textContent = `Added ${importCount} item${importCount === 1 ? '' : 's'} from the file to your catalog.`;
+  }
+
+  document.getElementById('csvPreview').style.display = 'none';
+  document.getElementById('csvFile').value = '';
+  csvRows = [];
+  csvOrderEntries = null;
+  resultEl.style.display = 'block';
 };
 
 function removeFromRestock(docId){
