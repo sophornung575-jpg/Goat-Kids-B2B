@@ -114,6 +114,14 @@
   .card .view{ font-size:0.72rem; color:var(--primary); text-decoration:none; font-weight:600; }
   .card .add{ background:var(--secondary); color:#fff; border:none; border-radius:6px; padding:6px 10px; font-size:0.72rem; font-weight:600; cursor:pointer; font-family:inherit; }
   .card .add:hover{ background:var(--secondary-dark); }
+  .add-photo{ margin-top:6px; }
+  .add-photo-toggle{ background:none; border:none; color:var(--primary); font-size:0.7rem; font-weight:600; cursor:pointer; padding:2px 0; font-family:inherit; }
+  .add-photo-toggle:hover{ text-decoration:underline; }
+  .add-photo-form{ display:flex; gap:6px; margin-top:6px; }
+  .add-photo-form.hidden{ display:none; }
+  .add-photo-input{ flex:1; min-width:0; padding:5px 7px; border:2px solid var(--gray-light); border-radius:5px; font-size:0.72rem; font-family:inherit; }
+  .add-photo-save{ background:var(--primary); color:#fff; border:none; border-radius:5px; padding:5px 9px; font-size:0.72rem; font-weight:600; cursor:pointer; font-family:inherit; }
+  .add-photo-save:hover{ background:var(--primary-dark); }
   .admin-empty{ text-align:center; padding:2.5rem; color:var(--gray); font-size:0.85rem; }
 
   .manual-add, .bulk-import{ margin-top:18px; }
@@ -395,9 +403,37 @@ function productCardHtml(p, opts){
           <a class="view" href="${escapeHtml(p.url)}" target="_blank" rel="noopener">${p.isSearchLink ? 'Search on 1688' : 'View on 1688'}</a>
           <button class="add" onclick="addToRestock('${escapeHtml(p.id)}', this)">Add to list</button>
         </div>
+        ${(opts.removable && !p.image) ? `
+        <div class="add-photo">
+          <button class="add-photo-toggle" onclick="toggleAddPhoto('${escapeHtml(p.id)}')">+ Add photo link</button>
+          <div class="add-photo-form hidden" id="addPhotoForm-${escapeHtml(p.id)}">
+            <input type="text" class="add-photo-input" id="addPhotoInput-${escapeHtml(p.id)}" placeholder="Paste image link">
+            <button class="add-photo-save" onclick="savePhotoLink('${escapeHtml(p.id)}')">Save</button>
+          </div>
+        </div>` : ''}
       </div>
     </div>
   `;
+}
+
+// Lets staff paste an image link straight from 1688 (right-click the
+// photo on the product page → "Copy image address") onto a catalog item
+// that doesn't have one — simpler than the bookmarklet for a handful of items.
+function toggleAddPhoto(id){
+  const form = document.getElementById('addPhotoForm-' + id);
+  if(form) form.classList.toggle('hidden');
+}
+
+function savePhotoLink(id){
+  const input = document.getElementById('addPhotoInput-' + id);
+  const url = input.value.trim();
+  if(!url) return;
+  if(db){
+    db.collection('restockTool_history').doc(id).set({ image: url }, { merge: true });
+  } else {
+    const item = historyCache.find(p => p.id === id);
+    if(item){ item.image = url; renderHistory(); }
+  }
 }
 
 // ---------- Home catalog ----------
