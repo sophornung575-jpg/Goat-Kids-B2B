@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restock Search — Goat Kids B2B</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root{
+    --primary:#667eea; --primary-light:#a3b4f6; --primary-dark:#5a67d8;
+    --secondary:#ed64a6; --secondary-dark:#b83280;
+    --success:#48bb78; --warning:#ecc94b; --danger:#f56565; --info:#4299e1;
+    --dark:#2d3748; --light:#f7fafc; --gray:#a0aec0; --gray-light:#e2e8f0; --gray-dark:#4a5568;
+    --radius:8px; --radius-lg:12px;
+    --shadow:0 1px 3px rgba(0,0,0,0.1); --shadow-lg:0 10px 15px rgba(0,0,0,0.1);
+  }
+  *{ box-sizing: border-box; }
+  body{
+    margin:0;
+    background:var(--light);
+    color:var(--dark);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    line-height:1.5;
+  }
+  header{
+    background:#fff;
+    box-shadow:0 1px 2px rgba(0,0,0,0.05);
+    position:sticky; top:0; z-index:100;
+  }
+  .header-container{
+    max-width:1400px; margin:0 auto; padding:1rem 1.5rem;
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+  .logo{ display:flex; align-items:center; gap:0.6rem; font-size:1.3rem; font-weight:700; color:var(--primary); }
+  .logo .sub{ font-size:0.78rem; font-weight:500; color:var(--gray-dark); }
+  .back-link{
+    display:inline-flex; align-items:center; gap:0.4rem;
+    font-size:0.85rem; font-weight:600; color:var(--primary); text-decoration:none;
+    padding:0.5rem 0.9rem; border:2px solid var(--primary); border-radius:var(--radius);
+  }
+  .back-link:hover{ background:var(--primary); color:#fff; }
+  .mode-pill{
+    flex-shrink:0; font-size:0.72rem; font-weight:600; padding:0.3rem 0.7rem;
+    border-radius:999px; background:var(--gray-light); color:var(--gray-dark); white-space:nowrap;
+  }
+  .mode-pill.live{ background:#e6fffa; color:#2c7a7b; }
+
+  main{
+    max-width:1400px; margin:0 auto;
+    display:grid; grid-template-columns: 1fr 340px; gap:24px;
+    padding:24px 1.5rem 60px; align-items:start;
+  }
+  @media (max-width: 900px){ main{ grid-template-columns: 1fr; } }
+
+  .admin-card{ background:#fff; border:1px solid var(--gray-light); border-radius:var(--radius-lg); margin-bottom:1.5rem; overflow:hidden; }
+  .admin-card-header{ padding:1rem 1.25rem; background:var(--light); border-bottom:1px solid var(--gray-light); }
+  .admin-card-header h1{ margin:0; font-size:1.15rem; font-weight:700; }
+  .admin-card-header p{ margin:0.3rem 0 0; color:var(--gray-dark); font-size:0.85rem; }
+  .admin-card-body{ padding:1.25rem; }
+
+  .search-bar{ display:flex; gap:10px; flex-wrap:wrap; }
+  .search-bar input[type=text]{ flex:1 1 220px; }
+  .form-control{ width:100%; padding:0.7rem 0.9rem; border:2px solid var(--gray-light); border-radius:var(--radius); font-size:0.95rem; font-family:inherit; }
+  .form-control:focus{ outline:none; border-color:var(--primary); }
+  select.form-control{ max-width:220px; background:#fff; }
+
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:0.65rem 1.2rem; border:none; border-radius:var(--radius); font-size:0.9rem; font-weight:600; cursor:pointer; transition:all 0.2s; white-space:nowrap; font-family:inherit; }
+  .btn-primary{ background:var(--primary); color:#fff; }
+  .btn-primary:hover{ background:var(--primary-dark); }
+  .btn-outline{ background:transparent; border:2px solid var(--primary); color:var(--primary); padding:0.55rem 1.1rem; }
+  .btn-outline:hover{ background:var(--primary); color:#fff; }
+  .btn-outline:disabled{ border-color:var(--gray-light); color:var(--gray); cursor:not-allowed; }
+  .btn-outline:disabled:hover{ background:transparent; }
+  .btn-small{ padding:0.4rem 0.75rem; font-size:0.8rem; }
+  .hint{ font-size:0.8rem; color:var(--gray-dark); margin:10px 0 0; line-height:1.5; }
+
+  .shop-manager{ padding-top:16px; border-top:1px solid var(--gray-light); margin-top:16px; }
+  .shop-manager summary{ cursor:pointer; padding:2px 0 10px; font-size:0.85rem; font-weight:600; color:var(--gray-dark); list-style:none; }
+  .shop-manager summary::-webkit-details-marker{ display:none; }
+  .shop-manager summary::before{ content:"Trusted shops (" attr(data-count) ") ▸"; }
+  .shop-manager[open] summary::before{ content:"Trusted shops (" attr(data-count) ") ▾"; }
+  .shop-row{ display:flex; gap:8px; align-items:center; padding:7px 0; font-size:0.85rem; border-bottom:1px dashed var(--gray-light); }
+  .shop-row:last-of-type{ border-bottom:none; }
+  .shop-row .name{ font-weight:600; width:130px; flex-shrink:0; }
+  .shop-row .id{ color:var(--gray-dark); flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .add-shop-row{ display:flex; gap:8px; margin-top:10px; }
+  .add-shop-row input{ padding:8px 10px; border:2px solid var(--gray-light); border-radius:6px; font-size:0.82rem; font-family:inherit; }
+  .add-shop-row input.name{ width:110px; }
+  .add-shop-row input.id{ flex:1; }
+
+  .results-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:14px; }
+  .results-head h2{ margin:0; font-size:0.95rem; font-weight:700; }
+  .grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap:14px; }
+  .card{ border:1px solid var(--gray-light); border-radius:var(--radius); overflow:hidden; display:flex; flex-direction:column; }
+  .thumb{ aspect-ratio:1/1; background:var(--light); display:flex; align-items:center; justify-content:center; color:var(--gray); font-size:11.5px; overflow:hidden; }
+  .thumb img{ width:100%; height:100%; object-fit:cover; }
+  .card .body{ padding:10px; display:flex; flex-direction:column; gap:6px; flex:1; }
+  .card .title{ font-size:0.8rem; font-weight:600; line-height:1.35; min-height:2.6em; }
+  .card .price{ font-size:0.85rem; font-weight:700; color:var(--secondary-dark); }
+  .card .meta{ font-size:0.7rem; color:var(--gray-dark); }
+  .card .size-select{ padding:6px 7px; border:2px solid var(--gray-light); border-radius:5px; font-size:0.75rem; font-family:inherit; }
+  .card .row{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:auto; }
+  .card .view{ font-size:0.72rem; color:var(--primary); text-decoration:none; font-weight:600; }
+  .card .add{ background:var(--secondary); color:#fff; border:none; border-radius:6px; padding:6px 10px; font-size:0.72rem; font-weight:600; cursor:pointer; font-family:inherit; }
+  .card .add:hover{ background:var(--secondary-dark); }
+  .admin-empty{ text-align:center; padding:2.5rem; color:var(--gray); font-size:0.85rem; }
+
+  .manual-add{ margin-top:18px; }
+  .manual-add summary{ cursor:pointer; font-size:0.85rem; color:var(--gray-dark); font-weight:600; list-style:none; padding:2px 0; }
+  .manual-add summary::-webkit-details-marker{ display:none; }
+  .manual-add summary::before{ content:"Can't find it in search? Add an item by link ▸"; }
+  .manual-add[open] summary::before{ content:"Can't find it in search? Add an item by link ▾"; }
+  .add-form{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:12px; }
+  .add-form input#itemUrl{ grid-column: 1 / -1; }
+  .add-form button{ grid-column: 1 / -1; }
+
+  aside .admin-card{ position:sticky; top:88px; max-height:calc(100vh - 110px); overflow-y:auto; margin-bottom:0; }
+  aside .admin-card-body{ padding-top:0.75rem; }
+  .restock-item{ border:1px solid var(--gray-light); border-radius:var(--radius); padding:10px; margin-bottom:10px; }
+  .restock-item .t{ font-size:0.8rem; font-weight:600; margin-bottom:6px; }
+  .restock-item .r2{ display:flex; align-items:center; gap:8px; font-size:0.75rem; flex-wrap:wrap; }
+  .restock-item input.qty{ width:52px; padding:5px 6px; border:2px solid var(--gray-light); border-radius:5px; font-size:0.75rem; font-family:inherit; }
+  .restock-item .remove{ margin-left:auto; background:none; border:none; color:var(--danger); cursor:pointer; font-size:0.75rem; padding:4px; font-family:inherit; }
+  .restock-item a{ color:var(--primary); text-decoration:none; font-size:0.75rem; font-weight:600; }
+  .restock-empty{ font-size:0.8rem; color:var(--gray-dark); border:1px dashed var(--gray-light); border-radius:var(--radius); padding:20px 14px; text-align:center; }
+
+  .settings{ margin-top:16px; padding-top:14px; border-top:1px solid var(--gray-light); }
+  .settings summary{ cursor:pointer; font-size:0.78rem; color:var(--gray-dark); font-weight:600; list-style:none; }
+  .settings summary::-webkit-details-marker{ display:none; }
+  .settings summary::before{ content:"Data source settings ▸"; }
+  .settings[open] summary::before{ content:"Data source settings ▾"; }
+  .settings label{ display:block; font-size:0.75rem; color:var(--gray-dark); margin:10px 0 4px; }
+  .settings input[type=text]{ width:100%; padding:8px 9px; border:2px solid var(--gray-light); border-radius:6px; font-size:0.78rem; font-family:inherit; }
+  .settings .note{ font-size:0.72rem; color:var(--gray-dark); margin-top:8px; line-height:1.5; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <div class="logo"><i class="fas fa-truck-loading"></i> GOAT KIDS B2B <span class="sub">Restock Search</span></div>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <span class="mode-pill" id="modePill">Sample data</span>
+      <a class="back-link" href="index.html"><i class="fas fa-arrow-left"></i> Back to B2B</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div>
+    <div class="admin-card">
+      <div class="admin-card-header">
+        <h1><i class="fas fa-search" style="color:var(--primary)"></i> Search suppliers</h1>
+        <p>Search trusted 1688 suppliers, build a restock list, then order directly on 1688.</p>
+      </div>
+      <div class="admin-card-body">
+        <div class="search-bar">
+          <input type="text" class="form-control" id="keyword" placeholder="Search a product, e.g. kids cotton socks">
+          <select class="form-control" id="shopFilter"></select>
+          <button class="btn btn-primary" id="searchBtn"><i class="fas fa-search"></i> Search</button>
+          <button class="btn btn-outline" id="browseBtn" title="Pick a specific shop to browse its full catalog" disabled>View all items</button>
+        </div>
+        <p class="hint" id="liveDataHint" style="display:none;">Live search covers all of 1688 by keyword — it doesn't filter to one trusted shop, and "View all items" still shows sample data since this scraper can't browse a whole shop without a keyword.</p>
+        <details class="shop-manager" id="shopManager" data-count="1">
+          <summary></summary>
+          <div id="shopList"></div>
+          <div class="add-shop-row">
+            <input type="text" class="name" id="newShopName" placeholder="Shop nickname">
+            <input type="text" class="id" id="newShopId" placeholder="1688 shop ID (from the shop URL)">
+            <button class="btn btn-outline btn-small" id="addShopBtn">Add shop</button>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="admin-card">
+      <div class="admin-card-body">
+        <div class="results-head">
+          <h2 id="resultsLabel">Search a product to see results</h2>
+        </div>
+        <div class="grid" id="grid"></div>
+        <div class="admin-empty" id="emptyState">No results yet — try a search above.</div>
+
+        <details class="manual-add">
+          <summary></summary>
+          <p class="hint">If a supplier's item isn't showing up in search, paste its 1688 product link here to add it straight to your restock list.</p>
+          <div class="add-form">
+            <input type="text" class="form-control" id="itemUrl" placeholder="1688 product link">
+            <input type="text" class="form-control" id="itemTitle" placeholder="Product name">
+            <input type="text" class="form-control" id="itemSize" placeholder="Size (optional)">
+            <input type="number" class="form-control" id="itemQty" min="1" value="1" placeholder="Qty">
+            <button class="btn btn-primary" id="addItemBtn"><i class="fas fa-plus"></i> Add to list</button>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <aside>
+    <div class="admin-card">
+      <div class="admin-card-header">
+        <h1><i class="fas fa-clipboard-list" style="color:var(--primary)"></i> Restock list</h1>
+        <p>Items staff have picked to order</p>
+      </div>
+      <div class="admin-card-body">
+        <div id="restockList"></div>
+        <div class="restock-empty" id="restockEmpty">Nothing added yet. Use "Add to list" on a product.</div>
+
+        <details class="settings">
+          <summary></summary>
+          <label for="apifyToken">Apify API token</label>
+          <input type="text" id="apifyToken" placeholder="Paste your token here">
+          <label for="apifyActor">Apify actor ID</label>
+          <input type="text" id="apifyActor" placeholder="e.g. zen-studio~1688-wholesale-scraper" value="zen-studio~1688-wholesale-scraper">
+          <div class="note">
+            Until a token is added, search uses sample data so the tool is fully testable.
+            Once you have an Apify account and token, paste it above — keyword search will
+            switch to real 1688 listings automatically. This particular scraper searches all
+            of 1688 by keyword; it can't scope a search to one specific trusted shop, and it
+            can't browse a whole shop's catalog without a keyword — so "View all items" still
+            shows sample data even once a token is added. Nothing here touches the main Goat
+            Kids app.
+          </div>
+        </details>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script>
+// Same Firebase project as the Goat Kids B2B app, but this tool only ever
+// touches its own two collections below (restockTool_shops, restockTool_items) —
+// it never reads or writes stores/mkt_stores/mkt_listings/mkt_convs.
+const firebaseConfig = {
+  apiKey: "AIzaSyAiTcQDO0UGqWBzJn1DkoRrnXCJW2n83kM",
+  authDomain: "goat-kids-b2b.firebaseapp.com",
+  projectId: "goat-kids-b2b",
+  storageBucket: "goat-kids-b2b.firebasestorage.app",
+  messagingSenderId: "133821884669",
+  appId: "1:133821884669:web:87626bd7c869b40981f694",
+  measurementId: "G-LLG53WWNXJ"
+};
+let db = null;
+try{
+  firebase.initializeApp(firebaseConfig);
+  db = firebase.firestore();
+}catch(e){
+  console.error('Firebase init error:', e);
+  db = null;
+}
+</script>
+<script>
+// ---------- state ----------
+// shops and restockList are the local cache, kept in sync with Firestore by
+// the listeners in initFirestoreListeners(). If db didn't connect (offline,
+// bad config, etc.) they just behave as session-only arrays like before.
+let shops = [];
+let restockList = [];
+let lastResults = [];
+
+function initFirestoreListeners(){
+  db.collection('restockTool_shops').onSnapshot(snap => {
+    shops = snap.docs.map(d => ({ id: d.id, name: d.data().name }));
+    if(shops.length === 0){
+      // First run against an empty collection — seed the one known trusted shop.
+      db.collection('restockTool_shops').doc('1381942494680').set({ name: 'Supplier 1' });
+    }
+    renderShops();
+  }, err => {
+    console.error('Shops listener failed, falling back to local-only:', err);
+    db = null;
+    shops = [{ name: 'Supplier 1', id: '1381942494680' }];
+    renderShops();
+  });
+
+  db.collection('restockTool_items').orderBy('addedAt').onSnapshot(snap => {
+    restockList = snap.docs.map(d => ({ docId: d.id, ...d.data() }));
+    renderRestock();
+  }, err => {
+    console.error('Restock list listener failed, falling back to local-only:', err);
+    db = null;
+    renderRestock();
+  });
+}
+
+// ---------- shop list UI ----------
+function renderShops(){
+  const list = document.getElementById('shopList');
+  list.innerHTML = shops.map(s => `
+    <div class="shop-row">
+      <span class="name">${escapeHtml(s.name)}</span>
+      <span class="id">${escapeHtml(s.id)}</span>
+      <button class="btn btn-outline btn-small" onclick="removeShop('${escapeHtml(s.id)}')">Remove</button>
+    </div>
+  `).join('');
+  document.getElementById('shopManager').setAttribute('data-count', shops.length);
+
+  const filter = document.getElementById('shopFilter');
+  const current = filter.value;
+  filter.innerHTML = `<option value="all">All trusted shops</option>` +
+    shops.map(s => `<option value="${escapeHtml(s.id)}">${escapeHtml(s.name)}</option>`).join('');
+  if ([...filter.options].some(o => o.value === current)) filter.value = current;
+  updateBrowseBtnState();
+}
+
+function updateBrowseBtnState(){
+  const filter = document.getElementById('shopFilter');
+  document.getElementById('browseBtn').disabled = (filter.value === 'all');
+}
+
+function removeShop(id){
+  if(db){
+    db.collection('restockTool_shops').doc(id).delete();
+  } else {
+    shops = shops.filter(s => s.id !== id);
+    renderShops();
+  }
+}
+
+document.getElementById('addShopBtn').onclick = () => {
+  const name = document.getElementById('newShopName').value.trim();
+  const id = document.getElementById('newShopId').value.trim();
+  if(!name || !id){ return; }
+  if(db){
+    db.collection('restockTool_shops').doc(id).set({ name });
+  } else {
+    shops.push({ name, id });
+    renderShops();
+  }
+  document.getElementById('newShopName').value = '';
+  document.getElementById('newShopId').value = '';
+};
+
+// ---------- search ----------
+document.getElementById('searchBtn').onclick = () => {
+  const keyword = document.getElementById('keyword').value.trim();
+  if(!keyword){ return; }
+  performSearch(keyword);
+};
+document.getElementById('browseBtn').onclick = () => {
+  const shopId = document.getElementById('shopFilter').value;
+  if(shopId === 'all'){ return; }
+  performSearch(''); // empty keyword = browse the selected shop's full catalog
+};
+document.getElementById('shopFilter').addEventListener('change', updateBrowseBtnState);
+document.getElementById('keyword').addEventListener('keydown', e => {
+  if(e.key === 'Enter'){
+    const keyword = document.getElementById('keyword').value.trim();
+    if(keyword) performSearch(keyword);
+  }
+});
+
+async function performSearch(keyword){
+  const shopId = document.getElementById('shopFilter').value;
+  const browsing = !keyword;
+
+  document.getElementById('resultsLabel').textContent = browsing ? 'Loading shop catalog…' : 'Searching…';
+  document.getElementById('grid').innerHTML = '';
+  document.getElementById('emptyState').style.display = 'none';
+
+  const token = document.getElementById('apifyToken').value.trim();
+  let results;
+  if(token && keyword){
+    // Live data only applies to keyword search — this actor has no
+    // "browse a whole shop" mode, so browsing always uses sample data.
+    setMode(true);
+    try{
+      results = await fetchFromApify(keyword, token);
+    }catch(err){
+      console.error('Apify search failed, falling back to sample data:', err);
+      results = generateMockResults(keyword, shopId);
+      setMode(false);
+    }
+  } else {
+    setMode(false);
+    results = generateMockResults(keyword, shopId);
+  }
+
+  lastResults = results;
+  renderResults(results, keyword, shopId);
+}
+
+function setMode(live){
+  const pill = document.getElementById('modePill');
+  pill.textContent = live ? 'Live 1688 data' : 'Sample data';
+  pill.className = 'mode-pill' + (live ? ' live' : '');
+  document.getElementById('liveDataHint').style.display = live ? 'block' : 'none';
+}
+
+// Real Apify call for zen-studio/1688-wholesale-scraper. Uses the
+// "run-sync-get-dataset-items" endpoint so results come back in one request.
+// Confirmed input/output schema (Sept 2026) — see apify.com/zen-studio/1688-wholesale-scraper.
+// If you switch to a different actor, this function and mapProduct() below
+// will need matching adjustments to its actual field names.
+async function fetchFromApify(keyword, token){
+  const actor = document.getElementById('apifyActor').value.trim();
+  const url = `https://api.apify.com/v2/acts/${encodeURIComponent(actor)}/run-sync-get-dataset-items?token=${encodeURIComponent(token)}`;
+  const body = {
+    keywords: [keyword],
+    maxResults: 24,
+    includeSkuDetails: true // needed so size/colour variants come back for the size picker
+  };
+
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  if(!res.ok){ throw new Error('Apify request failed: ' + res.status); }
+  const data = await res.json();
+  // Offers the actor couldn't retrieve come back as {offerId, error} — skip those.
+  return data.filter(item => !item.error).map(mapProduct);
+}
+
+function mapProduct(raw){
+  return {
+    id: raw.offerId || String(Math.random()),
+    title: raw.title || 'Untitled product',
+    price: formatPrice(raw.price),
+    moq: (raw.minOrderQuantity != null) ? `${raw.minOrderQuantity} ${raw.unit || ''}`.trim() : '—',
+    supplier: (raw.supplier && raw.supplier.companyName) || '—',
+    image: (raw.images && raw.images[0]) || '',
+    url: raw.detailUrl || '#',
+    sizes: extractSizes(raw)
+  };
+}
+
+function formatPrice(price){
+  if(!price || price.min == null) return '—';
+  const symbol = price.currency === 'CNY' ? '¥' : (price.currency ? price.currency + ' ' : '');
+  const min = Number(price.min).toFixed(2);
+  if(price.max == null || price.max === price.min) return `${symbol}${min}`;
+  return `${symbol}${min}–${Number(price.max).toFixed(2)}`;
+}
+
+// Size (and similar variant) info lives under skuDetails.properties, each
+// shaped like { name: "颜色"/"尺码"/etc, values: [{ name, imageUrl }] } —
+// only present when includeSkuDetails is true. Picks whichever property
+// looks like a size, falling back to none (the card just won't show a
+// size picker in that case).
+function extractSizes(raw){
+  const props = raw.skuDetails && raw.skuDetails.properties;
+  if(!Array.isArray(props)) return [];
+  const sizeProp = props.find(p => /size|尺码|尺寸|码/i.test(p.name || ''));
+  if(!sizeProp || !Array.isArray(sizeProp.values)) return [];
+  return sizeProp.values.map(v => v.name).filter(Boolean);
+}
+
+// ---------- sample data ----------
+const KID_SIZES = ['80cm','90cm','100cm','110cm','120cm','130cm'];
+
+const CATALOG_ITEMS = [
+  { name: 'Kids cotton T-shirt', price: '¥12.50 / pc', moq: '50 pcs' },
+  { name: 'Toddler socks, 3-pack', price: '¥6.80 / pack', moq: '100 packs' },
+  { name: 'Girls floral dress', price: '¥27.00 / pc', moq: '20 pcs' },
+  { name: 'Boys shorts set', price: '¥18.90 / pc', moq: '30 pcs' },
+  { name: 'Baby onesie, plain colours', price: '¥11.10 / pc', moq: '60 pcs' },
+  { name: 'Kids winter jacket', price: '¥42.00 / pc', moq: '15 pcs' },
+  { name: 'School uniform polo', price: '¥15.40 / pc', moq: '40 pcs' },
+  { name: 'Kids pyjama set', price: '¥19.60 / pc', moq: '25 pcs' },
+  { name: 'Toddler hat & mitten set', price: '¥8.90 / set', moq: '50 sets' },
+  { name: 'Kids denim overalls', price: '¥24.30 / pc', moq: '20 pcs' },
+  { name: 'Girls hair accessory pack', price: '¥4.20 / pack', moq: '100 packs' },
+  { name: 'Kids swim shorts', price: '¥13.70 / pc', moq: '40 pcs' }
+];
+
+function generateMockResults(keyword, shopId){
+  const shop = shops.find(s => s.id === shopId);
+  const supplierName = shop ? shop.name : 'Sample Supplier';
+
+  if(!keyword){
+    return CATALOG_ITEMS.map((it, i) => ({
+      id: 'sample-' + i,
+      title: it.name,
+      price: it.price,
+      moq: it.moq,
+      supplier: supplierName,
+      image: '',
+      url: 'https://www.1688.com/',
+      sizes: KID_SIZES
+    }));
+  }
+
+  const suffixes = ['basic pack', 'cotton, size run', 'wholesale carton', 'premium line', 'seasonal print', 'plain colours'];
+  const prices = ['¥12.50 / pc', '¥18.90 / pc', '¥9.20 / pc', '¥27.00 / pc', '¥15.40 / pc', '¥11.10 / pc'];
+  const moqs = ['50 pcs', '30 pcs', '100 pcs', '20 pcs', '40 pcs', '60 pcs'];
+  return suffixes.map((suffix, i) => ({
+    id: 'sample-' + i,
+    title: `${keyword} — ${suffix}`,
+    price: prices[i],
+    moq: moqs[i],
+    supplier: supplierName,
+    image: '',
+    url: 'https://www.1688.com/',
+    sizes: KID_SIZES
+  }));
+}
+
+// ---------- results rendering ----------
+function renderResults(results, keyword, shopId){
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('emptyState');
+  const label = document.getElementById('resultsLabel');
+
+  if(keyword){
+    label.textContent = `Results for "${keyword}" (${results.length})`;
+  } else {
+    const shop = shops.find(s => s.id === shopId);
+    label.textContent = `All items in ${shop ? shop.name : 'shop'} (${results.length})`;
+  }
+
+  if(results.length === 0){
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    empty.textContent = 'No results found — try a different keyword or shop.';
+    return;
+  }
+  empty.style.display = 'none';
+
+  grid.innerHTML = results.map(p => `
+    <div class="card">
+      <div class="thumb">${p.image ? `<img src="${escapeHtml(p.image)}" alt="">` : 'No image'}</div>
+      <div class="body">
+        <div class="title">${escapeHtml(p.title)}</div>
+        <div class="price">${escapeHtml(String(p.price))}</div>
+        <div class="meta">MOQ ${escapeHtml(String(p.moq))} · ${escapeHtml(p.supplier)}</div>
+        ${p.sizes && p.sizes.length ? `
+        <select class="size-select">
+          ${p.sizes.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('')}
+        </select>` : ''}
+        <div class="row">
+          <a class="view" href="${escapeHtml(p.url)}" target="_blank" rel="noopener">View on 1688</a>
+          <button class="add" onclick="addToRestock('${p.id}', this)">Add to list</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ---------- restock list ----------
+function addToRestock(id, btnEl){
+  const product = lastResults.find(p => p.id === id);
+  if(!product) return;
+  const sizeSelect = btnEl ? btnEl.closest('.card').querySelector('.size-select') : null;
+  const size = sizeSelect ? sizeSelect.value : null;
+  const item = {
+    ...product,
+    size,
+    qty: product.moq && !isNaN(parseInt(product.moq)) ? parseInt(product.moq) : 1
+  };
+  if(db){
+    item.addedAt = firebase.firestore.FieldValue.serverTimestamp();
+    db.collection('restockTool_items').add(item);
+  } else {
+    restockList.push({ ...item, docId: 'local-' + Date.now() });
+    renderRestock();
+  }
+}
+
+// Manual add-by-link, for items found outside of search results.
+document.getElementById('addItemBtn').onclick = () => {
+  const url = document.getElementById('itemUrl').value.trim();
+  const title = document.getElementById('itemTitle').value.trim();
+  const size = document.getElementById('itemSize').value.trim();
+  const qtyRaw = document.getElementById('itemQty').value.trim();
+  const qty = parseInt(qtyRaw);
+
+  if(!url){ return; }
+
+  const item = {
+    url,
+    title: title || url,
+    size: size || null,
+    qty: isNaN(qty) || qty < 1 ? 1 : qty
+  };
+
+  if(db){
+    item.addedAt = firebase.firestore.FieldValue.serverTimestamp();
+    db.collection('restockTool_items').add(item);
+  } else {
+    restockList.push({ ...item, docId: 'local-' + Date.now() });
+    renderRestock();
+  }
+
+  document.getElementById('itemUrl').value = '';
+  document.getElementById('itemTitle').value = '';
+  document.getElementById('itemSize').value = '';
+  document.getElementById('itemQty').value = '1';
+};
+
+function removeFromRestock(docId){
+  if(db && !docId.startsWith('local-')){
+    db.collection('restockTool_items').doc(docId).delete();
+  } else {
+    restockList = restockList.filter(item => item.docId !== docId);
+    renderRestock();
+  }
+}
+
+function updateQty(docId, val){
+  const n = parseInt(val);
+  const qty = isNaN(n) ? 1 : n;
+  if(db && !docId.startsWith('local-')){
+    db.collection('restockTool_items').doc(docId).update({ qty });
+  } else {
+    const item = restockList.find(item => item.docId === docId);
+    if(item) item.qty = qty;
+  }
+}
+
+function renderRestock(){
+  const wrap = document.getElementById('restockList');
+  const emptyMsg = document.getElementById('restockEmpty');
+  if(restockList.length === 0){
+    wrap.innerHTML = '';
+    emptyMsg.style.display = 'block';
+    return;
+  }
+  emptyMsg.style.display = 'none';
+  wrap.innerHTML = restockList.map(item => `
+    <div class="restock-item">
+      <div class="t">${escapeHtml(item.title)}${item.size ? ` — Size ${escapeHtml(item.size)}` : ''}</div>
+      <div class="r2">
+        <span>Qty</span>
+        <input class="qty" type="number" min="1" value="${item.qty}" onchange="updateQty('${item.docId}', this.value)">
+        <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Order on 1688 ↗</a>
+        <button class="remove" onclick="removeFromRestock('${item.docId}')">Remove</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ---------- utils ----------
+function escapeHtml(str){
+  return String(str)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// ---------- init ----------
+if(db){
+  initFirestoreListeners();
+} else {
+  shops = [{ name: 'Supplier 1', id: '1381942494680' }];
+  renderShops();
+  renderRestock();
+}
+
+</script>
+
+</body>
+</html>
