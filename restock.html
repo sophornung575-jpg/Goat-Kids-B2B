@@ -219,7 +219,8 @@
             of 1688 by keyword; it can't scope a search to one specific trusted shop, and it
             can't browse a whole shop's catalog without a keyword — so "View all items" still
             shows sample data even once a token is added. Nothing here touches the main Goat
-            Kids app.
+            Kids app. Your token is saved in this browser only, so it stays private to this
+            device — you'll need to paste it again on any other computer or phone.
           </div>
         </details>
       </div>
@@ -521,7 +522,7 @@ function renderResults(results, keyword, shopId){
 
   grid.innerHTML = results.map(p => `
     <div class="card">
-      <div class="thumb">${p.image ? `<img src="${escapeHtml(p.image)}" alt="">` : 'No image'}</div>
+      <div class="thumb">${p.image ? `<img src="${escapeHtml(p.image)}" alt="" referrerpolicy="no-referrer" onerror="this.closest('.thumb').textContent='No image'">` : 'No image'}</div>
       <div class="body">
         <div class="title">${escapeHtml(p.title)}</div>
         <div class="price">${escapeHtml(String(p.price))}</div>
@@ -638,6 +639,20 @@ function escapeHtml(str){
     .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
     .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
+
+// ---------- Apify settings persistence (this browser only) ----------
+// Saved to localStorage, not Firestore, so the token never leaves this
+// device / gets exposed to anyone else who opens the page.
+(function(){
+  const tokenEl = document.getElementById('apifyToken');
+  const actorEl = document.getElementById('apifyActor');
+  const savedToken = localStorage.getItem('restockTool_apifyToken');
+  const savedActor = localStorage.getItem('restockTool_apifyActor');
+  if(savedToken) tokenEl.value = savedToken;
+  if(savedActor) actorEl.value = savedActor;
+  tokenEl.addEventListener('change', () => localStorage.setItem('restockTool_apifyToken', tokenEl.value.trim()));
+  actorEl.addEventListener('change', () => localStorage.setItem('restockTool_apifyActor', actorEl.value.trim()));
+})();
 
 // ---------- init ----------
 if(db){
