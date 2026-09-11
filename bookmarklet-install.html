@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bookmarklets — Goat Kids B2B Restock Tool</title>
+<style>
+  :root{
+    --primary:#667eea; --primary-dark:#5a67d8;
+    --dark:#2d3748; --light:#f7fafc; --gray-light:#e2e8f0; --gray-dark:#4a5568;
+  }
+  body{
+    margin:0; background:var(--light); color:var(--dark);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    line-height:1.6; padding:2rem 1.25rem 4rem;
+  }
+  .wrap{ max-width:640px; margin:0 auto; }
+  h1{ font-size:1.4rem; margin-bottom:0.3rem; }
+  h2{ font-size:1.1rem; margin:2.5rem 0 0.3rem; }
+  .lead{ color:var(--gray-dark); margin-top:0; }
+  .card{ background:#fff; border:1px solid var(--gray-light); border-radius:12px; padding:1.5rem; margin:1.5rem 0; }
+  .bookmarklet-btn{
+    display:inline-block; background:var(--primary); color:#fff; text-decoration:none;
+    font-weight:700; padding:0.9rem 1.6rem; border-radius:10px; font-size:1.05rem;
+    cursor:grab; user-select:none;
+  }
+  .bookmarklet-btn:hover{ background:var(--primary-dark); }
+  .bookmarklet-btn.secondary{ background:#48bb78; }
+  .bookmarklet-btn.secondary:hover{ background:#38a169; }
+  .drag-row{ text-align:center; padding:1rem 0; }
+  ol{ padding-left:1.3rem; }
+  li{ margin-bottom:0.9rem; }
+  code{ background:var(--gray-light); padding:2px 6px; border-radius:4px; font-size:0.9em; }
+  .warn{ background:#fffaf0; border:1px solid #f6cf7d; border-radius:8px; padding:0.9rem 1.1rem; font-size:0.9rem; color:#7a5b1e; }
+  .back{ display:inline-block; margin-top:2rem; color:var(--primary); text-decoration:none; font-weight:600; font-size:0.9rem; }
+  hr{ border:none; border-top:1px solid var(--gray-light); margin:2.5rem 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🏷️ Restock tool bookmarklets</h1>
+  <p class="lead">Two small browser buttons. Drag either one to your bookmarks bar. Both only ever touch your own catalog in Firestore — nothing is shared with anyone.</p>
+
+  <h2>📥 Save a shop/search page</h2>
+  <p class="lead">Click while browsing any 1688 shop or search results page (logged in as yourself) — saves every product visible on screen into your Home catalog.</p>
+  <div class="drag-row">
+    <a class="bookmarklet-btn" href="javascript:(function()%7B%20var%20FIREBASE_CONFIG%20%3D%20%7B%20apiKey%3A%20%22AIzaSyAiTcQDO0UGqWBzJn1DkoRrnXCJW2n83kM%22%2C%20authDomain%3A%20%22goat-kids-b2b.firebaseapp.com%22%2C%20projectId%3A%20%22goat-kids-b2b%22%2C%20storageBucket%3A%20%22goat-kids-b2b.firebasestorage.app%22%2C%20messagingSenderId%3A%20%22133821884669%22%2C%20appId%3A%20%221%3A133821884669%3Aweb%3A87626bd7c869b40981f694%22%2C%20measurementId%3A%20%22G-LLG53WWNXJ%22%20%7D%3B%20function%20loadScript(src)%7B%20return%20new%20Promise(function(resolve%2C%20reject)%7B%20var%20s%20%3D%20document.createElement('script')%3B%20s.src%20%3D%20src%3B%20s.onload%20%3D%20resolve%3B%20s.onerror%20%3D%20function()%7B%20reject(new%20Error('Failed%20to%20load%20'%20%2B%20src))%3B%20%7D%3B%20document.head.appendChild(s)%3B%20%7D)%3B%20%7D%20function%20run()%7B%20var%20db%20%3D%20firebase.firestore()%3B%20var%20links%20%3D%20Array.prototype.slice.call(%20document.querySelectorAll('a%5Bhref*%3D%22detail.1688.com%2Foffer%22%5D%2C%20a%5Bhref*%3D%22.1688.com%2Foffer%2F%22%5D')%20)%3B%20var%20seen%20%3D%20%7B%7D%3B%20var%20pending%20%3D%20%5B%5D%3B%20links.forEach(function(a)%7B%20var%20m%20%3D%20a.href.match(%2Foffer%5C%2F(%5Cd%2B)%5C.html%2F)%3B%20if(!m)%20return%3B%20var%20id%20%3D%20m%5B1%5D%3B%20if(seen%5Bid%5D)%20return%3B%20seen%5Bid%5D%20%3D%20true%3B%20var%20card%20%3D%20a%3B%20for(var%20i%20%3D%200%3B%20i%20%3C%204%20%26%26%20card.parentElement%3B%20i%2B%2B)%7B%20card%20%3D%20card.parentElement%3B%20%7D%20var%20img%20%3D%20card.querySelector('img')%3B%20var%20imageSrc%20%3D%20''%3B%20if(img)%7B%20imageSrc%20%3D%20img.getAttribute('src')%20%7C%7C%20img.getAttribute('data-src')%20%7C%7C%20img.getAttribute('data-lazy-src')%20%7C%7C%20img.getAttribute('data-original')%20%7C%7C%20''%3B%20if(imageSrc.indexOf('data%3A')%20%3D%3D%3D%200%20%26%26%20imageSrc.length%20%3C%20100)%20imageSrc%20%3D%20''%3B%20if(imageSrc%20%26%26%20imageSrc.indexOf('http')%20!%3D%3D%200)%20imageSrc%20%3D%20'https%3A'%20%2B%20imageSrc%3B%20%7D%20var%20text%20%3D%20(card.innerText%20%7C%7C%20'').trim()%3B%20var%20priceMatch%20%3D%20text.match(%2F%C2%A5%5Cs%3F%5B%5Cd%2C.%5D%2B%2F)%3B%20var%20title%20%3D%20(a.getAttribute('title')%20%7C%7C%20a.innerText%20%7C%7C%20text.slice(0%2C%2080)%20%7C%7C%20'Untitled%20product').trim().slice(0%2C%20150)%3B%20var%20docData%20%3D%20%7B%20title%3A%20title%2C%20price%3A%20priceMatch%20%3F%20priceMatch%5B0%5D%20%3A%20'%E2%80%94'%2C%20moq%3A%20'%E2%80%94'%2C%20supplier%3A%20'%E2%80%94'%2C%20image%3A%20imageSrc%2C%20url%3A%20a.href.split('%3F')%5B0%5D%2C%20sizes%3A%20%5B%5D%2C%20savedAt%3A%20firebase.firestore.FieldValue.serverTimestamp()%20%7D%3B%20pending.push(db.collection('restockTool_history').doc(id).set(docData%2C%20%7B%20merge%3A%20true%20%7D))%3B%20%7D)%3B%20if(pending.length%20%3D%3D%3D%200)%7B%20alert('Goat%20Kids%20Restock%3A%20no%20product%20links%20found%20on%20this%20page.%20Try%20scrolling%20down%20to%20load%20more%20products%20first%2C%20then%20click%20this%20again.')%3B%20return%3B%20%7D%20Promise.all(pending).then(function()%7B%20alert('Goat%20Kids%20Restock%3A%20saved%20'%20%2B%20pending.length%20%2B%20'%20product(s)%20from%20this%20page%20to%20your%20Home%20catalog.')%3B%20%7D).catch(function(err)%7B%20alert('Goat%20Kids%20Restock%3A%20found%20'%20%2B%20pending.length%20%2B%20'%20product(s)%20but%20saving%20failed%20%E2%80%94%20'%20%2B%20err.message)%3B%20%7D)%3B%20%7D%20try%7B%20if(!window.firebase)%7B%20loadScript('https%3A%2F%2Fwww.gstatic.com%2Ffirebasejs%2F10.13.0%2Ffirebase-app-compat.js')%20.then(function()%7B%20return%20loadScript('https%3A%2F%2Fwww.gstatic.com%2Ffirebasejs%2F10.13.0%2Ffirebase-firestore-compat.js')%3B%20%7D)%20.then(function()%7B%20firebase.initializeApp(FIREBASE_CONFIG)%3B%20run()%3B%20%7D)%20.catch(function(err)%7B%20alert('Goat%20Kids%20Restock%3A%20could%20not%20load%20%E2%80%94%20this%20page%20may%20be%20blocking%20outside%20scripts.%20('%20%2B%20err.message%20%2B%20')')%3B%20%7D)%3B%20%7D%20else%20%7B%20if(!firebase.apps.length)%20firebase.initializeApp(FIREBASE_CONFIG)%3B%20run()%3B%20%7D%20%7Dcatch(err)%7B%20alert('Goat%20Kids%20Restock%3A%20something%20went%20wrong%20%E2%80%94%20'%20%2B%20err.message)%3B%20%7D%20%7D)()%3B" onclick="alert('Drag this button up to your bookmarks bar instead of clicking it here.'); return false;">📥 Save page to Goat Kids catalog</a>
+  </div>
+
+  <h2>🖼️ Fill in a product photo</h2>
+  <p class="lead">Click while viewing one specific product's own page on 1688 (a page whose link looks like <code>detail.1688.com/offer/123...html</code>) — grabs that page's main photo and saves it onto the matching catalog item. Useful for items imported from an order-history file, which never include photos.</p>
+  <div class="drag-row">
+    <a class="bookmarklet-btn secondary" href="javascript:(function()%7B%20var%20FIREBASE_CONFIG%20%3D%20%7B%20apiKey%3A%20%22AIzaSyAiTcQDO0UGqWBzJn1DkoRrnXCJW2n83kM%22%2C%20authDomain%3A%20%22goat-kids-b2b.firebaseapp.com%22%2C%20projectId%3A%20%22goat-kids-b2b%22%2C%20storageBucket%3A%20%22goat-kids-b2b.firebasestorage.app%22%2C%20messagingSenderId%3A%20%22133821884669%22%2C%20appId%3A%20%221%3A133821884669%3Aweb%3A87626bd7c869b40981f694%22%2C%20measurementId%3A%20%22G-LLG53WWNXJ%22%20%7D%3B%20function%20loadScript(src)%7B%20return%20new%20Promise(function(resolve%2C%20reject)%7B%20var%20s%20%3D%20document.createElement('script')%3B%20s.src%20%3D%20src%3B%20s.onload%20%3D%20resolve%3B%20s.onerror%20%3D%20function()%7B%20reject(new%20Error('Failed%20to%20load%20'%20%2B%20src))%3B%20%7D%3B%20document.head.appendChild(s)%3B%20%7D)%3B%20%7D%20function%20run()%7B%20var%20m%20%3D%20window.location.href.match(%2Foffer%5C%2F(%5Cd%2B)%5C.html%2F)%3B%20if(!m)%7B%20alert('Goat%20Kids%20Restock%3A%20this%20doesn%5C't%20look%20like%20a%201688%20product%20page%20(no%20offer%20ID%20in%20the%20URL).%20Open%20the%20actual%20product%20page%20first.')%3B%20return%3B%20%7D%20var%20offerId%20%3D%20m%5B1%5D%3B%20var%20imgs%20%3D%20Array.prototype.slice.call(document.querySelectorAll('img'))%3B%20var%20best%20%3D%20null%2C%20bestArea%20%3D%200%3B%20imgs.forEach(function(img)%7B%20var%20w%20%3D%20img.naturalWidth%20%7C%7C%20img.width%20%7C%7C%200%3B%20var%20h%20%3D%20img.naturalHeight%20%7C%7C%20img.height%20%7C%7C%200%3B%20var%20area%20%3D%20w%20*%20h%3B%20if(w%20%3E%3D%20200%20%26%26%20h%20%3E%3D%20200%20%26%26%20area%20%3E%20bestArea)%7B%20best%20%3D%20img%3B%20bestArea%20%3D%20area%3B%20%7D%20%7D)%3B%20if(!best)%7B%20alert('Goat%20Kids%20Restock%3A%20could%20not%20find%20a%20main%20product%20photo%20on%20this%20page.%20Try%20scrolling%20up%20so%20the%20main%20image%20has%20fully%20loaded%2C%20then%20click%20this%20again.')%3B%20return%3B%20%7D%20var%20src%20%3D%20best.getAttribute('src')%20%7C%7C%20best.getAttribute('data-src')%20%7C%7C%20best.currentSrc%20%7C%7C%20''%3B%20if(src.indexOf('http')%20!%3D%3D%200)%7B%20if(src.indexOf('%2F%2F')%20%3D%3D%3D%200)%20src%20%3D%20'https%3A'%20%2B%20src%3B%20else%20%7B%20alert('Goat%20Kids%20Restock%3A%20found%20an%20image%20but%20its%20address%20looked%20invalid.')%3B%20return%3B%20%7D%20%7D%20var%20db%20%3D%20firebase.firestore()%3B%20db.collection('restockTool_history').doc(offerId).set(%7B%20image%3A%20src%20%7D%2C%20%7B%20merge%3A%20true%20%7D)%20.then(function()%7B%20alert('Goat%20Kids%20Restock%3A%20photo%20saved%20for%20this%20product.')%3B%20%7D)%20.catch(function(err)%7B%20alert('Goat%20Kids%20Restock%3A%20found%20the%20photo%20but%20saving%20failed%20%E2%80%94%20'%20%2B%20err.message)%3B%20%7D)%3B%20%7D%20try%7B%20if(!window.firebase)%7B%20loadScript('https%3A%2F%2Fwww.gstatic.com%2Ffirebasejs%2F10.13.0%2Ffirebase-app-compat.js')%20.then(function()%7B%20return%20loadScript('https%3A%2F%2Fwww.gstatic.com%2Ffirebasejs%2F10.13.0%2Ffirebase-firestore-compat.js')%3B%20%7D)%20.then(function()%7B%20firebase.initializeApp(FIREBASE_CONFIG)%3B%20run()%3B%20%7D)%20.catch(function(err)%7B%20alert('Goat%20Kids%20Restock%3A%20could%20not%20load%20%E2%80%94%20this%20page%20may%20be%20blocking%20outside%20scripts.%20('%20%2B%20err.message%20%2B%20')')%3B%20%7D)%3B%20%7D%20else%20%7B%20if(!firebase.apps.length)%20firebase.initializeApp(FIREBASE_CONFIG)%3B%20run()%3B%20%7D%20%7Dcatch(err)%7B%20alert('Goat%20Kids%20Restock%3A%20something%20went%20wrong%20%E2%80%94%20'%20%2B%20err.message)%3B%20%7D%20%7D)()%3B" onclick="alert('Drag this button up to your bookmarks bar instead of clicking it here.'); return false;">🖼️ Save photo to Goat Kids catalog</a>
+  </div>
+
+  <div class="card">
+    <strong>Setup (desktop browser, one time):</strong>
+    <ol>
+      <li>Make sure your bookmarks bar is showing (in Chrome: <code>Ctrl/Cmd + Shift + B</code>).</li>
+      <li>Drag either blue/green button above up into your bookmarks bar, then let go. Repeat for the other one if you want both.</li>
+      <li>Done — each is saved as its own bookmark.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <strong>Using the photo one, specifically:</strong>
+    <ol>
+      <li>Open the catalog item's "View on 1688" link (or go to the product directly) so you're on that exact product's own page — not a shop or search page.</li>
+      <li>Let the page fully load, including its main image.</li>
+      <li>Click the green bookmark. It reads the offer ID straight from the page's own URL, so it always updates the right catalog item.</li>
+      <li>Repeat for each product you want a photo for — one click each.</li>
+    </ol>
+  </div>
+
+  <div class="warn">
+    <strong>Heads up:</strong> I couldn't test either of these against 1688's real pages myself — their pages only fully render after JavaScript runs, which I can't execute from here, and their server blocks direct automated fetches too. The photo one picks the largest real image on the page, which is usually the main product photo, but if it grabs the wrong image or says it can't find one, tell me exactly what happened and I'll adjust it.
+  </div>
+
+  <a class="back" href="restock.html">← Back to the restock tool</a>
+</div>
+</body>
+</html>
