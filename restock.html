@@ -129,16 +129,25 @@
   .manual-add summary::-webkit-details-marker, .bulk-import summary::-webkit-details-marker{ display:none; }
   .manual-add summary::before{ content:"Can't find it in search? Add an item by link ▸"; }
   .manual-add[open] summary::before{ content:"Can't find it in search? Add an item by link ▾"; }
-  .bulk-import summary::before{ content:"Paste several links at once ▸"; }
-  .bulk-import[open] summary::before{ content:"Paste several links at once ▾"; }
+  .bulk-import summary::before{ content:"Add multiple products at once ▸"; }
+  .bulk-import[open] summary::before{ content:"Add multiple products at once ▾"; }
   .add-form{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:12px; }
   .add-form input#itemUrl{ grid-column: 1 / -1; }
   .add-form button{ grid-column: 1 / -1; }
-  .bulk-form{ margin-top:12px; }
+
+  .import-option{ margin-top:14px; }
+  .import-option h3{ margin:0 0 4px; font-size:0.8rem; font-weight:700; color:var(--dark); }
+  .import-divider{ display:flex; align-items:center; gap:10px; margin:18px 0; color:var(--gray); font-size:0.72rem; font-weight:600; }
+  .import-divider::before, .import-divider::after{ content:""; flex:1; border-top:1px dashed var(--gray-light); }
+  .bulk-form{ margin-top:10px; }
   .bulk-form textarea{ width:100%; padding:0.7rem 0.9rem; border:2px solid var(--gray-light); border-radius:var(--radius); font-size:0.85rem; font-family:inherit; resize:vertical; }
   .bulk-form textarea:focus{ outline:none; border-color:var(--primary); }
   .bulk-form button{ margin-top:10px; }
   .bulk-result{ font-size:0.8rem; color:var(--gray-dark); margin-top:8px; display:none; }
+  #csvPreview{ margin-top:10px; }
+  #csvColumnSelect{ max-width:260px; margin-top:6px; }
+  #csvPreviewText{ margin-top:8px; }
+  #csvImportBtn{ margin-top:8px; }
 
   aside .admin-card{ position:sticky; top:88px; max-height:calc(100vh - 110px); overflow-y:auto; margin-bottom:0; }
   aside .admin-card-body{ padding-top:0.75rem; }
@@ -158,6 +167,8 @@
   .settings label{ display:block; font-size:0.75rem; color:var(--gray-dark); margin:10px 0 4px; }
   .settings input[type=text]{ width:100%; padding:8px 9px; border:2px solid var(--gray-light); border-radius:6px; font-size:0.78rem; font-family:inherit; }
   .settings .note{ font-size:0.72rem; color:var(--gray-dark); margin-top:8px; line-height:1.5; }
+  .settings .note p{ margin:0 0 8px; }
+  .settings .note p:last-child{ margin-bottom:0; }
 </style>
 </head>
 <body>
@@ -192,21 +203,27 @@
 
           <details class="bulk-import">
             <summary></summary>
-            <p class="hint">Paste a list, one per line — either product links (a name before the link is fine, it becomes the title), or just plain product names with no link, like from a 1688 export. Names get a ready-made "Search on 1688" link since there's no exact product page to point to.</p>
-            <div class="bulk-form">
-              <textarea id="bulkUrls" rows="5" placeholder="Kids cotton dress  https://detail.1688.com/offer/1234567890.html&#10;https://detail.1688.com/offer/2345678901.html&#10;儿童棉质连衣裙&#10;..."></textarea>
-              <button class="btn btn-primary" id="bulkImportBtn"><i class="fas fa-file-import"></i> Import links</button>
-              <p class="bulk-result" id="bulkImportResult"></p>
+            <div class="import-option">
+              <h3>Paste a list</h3>
+              <p class="hint">One per line — product links (a name before the link becomes the title), or plain product names with no link, like from a 1688 export. Names get a ready-made "Search on 1688" link since there's no exact product page to point to.</p>
+              <div class="bulk-form">
+                <textarea id="bulkUrls" rows="4" placeholder="Kids cotton dress  https://detail.1688.com/offer/1234567890.html&#10;https://detail.1688.com/offer/2345678901.html&#10;儿童棉质连衣裙&#10;..."></textarea>
+                <button class="btn btn-primary" id="bulkImportBtn"><i class="fas fa-file-import"></i> Import links</button>
+                <p class="bulk-result" id="bulkImportResult"></p>
+              </div>
             </div>
 
-            <div class="csv-import">
-              <p class="hint" style="margin-bottom:6px;">Or upload a CSV or Excel export directly:</p>
+            <div class="import-divider"><span>or</span></div>
+
+            <div class="import-option">
+              <h3>Upload a file</h3>
+              <p class="hint">A CSV or Excel export — a 1688 order-history export is recognized automatically and brings in exact product links, price paid, and supplier.</p>
               <input type="file" id="csvFile" accept=".csv,text/csv,.xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
-              <div id="csvPreview" style="display:none; margin-top:10px;">
-                <label class="hint" for="csvColumnSelect" style="display:block;">Which column has the item name?</label>
-                <select class="form-control" id="csvColumnSelect" style="max-width:260px; margin-top:6px;"></select>
-                <p class="hint" id="csvPreviewText" style="margin-top:8px;"></p>
-                <button class="btn btn-primary btn-small" id="csvImportBtn" style="margin-top:8px;">Import these items</button>
+              <div id="csvPreview" class="hidden">
+                <label class="hint" for="csvColumnSelect">Which column has the item name?</label>
+                <select class="form-control" id="csvColumnSelect"></select>
+                <p class="hint" id="csvPreviewText"></p>
+                <button class="btn btn-primary btn-small" id="csvImportBtn">Import these items</button>
               </div>
             </div>
           </details>
@@ -281,14 +298,9 @@
           <label for="apifyActor">Apify actor ID</label>
           <input type="text" id="apifyActor" placeholder="e.g. zen-studio~1688-wholesale-scraper" value="zen-studio~1688-wholesale-scraper">
           <div class="note">
-            Until a token is added, search uses sample data so the tool is fully testable.
-            Once you have an Apify account and token, paste it above — keyword search will
-            switch to real 1688 listings automatically. This particular scraper searches all
-            of 1688 by keyword; it can't scope a search to one specific trusted shop, and it
-            can't browse a whole shop's catalog without a keyword — so "View all items" still
-            shows sample data even once a token is added. Nothing here touches the main Goat
-            Kids app. Your token is saved in this browser only, so it stays private to this
-            device — you'll need to paste it again on any other computer or phone.
+            <p>No token yet? Search uses sample data so the tool stays fully testable. Add a token and keyword search switches to real 1688 listings automatically.</p>
+            <p>This scraper searches all of 1688 by keyword — it can't scope to one trusted shop, and "View all items" always stays on sample data since it can't browse a whole shop without a keyword.</p>
+            <p>Your token is saved in this browser only — private to this device, and never touches the main Goat Kids app. You'll need to paste it again on any other device.</p>
           </div>
         </details>
       </div>
@@ -982,7 +994,7 @@ function handleParsedRows(){
     document.querySelector('label[for="csvColumnSelect"]').style.display = '';
     setupCsvColumnPicker();
   }
-  document.getElementById('csvPreview').style.display = 'block';
+  document.getElementById('csvPreview').classList.remove('hidden');
 }
 
 function setupCsvColumnPicker(){
@@ -1071,7 +1083,7 @@ document.getElementById('csvImportBtn').onclick = () => {
     resultEl.textContent = `Added ${importCount} item${importCount === 1 ? '' : 's'} from the file to your catalog.`;
   }
 
-  document.getElementById('csvPreview').style.display = 'none';
+  document.getElementById('csvPreview').classList.add('hidden');
   document.getElementById('csvFile').value = '';
   csvRows = [];
   csvOrderEntries = null;
