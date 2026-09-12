@@ -49,11 +49,9 @@
   .mode-pill.live{ background:#e6fffa; color:#2c7a7b; }
 
   main{
-    max-width:1400px; margin:0 auto;
-    display:grid; grid-template-columns: 1fr 340px; gap:24px;
-    padding:24px 1.5rem 60px; align-items:start;
+    max-width:1100px; margin:0 auto;
+    padding:24px 1.5rem 60px;
   }
-  @media (max-width: 900px){ main{ grid-template-columns: 1fr; } }
 
   .page-tabs{ display:flex; gap:0; border-bottom:2px solid var(--gray-light); margin-bottom:1.25rem; }
   .page-tab{ padding:0.7rem 1.3rem; border:none; background:none; font-size:0.9rem; font-weight:600; cursor:pointer; color:var(--gray-dark); border-bottom:2px solid transparent; margin-bottom:-2px; font-family:inherit; display:inline-flex; align-items:center; gap:0.5rem; }
@@ -78,6 +76,13 @@
   .rl-item .rl-actions{ display:flex; flex-direction:column; align-items:flex-end; gap:6px; flex-shrink:0; }
   .rl-item a{ color:var(--primary); text-decoration:none; font-size:0.78rem; font-weight:600; white-space:nowrap; }
   .rl-item .remove{ background:none; border:none; color:var(--danger); cursor:pointer; font-size:0.78rem; font-family:inherit; padding:2px; }
+  .rl-item.is-ordered{ opacity:0.65; }
+  .status-badge{ display:inline-block; font-size:0.65rem; font-weight:700; padding:2px 8px; border-radius:999px; margin:3px 0; }
+  .status-pending{ background:var(--gray-light); color:var(--gray-dark); }
+  .status-sent{ background:#e6fffa; color:#2c7a7b; }
+  .status-ordered{ background:#f0fff4; color:#276749; }
+  .mark-ordered{ background:none; border:1px solid var(--success); color:var(--success); border-radius:5px; padding:3px 8px; font-size:0.72rem; font-weight:600; cursor:pointer; font-family:inherit; }
+  .mark-ordered:hover{ background:var(--success); color:#fff; }
   .send-status{ font-size:0.82rem; margin-top:10px; padding:10px 12px; border-radius:var(--radius); display:none; }
   .send-status.ok{ background:#e6fffa; color:#2c7a7b; display:block; }
   .send-status.err{ background:#fff5f5; color:#c53030; display:block; }
@@ -101,11 +106,6 @@
   .btn-small{ padding:0.4rem 0.75rem; font-size:0.8rem; }
   .hint{ font-size:0.8rem; color:var(--gray-dark); margin:10px 0 0; line-height:1.5; }
 
-  .shop-manager{ padding-top:16px; border-top:1px solid var(--gray-light); margin-top:16px; }
-  .shop-manager summary{ cursor:pointer; padding:2px 0 10px; font-size:0.85rem; font-weight:600; color:var(--gray-dark); list-style:none; }
-  .shop-manager summary::-webkit-details-marker{ display:none; }
-  .shop-manager summary::before{ content:"Trusted shops (" attr(data-count) ") ▸"; }
-  .shop-manager[open] summary::before{ content:"Trusted shops (" attr(data-count) ") ▾"; }
   .shop-row{ display:flex; gap:8px; align-items:center; padding:7px 0; font-size:0.85rem; border-bottom:1px dashed var(--gray-light); }
   .shop-row:last-of-type{ border-bottom:none; }
   .shop-row .name{ font-weight:600; width:130px; flex-shrink:0; }
@@ -136,6 +136,9 @@
   .card .price{ font-size:0.85rem; font-weight:700; color:var(--secondary-dark); }
   .card .meta{ font-size:0.7rem; color:var(--gray-dark); }
   .card .size-select{ padding:6px 7px; border:2px solid var(--gray-light); border-radius:5px; font-size:0.75rem; font-family:inherit; }
+  .pick-row{ display:flex; gap:6px; }
+  .pick-row .size-select{ flex:1; min-width:0; }
+  .pick-row .qty-select{ width:52px; flex-shrink:0; padding:6px 5px; border:2px solid var(--gray-light); border-radius:5px; font-size:0.75rem; font-family:inherit; }
   .card .row{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:auto; }
   .card .view{ font-size:0.72rem; color:var(--primary); text-decoration:none; font-weight:600; }
   .card .add{ background:var(--secondary); color:#fff; border:none; border-radius:6px; padding:6px 10px; font-size:0.72rem; font-weight:600; cursor:pointer; font-family:inherit; }
@@ -175,21 +178,11 @@
   #csvPreviewText{ margin-top:8px; }
   #csvImportBtn{ margin-top:8px; }
 
-  aside .admin-card{ position:sticky; top:88px; max-height:calc(100vh - 110px); overflow-y:auto; margin-bottom:0; }
-  aside .admin-card-body{ padding-top:0.75rem; }
-
-  .settings{ margin-top:16px; padding-top:14px; border-top:1px solid var(--gray-light); }
-  .settings summary{ cursor:pointer; font-size:0.78rem; color:var(--gray-dark); font-weight:600; list-style:none; }
-  .settings summary::-webkit-details-marker{ display:none; }
-  .settings summary::before{ content:"Data source settings ▸"; }
-  .settings[open] summary::before{ content:"Data source settings ▾"; }
-  .settings.tg-settings summary::before{ content:"Telegram settings ▸"; }
-  .settings.tg-settings[open] summary::before{ content:"Telegram settings ▾"; }
-  .settings label{ display:block; font-size:0.75rem; color:var(--gray-dark); margin:10px 0 4px; }
-  .settings input[type=text]{ width:100%; padding:8px 9px; border:2px solid var(--gray-light); border-radius:6px; font-size:0.78rem; font-family:inherit; }
-  .settings .note{ font-size:0.72rem; color:var(--gray-dark); margin-top:8px; line-height:1.5; }
-  .settings .note p{ margin:0 0 8px; }
-  .settings .note p:last-child{ margin-bottom:0; }
+  .settings-label{ display:block; font-size:0.8rem; font-weight:600; color:var(--dark); margin:0 0 5px; }
+  .settings-label:not(:first-child){ margin-top:14px; }
+  .note{ font-size:0.75rem; color:var(--gray-dark); margin-top:12px; line-height:1.5; }
+  .note p{ margin:0 0 8px; }
+  .note p:last-child{ margin-bottom:0; }
 </style>
 </head>
 <body>
@@ -210,6 +203,7 @@
       <button class="page-tab active" id="tabHomeBtn" onclick="switchSection('home')"><i class="fas fa-layer-group"></i> Home</button>
       <button class="page-tab" id="tabSearchBtn" onclick="switchSection('search')"><i class="fas fa-search"></i> Search 1688</button>
       <button class="page-tab" id="tabRestockBtn" onclick="switchSection('restock')"><i class="fas fa-clipboard-list"></i> Restock List</button>
+      <button class="page-tab" id="tabSettingsBtn" onclick="switchSection('settings')"><i class="fas fa-cog"></i> Settings</button>
     </div>
 
     <div id="homeSection">
@@ -267,15 +261,6 @@
             <button class="btn btn-outline" id="browseBtn" title="Pick a specific shop to browse its full catalog" disabled>View all items</button>
           </div>
           <p class="hint" id="liveDataHint" style="display:none;">Live search covers all of 1688 by keyword — it doesn't filter to one trusted shop, and "View all items" still shows sample data since this scraper can't browse a whole shop without a keyword.</p>
-          <details class="shop-manager" id="shopManager" data-count="1">
-            <summary></summary>
-            <div id="shopList"></div>
-            <div class="add-shop-row">
-              <input type="text" class="name" id="newShopName" placeholder="Shop nickname">
-              <input type="text" class="id" id="newShopId" placeholder="1688 shop ID (from the shop URL)">
-              <button class="btn btn-outline btn-small" id="addShopBtn">Add shop</button>
-            </div>
-          </details>
         </div>
       </div>
 
@@ -319,46 +304,63 @@
           <div id="restockListWrap"></div>
           <div class="admin-empty" id="restockListEmpty">Nothing added yet. Use "Add to list" on a product.</div>
           <div class="send-status" id="sendStatus"></div>
-
-          <details class="settings tg-settings">
-            <summary></summary>
-            <label for="tgToken">Bot token</label>
-            <input type="text" class="form-control" id="tgToken" placeholder="Paste your bot token here">
-            <label for="tgChatId">Chat ID</label>
-            <input type="text" class="form-control" id="tgChatId" placeholder="Paste your chat ID here">
-            <div class="note">
-              <p>Message @BotFather on Telegram, send <code>/newbot</code>, and follow the prompts — it gives you a bot token when it's done.</p>
-              <p>To get your chat ID: message your new bot anything first, then open <code>https://api.telegram.org/bot&lt;your token&gt;/getUpdates</code> in a browser and look for the <code>"chat":{"id":...}</code> number.</p>
-              <p>Both are saved in this browser only — private to this device.</p>
-            </div>
-          </details>
         </div>
       </div>
     </div>
-  </div>
 
-  <aside>
-    <div class="admin-card">
-      <div class="admin-card-header">
-        <h1><i class="fas fa-sliders-h" style="color:var(--primary)"></i> Search settings</h1>
-        <p>Controls for the Search 1688 tab</p>
-      </div>
-      <div class="admin-card-body">
-        <details class="settings" open>
-          <summary></summary>
-          <label for="apifyToken">Apify API token</label>
-          <input type="text" id="apifyToken" placeholder="Paste your token here">
-          <label for="apifyActor">Apify actor ID</label>
-          <input type="text" id="apifyActor" placeholder="e.g. zen-studio~1688-wholesale-scraper" value="zen-studio~1688-wholesale-scraper">
+    <div id="settingsSection" class="hidden">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h1><i class="fas fa-server" style="color:var(--primary)"></i> Data source</h1>
+          <p>Controls for the Search 1688 tab</p>
+        </div>
+        <div class="admin-card-body">
+          <label for="apifyToken" class="settings-label">Apify API token</label>
+          <input type="text" class="form-control" id="apifyToken" placeholder="Paste your token here">
+          <label for="apifyActor" class="settings-label">Apify actor ID</label>
+          <input type="text" class="form-control" id="apifyActor" placeholder="e.g. zen-studio~1688-wholesale-scraper" value="zen-studio~1688-wholesale-scraper">
           <div class="note">
             <p>No token yet? Search uses sample data so the tool stays fully testable. Add a token and keyword search switches to real 1688 listings automatically.</p>
             <p>This scraper searches all of 1688 by keyword — it can't scope to one trusted shop, and "View all items" always stays on sample data since it can't browse a whole shop without a keyword.</p>
             <p>Your token is saved in this browser only — private to this device, and never touches the main Goat Kids app. You'll need to paste it again on any other device.</p>
           </div>
-        </details>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h1><i class="fas fa-store" style="color:var(--primary)"></i> Trusted shops</h1>
+          <p>Shops you can filter searches to on the Search 1688 tab</p>
+        </div>
+        <div class="admin-card-body">
+          <div id="shopList"></div>
+          <div class="add-shop-row">
+            <input type="text" class="name" id="newShopName" placeholder="Shop nickname">
+            <input type="text" class="id" id="newShopId" placeholder="1688 shop ID (from the shop URL)">
+            <button class="btn btn-outline btn-small" id="addShopBtn">Add shop</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h1><i class="fab fa-telegram-plane" style="color:var(--primary)"></i> Telegram</h1>
+          <p>Where the Restock List sends orders to</p>
+        </div>
+        <div class="admin-card-body">
+          <label for="tgToken" class="settings-label">Bot token</label>
+          <input type="text" class="form-control" id="tgToken" placeholder="Paste your bot token here">
+          <label for="tgChatId" class="settings-label">Chat ID</label>
+          <input type="text" class="form-control" id="tgChatId" placeholder="Paste your chat ID here">
+          <div class="note">
+            <p>Message @BotFather on Telegram, send <code>/newbot</code>, and follow the prompts — it gives you a bot token when it's done.</p>
+            <p>To get your chat ID: message your new bot anything first, then open <code>https://api.telegram.org/bot&lt;your token&gt;/getUpdates</code> in a browser and look for the <code>"chat":{"id":...}</code> number.</p>
+            <p>Both are saved in this browser only — private to this device.</p>
+          </div>
+        </div>
       </div>
     </div>
-  </aside>
+  </div>
 </main>
 
 <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
@@ -408,9 +410,11 @@ function switchSection(name){
   document.getElementById('homeSection').classList.toggle('hidden', name !== 'home');
   document.getElementById('searchSection').classList.toggle('hidden', name !== 'search');
   document.getElementById('restockSection').classList.toggle('hidden', name !== 'restock');
+  document.getElementById('settingsSection').classList.toggle('hidden', name !== 'settings');
   document.getElementById('tabHomeBtn').classList.toggle('active', name === 'home');
   document.getElementById('tabSearchBtn').classList.toggle('active', name === 'search');
   document.getElementById('tabRestockBtn').classList.toggle('active', name === 'restock');
+  document.getElementById('tabSettingsBtn').classList.toggle('active', name === 'settings');
 }
 
 function initFirestoreListeners(){
@@ -496,10 +500,13 @@ function productCardHtml(p, opts){
         <div class="title">${escapeHtml(p.title)}</div>
         <div class="price">${escapeHtml(String(p.price))}</div>
         <div class="meta">MOQ ${escapeHtml(String(p.moq))} · ${escapeHtml(p.supplier)}</div>
-        ${p.sizes && p.sizes.length ? `
-        <select class="size-select">
-          ${p.sizes.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('')}
-        </select>` : ''}
+        <div class="pick-row">
+          ${p.sizes && p.sizes.length ? `
+          <select class="size-select">
+            ${p.sizes.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('')}
+          </select>` : ''}
+          <input type="number" class="qty-select" min="1" value="1" title="Quantity to order">
+        </div>
         <div class="row">
           <a class="view" href="${escapeHtml(p.url)}" target="_blank" rel="noopener">${p.isSearchLink ? 'Search on 1688' : 'View on 1688'}</a>
           <button class="add" onclick="addToRestock('${escapeHtml(p.id)}', this)">Add to list</button>
@@ -623,7 +630,6 @@ function renderShops(){
       <button class="btn btn-outline btn-small" onclick="removeShop('${escapeHtml(s.id)}')">Remove</button>
     </div>
   `).join('');
-  document.getElementById('shopManager').setAttribute('data-count', shops.length);
 
   const filter = document.getElementById('shopFilter');
   const current = filter.value;
@@ -860,12 +866,18 @@ function renderResults(results, keyword, shopId){
 function addToRestock(id, btnEl){
   const product = productIndex[id];
   if(!product) return;
-  const sizeSelect = btnEl ? btnEl.closest('.card').querySelector('.size-select') : null;
+  const card = btnEl ? btnEl.closest('.card') : null;
+  const sizeSelect = card ? card.querySelector('.size-select') : null;
+  const qtySelect = card ? card.querySelector('.qty-select') : null;
   const size = sizeSelect ? sizeSelect.value : null;
+  const qtyFromInput = qtySelect ? parseInt(qtySelect.value) : NaN;
+  const qty = !isNaN(qtyFromInput) && qtyFromInput > 0
+    ? qtyFromInput
+    : (product.moq && !isNaN(parseInt(product.moq)) ? parseInt(product.moq) : 1);
   const item = {
     ...product,
     size,
-    qty: product.moq && !isNaN(parseInt(product.moq)) ? parseInt(product.moq) : 1
+    qty
   };
   if(db){
     item.addedAt = firebase.firestore.FieldValue.serverTimestamp();
@@ -1223,6 +1235,18 @@ function confirmRemoveFromRestock(docId){
   }
 }
 
+function markAsOrdered(docId){
+  if(db && !docId.startsWith('local-')){
+    db.collection('restockTool_items').doc(docId).update({
+      status: 'ordered',
+      orderedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  } else {
+    const item = restockList.find(i => i.docId === docId);
+    if(item){ item.status = 'ordered'; renderRestock(); }
+  }
+}
+
 function removeFromRestock(docId){
   if(db && !docId.startsWith('local-')){
     db.collection('restockTool_items').doc(docId).delete();
@@ -1268,12 +1292,15 @@ function renderRestock(){
       ? `<img src="${escapeHtml(images[0])}" alt="" referrerpolicy="no-referrer" onerror="this.parentElement.textContent='No image'">`
       : 'No image';
     const checked = selectedRestockIds.has(item.docId) ? 'checked' : '';
+    const status = item.status === 'ordered' ? 'ordered' : (item.status === 'sent' ? 'sent' : 'pending');
+    const statusLabel = status === 'ordered' ? 'Ordered' : (status === 'sent' ? 'Sent' : 'Not sent');
     return `
-      <div class="rl-item">
+      <div class="rl-item${status === 'ordered' ? ' is-ordered' : ''}">
         <input type="checkbox" ${checked} onchange="toggleRestockSelect('${escapeHtml(item.docId)}', this.checked)">
         <div class="rl-thumb">${thumb}</div>
         <div class="rl-info">
           <div class="rl-title">${escapeHtml(item.title)}${item.size ? ` — ${escapeHtml(item.size)}` : ''}</div>
+          <span class="status-badge status-${status}">${statusLabel}</span>
           <div class="rl-meta">${item.isSearchLink ? 'Search link' : 'Direct link'}</div>
           <div class="rl-qty-row">
             <span>Qty</span>
@@ -1282,6 +1309,7 @@ function renderRestock(){
         </div>
         <div class="rl-actions">
           <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${item.isSearchLink ? 'Search on 1688 ↗' : 'Order on 1688 ↗'}</a>
+          ${status !== 'ordered' ? `<button class="mark-ordered" onclick="markAsOrdered('${escapeHtml(item.docId)}')">Mark ordered</button>` : ''}
           <button class="remove" onclick="confirmRemoveFromRestock('${escapeHtml(item.docId)}')">Remove</button>
         </div>
       </div>
@@ -1353,6 +1381,18 @@ document.getElementById('sendTelegramBtn').onclick = async () => {
     await fetch(url, { mode: 'no-cors' });
     statusEl.className = 'send-status ok';
     statusEl.textContent = 'Sent — check your Telegram chat to confirm it arrived (this page can\'t fully verify delivery due to how Telegram\'s API responds to browsers).';
+
+    items.forEach(item => {
+      if(db && !item.docId.startsWith('local-')){
+        db.collection('restockTool_items').doc(item.docId).update({
+          status: 'sent',
+          sentAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      } else {
+        item.status = 'sent';
+      }
+    });
+    if(!db) renderRestock();
   }catch(err){
     statusEl.className = 'send-status err';
     statusEl.textContent = 'Could not reach Telegram — check your internet connection and try again.';
