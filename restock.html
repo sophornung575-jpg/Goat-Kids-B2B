@@ -62,6 +62,25 @@
 
   .admin-card{ background:#fff; border:1px solid var(--gray-light); border-radius:var(--radius-lg); margin-bottom:1.5rem; overflow:hidden; }
   .admin-card-header{ padding:1rem 1.25rem; background:var(--light); border-bottom:1px solid var(--gray-light); }
+  .restock-header{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+
+  .select-all-row{ display:flex; align-items:center; gap:10px; padding-bottom:12px; margin-bottom:12px; border-bottom:1px solid var(--gray-light); font-size:0.85rem; font-weight:600; }
+  .select-all-row input{ width:18px; height:18px; }
+  .rl-item{ display:flex; gap:12px; align-items:center; border:1px solid var(--gray-light); border-radius:var(--radius); padding:10px; margin-bottom:10px; }
+  .rl-item input[type=checkbox]{ width:18px; height:18px; flex-shrink:0; }
+  .rl-item .rl-thumb{ width:56px; height:56px; flex-shrink:0; border-radius:6px; overflow:hidden; background:var(--light); display:flex; align-items:center; justify-content:center; color:var(--gray); font-size:9px; text-align:center; }
+  .rl-item .rl-thumb img{ width:100%; height:100%; object-fit:cover; }
+  .rl-item .rl-info{ flex:1; min-width:0; }
+  .rl-item .rl-title{ font-size:0.85rem; font-weight:600; }
+  .rl-item .rl-meta{ font-size:0.75rem; color:var(--gray-dark); margin-top:2px; }
+  .rl-item .rl-qty-row{ display:flex; align-items:center; gap:6px; margin-top:6px; font-size:0.78rem; }
+  .rl-item input.qty{ width:56px; padding:5px 6px; border:2px solid var(--gray-light); border-radius:5px; font-size:0.78rem; font-family:inherit; }
+  .rl-item .rl-actions{ display:flex; flex-direction:column; align-items:flex-end; gap:6px; flex-shrink:0; }
+  .rl-item a{ color:var(--primary); text-decoration:none; font-size:0.78rem; font-weight:600; white-space:nowrap; }
+  .rl-item .remove{ background:none; border:none; color:var(--danger); cursor:pointer; font-size:0.78rem; font-family:inherit; padding:2px; }
+  .send-status{ font-size:0.82rem; margin-top:10px; padding:10px 12px; border-radius:var(--radius); display:none; }
+  .send-status.ok{ background:#e6fffa; color:#2c7a7b; display:block; }
+  .send-status.err{ background:#fff5f5; color:#c53030; display:block; }
   .admin-card-header h1{ margin:0; font-size:1.15rem; font-weight:700; }
   .admin-card-header p{ margin:0.3rem 0 0; color:var(--gray-dark); font-size:0.85rem; }
   .admin-card-body{ padding:1.25rem; }
@@ -103,8 +122,15 @@
   .thumb{ aspect-ratio:1/1; background:var(--light); position:relative; overflow:hidden; }
   .thumb-img{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:var(--gray); font-size:11.5px; }
   .thumb-img img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .thumb-remove{ position:absolute; top:4px; right:4px; width:22px; height:22px; border-radius:50%; border:none; background:rgba(0,0,0,0.55); color:#fff; font-size:11px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+  .thumb-remove{ position:absolute; top:4px; right:32px; width:22px; height:22px; border-radius:50%; border:none; background:rgba(0,0,0,0.55); color:#fff; font-size:11px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
   .thumb-remove:hover{ background:var(--danger); }
+  .thumb-menu{ position:absolute; top:4px; right:4px; width:22px; height:22px; border-radius:50%; border:none; background:rgba(0,0,0,0.55); color:#fff; font-size:11px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+  .thumb-menu:hover{ background:rgba(0,0,0,0.75); }
+  .thumb-nav{ position:absolute; top:50%; transform:translateY(-50%); width:22px; height:22px; border-radius:50%; border:none; background:rgba(0,0,0,0.45); color:#fff; font-size:11px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+  .thumb-nav:hover{ background:rgba(0,0,0,0.7); }
+  .thumb-nav.prev{ left:4px; }
+  .thumb-nav.next{ right:4px; }
+  .thumb-count{ position:absolute; bottom:4px; right:4px; background:rgba(0,0,0,0.55); color:#fff; font-size:0.62rem; font-weight:600; padding:1px 6px; border-radius:999px; }
   .card .body{ padding:10px; display:flex; flex-direction:column; gap:6px; flex:1; }
   .card .title{ font-size:0.8rem; font-weight:600; line-height:1.35; min-height:2.6em; }
   .card .price{ font-size:0.85rem; font-weight:700; color:var(--secondary-dark); }
@@ -151,19 +177,14 @@
 
   aside .admin-card{ position:sticky; top:88px; max-height:calc(100vh - 110px); overflow-y:auto; margin-bottom:0; }
   aside .admin-card-body{ padding-top:0.75rem; }
-  .restock-item{ border:1px solid var(--gray-light); border-radius:var(--radius); padding:10px; margin-bottom:10px; }
-  .restock-item .t{ font-size:0.8rem; font-weight:600; margin-bottom:6px; }
-  .restock-item .r2{ display:flex; align-items:center; gap:8px; font-size:0.75rem; flex-wrap:wrap; }
-  .restock-item input.qty{ width:52px; padding:5px 6px; border:2px solid var(--gray-light); border-radius:5px; font-size:0.75rem; font-family:inherit; }
-  .restock-item .remove{ margin-left:auto; background:none; border:none; color:var(--danger); cursor:pointer; font-size:0.75rem; padding:4px; font-family:inherit; }
-  .restock-item a{ color:var(--primary); text-decoration:none; font-size:0.75rem; font-weight:600; }
-  .restock-empty{ font-size:0.8rem; color:var(--gray-dark); border:1px dashed var(--gray-light); border-radius:var(--radius); padding:20px 14px; text-align:center; }
 
   .settings{ margin-top:16px; padding-top:14px; border-top:1px solid var(--gray-light); }
   .settings summary{ cursor:pointer; font-size:0.78rem; color:var(--gray-dark); font-weight:600; list-style:none; }
   .settings summary::-webkit-details-marker{ display:none; }
   .settings summary::before{ content:"Data source settings ▸"; }
   .settings[open] summary::before{ content:"Data source settings ▾"; }
+  .settings.tg-settings summary::before{ content:"Telegram settings ▸"; }
+  .settings.tg-settings[open] summary::before{ content:"Telegram settings ▾"; }
   .settings label{ display:block; font-size:0.75rem; color:var(--gray-dark); margin:10px 0 4px; }
   .settings input[type=text]{ width:100%; padding:8px 9px; border:2px solid var(--gray-light); border-radius:6px; font-size:0.78rem; font-family:inherit; }
   .settings .note{ font-size:0.72rem; color:var(--gray-dark); margin-top:8px; line-height:1.5; }
@@ -188,6 +209,7 @@
     <div class="page-tabs">
       <button class="page-tab active" id="tabHomeBtn" onclick="switchSection('home')"><i class="fas fa-layer-group"></i> Home</button>
       <button class="page-tab" id="tabSearchBtn" onclick="switchSection('search')"><i class="fas fa-search"></i> Search 1688</button>
+      <button class="page-tab" id="tabRestockBtn" onclick="switchSection('restock')"><i class="fas fa-clipboard-list"></i> Restock List</button>
     </div>
 
     <div id="homeSection">
@@ -279,19 +301,50 @@
         </div>
       </div>
     </div>
+
+    <div id="restockSection" class="hidden">
+      <div class="admin-card">
+        <div class="admin-card-header restock-header">
+          <div>
+            <h1><i class="fas fa-clipboard-list" style="color:var(--primary)"></i> Restock list</h1>
+            <p>Select the items you're ready to order, then send them to Telegram.</p>
+          </div>
+          <button class="btn btn-primary" id="sendTelegramBtn" disabled><i class="fab fa-telegram-plane"></i> Send selected to Telegram</button>
+        </div>
+        <div class="admin-card-body">
+          <div class="select-all-row">
+            <input type="checkbox" id="selectAllRestock">
+            <label for="selectAllRestock">Select all</label>
+          </div>
+          <div id="restockListWrap"></div>
+          <div class="admin-empty" id="restockListEmpty">Nothing added yet. Use "Add to list" on a product.</div>
+          <div class="send-status" id="sendStatus"></div>
+
+          <details class="settings tg-settings">
+            <summary></summary>
+            <label for="tgToken">Bot token</label>
+            <input type="text" class="form-control" id="tgToken" placeholder="Paste your bot token here">
+            <label for="tgChatId">Chat ID</label>
+            <input type="text" class="form-control" id="tgChatId" placeholder="Paste your chat ID here">
+            <div class="note">
+              <p>Message @BotFather on Telegram, send <code>/newbot</code>, and follow the prompts — it gives you a bot token when it's done.</p>
+              <p>To get your chat ID: message your new bot anything first, then open <code>https://api.telegram.org/bot&lt;your token&gt;/getUpdates</code> in a browser and look for the <code>"chat":{"id":...}</code> number.</p>
+              <p>Both are saved in this browser only — private to this device.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
   </div>
 
   <aside>
     <div class="admin-card">
       <div class="admin-card-header">
-        <h1><i class="fas fa-clipboard-list" style="color:var(--primary)"></i> Restock list</h1>
-        <p>Items staff have picked to order</p>
+        <h1><i class="fas fa-sliders-h" style="color:var(--primary)"></i> Search settings</h1>
+        <p>Controls for the Search 1688 tab</p>
       </div>
       <div class="admin-card-body">
-        <div id="restockList"></div>
-        <div class="restock-empty" id="restockEmpty">Nothing added yet. Use "Add to list" on a product.</div>
-
-        <details class="settings">
+        <details class="settings" open>
           <summary></summary>
           <label for="apifyToken">Apify API token</label>
           <input type="text" id="apifyToken" placeholder="Paste your token here">
@@ -354,8 +407,10 @@ function indexProducts(list){
 function switchSection(name){
   document.getElementById('homeSection').classList.toggle('hidden', name !== 'home');
   document.getElementById('searchSection').classList.toggle('hidden', name !== 'search');
+  document.getElementById('restockSection').classList.toggle('hidden', name !== 'restock');
   document.getElementById('tabHomeBtn').classList.toggle('active', name === 'home');
   document.getElementById('tabSearchBtn').classList.toggle('active', name === 'search');
+  document.getElementById('tabRestockBtn').classList.toggle('active', name === 'restock');
 }
 
 function initFirestoreListeners(){
@@ -392,16 +447,50 @@ function initFirestoreListeners(){
 }
 
 // ---------- shared product card ----------
+// Merges the legacy single-image field with the newer images array, so
+// older catalog entries never lose their photo when a second one is added.
+function getImages(p){
+  const arr = Array.isArray(p.images) ? p.images.slice() : [];
+  if(p.image && !arr.includes(p.image)) arr.push(p.image);
+  return arr;
+}
+
+let photoIndex = {}; // product id -> which photo is currently shown
+
+function cyclePhoto(e, id, delta){
+  e.stopPropagation();
+  const product = productIndex[id];
+  if(!product) return;
+  const images = getImages(product);
+  if(images.length < 2) return;
+  const cur = photoIndex[id] || 0;
+  const next = (cur + delta + images.length) % images.length;
+  photoIndex[id] = next;
+  const imgEl = document.getElementById('thumbimg-' + id);
+  if(imgEl) imgEl.src = images[next];
+  const countEl = document.getElementById('thumbcount-' + id);
+  if(countEl) countEl.textContent = (next + 1) + '/' + images.length;
+}
+
 function productCardHtml(p, opts){
   opts = opts || {};
-  const imgHtml = p.image
-    ? `<img src="${escapeHtml(p.image)}" alt="" referrerpolicy="no-referrer" onerror="this.parentElement.textContent='No image'">`
+  const images = getImages(p);
+  const startIdx = Math.min(photoIndex[p.id] || 0, Math.max(images.length - 1, 0));
+  const imgHtml = images.length
+    ? `<img id="thumbimg-${escapeHtml(p.id)}" src="${escapeHtml(images[startIdx])}" alt="" referrerpolicy="no-referrer" onerror="this.parentElement.textContent='No image'">`
     : 'No image';
+
   return `
     <div class="card">
       <div class="thumb">
         <div class="thumb-img">${imgHtml}</div>
-        ${opts.removable ? `<button class="thumb-remove" onclick="removeFromHistory('${escapeHtml(p.id)}')" title="Remove from catalog"><i class="fas fa-times"></i></button>` : ''}
+        ${images.length > 1 ? `
+        <button class="thumb-nav prev" onclick="cyclePhoto(event,'${escapeHtml(p.id)}',-1)" title="Previous photo"><i class="fas fa-chevron-left"></i></button>
+        <button class="thumb-nav next" onclick="cyclePhoto(event,'${escapeHtml(p.id)}',1)" title="Next photo"><i class="fas fa-chevron-right"></i></button>
+        <span class="thumb-count" id="thumbcount-${escapeHtml(p.id)}">${startIdx + 1}/${images.length}</span>` : ''}
+        ${opts.removable ? `
+        <button class="thumb-menu" onclick="event.stopPropagation();toggleThumbMenu('${escapeHtml(p.id)}')" title="More options"><i class="fas fa-ellipsis-v"></i></button>
+        <button class="thumb-remove hidden" id="removeBtn-${escapeHtml(p.id)}" onclick="event.stopPropagation();confirmRemoveFromHistory('${escapeHtml(p.id)}')" title="Remove from catalog"><i class="fas fa-times"></i></button>` : ''}
       </div>
       <div class="body">
         <div class="title">${escapeHtml(p.title)}</div>
@@ -415,9 +504,9 @@ function productCardHtml(p, opts){
           <a class="view" href="${escapeHtml(p.url)}" target="_blank" rel="noopener">${p.isSearchLink ? 'Search on 1688' : 'View on 1688'}</a>
           <button class="add" onclick="addToRestock('${escapeHtml(p.id)}', this)">Add to list</button>
         </div>
-        ${(opts.removable && !p.image) ? `
+        ${opts.removable ? `
         <div class="add-photo">
-          <button class="add-photo-toggle" onclick="toggleAddPhoto('${escapeHtml(p.id)}')">+ Add photo link</button>
+          <button class="add-photo-toggle" onclick="toggleAddPhoto('${escapeHtml(p.id)}')">${images.length ? '+ Add another photo' : '+ Add photo link'}</button>
           <div class="add-photo-form hidden" id="addPhotoForm-${escapeHtml(p.id)}">
             <input type="text" class="add-photo-input" id="addPhotoInput-${escapeHtml(p.id)}" placeholder="Paste image link">
             <button class="add-photo-save" onclick="savePhotoLink('${escapeHtml(p.id)}')">Save</button>
@@ -428,9 +517,25 @@ function productCardHtml(p, opts){
   `;
 }
 
+// A tap on the ⋮ reveals Remove — kept out of sight by default so it can't
+// be tapped by accident, and removing still asks for confirmation on top
+// of that, since catalog entries can be tedious to rebuild.
+function toggleThumbMenu(id){
+  const btn = document.getElementById('removeBtn-' + id);
+  if(btn) btn.classList.toggle('hidden');
+}
+
+function confirmRemoveFromHistory(id){
+  if(confirm('Remove this product from your catalog? This can\'t be undone.')){
+    removeFromHistory(id);
+  }
+}
+
 // Lets staff paste an image link straight from 1688 (right-click the
-// photo on the product page → "Copy image address") onto a catalog item
-// that doesn't have one — simpler than the bookmarklet for a handful of items.
+// photo on the product page → "Copy image address") onto a catalog item —
+// simpler than the bookmarklet for a handful of items. Adds to the
+// item's photo list rather than replacing it, so more than one photo
+// can build up over time.
 function toggleAddPhoto(id){
   const form = document.getElementById('addPhotoForm-' + id);
   if(form) form.classList.toggle('hidden');
@@ -441,11 +546,20 @@ function savePhotoLink(id){
   const url = input.value.trim();
   if(!url) return;
   if(db){
-    db.collection('restockTool_history').doc(id).set({ image: url }, { merge: true });
+    db.collection('restockTool_history').doc(id).set({
+      images: firebase.firestore.FieldValue.arrayUnion(url)
+    }, { merge: true });
   } else {
     const item = historyCache.find(p => p.id === id);
-    if(item){ item.image = url; renderHistory(); }
+    if(item){
+      item.images = Array.isArray(item.images) ? item.images : [];
+      if(!item.images.includes(url)) item.images.push(url);
+      renderHistory();
+    }
   }
+  input.value = '';
+  const form = document.getElementById('addPhotoForm-' + id);
+  if(form) form.classList.add('hidden');
 }
 
 // ---------- Home catalog ----------
@@ -493,7 +607,7 @@ function saveToHistory(products){
     if(!p.hasStableId) return;
     db.collection('restockTool_history').doc(String(p.id)).set({
       title: p.title, price: p.price, moq: p.moq, supplier: p.supplier,
-      image: p.image, url: p.url, sizes: p.sizes || [],
+      images: p.image ? [p.image] : [], url: p.url, sizes: p.sizes || [],
       savedAt: firebase.firestore.FieldValue.serverTimestamp()
     }, { merge: true });
   });
@@ -926,22 +1040,35 @@ function detectOrderExport(){
   }
   if(idx.title === -1 || idx.offerId === -1) return null;
 
-  const seen = new Set();
-  const entries = [];
+  // Each row is one size/colour variant of an order — group by Offer ID so
+  // the many rows for one product collapse into one entry, with every
+  // distinct variant text (e.g. "颜色: 杏色 适合身高: 110码/4Y") collected
+  // into that product's sizes list rather than thrown away.
+  const grouped = {};
   for(let i = 1; i < csvRows.length; i++){
     const row = csvRows[i];
     const offerId = ((row[idx.offerId] || '') + '').trim();
     const rawTitle = ((row[idx.title] || '') + '').trim();
-    if(!offerId || !rawTitle || seen.has(offerId)) continue;
-    seen.add(offerId);
-    entries.push({
-      offerId,
-      title: stripVariantSuffix(rawTitle),
-      price: idx.price > -1 && row[idx.price] !== undefined && row[idx.price] !== '' ? ('¥' + row[idx.price]) : '—',
-      supplier: idx.supplier > -1 && row[idx.supplier] ? ((row[idx.supplier] || '') + '').trim() : '—',
-      url: 'https://detail.1688.com/offer/' + offerId + '.html'
-    });
+    if(!offerId || !rawTitle) continue;
+
+    if(!grouped[offerId]){
+      grouped[offerId] = {
+        offerId,
+        title: stripVariantSuffix(rawTitle),
+        price: idx.price > -1 && row[idx.price] !== undefined && row[idx.price] !== '' ? ('¥' + row[idx.price]) : '—',
+        supplier: idx.supplier > -1 && row[idx.supplier] ? ((row[idx.supplier] || '') + '').trim() : '—',
+        url: 'https://detail.1688.com/offer/' + offerId + '.html',
+        sizesSet: new Set()
+      };
+    }
+    const variant = rawTitle.slice(grouped[offerId].title.length).trim().replace(/^[\s,;、]+/, '');
+    if(variant) grouped[offerId].sizesSet.add(variant);
   }
+
+  const entries = Object.values(grouped).map(e => ({
+    offerId: e.offerId, title: e.title, price: e.price, supplier: e.supplier, url: e.url,
+    sizes: Array.from(e.sizesSet)
+  }));
   return entries.length ? entries : null;
 }
 
@@ -988,7 +1115,7 @@ function handleParsedRows(){
     document.querySelector('label[for="csvColumnSelect"]').style.display = 'none';
     const preview = csvOrderEntries.slice(0, 5).map(e => e.title).join(', ');
     document.getElementById('csvPreviewText').textContent =
-      `Detected a 1688 order export — found ${csvOrderEntries.length} distinct product${csvOrderEntries.length === 1 ? '' : 's'} across your orders (e.g. ${preview}${csvOrderEntries.length > 5 ? ', ...' : ''}). These will get exact product links, price paid, and supplier.`;
+      `Detected a 1688 order export — found ${csvOrderEntries.length} distinct product${csvOrderEntries.length === 1 ? '' : 's'} across your orders (e.g. ${preview}${csvOrderEntries.length > 5 ? ', ...' : ''}). These will get exact product links, price paid, supplier, and the sizes/colours you ordered.`;
   } else {
     document.getElementById('csvColumnSelect').style.display = '';
     document.querySelector('label[for="csvColumnSelect"]').style.display = '';
@@ -1048,7 +1175,7 @@ document.getElementById('csvImportBtn').onclick = () => {
       const id = e.offerId;
       const data = {
         title: e.title, price: e.price, moq: '—', supplier: e.supplier,
-        image: '', url: e.url, sizes: [], isSearchLink: false
+        image: '', url: e.url, sizes: e.sizes || [], isSearchLink: false
       };
       if(db){
         db.collection('restockTool_history').doc(id).set({
@@ -1090,6 +1217,12 @@ document.getElementById('csvImportBtn').onclick = () => {
   resultEl.style.display = 'block';
 };
 
+function confirmRemoveFromRestock(docId){
+  if(confirm('Remove this item from the restock list? This can\'t be undone.')){
+    removeFromRestock(docId);
+  }
+}
+
 function removeFromRestock(docId){
   if(db && !docId.startsWith('local-')){
     db.collection('restockTool_items').doc(docId).delete();
@@ -1110,27 +1243,122 @@ function updateQty(docId, val){
   }
 }
 
+let selectedRestockIds = new Set();
+
 function renderRestock(){
-  const wrap = document.getElementById('restockList');
-  const emptyMsg = document.getElementById('restockEmpty');
+  const wrap = document.getElementById('restockListWrap');
+  const empty = document.getElementById('restockListEmpty');
+  const sendBtn = document.getElementById('sendTelegramBtn');
+
+  // drop selections for items that no longer exist
+  selectedRestockIds = new Set([...selectedRestockIds].filter(id => restockList.some(i => i.docId === id)));
+
   if(restockList.length === 0){
     wrap.innerHTML = '';
-    emptyMsg.style.display = 'block';
+    empty.style.display = 'block';
+    sendBtn.disabled = true;
+    updateSelectAllRestockState();
     return;
   }
-  emptyMsg.style.display = 'none';
-  wrap.innerHTML = restockList.map(item => `
-    <div class="restock-item">
-      <div class="t">${escapeHtml(item.title)}${item.size ? ` — Size ${escapeHtml(item.size)}` : ''}</div>
-      <div class="r2">
-        <span>Qty</span>
-        <input class="qty" type="number" min="1" value="${item.qty}" onchange="updateQty('${item.docId}', this.value)">
-        <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${item.isSearchLink ? 'Search on 1688 ↗' : 'Order on 1688 ↗'}</a>
-        <button class="remove" onclick="removeFromRestock('${item.docId}')">Remove</button>
+  empty.style.display = 'none';
+
+  wrap.innerHTML = restockList.map(item => {
+    const images = getImages(item);
+    const thumb = images.length
+      ? `<img src="${escapeHtml(images[0])}" alt="" referrerpolicy="no-referrer" onerror="this.parentElement.textContent='No image'">`
+      : 'No image';
+    const checked = selectedRestockIds.has(item.docId) ? 'checked' : '';
+    return `
+      <div class="rl-item">
+        <input type="checkbox" ${checked} onchange="toggleRestockSelect('${escapeHtml(item.docId)}', this.checked)">
+        <div class="rl-thumb">${thumb}</div>
+        <div class="rl-info">
+          <div class="rl-title">${escapeHtml(item.title)}${item.size ? ` — ${escapeHtml(item.size)}` : ''}</div>
+          <div class="rl-meta">${item.isSearchLink ? 'Search link' : 'Direct link'}</div>
+          <div class="rl-qty-row">
+            <span>Qty</span>
+            <input class="qty" type="number" min="1" value="${item.qty}" onchange="updateQty('${escapeHtml(item.docId)}', this.value)">
+          </div>
+        </div>
+        <div class="rl-actions">
+          <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${item.isSearchLink ? 'Search on 1688 ↗' : 'Order on 1688 ↗'}</a>
+          <button class="remove" onclick="confirmRemoveFromRestock('${escapeHtml(item.docId)}')">Remove</button>
+        </div>
       </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
+
+  sendBtn.disabled = selectedRestockIds.size === 0;
+  updateSelectAllRestockState();
 }
+
+function toggleRestockSelect(docId, checked){
+  if(checked) selectedRestockIds.add(docId); else selectedRestockIds.delete(docId);
+  document.getElementById('sendTelegramBtn').disabled = selectedRestockIds.size === 0;
+  updateSelectAllRestockState();
+}
+
+function updateSelectAllRestockState(){
+  const box = document.getElementById('selectAllRestock');
+  box.checked = restockList.length > 0 && selectedRestockIds.size === restockList.length;
+}
+
+document.getElementById('selectAllRestock').addEventListener('change', (e) => {
+  selectedRestockIds = e.target.checked ? new Set(restockList.map(i => i.docId)) : new Set();
+  renderRestock();
+});
+
+// ---------- Telegram settings + sending ----------
+(function(){
+  const tokenEl = document.getElementById('tgToken');
+  const chatEl = document.getElementById('tgChatId');
+  const savedToken = localStorage.getItem('restockTool_tgToken');
+  const savedChat = localStorage.getItem('restockTool_tgChatId');
+  if(savedToken) tokenEl.value = savedToken;
+  if(savedChat) chatEl.value = savedChat;
+  tokenEl.addEventListener('change', () => localStorage.setItem('restockTool_tgToken', tokenEl.value.trim()));
+  chatEl.addEventListener('change', () => localStorage.setItem('restockTool_tgChatId', chatEl.value.trim()));
+})();
+
+document.getElementById('sendTelegramBtn').onclick = async () => {
+  const token = document.getElementById('tgToken').value.trim();
+  const chatId = document.getElementById('tgChatId').value.trim();
+  const statusEl = document.getElementById('sendStatus');
+
+  if(!token || !chatId){
+    statusEl.className = 'send-status err';
+    statusEl.textContent = 'Add your Telegram bot token and chat ID first (in the settings below).';
+    return;
+  }
+
+  const items = restockList.filter(i => selectedRestockIds.has(i.docId));
+  if(items.length === 0) return;
+
+  const lines = items.map((item, i) =>
+    `${i + 1}. ${item.title}${item.size ? ' — ' + item.size : ''} — Qty ${item.qty}\n${item.url}`
+  );
+  const text = `📦 Goat Kids Restock List (${items.length} item${items.length === 1 ? '' : 's'})\n\n` + lines.join('\n\n');
+  const url = `https://api.telegram.org/bot${encodeURIComponent(token)}/sendMessage?chat_id=${encodeURIComponent(chatId)}&text=${encodeURIComponent(text)}`;
+
+  const sendBtn = document.getElementById('sendTelegramBtn');
+  sendBtn.disabled = true;
+  statusEl.className = 'send-status';
+  statusEl.textContent = '';
+
+  try{
+    // Telegram's CORS support is inconsistent, so this fires in no-cors
+    // mode: the message still gets delivered even if the browser can't
+    // read a confirmation back, but that also means a genuine failure
+    // (bad token, bad chat ID) can't be detected from here either.
+    await fetch(url, { mode: 'no-cors' });
+    statusEl.className = 'send-status ok';
+    statusEl.textContent = 'Sent — check your Telegram chat to confirm it arrived (this page can\'t fully verify delivery due to how Telegram\'s API responds to browsers).';
+  }catch(err){
+    statusEl.className = 'send-status err';
+    statusEl.textContent = 'Could not reach Telegram — check your internet connection and try again.';
+  }
+  sendBtn.disabled = selectedRestockIds.size === 0;
+};
 
 // ---------- utils ----------
 function escapeHtml(str){
