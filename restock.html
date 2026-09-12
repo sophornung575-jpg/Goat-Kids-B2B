@@ -62,6 +62,10 @@
   .admin-card-header{ padding:1rem 1.25rem; background:var(--light); border-bottom:1px solid var(--gray-light); }
   .restock-header{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
 
+  .status-filter{ display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; }
+  .status-filter-btn{ padding:6px 12px; border:2px solid var(--gray-light); background:#fff; border-radius:999px; font-size:0.78rem; font-weight:600; color:var(--gray-dark); cursor:pointer; font-family:inherit; }
+  .status-filter-btn:hover{ border-color:var(--primary); color:var(--primary); }
+  .status-filter-btn.active{ background:var(--primary); border-color:var(--primary); color:#fff; }
   .select-all-row{ display:flex; align-items:center; gap:10px; padding-bottom:12px; margin-bottom:12px; border-bottom:1px solid var(--gray-light); font-size:0.85rem; font-weight:600; }
   .select-all-row input{ width:18px; height:18px; }
   .rl-item{ display:flex; gap:12px; align-items:center; border:1px solid var(--gray-light); border-radius:var(--radius); padding:10px; margin-bottom:10px; }
@@ -297,6 +301,12 @@
           <button class="btn btn-primary" id="sendTelegramBtn" disabled><i class="fab fa-telegram-plane"></i> Send selected to Telegram</button>
         </div>
         <div class="admin-card-body">
+          <div class="status-filter" id="statusFilter">
+            <button class="status-filter-btn active" data-status="all" data-label="All" onclick="setRestockFilter('all')">All</button>
+            <button class="status-filter-btn" data-status="pending" data-label="Not sent" onclick="setRestockFilter('pending')">Not sent</button>
+            <button class="status-filter-btn" data-status="sent" data-label="Sent" onclick="setRestockFilter('sent')">Sent</button>
+            <button class="status-filter-btn" data-status="ordered" data-label="Ordered" onclick="setRestockFilter('ordered')">Ordered</button>
+          </div>
           <div class="select-all-row">
             <input type="checkbox" id="selectAllRestock">
             <label for="selectAllRestock">Select all</label>
@@ -1268,6 +1278,25 @@ function updateQty(docId, val){
 }
 
 let selectedRestockIds = new Set();
+let restockStatusFilter = 'all';
+
+function itemStatus(item){
+  return item.status === 'ordered' ? 'ordered' : (item.status === 'sent' ? 'sent' : 'pending');
+}
+
+function getFilteredRestockList(){
+  return restockStatusFilter === 'all'
+    ? restockList
+    : restockList.filter(item => itemStatus(item) === restockStatusFilter);
+}
+
+function setRestockFilter(status){
+  restockStatusFilter = status;
+  document.querySelectorAll('.status-filter-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.status === status);
+  });
+  renderRestock();
+}
 
 function renderRestock(){
   const wrap = document.getElementById('restockListWrap');
@@ -1277,22 +1306,33 @@ function renderRestock(){
   // drop selections for items that no longer exist
   selectedRestockIds = new Set([...selectedRestockIds].filter(id => restockList.some(i => i.docId === id)));
 
-  if(restockList.length === 0){
+  const counts = { all: restockList.length, pending: 0, sent: 0, ordered: 0 };
+  restockList.forEach(item => counts[itemStatus(item)]++);
+  document.querySelectorAll('.status-filter-btn').forEach(btn => {
+    btn.textContent = `${btn.dataset.label} (${counts[btn.dataset.status]})`;
+  });
+
+  const filtered = getFilteredRestockList();
+
+  if(filtered.length === 0){
     wrap.innerHTML = '';
     empty.style.display = 'block';
-    sendBtn.disabled = true;
+    empty.textContent = restockList.length === 0
+      ? 'Nothing added yet. Use "Add to list" on a product.'
+      : 'No items match this filter.';
+    sendBtn.disabled = selectedRestockIds.size === 0;
     updateSelectAllRestockState();
     return;
   }
   empty.style.display = 'none';
 
-  wrap.innerHTML = restockList.map(item => {
+  wrap.innerHTML = filtered.map(item => {
     const images = getImages(item);
     const thumb = images.length
       ? `<img src="${escapeHtml(images[0])}" alt="" referrerpolicy="no-referrer" onerror="this.parentElement.textContent='No image'">`
       : 'No image';
     const checked = selectedRestockIds.has(item.docId) ? 'checked' : '';
-    const status = item.status === 'ordered' ? 'ordered' : (item.status === 'sent' ? 'sent' : 'pending');
+    const status = itemStatus(item);
     const statusLabel = status === 'ordered' ? 'Ordered' : (status === 'sent' ? 'Sent' : 'Not sent');
     return `
       <div class="rl-item${status === 'ordered' ? ' is-ordered' : ''}">
@@ -1328,11 +1368,17 @@ function toggleRestockSelect(docId, checked){
 
 function updateSelectAllRestockState(){
   const box = document.getElementById('selectAllRestock');
-  box.checked = restockList.length > 0 && selectedRestockIds.size === restockList.length;
+  const visible = getFilteredRestockList();
+  box.checked = visible.length > 0 && visible.every(item => selectedRestockIds.has(item.docId));
 }
 
 document.getElementById('selectAllRestock').addEventListener('change', (e) => {
-  selectedRestockIds = e.target.checked ? new Set(restockList.map(i => i.docId)) : new Set();
+  const visible = getFilteredRestockList();
+  if(e.target.checked){
+    visible.forEach(item => selectedRestockIds.add(item.docId));
+  } else {
+    visible.forEach(item => selectedRestockIds.delete(item.docId));
+  }
   renderRestock();
 });
 
